@@ -1,11 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borregos S.L — k de queso</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ========== VARIABLES ========== */
+:root{
+  --bg:#0a0a0a;
+  --fg:#f5f5f5;
+  --muted:#777;
+  --card:rgba(255,255,255,.06);
+}
+body.light{
+  --bg:#f4f4f4;
+  --fg:#0a0a0a;
+  --muted:#555;
+  --card:rgba(0,0,0,.05);
+}
+
+/* ========== RESET ========== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+
+/* ========== BODY ========== */
+body{
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+  transition:.3s;
+}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;
+  top:24px;
+  right:32px;
+  display:flex;
+  gap:12px;
+  z-index:1000;
+}
+.header button{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.15);
+  background:var(--card);
+  color:var(--fg);
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+}
+
+/* ========== MENU ========== */
+.menu{
+  position:fixed;
+  top:0;
+  right:0;
+  width:320px;
+  height:100vh;
+  padding:140px 48px;
+  background:var(--bg);
+  transform:translateX(100%);
+  transition:.5s ease;
+  z-index:900;
+}
+.menu.open{transform:none;}
+.menu span{
+  display:block;
+  margin-bottom:26px;
+  font-size:13px;
+  letter-spacing:.3em;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+/* ========== SECTIONS ========== */
+.section{
+  min-height:100vh;
+  padding:180px 10vw 160px 14vw;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.section.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* ========== TITLES ========== */
+h1{
+  font-size:clamp(72px,6vw,130px);
+  font-weight:500;
+}
+.hero h1{
+  font-size:clamp(130px,11vw,220px);
+}
+.hero-sub{
+  margin-top:24px;
+  font-size:22px;
+  letter-spacing:.35em;
+  color:var(--muted);
+}
+
+/* ========== TEXT ========== */
+p{
+  margin-top:24px;
+  max-width:720px;
+  line-height:1.7;
+  color:var(--muted);
+}
+
+/* ========== GRID ========== */
+.grid{
+  margin-top:64px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:36px;
+}
+
+/* ========== CARD ========== */
+.card{
+  padding:32px;
+  border-radius:22px;
+  background:var(--card);
+  transition:.3s ease;
+}
+.card:hover{transform:translateY(-6px);}
+
+/* ========== BORREGOS ========== */
+.borrego{text-align:center;}
+.borrego img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:12px;
+}
+
+/* ========== BLOG ========== */
+.blog-item img,
+.blog-item video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+/* ========== INVENTARIO ========== */
+.counters{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.counter-card{
+  padding:36px;
+  border-radius:22px;
+  background:var(--card);
+}
+.counter-value{font-size:64px;}
+
+/* ========== CONTACT ========== */
+.contact{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+.contact a{
+  padding:32px;
+  border-radius:22px;
+  background:var(--card);
+  color:var(--fg);
+  text-decoration:none;
+}
+
+/* ========== FOOTER ========== */
+footer{
+  padding:80px 10vw;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,.1);
+  color:var(--muted);
+}
+footer strong{color:var(--fg);}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <button id="langBtn">ES</button>
+  <button id="themeBtn">🌗</button>
+  <button id="menuBtn">☰</button>
+</div>
+
+<!-- MENU -->
+<nav class="menu" id="menu">
+  <span data-i="0">Inicio</span>
+  <span data-i="1">Quiénes somos</span>
+  <span data-i="2">Borregos</span>
+  <span data-i="3">Servicios</span>
+  <span data-i="4">Blog</span>
+  <span data-i="5">Inventario</span>
+  <span data-i="6">Donaciones</span>
+  <span data-i="7">Contacto</span>
+</nav>
+
+<!-- HERO -->
+<section class="section hero">
+  <h1>Borregos<br>S.L</h1>
+  <div class="hero-sub">K DE QUESO</div>
+</section>
+
+<section class="section">
+  <h1>Quiénes somos</h1>
+  <p>
+    Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
+    No prometemos resultados, pero sí presencia constante.
+  </p>
+</section>
+
+<section class="section">
+  <h1>Los borregos</h1>
+  <div class="grid">
+    <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+    <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+    <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+    <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+    <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+    <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+    <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+    <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+    <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+    <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Servicios</h1>
+  <div class="grid">
+    <div class="card">Estropear eventos con precisión</div>
+    <div class="card">Fiestas improvisadas</div>
+    <div class="card">Opiniones no solicitadas</div>
+    <div class="card">Presencia incómoda garantizada</div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Blog</h1>
+  <p>Registro visual de decisiones dudosas.</p>
+  <div class="grid">
+    <div class="blog-item"><img src="blog1.jpg"></div>
+    <div class="blog-item"><video src="video1.mp4" controls></video></div>
+    <div class="blog-item"><img src="blog2.jpg"></div>
+  </div>
+</section>
+
 <section class="section">
   <h1>Inventario</h1>
-  <p>
-    Objetos encontrados, comprados sin justificación o heredados por error.
-    Ninguno es útil por sí solo, pero juntos cuentan una historia.
-  </p>
+  <p>Objetos encontrados, comprados o heredados sin explicación.</p>
 
-  <!-- CONTADOR -->
   <div class="counters">
     <div class="counter-card">
       <div class="counter-value" id="counter">0</div>
@@ -13,17 +270,85 @@
     </div>
   </div>
 
-  <!-- CAJAS DE INVENTARIO -->
   <div class="grid">
-    <div class="card">Cono de tráfico ligeramente robado</div>
-    <div class="card">Silla rota pero funcional</div>
-    <div class="card">Carrito metálico de procedencia dudosa</div>
-    <div class="card">Altavoz que distorsiona</div>
-    <div class="card">Mesa plegable coja</div>
-    <div class="card">Cubo azul sin tapa</div>
-    <div class="card">Cable infinito que no carga nada</div>
-    <div class="card">Señal de obra “temporal”</div>
-    <div class="card">Taburete rescatado de la calle</div>
-    <div class="card">Caja misteriosa (no abrir)</div>
+    <div class="card">Cono de tráfico</div>
+    <div class="card">Silla rota</div>
+    <div class="card">Carrito metálico</div>
+    <div class="card">Altavoz dudoso</div>
+    <div class="card">Mesa coja</div>
+    <div class="card">Cubo azul</div>
+    <div class="card">Cable infinito</div>
+    <div class="card">Señal de obra</div>
+    <div class="card">Taburete rescatado</div>
+    <div class="card">Caja misteriosa</div>
+    <div class="card">Foco viejo</div>
+    <div class="card">Extensión sin fin</div>
   </div>
 </section>
+
+<section class="section">
+  <h1>Donaciones</h1>
+  <p>Toda contribución será gestionada con responsabilidad variable.</p>
+  <div class="grid">
+    <div class="card">Bizum · +34 600 000 000</div>
+    <div class="card">PayPal · borregos@queso.com</div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Contacto</h1>
+  <div class="contact">
+    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+    <a href="#">Instagram</a>
+  </div>
+</section>
+
+<footer>
+  <strong>Borregos S.L</strong><br>
+  k de queso<br><br>
+  © 2026 — Todos los derechos dudosos reservados
+</footer>
+
+<script>
+/* MENU */
+const menuBtn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+menuBtn.onclick=()=>menu.classList.toggle("open");
+
+document.querySelectorAll(".menu span").forEach((b,i)=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth"});
+    menu.classList.remove("open");
+  };
+});
+
+/* THEME */
+const themeBtn=document.getElementById("themeBtn");
+if(localStorage.theme==="light") document.body.classList.add("light");
+themeBtn.onclick=()=>{
+  document.body.classList.toggle("light");
+  localStorage.theme=document.body.classList.contains("light")?"light":"dark";
+};
+
+/* COUNTER */
+let count=Number(localStorage.items)||0;
+const counter=document.getElementById("counter");
+counter.textContent=count;
+setInterval(()=>{
+  count++;
+  counter.textContent=count;
+  localStorage.items=count;
+},3000);
+
+/* ANIMATIONS */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    e.target.classList.toggle("visible",e.isIntersecting);
+  });
+},{threshold:.25});
+document.querySelectorAll(".section").forEach(s=>observer.observe(s));
+</script>
+
+</body>
+</html>
