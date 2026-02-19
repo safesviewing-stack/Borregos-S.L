@@ -8,14 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ================= VARIABLES ================= */
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
   --muted:#777;
   --glass:rgba(255,255,255,.06);
+  --card:rgba(255,255,255,.06);
 }
 
-/* RESET */
+body.light{
+  --bg:#f5f5f5;
+  --fg:#0a0a0a;
+  --muted:#555;
+  --glass:rgba(0,0,0,.05);
+  --card:rgba(0,0,0,.04);
+}
+
+/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
@@ -23,33 +33,45 @@
   font-family:Inter,sans-serif;
 }
 
-/* BODY */
+/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
   overflow-x:hidden;
-  scroll-snap-type:y mandatory;
+  transition:background .3s,color .3s;
 }
 
-/* MENU */
-.menu-btn{
+/* ================= HEADER ================= */
+.header{
   position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
+  top:24px;
+  right:32px;
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  cursor:pointer;
+  align-items:center;
+  gap:14px;
   z-index:600;
 }
-.menu-btn span{
-  height:2px;
-  background:#fff;
-  transition:.4s;
+
+.header button{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.15);
+  background:var(--glass);
+  color:var(--fg);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  backdrop-filter:blur(10px);
+  transition:.3s;
+}
+.header button:hover{
+  transform:translateY(-2px);
 }
 
+/* ================= MENU ================= */
 .menu{
   position:fixed;
   top:0;
@@ -57,61 +79,41 @@ body{
   width:320px;
   height:100vh;
   padding:140px 48px;
-  background:rgba(15,15,15,.7);
-  backdrop-filter:blur(24px);
+  background:var(--bg);
+  border-left:1px solid rgba(255,255,255,.1);
   transform:translateX(100%);
-  transition:.6s cubic-bezier(.2,.8,.2,1);
+  transition:.5s ease;
   z-index:500;
 }
-.menu.open{transform:none}
+.menu.open{transform:none;}
 .menu span{
   display:block;
   margin-bottom:26px;
   font-size:13px;
   letter-spacing:.3em;
   cursor:pointer;
-  color:#ccc;
+  color:var(--muted);
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
-  scroll-snap-align:start;
-
   opacity:0;
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
+  transform:translateY(30px);
+  transition:opacity .6s ease, transform .6s ease;
 }
-
-/* ESTADOS OCULTOS */
-.section.hidden-down{
-  transform:translateY(80px);
-}
-.section.hidden-up{
-  transform:translateY(-80px);
-}
-
-/* ESTADOS VISIBLES */
 .section.visible{
   opacity:1;
-  transform:translateY(0);
+  transform:none;
 }
 
-/* TITLES */
-.section h1{
+/* ================= TITLES ================= */
+h1{
   margin-left:-4px;
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
-
-  opacity:0;
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
 }
-
-/* HERO */
 .hero h1{
   font-size:clamp(130px,11vw,220px);
 }
@@ -122,33 +124,16 @@ body{
   color:var(--muted);
 }
 
-/* TITULO SEGÚN DIRECCIÓN */
-.section.visible.down h1{
-  opacity:1;
-  transform:translateY(0);
-}
-.section.visible.up h1{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.section.hidden-down h1{
-  transform:translateY(40px);
-}
-.section.hidden-up h1{
-  transform:translateY(-40px);
-}
-
-/* TEXT */
+/* ================= TEXT ================= */
 p{
   margin-top:24px;
   max-width:720px;
   font-size:15px;
   line-height:1.7;
-  color:#aaa;
+  color:var(--muted);
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .grid{
   margin-top:64px;
   display:grid;
@@ -156,11 +141,11 @@ p{
   gap:36px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .card{
   padding:32px;
   border-radius:22px;
-  background:var(--glass);
+  background:var(--card);
   border:1px solid rgba(255,255,255,.1);
   transition:.3s ease;
 }
@@ -168,15 +153,7 @@ p{
   transform:translateY(-6px);
 }
 
-/* BORREGOS */
-.borrego img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  background:#111;
-}
-
-/* CONTACT */
+/* ================= CONTACT ================= */
 .contact{
   margin-top:40px;
   display:grid;
@@ -186,65 +163,69 @@ p{
 .contact a{
   padding:32px;
   border-radius:22px;
-  background:var(--glass);
+  background:var(--card);
   border:1px solid rgba(255,255,255,.1);
-  color:#fff;
+  color:var(--fg);
   text-decoration:none;
+}
+
+/* ================= COUNTER ================= */
+.counter{
+  margin-top:48px;
+  font-size:64px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="menu-btn" id="menuBtn">
-  <span></span><span></span><span></span>
+<!-- HEADER -->
+<div class="header">
+  <button id="langBtn">ES</button>
+  <button id="themeBtn">🌗</button>
+  <button id="menuBtn">☰</button>
 </div>
 
+<!-- MENU -->
 <nav class="menu" id="menu">
   <span data-i="0">Inicio</span>
   <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Borregos</span>
-  <span data-i="3">Servicios</span>
-  <span data-i="4">Blog</span>
-  <span data-i="5">Inventario</span>
-  <span data-i="6">Donaciones</span>
-  <span data-i="7">Contacto</span>
+  <span data-i="2">Servicios</span>
+  <span data-i="3">Inventario</span>
+  <span data-i="4">Contacto</span>
 </nav>
 
 <section class="section hero">
-  <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">k de queso</div>
+  <h1 id="title">Borregos<br>S.L</h1>
+  <div class="hero-sub" id="slogan">k de queso</div>
 </section>
 
 <section class="section">
-  <h1>Quiénes somos</h1>
-  <p>Grupo de amigos que decidió tomarse poco en serio.</p>
+  <h1 id="aboutTitle">Quiénes somos</h1>
+  <p id="aboutText">
+    Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
+  </p>
 </section>
 
 <section class="section">
-  <h1>Los borregos</h1>
+  <h1 id="servicesTitle">Servicios</h1>
   <div class="grid">
-    <div class="borrego"><img src="b1.jpg"></div>
-    <div class="borrego"><img src="b2.jpg"></div>
-    <div class="borrego"><img src="b3.jpg"></div>
-    <div class="borrego"><img src="b4.jpg"></div>
+    <div class="card" id="s1">Estropear eventos</div>
+    <div class="card" id="s2">Fiestas improvisadas</div>
+    <div class="card" id="s3">Opiniones no solicitadas</div>
   </div>
 </section>
 
 <section class="section">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos</div>
-    <div class="card">Fiestas improvisadas</div>
-    <div class="card">Opiniones no solicitadas</div>
-  </div>
+  <h1 id="inventoryTitle">Inventario</h1>
+  <div class="counter" id="counter">0</div>
 </section>
 
 <section class="section">
-  <h1>Contacto</h1>
+  <h1 id="contactTitle">Contacto</h1>
   <div class="contact">
+    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
     <a href="#">Instagram</a>
-    <a href="#">Email</a>
   </div>
 </section>
 
@@ -254,30 +235,58 @@ const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 menuBtn.onclick=()=>menu.classList.toggle("open");
 
-/* SCROLL DIRECTION */
-let lastScrollY=window.scrollY;
-let direction="down";
+/* THEME */
+const themeBtn=document.getElementById("themeBtn");
+if(localStorage.theme==="light") document.body.classList.add("light");
+themeBtn.onclick=()=>{
+  document.body.classList.toggle("light");
+  localStorage.theme=document.body.classList.contains("light")?"light":"dark";
+};
 
-window.addEventListener("scroll",()=>{
-  direction=window.scrollY>lastScrollY?"down":"up";
-  lastScrollY=window.scrollY;
-});
+/* LANGUAGE */
+const langBtn=document.getElementById("langBtn");
+let lang=localStorage.lang||"es";
+const texts={
+  es:{
+    about:"Borregos S.L es un grupo de amigos que decidió formalizar lo informal.",
+    services:["Estropear eventos","Fiestas improvisadas","Opiniones no solicitadas"]
+  },
+  en:{
+    about:"Borregos S.L is a group of friends who decided to formalize the informal.",
+    services:["Ruining events","Improvised parties","Unrequested opinions"]
+  }
+};
+function setLang(l){
+  document.getElementById("aboutText").textContent=texts[l].about;
+  document.getElementById("s1").textContent=texts[l].services[0];
+  document.getElementById("s2").textContent=texts[l].services[1];
+  document.getElementById("s3").textContent=texts[l].services[2];
+  langBtn.textContent=l.toUpperCase();
+  localStorage.lang=l;
+}
+setLang(lang);
+langBtn.onclick=()=>setLang(lang=lang==="es"?"en":"es");
 
-/* OBSERVER */
+/* COUNTER */
+let count=Number(localStorage.items)||0;
+const counter=document.getElementById("counter");
+counter.textContent=count;
+setInterval(()=>{
+  count++;
+  counter.textContent=count;
+  localStorage.items=count;
+},3000);
+
+/* ANIMATIONS */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    const s=entry.target;
-
-    s.classList.remove("visible","up","down","hidden-up","hidden-down");
-
-    if(entry.isIntersecting){
-      s.classList.add("visible",direction);
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
     }else{
-      s.classList.add(direction==="down"?"hidden-down":"hidden-up");
+      e.target.classList.remove("visible");
     }
   });
 },{threshold:.25});
-
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 </script>
 
