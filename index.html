@@ -35,22 +35,27 @@ body{
 .overlay{
   position:fixed;
   inset:0;
-  backdrop-filter:blur(12px);
-  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.45);
   opacity:0;
   pointer-events:none;
   transition:.5s;
-  z-index:250;
+  z-index:200;
 }
 .overlay.active{opacity:1;pointer-events:auto}
 
-/* MENU BTN */
+/* MENU BUTTON */
 .menu-btn{
-  position:fixed;top:32px;right:40px;
-  width:28px;height:22px;
-  display:flex;flex-direction:column;
+  position:fixed;
+  top:32px;
+  right:40px;
+  width:28px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
   justify-content:space-between;
-  cursor:pointer;z-index:500;
+  cursor:pointer;
+  z-index:400;
 }
 .menu-btn span{height:2px;background:#fff;transition:.4s}
 .menu-btn.open span:nth-child(1){transform:rotate(45deg) translateY(10px)}
@@ -59,19 +64,24 @@ body{
 
 /* MENU */
 .menu{
-  position:fixed;top:0;right:0;
-  width:340px;height:100vh;
+  position:fixed;
+  right:0;
+  top:0;
+  width:340px;
+  height:100vh;
   padding:140px 56px;
   background:rgba(15,15,15,.65);
-  backdrop-filter:blur(22px) saturate(140%);
-  border-left:1px solid rgba(255,255,255,.08);
-  display:flex;flex-direction:column;
+  backdrop-filter:blur(24px) saturate(160%);
+  border-left:1px solid rgba(255,255,255,.1);
+  display:flex;
+  flex-direction:column;
   gap:32px;
   transform:translateX(100%);
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:300;
 }
 .menu.open{transform:none}
+
 .menu span{
   font-size:13px;
   letter-spacing:.32em;
@@ -82,14 +92,16 @@ body{
 
 /* TOGGLE */
 .toggle{
-  position:fixed;bottom:32px;right:40px;
+  position:fixed;
+  bottom:32px;
+  right:40px;
   padding:14px 20px;
   font-size:11px;
   letter-spacing:.25em;
   background:#111;
   border:1px solid #333;
   cursor:pointer;
-  z-index:600;
+  z-index:500;
 }
 
 /* SECTIONS */
@@ -98,7 +110,11 @@ body{
   scroll-snap-align:start;
   padding:180px 10vw 160px 14vw;
 }
-.section-block{position:sticky;top:240px;max-width:1200px}
+.section-block{
+  position:sticky;
+  top:240px;
+  max-width:1200px;
+}
 
 /* TITLES */
 h1{
@@ -108,8 +124,13 @@ h1{
 }
 
 /* HERO */
-.hero{display:flex;align-items:center}
-.hero h1{font-size:clamp(110px,9vw,190px)}
+.hero{
+  display:flex;
+  align-items:center;
+}
+.hero h1{
+  font-size:clamp(120px,10vw,210px);
+}
 .hero-sub{
   margin-top:28px;
   font-size:14px;
@@ -136,22 +157,21 @@ p{
 }
 
 /* BORREGOS */
-.borrego{
-  opacity:0;transform:translateY(24px);
-  transition:.8s ease;
-}
-.borrego.is-visible{opacity:1;transform:none}
 .borrego img{
-  width:100%;height:300px;
-  object-fit:cover;background:#111;
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  background:#111;
   margin-bottom:14px;
 }
 
 /* BLOG */
 .blog-item img,
 .blog-item video{
-  width:100%;height:260px;
-  object-fit:cover;background:#111;
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  background:#111;
   margin-bottom:14px;
 }
 
@@ -160,7 +180,7 @@ p{
   padding:32px;
   border-radius:22px;
   background:var(--glass);
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
 }
 
 /* COUNTERS */
@@ -175,12 +195,15 @@ p{
   border-radius:22px;
   background:linear-gradient(
     180deg,
-    rgba(255,255,255,.08),
-    rgba(255,255,255,.02)
+    rgba(255,255,255,.1),
+    rgba(255,255,255,.03)
   );
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
 }
-.counter-value{font-size:64px;font-weight:500}
+.counter-value{
+  font-size:64px;
+  font-weight:500;
+}
 .counter-label{
   margin-top:12px;
   font-size:12px;
@@ -200,9 +223,21 @@ p{
   padding:32px;
   border-radius:22px;
   background:var(--glass);
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
   color:#fff;
   text-decoration:none;
+}
+
+/* CHEESE */
+.cheese{
+  position:fixed;
+  font-size:32px;
+  pointer-events:none;
+  animation:floatCheese 6s ease-in-out infinite;
+}
+@keyframes floatCheese{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
 }
 </style>
 </head>
@@ -226,64 +261,13 @@ p{
 
 <div class="toggle" id="toggleMode">MODO BORREGO</div>
 
+<audio id="glassSound" src="sounds/glass.mp3"></audio>
+
 <!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <h1>Borregos<br>S.L</h1>
-    <div class="hero-sub">k de queso</div>
-  </div>
-</section>
-
-<!-- QUIÉNES SOMOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Quiénes somos</h1>
-    <p>
-      Borregos S.L es un grupo de diez individuos con criterio dudoso,
-      coordinación irregular y una clara obsesión por el queso.
-    </p>
-  </div>
-</section>
-
-<!-- BORREGOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Los borregos</h1>
-    <div class="grid">
-      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
-      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
-      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
-      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
-      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
-      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
-      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
-      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
-      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
-      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Servicios</h1>
-    <div class="grid">
-      <div class="card">Estropear eventos</div>
-      <div class="card">Fiestas sin control</div>
-      <div class="card">Opiniones no pedidas</div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section class="section">
-  <div class="section-block">
-    <h1>Blog</h1>
-    <div class="grid">
-      <div class="blog-item"><img src="blog1.jpg"></div>
-      <div class="blog-item"><video src="video1.mp4" controls></video></div>
-    </div>
+    <h1 id="heroTitle">Borregos<br>S.L</h1>
+    <div class="hero-sub" id="heroSub">k de queso</div>
   </div>
 </section>
 
@@ -301,34 +285,6 @@ p{
         <div class="counter-label">Quesos acumulados</div>
       </div>
     </div>
-    <div class="grid">
-      <div class="card">#001 Cono de tráfico</div>
-      <div class="card">#002 Silla rota</div>
-      <div class="card">#003 Carrito metálico</div>
-    </div>
-  </div>
-</section>
-
-<!-- DONACIONES -->
-<section class="section">
-  <div class="section-block">
-    <h1>Donaciones</h1>
-    <p>Tu aportación nos permite seguir siendo irresponsables.</p>
-    <div class="grid">
-      <div class="card">Bizum · +34 600 000 000</div>
-      <div class="card">PayPal · borregos@queso.com</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact">
-      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-      <a href="#">Instagram oficial</a>
-    </div>
   </div>
 </section>
 
@@ -337,11 +293,14 @@ p{
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 const overlay=document.getElementById("overlay");
+const glass=document.getElementById("glassSound");
 
 menuBtn.onclick=()=>{
   menuBtn.classList.toggle("open");
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
+  glass.currentTime=0;
+  glass.play();
 };
 
 overlay.onclick=()=>{
@@ -352,28 +311,61 @@ overlay.onclick=()=>{
 
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
-    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
-    menuBtn.classList.remove("open");
-    menu.classList.remove("open");
-    overlay.classList.remove("active");
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth"});
+    overlay.click();
   };
 });
 
-/* OBSERVER */
-const observer=new IntersectionObserver(e=>{
-  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting))
-},{threshold:.2});
-document.querySelectorAll(".borrego").forEach(el=>observer.observe(el));
+/* COUNTERS with localStorage */
+let items=Number(localStorage.items)||0;
+let cheese=Number(localStorage.cheese)||0;
+itemCount.textContent=items;
+cheeseCount.textContent=cheese;
 
-/* COUNTERS */
-let items=0,cheese=0;
-setInterval(()=>{items++;itemCount.textContent=items},2800);
-setInterval(()=>{cheese++;cheeseCount.textContent=cheese},1800);
+setInterval(()=>{
+  items++;
+  localStorage.items=items;
+  itemCount.textContent=items;
+},3000);
+
+setInterval(()=>{
+  cheese++;
+  localStorage.cheese=cheese;
+  cheeseCount.textContent=cheese;
+},2000);
 
 /* MODE BORREGO */
-document.getElementById("toggleMode").onclick=()=>{
+const toggle=document.getElementById("toggleMode");
+const title=document.getElementById("heroTitle");
+const sub=document.getElementById("heroSub");
+
+if(localStorage.mode==="borrego"){
+  document.body.classList.add("borrego");
+  spawnCheese();
+}
+
+toggle.onclick=()=>{
   document.body.classList.toggle("borrego");
+  const active=document.body.classList.contains("borrego");
+  localStorage.mode=active?"borrego":"normal";
+  title.innerHTML=active?"Borregos<br>definitivos":"Borregos<br>S.L";
+  sub.textContent=active?"mucho queso":"k de queso";
+  if(active) spawnCheese();
+  else document.querySelectorAll(".cheese").forEach(c=>c.remove());
 };
+
+/* CHEESE SPAWN */
+function spawnCheese(){
+  for(let i=0;i<8;i++){
+    const c=document.createElement("div");
+    c.className="cheese";
+    c.textContent="🧀";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top=Math.random()*100+"vh";
+    document.body.appendChild(c);
+  }
+}
 </script>
 
 </body>
