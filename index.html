@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ========= BASE ========= */
+/* ========= VARIABLES ========= */
 :root{
   --bg:#ffffff;
   --fg:#0a0a0a;
@@ -24,8 +24,10 @@ body.dark{
   --accent:#fff;
 }
 
+/* ========= RESET ========= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
+/* ========= BODY ========= */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -51,9 +53,11 @@ body{
 .section{
   min-height:100vh;
   padding:160px 12vw;
+  border-bottom:1px solid var(--line);
   opacity:0;
   transform:translateY(12px);
   transition:.6s ease;
+  cursor:pointer;
 }
 .section.visible{
   opacity:1;
@@ -82,11 +86,28 @@ p{
   color:var(--muted);
 }
 
-/* ========= BLOCK ========= */
-.block{
-  margin-top:64px;
-  border-top:1px solid var(--line);
-  padding-top:32px;
+/* ========= LIST / GRID ========= */
+.list{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+}
+.item{
+  padding:24px;
+  border:1px solid var(--line);
+  cursor:pointer;
+  transition:.2s;
+}
+.item:hover{
+  background:var(--accent);
+  color:var(--bg);
+}
+
+/* ========= INVENTORY ========= */
+.counter{
+  font-size:56px;
+  margin-top:24px;
 }
 
 /* ========= DONATIONS ========= */
@@ -99,9 +120,8 @@ p{
   height:100%;
   width:0%;
   background:var(--accent);
-  transition:width .5s ease;
+  transition:width .4s ease;
 }
-
 .actions{
   display:flex;
   gap:16px;
@@ -112,15 +132,33 @@ p{
   border:1px solid var(--line);
   padding:10px 18px;
   cursor:pointer;
-  font-size:14px;
+}
+
+/* ========= FORM ========= */
+form{
+  margin-top:48px;
+  max-width:520px;
+}
+input,textarea{
+  width:100%;
+  border:1px solid var(--line);
+  padding:12px;
+  margin-bottom:16px;
+  background:none;
+  color:var(--fg);
+}
+button.send{
+  border:1px solid var(--line);
+  background:none;
+  padding:12px 20px;
+  cursor:pointer;
 }
 
 /* ========= FOOTER ========= */
 footer{
   padding:80px 12vw;
-  border-top:1px solid var(--line);
-  color:var(--muted);
   font-size:14px;
+  color:var(--muted);
 }
 </style>
 </head>
@@ -131,32 +169,99 @@ footer{
   <button id="themeBtn">Modo</button>
 </div>
 
+<!-- HERO -->
 <section class="section hero">
   <h1>Borregos <span>S.L</span></h1>
   <div class="hero-sub">K DE QUESO</div>
 </section>
 
+<!-- QUIÉNES SOMOS -->
+<section class="section">
+  <h1>Quiénes somos</h1>
+  <p>
+    Grupo de amigos con criterio dudoso y constancia sorprendente.
+    Operamos sin garantías, pero con mucha presencia.
+  </p>
+</section>
+
+<!-- BORREGOS -->
+<section class="section">
+  <h1>Los borregos</h1>
+  <div class="list">
+    <div class="item">Borrego 01</div>
+    <div class="item">Borrego 02</div>
+    <div class="item">Borrego 03</div>
+    <div class="item">Borrego 04</div>
+    <div class="item">Borrego 05</div>
+    <div class="item">Borrego 06</div>
+    <div class="item">Borrego 07</div>
+    <div class="item">Borrego 08</div>
+    <div class="item">Borrego 09</div>
+    <div class="item">Borrego 10</div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section">
+  <h1>Servicios</h1>
+  <div class="list">
+    <div class="item">Estropear eventos</div>
+    <div class="item">Fiestas improvisadas</div>
+    <div class="item">Opiniones no solicitadas</div>
+    <div class="item">Presencia incómoda</div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <h1>Blog</h1>
+  <div class="list">
+    <div class="item">Foto o vídeo 01</div>
+    <div class="item">Foto o vídeo 02</div>
+    <div class="item">Foto o vídeo 03</div>
+  </div>
+</section>
+
+<!-- INVENTARIO -->
+<section class="section">
+  <h1>Inventario</h1>
+  <div class="counter" id="invCount">0</div>
+  <div class="list">
+    <div class="item">Cono de tráfico</div>
+    <div class="item">Silla rota</div>
+    <div class="item">Carrito metálico</div>
+    <div class="item">Altavoz dudoso</div>
+    <div class="item">Cable infinito</div>
+    <div class="item">Caja misteriosa</div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
 <section class="section">
   <h1>Donaciones</h1>
   <p>Financia el próximo error.</p>
 
-  <div class="block">
-    <strong>Objetivo actual</strong>
-    <p>Nuevo altavoz (otra vez)</p>
-
-    <div class="progress">
-      <div class="progress-bar" id="bar"></div>
-    </div>
-
-    <p id="status">0€ / 300€ recaudados</p>
-    <p id="absurd">Dinero mal invertido: 0€</p>
-
-    <div class="actions">
-      <button onclick="donate(5)">+5€</button>
-      <button onclick="donate(10)">+10€</button>
-      <button onclick="donate(25)">+25€</button>
-    </div>
+  <div class="progress">
+    <div class="progress-bar" id="bar"></div>
   </div>
+  <p id="donText">0€ / 300€ recaudados</p>
+
+  <div class="actions">
+    <button onclick="donate(5)">+5€</button>
+    <button onclick="donate(10)">+10€</button>
+    <button onclick="donate(25)">+25€</button>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <h1>Contacto</h1>
+  <form>
+    <input placeholder="Nombre">
+    <input placeholder="Email">
+    <textarea placeholder="Mensaje"></textarea>
+    <button class="send">Enviar</button>
+  </form>
 </section>
 
 <footer>
@@ -171,36 +276,37 @@ themeBtn.onclick=()=>{
 };
 
 /* SCROLL ANIMATION */
-const observer=new IntersectionObserver(e=>{
+const obs=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
-},{threshold:.25});
-document.querySelectorAll(".section").forEach(s=>observer.observe(s));
+},{threshold:.2});
+document.querySelectorAll(".section").forEach(s=>obs.observe(s));
+
+/* INVENTORY COUNTER */
+let inv=Number(localStorage.inv)||0;
+invCount.textContent=inv;
+setInterval(()=>{
+  inv++;
+  invCount.textContent=inv;
+  localStorage.inv=inv;
+},4000);
 
 /* DONATIONS */
 const GOAL=300;
-let total=Number(localStorage.donations)||0;
-
+let total=Number(localStorage.don)||0;
 const bar=document.getElementById("bar");
-const status=document.getElementById("status");
-const absurd=document.getElementById("absurd");
+const donText=document.getElementById("donText");
 
-function update(){
+function updateDon(){
   const pct=Math.min(total/GOAL*100,100);
   bar.style.width=pct+"%";
-  status.textContent=`${total}€ / ${GOAL}€ recaudados`;
-  absurd.textContent=
-    total>=GOAL
-    ? "Objetivo alcanzado. Error inevitable."
-    : `Dinero mal invertido: ${total}€`;
+  donText.textContent=`${total}€ / ${GOAL}€ recaudados`;
 }
-
 function donate(v){
   total+=v;
-  localStorage.donations=total;
-  update();
+  localStorage.don=total;
+  updateDon();
 }
-
-update();
+updateDon();
 </script>
 
 </body>
