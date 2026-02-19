@@ -5,25 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Borregos S.L — k de queso</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+/* ========= BASE ========= */
 :root{
-  --bg:#0b0b0b;
-  --fg:#f5f5f5;
-  --muted:#777;
-  --glass-bg:rgba(255,255,255,.08);
-  --glass-border:rgba(255,255,255,.18);
-  --glass-glow:rgba(255,255,255,.25);
-  --accent:#9cffc9;
-}
-body.light{
-  --bg:#f4f4f4;
+  --bg:#ffffff;
   --fg:#0a0a0a;
-  --muted:#555;
-  --glass-bg:rgba(255,255,255,.6);
-  --glass-border:rgba(0,0,0,.12);
-  --glass-glow:rgba(0,0,0,.18);
+  --muted:#666;
+  --line:#e5e5e5;
+  --accent:#000;
+}
+body.dark{
+  --bg:#0a0a0a;
+  --fg:#f5f5f5;
+  --muted:#888;
+  --line:#222;
+  --accent:#fff;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
@@ -31,139 +29,106 @@ body.light{
 body{
   background:var(--bg);
   color:var(--fg);
-  overflow-x:hidden;
   transition:.3s;
 }
 
+/* ========= HEADER ========= */
 .header{
   position:fixed;
-  top:24px;
+  top:32px;
   right:32px;
-  display:flex;
-  gap:12px;
   z-index:1000;
 }
 .header button{
-  width:42px;
-  height:42px;
-  border-radius:999px;
-  border:1px solid var(--glass-border);
-  background:var(--glass-bg);
-  color:var(--fg);
+  background:none;
+  border:1px solid var(--line);
+  padding:10px 14px;
   cursor:pointer;
-  backdrop-filter:blur(12px);
+  font-size:14px;
 }
 
+/* ========= SECTIONS ========= */
 .section{
   min-height:100vh;
-  padding:180px 12vw;
+  padding:160px 12vw;
   opacity:0;
-  transform:translateY(30px);
-  filter:blur(8px);
-  transition:.8s ease;
+  transform:translateY(12px);
+  transition:.6s ease;
 }
 .section.visible{
   opacity:1;
   transform:none;
-  filter:none;
 }
 
+/* ========= TYPO ========= */
 h1{
-  font-size:clamp(64px,6vw,120px);
-  font-weight:500;
+  font-size:clamp(56px,7vw,120px);
+  font-weight:400;
 }
-.hero h1{font-size:clamp(120px,10vw,200px);}
-.hero span{font-size:.35em;opacity:.7}
-
+.hero span{
+  font-size:.35em;
+  margin-left:12px;
+}
 .hero-sub{
   margin-top:24px;
-  letter-spacing:.35em;
+  letter-spacing:.4em;
   color:var(--muted);
 }
 
 p{
+  max-width:640px;
   margin-top:24px;
-  max-width:720px;
   line-height:1.7;
   color:var(--muted);
 }
 
-.grid{
+/* ========= BLOCK ========= */
+.block{
   margin-top:64px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:32px;
+  border-top:1px solid var(--line);
+  padding-top:32px;
 }
 
-/* GLASS CARD */
-.card{
-  position:relative;
-  padding:32px;
-  border-radius:22px;
-  background:var(--glass-bg);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(18px);
-  overflow:hidden;
-}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(
-      400px circle at var(--x,50%) var(--y,50%),
-      var(--glass-glow),
-      transparent 45%
-    );
-  opacity:0;
-  transition:.3s;
-}
-.card:hover::before{opacity:1}
-
-/* DONATIONS */
+/* ========= DONATIONS ========= */
 .progress{
-  height:14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.1);
-  overflow:hidden;
-  margin:32px 0 16px;
+  height:2px;
+  background:var(--line);
+  margin:24px 0;
 }
 .progress-bar{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,var(--accent),#6fffd1);
-  transition:width .6s ease;
+  background:var(--accent);
+  transition:width .5s ease;
 }
 
-.donation-buttons{
+.actions{
   display:flex;
-  gap:12px;
+  gap:16px;
   flex-wrap:wrap;
-  margin-top:24px;
 }
-.donation-buttons button{
-  padding:14px 22px;
-  border-radius:999px;
-  border:1px solid var(--glass-border);
-  background:transparent;
-  color:var(--fg);
+.actions button{
+  background:none;
+  border:1px solid var(--line);
+  padding:10px 18px;
   cursor:pointer;
+  font-size:14px;
 }
 
+/* ========= FOOTER ========= */
 footer{
   padding:80px 12vw;
-  text-align:center;
-  border-top:1px solid var(--glass-border);
+  border-top:1px solid var(--line);
   color:var(--muted);
+  font-size:14px;
 }
-footer strong{color:var(--fg);}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-  <button id="themeBtn">🌗</button>
+  <button id="themeBtn">Modo</button>
 </div>
 
 <section class="section hero">
@@ -173,83 +138,69 @@ footer strong{color:var(--fg);}
 
 <section class="section">
   <h1>Donaciones</h1>
-  <p>Ayúdanos a financiar el próximo error.</p>
+  <p>Financia el próximo error.</p>
 
-  <div class="card" id="donationCard">
-    <strong>🎯 Objetivo actual</strong>
+  <div class="block">
+    <strong>Objetivo actual</strong>
     <p>Nuevo altavoz (otra vez)</p>
 
     <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+      <div class="progress-bar" id="bar"></div>
     </div>
 
-    <div id="progressText">0€ / 300€ recaudados</div>
-    <p id="absurdText">Dinero mal invertido hasta ahora: 0€</p>
+    <p id="status">0€ / 300€ recaudados</p>
+    <p id="absurd">Dinero mal invertido: 0€</p>
 
-    <div class="donation-buttons">
-      <button onclick="donate(5)">+5€ · Cable</button>
-      <button onclick="donate(10)">+10€ · Queso</button>
-      <button onclick="donate(25)">+25€ · Caja misteriosa</button>
+    <div class="actions">
+      <button onclick="donate(5)">+5€</button>
+      <button onclick="donate(10)">+10€</button>
+      <button onclick="donate(25)">+25€</button>
     </div>
   </div>
 </section>
 
 <footer>
-  <strong>Borregos S.L</strong><br>
-  k de queso<br><br>
-  © 2026 — Todos los derechos dudosos reservados
+  Borregos S.L — k de queso<br>
+  © 2026
 </footer>
 
 <script>
 /* THEME */
-if(localStorage.theme==="light") document.body.classList.add("light");
 themeBtn.onclick=()=>{
-  document.body.classList.toggle("light");
-  localStorage.theme=document.body.classList.contains("light")?"light":"dark";
+  document.body.classList.toggle("dark");
 };
 
-/* SECTION ANIMATION */
+/* SCROLL ANIMATION */
 const observer=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.25});
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
-/* GLOW FOLLOW CURSOR */
-document.querySelectorAll(".card").forEach(el=>{
-  el.addEventListener("mousemove",e=>{
-    const r=el.getBoundingClientRect();
-    el.style.setProperty("--x",`${e.clientX-r.left}px`);
-    el.style.setProperty("--y",`${e.clientY-r.top}px`);
-  });
-});
+/* DONATIONS */
+const GOAL=300;
+let total=Number(localStorage.donations)||0;
 
-/* DONATION LOGIC */
-const GOAL = 300;
-let total = Number(localStorage.donations) || 0;
+const bar=document.getElementById("bar");
+const status=document.getElementById("status");
+const absurd=document.getElementById("absurd");
 
-const bar = document.getElementById("progressBar");
-const text = document.getElementById("progressText");
-const absurd = document.getElementById("absurdText");
-
-function updateUI(){
-  const percent = Math.min((total / GOAL) * 100, 100);
-  bar.style.width = percent + "%";
-  text.textContent = `${total}€ / ${GOAL}€ recaudados`;
-  absurd.textContent = `Dinero mal invertido hasta ahora: ${total}€`;
-
-  if(total >= GOAL){
-    absurd.textContent = "Objetivo completado. Esto ya es irreversible.";
-    bar.style.background = "linear-gradient(90deg,#ffe29f,#ffa99f)";
-  }
+function update(){
+  const pct=Math.min(total/GOAL*100,100);
+  bar.style.width=pct+"%";
+  status.textContent=`${total}€ / ${GOAL}€ recaudados`;
+  absurd.textContent=
+    total>=GOAL
+    ? "Objetivo alcanzado. Error inevitable."
+    : `Dinero mal invertido: ${total}€`;
 }
 
-function donate(amount){
-  total += amount;
-  localStorage.donations = total;
-  updateUI();
+function donate(v){
+  total+=v;
+  localStorage.donations=total;
+  update();
 }
 
-updateUI();
+update();
 </script>
 
 </body>
