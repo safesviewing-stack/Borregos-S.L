@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
@@ -22,15 +21,8 @@ body.borrego{
   --muted:#cfa;
 }
 
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
 
-/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -39,82 +31,64 @@ body{
   transition:.6s ease;
 }
 
-/* ================= OVERLAY ================= */
+/* CAOS GLOBAL */
+body.borrego{
+  animation:bodyChaos 6s infinite alternate;
+}
+@keyframes bodyChaos{
+  0%{transform:scale(1)}
+  100%{transform:scale(1.01)}
+}
+
+/* TITLES SHAKE */
+body.borrego h1{
+  animation:titleShake 0.25s infinite alternate;
+}
+@keyframes titleShake{
+  from{transform:translateX(-2px)}
+  to{transform:translateX(2px)}
+}
+
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
   backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.45);
   opacity:0;
   pointer-events:none;
-  transition:.5s ease;
+  transition:.5s;
   z-index:200;
 }
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
+.overlay.active{opacity:1;pointer-events:auto}
 
-/* ================= MENU BUTTON ================= */
+/* MENU BTN */
 .menu-btn{
-  position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
-  display:flex;
-  flex-direction:column;
+  position:fixed;top:32px;right:40px;
+  width:28px;height:22px;
+  display:flex;flex-direction:column;
   justify-content:space-between;
-  cursor:pointer;
-  z-index:500;
+  cursor:pointer;z-index:500;
 }
+.menu-btn span{height:2px;background:#fff;transition:.4s}
 
-.menu-btn span{
-  height:2px;
-  width:100%;
-  background:#fff;
-  transition:.4s ease;
-}
-
-.menu-btn.open span:nth-child(1){
-  transform:rotate(45deg) translateY(10px);
-}
-.menu-btn.open span:nth-child(2){
-  opacity:0;
-}
-.menu-btn.open span:nth-child(3){
-  transform:rotate(-45deg) translateY(-10px);
-}
-
-/* ================= MENU ================= */
+/* MENU */
 .menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:340px;
-  height:100vh;
+  position:fixed;top:0;right:0;
+  width:340px;height:100vh;
   padding:140px 56px;
-  background:rgba(15,15,15,.65);
+  background:rgba(15,15,15,.7);
   backdrop-filter:blur(24px) saturate(160%);
   border-left:1px solid rgba(255,255,255,.1);
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
   gap:32px;
   transform:translateX(100%);
-  transition:.6s cubic-bezier(.2,.8,.2,1);
+  transition:.6s;
   z-index:300;
 }
-.menu.open{transform:none;}
+.menu.open{transform:none}
 
-.menu span{
-  font-size:13px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  color:#ccc;
-  cursor:pointer;
-}
-
-/* ================= TOGGLE ================= */
+/* TOGGLE */
 .toggle{
   position:fixed;
   bottom:32px;
@@ -128,7 +102,7 @@ body{
   z-index:600;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
@@ -140,18 +114,7 @@ body{
   max-width:1200px;
 }
 
-/* ================= TITLES ================= */
-h1{
-  font-size:clamp(76px,6vw,130px);
-  font-weight:500;
-  line-height:1.02;
-}
-
-/* ================= HERO ================= */
-.hero{
-  display:flex;
-  align-items:center;
-}
+/* HERO */
 .hero h1{
   font-size:clamp(120px,10vw,210px);
 }
@@ -162,17 +125,16 @@ h1{
   color:var(--muted);
 }
 
-/* ================= TEXT ================= */
+/* TEXT */
 p{
   margin-top:20px;
   max-width:680px;
   font-size:15px;
   line-height:1.65;
   color:#aaa;
-  text-align:justify;
 }
 
-/* ================= GRID ================= */
+/* GRID */
 .grid{
   margin-top:64px;
   display:grid;
@@ -180,119 +142,34 @@ p{
   gap:36px;
 }
 
-/* ================= BORREGOS ================= */
-.borrego img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  background:#111;
-  margin-bottom:14px;
-}
-
-/* ================= BLOG ================= */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  background:#111;
-  margin-bottom:14px;
-}
-
-/* ================= CARD ================= */
+/* CARD */
 .card{
   padding:32px;
   border-radius:22px;
   background:var(--glass);
   border:1px solid rgba(255,255,255,.1);
-  transition:.3s ease;
+  transition:.2s ease;
 }
 
-/* ================= COUNTERS ================= */
-.counters{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-
-.counter-card{
-  padding:36px;
-  border-radius:22px;
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.1),
-    rgba(255,255,255,.03)
-  );
-  border:1px solid rgba(255,255,255,.15);
-}
-
-.counter-value{
-  font-size:64px;
-  font-weight:500;
-}
-
-.counter-label{
-  margin-top:12px;
-  font-size:12px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-
-/* ================= CONTACT ================= */
-.contact{
-  margin-top:56px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-
-.contact a{
-  padding:32px;
-  border-radius:22px;
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,.1);
-  color:#fff;
-  text-decoration:none;
-}
-
-/* ================= CHEESE ================= */
+/* CHEESE */
 .cheese{
   position:fixed;
   font-size:32px;
   pointer-events:none;
-  animation:floatCheese 6s ease-in-out infinite;
+  animation:floatCheese 4s ease-in-out infinite;
 }
 @keyframes floatCheese{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
+  50%{transform:translateY(-30px)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<div class="menu-btn" id="menuBtn">
-  <span></span><span></span><span></span>
-</div>
-
-<nav class="menu" id="menu">
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Borregos</span>
-  <span data-i="3">Servicios</span>
-  <span data-i="4">Blog</span>
-  <span data-i="5">Inventario</span>
-  <span data-i="6">Donaciones</span>
-  <span data-i="7">Contacto</span>
-</nav>
-
+<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
 <div class="toggle" id="toggleMode">MODO BORREGO</div>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1 id="heroTitle">Borregos<br>S.L</h1>
@@ -300,207 +177,37 @@ p{
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Quiénes somos</h1>
-    <p id="whoText">
-      Borregos S.L es un grupo de diez individuos con criterio dudoso,
-      coordinación irregular y una dependencia emocional del queso.
-    </p>
-  </div>
-</section>
-
-<!-- BORREGOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Los borregos</h1>
-    <div class="grid">
-      ${Array.from({length:10},(_,i)=>`
-      <div class="borrego">
-        <img src="b${i+1}.jpg">
-        <strong>Borrego ${String(i+1).padStart(2,"0")}</strong>
-      </div>`).join("")}
-    </div>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
 <section class="section">
   <div class="section-block">
     <h1>Servicios</h1>
     <div class="grid">
       <div class="card">Estropear eventos</div>
       <div class="card">Fiestas sin control</div>
-      <div class="card">Opiniones no solicitadas</div>
-      <div class="card">Presencia incómoda</div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section class="section">
-  <div class="section-block">
-    <h1>Blog</h1>
-    <div class="grid">
-      <div class="blog-item"><img src="blog1.jpg"></div>
-      <div class="blog-item"><video src="video1.mp4" controls></video></div>
-      <div class="blog-item"><img src="blog2.jpg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- INVENTARIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Inventario</h1>
-    <div class="counters">
-      <div class="counter-card">
-        <div class="counter-value" id="itemCount">0</div>
-        <div class="counter-label">Objetos recogidos</div>
-      </div>
-      <div class="counter-card">
-        <div class="counter-value" id="cheeseCount">0</div>
-        <div class="counter-label">Quesos acumulados</div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card">#001 Cono de tráfico</div>
-      <div class="card">#002 Silla rota</div>
-      <div class="card">#003 Carrito metálico</div>
-      <div class="card">#004 Altavoz dudoso</div>
-    </div>
-  </div>
-</section>
-
-<!-- DONACIONES -->
-<section class="section">
-  <div class="section-block">
-    <h1>Donaciones</h1>
-    <p>
-      Toda aportación económica será gestionada con una ética flexible
-      y destinada principalmente a queso.
-    </p>
-    <div class="grid">
-      <div class="card">Bizum · +34 600 000 000</div>
-      <div class="card">PayPal · borregos@queso.com</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact">
-      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-      <a href="#">Instagram oficial</a>
+      <div class="card">Opiniones no pedidas</div>
     </div>
   </div>
 </section>
 
 <script>
-/* ================= MENU ================= */
-const menuBtn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-const overlay=document.getElementById("overlay");
-
-menuBtn.onclick=()=>{
-  menuBtn.classList.toggle("open");
-  menu.classList.toggle("open");
-  overlay.classList.toggle("active");
-};
-
-overlay.onclick=()=>{
-  menuBtn.classList.remove("open");
-  menu.classList.remove("open");
-  overlay.classList.remove("active");
-};
-
-document.querySelectorAll(".menu span").forEach((b,i)=>{
-  b.onclick=()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-    overlay.click();
-  };
-});
-
-/* ================= COUNTERS ================= */
-let items=Number(localStorage.items)||0;
-let cheese=Number(localStorage.cheese)||0;
-itemCount.textContent=items;
-cheeseCount.textContent=cheese;
-
-setInterval(()=>{
-  items++;
-  localStorage.items=items;
-  itemCount.textContent=items;
-},3000);
-
-setInterval(()=>{
-  cheese++;
-  localStorage.cheese=cheese;
-  cheeseCount.textContent=cheese;
-},2000);
-
-/* ================= MODE BORREGO ================= */
+/* MODE BORREGO TOTAL */
 const toggle=document.getElementById("toggleMode");
-const heroTitle=document.getElementById("heroTitle");
-const heroSub=document.getElementById("heroSub");
-const whoText=document.getElementById("whoText");
-
-const subs=[
-  "k de queso",
-  "demasiado queso",
-  "error corporativo",
-  "esto no es legal",
-  "nadie nos pidió esto"
-];
-
-const whoTexts=[
-  "Diez individuos con una coordinación preocupante.",
-  "Esto empezó como una broma.",
-  "No somos responsables de nada.",
-  "Un fallo organizativo con amigos.",
-  "Probablemente no deberíamos existir."
-];
-
-let textLoop=null;
-
-function enableBorrego(){
-  document.body.classList.add("borrego");
-  localStorage.mode="borrego";
-  heroTitle.innerHTML="Borregos<br>definitivos";
-
-  textLoop=setInterval(()=>{
-    heroSub.textContent=subs[Math.floor(Math.random()*subs.length)];
-    whoText.textContent=whoTexts[Math.floor(Math.random()*whoTexts.length)];
-  },2500);
-
-  spawnCheese();
-}
-
-function disableBorrego(){
-  document.body.classList.remove("borrego");
-  localStorage.mode="normal";
-  heroTitle.innerHTML="Borregos<br>S.L";
-  heroSub.textContent="k de queso";
-  clearInterval(textLoop);
-  document.querySelectorAll(".cheese").forEach(c=>c.remove());
-}
-
-if(localStorage.mode==="borrego") enableBorrego();
+let chaosInterval=null;
 
 toggle.onclick=()=>{
-  document.body.classList.contains("borrego")
-    ? disableBorrego()
-    : enableBorrego();
+  document.body.classList.toggle("borrego");
+  if(document.body.classList.contains("borrego")){
+    spawnCheese();
+    chaosInterval=setInterval(randomChaos,150);
+  }else{
+    clearInterval(chaosInterval);
+    document.querySelectorAll(".cheese").forEach(c=>c.remove());
+    document.querySelectorAll(".card").forEach(c=>c.style.transform="none");
+  }
 };
 
-/* ================= CHEESE ================= */
+/* CHEESE */
 function spawnCheese(){
-  document.querySelectorAll(".cheese").forEach(c=>c.remove());
-  for(let i=0;i<8;i++){
+  for(let i=0;i<10;i++){
     const c=document.createElement("div");
     c.className="cheese";
     c.textContent="🧀";
@@ -510,25 +217,28 @@ function spawnCheese(){
   }
 }
 
-/* ================= CARDS HUYEN ================= */
+/* RANDOM CHAOS */
+function randomChaos(){
+  document.querySelectorAll(".card").forEach(card=>{
+    const x=(Math.random()-.5)*20;
+    const y=(Math.random()-.5)*20;
+    const r=(Math.random()-.5)*6;
+    card.style.transform=`translate(${x}px,${y}px) rotate(${r}deg)`;
+  });
+}
+
+/* CARDS HUYEN */
 document.addEventListener("mousemove",e=>{
   if(!document.body.classList.contains("borrego")) return;
 
   document.querySelectorAll(".card").forEach(card=>{
     const r=card.getBoundingClientRect();
-    const cx=r.left+r.width/2;
-    const cy=r.top+r.height/2;
-
-    const dx=cx-e.clientX;
-    const dy=cy-e.clientY;
+    const dx=r.left+r.width/2-e.clientX;
+    const dy=r.top+r.height/2-e.clientY;
     const dist=Math.sqrt(dx*dx+dy*dy);
 
-    if(dist<180){
-      const force=(180-dist)/180;
-      card.style.transform=
-        `translate(${dx*0.15*force}px,${dy*0.15*force}px)`;
-    }else{
-      card.style.transform="translate(0,0)";
+    if(dist<160){
+      card.style.transform=`translate(${dx*.2}px,${dy*.2}px)`;
     }
   });
 });
