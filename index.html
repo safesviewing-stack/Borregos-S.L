@@ -8,12 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
   --muted:#777;
-
   --glass-bg:rgba(255,255,255,.08);
   --glass-border:rgba(255,255,255,.18);
   --glass-glow:rgba(255,255,255,.25);
@@ -22,16 +20,13 @@ body.light{
   --bg:#f4f4f4;
   --fg:#0a0a0a;
   --muted:#555;
-
   --glass-bg:rgba(255,255,255,.6);
   --glass-border:rgba(0,0,0,.12);
   --glass-glow:rgba(0,0,0,.18);
 }
 
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -39,7 +34,7 @@ body{
   transition:.3s;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 .header{
   position:fixed;
   top:24px;
@@ -57,13 +52,9 @@ body{
   backdrop-filter:blur(14px);
   color:var(--fg);
   cursor:pointer;
-  transition:.25s;
-}
-.header button:hover{
-  box-shadow:0 0 20px var(--glass-glow);
 }
 
-/* ================= MENU ================= */
+/* MENU */
 .menu{
   position:fixed;
   top:0;
@@ -90,7 +81,7 @@ body{
   text-align:left;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 12vw;
@@ -103,7 +94,7 @@ body{
   transform:none;
 }
 
-/* ================= TITLES ================= */
+/* TITLES */
 h1{
   font-size:clamp(72px,6vw,130px);
   font-weight:500;
@@ -118,7 +109,7 @@ h1{
   color:var(--muted);
 }
 
-/* ================= GRID ================= */
+/* GRID */
 .grid{
   margin-top:64px;
   display:grid;
@@ -126,7 +117,7 @@ h1{
   gap:36px;
 }
 
-/* ================= GLASS CARD ================= */
+/* GLASS CARD */
 .card{
   position:relative;
   border-radius:22px;
@@ -135,8 +126,8 @@ h1{
   backdrop-filter:blur(18px);
   overflow:hidden;
   transition:.3s;
-  color:var(--fg);
   text-decoration:none;
+  color:var(--fg);
 }
 .card:hover{transform:translateY(-6px)}
 .card::before{
@@ -153,11 +144,12 @@ h1{
 }
 .card:hover::before{opacity:1}
 
+/* CARD CONTENT */
 .card-content{
   padding:32px;
 }
 
-/* ================= BORREGOS ================= */
+/* BORREGOS */
 .borrego img{
   width:100%;
   height:280px;
@@ -168,7 +160,7 @@ h1{
   text-align:center;
 }
 
-/* ================= BLOG ================= */
+/* BLOG */
 .blog img,
 .blog video{
   width:100%;
@@ -177,43 +169,29 @@ h1{
   display:block;
 }
 
-/* ================= COUNTER ================= */
-.counter-inner{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+/* ACTION CARD */
+.action span{
+  display:block;
+  font-size:12px;
+  letter-spacing:.3em;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+.action strong{
+  font-size:20px;
+}
+
+/* INVENTORY */
+.counter-box{
+  max-width:360px;
+  margin-top:64px;
 }
 .counter{
   font-size:64px;
   font-weight:500;
-  transition:transform .25s ease;
-}
-.counter.bump{
-  transform:scale(1.15);
-}
-.counter-box.flash{
-  box-shadow:
-    0 0 0 1px var(--glass-border),
-    0 0 40px var(--glass-glow);
 }
 
-.counter-btn{
-  align-self:flex-start;
-  padding:12px 22px;
-  border-radius:999px;
-  background:transparent;
-  border:1px solid var(--glass-border);
-  color:var(--fg);
-  cursor:pointer;
-  backdrop-filter:blur(10px);
-  transition:.25s;
-}
-.counter-btn:hover{
-  background:var(--glass-bg);
-  box-shadow:0 0 20px var(--glass-glow);
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
   padding:80px 12vw;
   border-top:1px solid var(--glass-border);
@@ -283,12 +261,11 @@ footer strong{color:var(--fg);}
 <section class="section" id="inventory">
   <h1>Inventario</h1>
 
-  <!-- CONTADOR INTERACTIVO -->
+  <!-- CONTADOR EN CAJA -->
   <div class="card counter-box">
-    <div class="card-content counter-inner">
+    <div class="card-content">
       <div class="counter" id="counter">0</div>
-      <p>Objetos injustificados registrados</p>
-      <button class="counter-btn" id="addItem">Añadir objeto</button>
+      Objetos registrados
     </div>
   </div>
 
@@ -305,6 +282,7 @@ footer strong{color:var(--fg);}
   <div class="grid">
     <a class="card action" href="https://paypal.me" target="_blank">
       <div class="card-content">
+        <span>APOYAR EL CAOS</span>
         <strong>Donar con PayPal →</strong>
       </div>
     </a>
@@ -316,11 +294,13 @@ footer strong{color:var(--fg);}
   <div class="grid">
     <a class="card action" href="mailto:borregos@queso.com">
       <div class="card-content">
+        <span>EMAIL</span>
         <strong>borregos@queso.com</strong>
       </div>
     </a>
     <a class="card action" href="#" target="_blank">
       <div class="card-content">
+        <span>REDES</span>
         <strong>Instagram →</strong>
       </div>
     </a>
@@ -334,7 +314,7 @@ footer strong{color:var(--fg);}
 </footer>
 
 <script>
-/* ===== MENU ===== */
+/* MENU */
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 menuBtn.onclick=()=>menu.classList.toggle("open");
@@ -346,7 +326,7 @@ menu.querySelectorAll("button").forEach(btn=>{
   };
 });
 
-/* ===== THEME ===== */
+/* THEME */
 const themeBtn=document.getElementById("themeBtn");
 if(localStorage.theme==="light") document.body.classList.add("light");
 themeBtn.onclick=()=>{
@@ -354,39 +334,27 @@ themeBtn.onclick=()=>{
   localStorage.theme=document.body.classList.contains("light")?"light":"dark";
 };
 
-/* ===== LANGUAGE ===== */
+/* LANGUAGE */
 const langBtn=document.getElementById("langBtn");
 langBtn.onclick=()=>langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
 
-/* ===== COUNTER INTERACTIVE ===== */
+/* COUNTER */
 const counter=document.getElementById("counter");
-const addBtn=document.getElementById("addItem");
-const box=document.querySelector(".counter-box");
-
 let count=Number(localStorage.items)||0;
 counter.textContent=count;
-
-addBtn.addEventListener("click",()=>{
+setInterval(()=>{
   count++;
   counter.textContent=count;
   localStorage.items=count;
+},3000);
 
-  counter.classList.add("bump");
-  box.classList.add("flash");
-
-  setTimeout(()=>{
-    counter.classList.remove("bump");
-    box.classList.remove("flash");
-  },250);
-});
-
-/* ===== SECTION ANIMATION ===== */
+/* ANIMATION */
 const observer=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.25});
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
-/* ===== GLOW ===== */
+/* GLOW */
 document.querySelectorAll(".card").forEach(el=>{
   el.onmousemove=e=>{
     const r=el.getBoundingClientRect();
