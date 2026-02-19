@@ -16,18 +16,30 @@
 }
 
 /* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
 /* BODY */
 body{
   background:var(--bg);
   color:var(--fg);
   overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(16px);
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:300;
+}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
 }
 
 /* MENU BUTTON */
@@ -41,11 +53,21 @@ body{
   flex-direction:column;
   justify-content:space-between;
   cursor:pointer;
-  z-index:500;
+  z-index:600;
 }
 .menu-btn span{
   height:2px;
   background:#fff;
+  transition:.4s;
+}
+.menu-btn.open span:nth-child(1){
+  transform:rotate(45deg) translateY(10px);
+}
+.menu-btn.open span:nth-child(2){
+  opacity:0;
+}
+.menu-btn.open span:nth-child(3){
+  transform:rotate(-45deg) translateY(-10px);
 }
 
 /* MENU */
@@ -57,24 +79,32 @@ body{
   height:100vh;
   padding:140px 48px;
   background:rgba(15,15,15,.7);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(24px) saturate(160%);
+  border-left:1px solid rgba(255,255,255,.1);
   transform:translateX(100%);
-  transition:.6s;
-  z-index:400;
+  transition:.6s cubic-bezier(.2,.8,.2,1);
+  z-index:500;
 }
 .menu.open{transform:none;}
 .menu span{
   display:block;
-  margin-bottom:24px;
+  margin-bottom:26px;
   font-size:13px;
   letter-spacing:.3em;
   cursor:pointer;
+  color:#ccc;
 }
 
 /* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
+  scroll-snap-align:start;
+}
+.section-block{
+  position:sticky;
+  top:220px;
+  max-width:1200px;
 }
 
 /* TITLES */
@@ -183,6 +213,8 @@ p{
 
 <body>
 
+<div class="overlay" id="overlay"></div>
+
 <div class="menu-btn" id="menuBtn">
   <span></span><span></span><span></span>
 </div>
@@ -200,108 +232,142 @@ p{
 
 <!-- HERO -->
 <section class="section hero">
-  <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">k de queso</div>
+  <div class="section-block">
+    <h1>Borregos<br>S.L</h1>
+    <div class="hero-sub">k de queso</div>
+  </div>
 </section>
 
 <!-- QUIÉNES SOMOS -->
 <section class="section">
-  <h1>Quiénes somos</h1>
-  <p>
-    Borregos S.L es un grupo de amigos con criterio dudoso,
-    capacidad organizativa limitada y una sorprendente constancia.
-  </p>
+  <div class="section-block">
+    <h1>Quiénes somos</h1>
+    <p>
+      Borregos S.L es un grupo de amigos con criterio dudoso,
+      organización cuestionable y una sorprendente perseverancia.
+    </p>
+  </div>
 </section>
 
 <!-- BORREGOS -->
 <section class="section">
-  <h1>Los borregos</h1>
-  <div class="grid">
-    <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
-    <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
-    <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
-    <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
-    <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
-    <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
-    <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
-    <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
-    <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
-    <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+  <div class="section-block">
+    <h1>Los borregos</h1>
+    <div class="grid">
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+    </div>
   </div>
 </section>
 
 <!-- SERVICIOS -->
 <section class="section">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos</div>
-    <div class="card">Fiestas sin control</div>
-    <div class="card">Opiniones no solicitadas</div>
-    <div class="card">Presencia incómoda</div>
+  <div class="section-block">
+    <h1>Servicios</h1>
+    <div class="grid">
+      <div class="card">Estropear eventos</div>
+      <div class="card">Fiestas sin control</div>
+      <div class="card">Opiniones no solicitadas</div>
+      <div class="card">Presencia incómoda</div>
+    </div>
   </div>
 </section>
 
 <!-- BLOG -->
 <section class="section">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
-    <div class="blog-item"><img src="blog2.jpg"></div>
+  <div class="section-block">
+    <h1>Blog</h1>
+    <div class="grid">
+      <div class="blog-item"><img src="blog1.jpg"></div>
+      <div class="blog-item"><video src="video1.mp4" controls></video></div>
+      <div class="blog-item"><img src="blog2.jpg"></div>
+    </div>
   </div>
 </section>
 
 <!-- INVENTARIO -->
 <section class="section">
-  <h1>Inventario</h1>
-  <div class="counters">
-    <div class="counter-card">
-      <div class="counter-value" id="itemCount">0</div>
-      <div class="counter-label">Objetos recogidos</div>
+  <div class="section-block">
+    <h1>Inventario</h1>
+    <div class="counters">
+      <div class="counter-card">
+        <div class="counter-value" id="itemCount">0</div>
+        <div class="counter-label">Objetos recogidos</div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">#001 Cono de tráfico</div>
+      <div class="card">#002 Silla rota</div>
+      <div class="card">#003 Carrito metálico</div>
+      <div class="card">#004 Altavoz dudoso</div>
     </div>
   </div>
 </section>
 
 <!-- DONACIONES -->
 <section class="section">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <div class="card">Bizum · +34 600 000 000</div>
-    <div class="card">PayPal · borregos@queso.com</div>
+  <div class="section-block">
+    <h1>Donaciones</h1>
+    <div class="grid">
+      <div class="card">Bizum · +34 600 000 000</div>
+      <div class="card">PayPal · borregos@queso.com</div>
+    </div>
   </div>
 </section>
 
 <!-- CONTACTO -->
 <section class="section">
-  <h1>Contacto</h1>
-  <div class="contact">
-    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-    <a href="#">Instagram</a>
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+      <a href="#">Instagram</a>
+    </div>
   </div>
 </section>
 
 <script>
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
+const overlay=document.getElementById("overlay");
 
-menuBtn.onclick=()=>menu.classList.toggle("open");
+menuBtn.onclick=()=>{
+  menuBtn.classList.toggle("open");
+  menu.classList.toggle("open");
+  overlay.classList.toggle("active");
+};
+
+overlay.onclick=()=>{
+  menuBtn.classList.remove("open");
+  menu.classList.remove("open");
+  overlay.classList.remove("active");
+};
 
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
     document.querySelectorAll(".section")[i]
       .scrollIntoView({behavior:"smooth"});
-    menu.classList.remove("open");
+    overlay.click();
   };
 });
 
+/* COUNTER */
 let items=Number(localStorage.items)||0;
-const itemEl=document.getElementById("itemCount");
-itemEl.textContent=items;
+const el=document.getElementById("itemCount");
+el.textContent=items;
 
 setInterval(()=>{
   items++;
   localStorage.items=items;
-  itemEl.textContent=items;
+  el.textContent=items;
 },3000);
 </script>
 
