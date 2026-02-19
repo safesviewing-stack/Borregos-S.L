@@ -100,7 +100,8 @@ h1{
 }
 .hero-sub{
   margin-top:24px;
-  letter-spacing:.28em;
+  font-size:22px;              /* MÁS GRANDE */
+  letter-spacing:.35em;
   color:var(--muted);
 }
 
@@ -130,6 +131,9 @@ p{
 .card:hover{transform:translateY(-6px);}
 
 /* ============ BORREGOS ============ */
+.borrego{
+  text-align:center;
+}
 .borrego img{
   width:100%;
   height:280px;
@@ -150,8 +154,18 @@ p{
 }
 
 /* ============ INVENTORY ============ */
-.counter{
+.counters{
   margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.counter-card{
+  padding:36px;
+  border-radius:22px;
+  background:var(--card);
+}
+.counter-value{
   font-size:64px;
 }
 
@@ -168,6 +182,17 @@ p{
   background:var(--card);
   color:var(--fg);
   text-decoration:none;
+}
+
+/* ============ FOOTER ============ */
+footer{
+  padding:80px 10vw;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.1);
+}
+footer strong{
+  color:var(--fg);
 }
 </style>
 </head>
@@ -196,79 +221,48 @@ p{
 <!-- HERO -->
 <section class="section hero">
   <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">k de queso</div>
+  <div class="hero-sub">K DE QUESO</div>
 </section>
 
 <section class="section">
   <h1>Quiénes somos</h1>
   <p>
     Borregos S.L es un grupo de amigos que decidió tomarse poco en serio,
-    pero hacerlo todo junto. No somos una empresa, pero operamos como tal
-    cuando conviene.
+    pero hacerlo todo junto.
   </p>
 </section>
 
 <section class="section">
   <h1>Los borregos</h1>
   <div class="grid">
-    ${Array.from({length:10},(_,i)=>`
-      <div class="borrego">
-        <img src="b${i+1}.jpg">
-        <strong>Borrego ${i+1}</strong>
-      </div>`).join("")}
-  </div>
-</section>
-
-<section class="section">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos con precisión</div>
-    <div class="card">Fiestas improvisadas</div>
-    <div class="card">Opiniones no solicitadas</div>
-    <div class="card">Presencia incómoda garantizada</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Blog</h1>
-  <p>Registro visual de decisiones cuestionables.</p>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
+    <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+    <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+    <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+    <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+    <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+    <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+    <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+    <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+    <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+    <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
   </div>
 </section>
 
 <section class="section">
   <h1>Inventario</h1>
-  <p>Objetos encontrados, comprados o heredados sin explicación.</p>
-  <div class="counter" id="counter">0</div>
-  <div class="grid">
-    <div class="card">Cono de tráfico</div>
-    <div class="card">Silla rota</div>
-    <div class="card">Carrito metálico</div>
-    <div class="card">Altavoz dudoso</div>
+  <div class="counters">
+    <div class="counter-card">
+      <div class="counter-value" id="counter">0</div>
+      Objetos registrados
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <h1>Donaciones</h1>
-  <p>
-    Toda contribución será utilizada con responsabilidad variable.
-  </p>
-  <div class="grid">
-    <div class="card">Bizum · +34 600 000 000</div>
-    <div class="card">PayPal · borregos@queso.com</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Contacto</h1>
-  <p>Para colaborar, preguntar o simplemente observar.</p>
-  <div class="contact">
-    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-    <a href="#">Instagram</a>
-  </div>
-</section>
+<footer>
+  <strong>Borregos S.L</strong><br>
+  k de queso<br><br>
+  © 2026 — Todos los derechos dudosos reservados
+</footer>
 
 <script>
 /* MENU */
@@ -290,12 +284,6 @@ if(localStorage.theme==="light") document.body.classList.add("light");
 themeBtn.onclick=()=>{
   document.body.classList.toggle("light");
   localStorage.theme=document.body.classList.contains("light")?"light":"dark";
-};
-
-/* LANGUAGE (básico, ampliable) */
-const langBtn=document.getElementById("langBtn");
-langBtn.onclick=()=>{
-  langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
 };
 
 /* COUNTER */
