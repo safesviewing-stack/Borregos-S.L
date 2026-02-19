@@ -3,96 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOS BORREGOS</title>
+<title>Los Borregos</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;font-family:"Comic Neue",cursive}
-body{
+:root{
+  --bg:#f7f7f5;
+  --fg:#111;
+  --muted:#666;
+  --border:#111;
+}
+
+*{
   margin:0;
-  background:linear-gradient(45deg,#ff00ff,#00ffff,#ffff00);
-  background-size:400% 400%;
-  animation:bgMove 6s infinite linear;
-  overflow-x:hidden;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
 }
-@keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
+body{
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.6;
+}
+
+/* HEADER */
 header{
-  position:fixed;top:0;width:100%;
-  background:#fff;border-bottom:6px dashed #000;
-  padding:12px;text-align:center;z-index:999;
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:24px 6vw;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:100;
 }
-header h1{margin:0;animation:shake .6s infinite}
-@keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(1deg)}50%{transform:rotate(-1deg)}75%{transform:rotate(1deg)}100%{transform:rotate(0)}}
 
-#chaosBtn,#doomBtn{
-  margin:6px;padding:8px 16px;font-size:14px;
-  border:3px solid #000;cursor:pointer
+.logo{
+  font-weight:600;
+  letter-spacing:.05em;
 }
-#chaosBtn{background:red;color:#fff}
-#doomBtn{background:black;color:lime}
 
-section{min-height:100vh;padding:140px 20px 80px;text-align:center}
-
-.hero h2{
-  font-size:clamp(64px,12vw,140px);
-  animation:zoom 1s infinite alternate
+nav a{
+  margin-left:28px;
+  text-decoration:none;
+  font-size:12px;
+  letter-spacing:.25em;
+  color:var(--fg);
 }
-@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.15)}}
 
-button.bad{
-  padding:16px 32px;font-size:18px;
-  background:yellow;border:4px solid #000;cursor:pointer
+/* SECTIONS */
+section{
+  padding:140px 6vw;
+  border-bottom:1px solid var(--border);
 }
-button.bad:hover{animation:spin .6s infinite linear}
-@keyframes spin{to{transform:rotate(360deg)}}
 
+h1{
+  font-size:clamp(80px,12vw,180px);
+  font-weight:500;
+  line-height:.9;
+}
+
+h2{
+  font-size:32px;
+  margin-bottom:32px;
+}
+
+p{
+  max-width:900px;
+  color:var(--muted);
+}
+
+/* HERO */
+.hero span{
+  display:block;
+  margin-top:24px;
+  font-size:13px;
+  letter-spacing:.4em;
+  color:var(--muted);
+}
+
+/* GRID */
 .grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:24px;margin-top:64px
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+  margin-top:48px;
 }
+
+/* CARDS */
 .card{
-  background:#fff;border:6px solid #000;padding:16px;
-  animation:float 2s infinite ease-in-out
-}
-@keyframes float{50%{transform:translateY(-20px)}}
-.card img{width:100%;height:200px;object-fit:cover;border:4px dotted #000}
-
-.marquee{background:#000;color:lime;font-size:24px;overflow:hidden;white-space:nowrap}
-.marquee span{display:inline-block;padding-left:100%;animation:scroll 8s linear infinite}
-@keyframes scroll{to{transform:translateX(-100%)}}
-
-.counter{font-size:96px;animation:pulse .5s infinite alternate}
-@keyframes pulse{to{transform:scale(1.3)}}
-
-footer{background:#000;color:#fff;padding:40px}
-
-/* ===== CHAOS MODE ===== */
-body.chaos{animation:screenShake .15s infinite}
-@keyframes screenShake{25%{transform:translate(4px,-4px)}50%{transform:translate(-4px,4px)}}
-body.chaos *{animation:chaosSpin 1s infinite linear!important}
-@keyframes chaosSpin{to{transform:rotate(360deg)}}
-body.chaos img{filter:hue-rotate(360deg) saturate(500%)}
-body.chaos button{animation:blink .2s infinite}
-@keyframes blink{50%{opacity:0}}
-
-.borrego-fly{
-  position:fixed;font-size:48px;pointer-events:none;
-  animation:fly linear infinite
-}
-@keyframes fly{from{left:-10%}to{left:110%}}
-
-/* ===== FAKE CRASH ===== */
-#crash{
-  position:fixed;inset:0;background:#000;color:#0f0;
-  display:none;z-index:2000;padding:40px;font-size:18px
+  border:1px solid var(--border);
+  padding:24px;
+  transition:.3s;
 }
 
-/* ===== MINIGAME ===== */
-#game{
-  border:6px solid #000;background:#fff;
-  padding:20px;margin:40px auto;max-width:400px
+.card:hover{
+  transform:translateY(-6px);
+}
+
+/* BORREGOS */
+.borrego{
+  text-align:center;
+}
+
+.borrego img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  margin-bottom:16px;
+}
+
+/* INVENTARIO */
+.counter{
+  font-size:96px;
+  font-weight:500;
+  margin-bottom:16px;
+}
+
+/* DONATIONS */
+.donate{
+  text-decoration:none;
+  color:var(--fg);
+  font-weight:500;
+}
+
+/* FOOTER */
+footer{
+  padding:80px 6vw;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ===== MODO DEMASIADOS EFECTOS ===== */
+body.chaos{
+  animation:shake .15s infinite;
+}
+
+@keyframes shake{
+  25%{transform:translate(2px,-2px)}
+  50%{transform:translate(-2px,2px)}
+}
+
+body.chaos *{
+  animation:spin 3s infinite linear;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+#chaosBtn{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  padding:12px 16px;
+  font-size:12px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  cursor:pointer;
 }
 </style>
 </head>
@@ -100,110 +172,105 @@ body.chaos button{animation:blink .2s infinite}
 <body>
 
 <header>
-  <h1>🐑 LOS BORREGOS 🐑</h1>
-  <button id="chaosBtn">ACTIVAR MODO DEMASIADOS EFECTOS</button>
-  <button id="doomBtn">AUTODESTRUCCIÓN</button>
+  <div class="logo">LOS BORREGOS</div>
+  <nav>
+    <a href="#inicio">INICIO</a>
+    <a href="#about">SOBRE</a>
+    <a href="#borregos">BORREGOS</a>
+    <a href="#blog">BLOG</a>
+    <a href="#inventory">INVENTARIO</a>
+    <a href="#donations">DONACIONES</a>
+    <a href="#contact">CONTACTO</a>
+  </nav>
 </header>
 
-<section class="hero">
-  <h2>NO SOMOS UN ESTUDIO</h2>
-  <p>somos un grupo sin rumbo pero con wifi</p>
-  <button class="bad" onclick="alert('MALA DECISIÓN')">NO TOQUES ESTO</button>
+<section id="inicio" class="hero">
+  <h1>Los<br>Borregos</h1>
+  <span>Grupo organizado sin objetivo claro</span>
 </section>
 
-<div class="marquee">
-  <span>LOS BORREGOS · SIN OBJETIVO · SIN FUTURO · PERO JUNTOS · </span>
-</div>
+<section id="about">
+  <h2>Sobre nosotros</h2>
+  <p>
+    Los Borregos nacieron de una decisión colectiva cuestionable y se mantienen
+    gracias a una sorprendente falta de criterio. Somos un grupo unido por la inercia,
+    el tiempo libre mal gestionado y una tendencia a seguir adelante aunque nadie
+    sepa muy bien por qué. No prometemos resultados, pero sí constancia.
+  </p>
+</section>
 
-<section>
-  <h2>NUESTROS BORREGOS</h2>
+<section id="borregos">
+  <h2>Borregos</h2>
   <div class="grid">
-    <div class="card"><img src="jose.jpg"><p>JOSE<br>confía demasiado</p></div>
-    <div class="card"><img src="luis.jpg"><p>LUIS<br>rompe cosas</p></div>
-    <div class="card"><img src="pablo.jpg"><p>PABLO<br>no estaba avisado</p></div>
+    <div class="card borrego">
+      <img src="jose.jpg">
+      <strong>Jose</strong>
+      <p>Confía demasiado en el grupo</p>
+    </div>
+    <div class="card borrego">
+      <img src="luis.jpg">
+      <strong>Luis</strong>
+      <p>Rompe cosas con intención noble</p>
+    </div>
+    <div class="card borrego">
+      <img src="pablo.jpg">
+      <strong>Pablo</strong>
+      <p>No recuerda haberse apuntado</p>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>CONTADORES IMPORTANTES</h2>
-  <div class="counter" id="items">0</div>
-  <p>objetos inútiles</p>
-  <div class="counter" id="neurons">100</div>
-  <p>neuronas restantes</p>
-
-  <div id="game">
-    <h3>MINIJUEGO INÚTIL</h3>
-    <p>Haz clic para perder</p>
-    <button onclick="lose()">PERDER</button>
-    <p id="score">Derrotas: 0</p>
+<section id="blog">
+  <h2>Blog</h2>
+  <div class="grid">
+    <div class="card">Reflexiones innecesarias</div>
+    <div class="card">Decisiones mal tomadas</div>
+    <div class="card">Fotos borrosas sin contexto</div>
   </div>
+</section>
+
+<section id="inventory">
+  <h2>Inventario</h2>
+  <div class="counter" id="counter">0</div>
+  <p>
+    Objetos recogidos, heredados o encontrados cuyo origen
+    nadie recuerda con claridad.
+  </p>
+</section>
+
+<section id="donations">
+  <h2>Donaciones</h2>
+  <a class="donate" href="#">
+    Apoyar decisiones futuras cuestionables →
+  </a>
+</section>
+
+<section id="contact">
+  <h2>Contacto</h2>
+  <p>borregos@ningunsitio.com</p>
 </section>
 
 <footer>
-  © 2026 LOS BORREGOS<br>
-  ninguna neurona fue dañada (mentira)
+  © 2026 Los Borregos · seguimos adelante sin saber por qué
 </footer>
 
-<div id="crash">
-  <p>:(</p>
-  <p>El sistema ha encontrado demasiados borregos.</p>
-  <p>Recogiendo datos del desastre… 0%</p>
-</div>
-
-<audio id="horn" src="https://www.myinstants.com/media/sounds/airhorn.mp3"></audio>
+<button id="chaosBtn">Modo demasiados efectos</button>
 
 <script>
-/* CONTADORES */
-let items=0,neurons=100,losses=0;
-setInterval(()=>{
-  items++; document.getElementById("items").textContent=items;
-  neurons--; if(neurons<0) neurons=0;
-  document.getElementById("neurons").textContent=neurons;
-  if(items%10===0) alert("WARNING: BORREGOS DETECTADOS");
-},700);
+/* CONTADOR */
+const counter=document.getElementById("counter");
+let count=Number(localStorage.items)||0;
+counter.textContent=count;
 
-/* MINIJUEGO */
-function lose(){
-  losses++;
-  document.getElementById("score").textContent="Derrotas: "+losses;
-  alert("HAS PERDIDO (como estaba previsto)");
-}
+setInterval(()=>{
+  count++;
+  counter.textContent=count;
+  localStorage.items=count;
+},3000);
 
 /* CHAOS MODE */
-const chaosBtn=document.getElementById("chaosBtn");
-const horn=document.getElementById("horn");
-let chaos=false;
-
-chaosBtn.onclick=()=>{
-  chaos=!chaos;
+document.getElementById("chaosBtn").onclick=()=>{
   document.body.classList.toggle("chaos");
-  chaosBtn.textContent=chaos?"DESACTIVAR CAOS":"ACTIVAR MODO DEMASIADOS EFECTOS";
-  if(chaos){horn.play();spawnBorregos();}
-};
-
-/* RATÓN INFERNAL */
-document.addEventListener("mousemove",e=>{
-  if(!document.body.classList.contains("chaos"))return;
-  document.body.style.backgroundPosition=`${e.clientX/3}px ${e.clientY/3}px`;
-});
-
-/* BORREGOS VOLADORES */
-function spawnBorregos(){
-  for(let i=0;i<10;i++){
-    const b=document.createElement("div");
-    b.className="borrego-fly";
-    b.textContent="🐑";
-    b.style.top=Math.random()*100+"%";
-    b.style.animationDuration=2+Math.random()*4+"s";
-    document.body.appendChild(b);
-  }
-}
-
-/* AUTODESTRUCCIÓN */
-document.getElementById("doomBtn").onclick=()=>{
-  document.getElementById("crash").style.display="block";
-  setTimeout(()=>{document.getElementById("crash").innerHTML+="<p>ERROR FATAL</p>";},2000);
-  setTimeout(()=>{location.reload();},6000);
 };
 </script>
 
