@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Diseño Industrial</title>
+<title>Borregos S.L — k de queso</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -18,8 +18,8 @@
 body{
   background:#0a0a0a;
   color:#f5f5f5;
-  scroll-snap-type:y mandatory;
   overflow-y:scroll;
+  scroll-snap-type:y mandatory;
 }
 
 /* NAV */
@@ -28,8 +28,8 @@ nav{
   top:0;
   left:50%;
   transform:translateX(-50%);
-  height:80px;
   width:100%;
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -86,86 +86,61 @@ h1{
 /* TEXT */
 p{
   margin-top:16px;
-  max-width:600px;
+  max-width:620px;
   font-size:15px;
   line-height:1.6;
   color:#aaa;
   text-align:justify;
 }
 
-/* ABOUT */
-.about{
-  display:flex;
-  gap:48px;
-  margin-top:32px;
-}
-
-.about img{
-  width:360px;
-  height:480px;
-  object-fit:cover;
-  opacity:.9;
-}
-
-/* PORTFOLIO */
-.portfolio-wrapper{
+/* BORREGOS GRID */
+.borregos{
   margin-top:56px;
-  overflow:hidden;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
 }
 
-.portfolio-carousel{
-  display:flex;
-  gap:48px;
-  overflow-x:auto;
-  padding-bottom:28px;
-}
-
-.project-card{
-  min-width:540px;
+.borrego{
   opacity:0;
-  transform:translateY(12px);
+  transform:translateY(16px);
   transition:.8s ease;
 }
 
-.project-card.is-visible{
+.borrego.is-visible{
   opacity:1;
   transform:none;
 }
 
-.project-image{
-  height:310px;
-  margin-bottom:16px;
-}
-
-.project-image img{
+.borrego img{
   width:100%;
-  height:100%;
+  height:280px;
   object-fit:cover;
+  margin-bottom:12px;
 }
 
-/* CV */
-.timeline{
-  margin-top:60px;
-  padding-left:60px;
+.borrego strong{
+  display:block;
 }
 
-.timeline-item{
-  margin-bottom:80px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.8s ease;
+.borrego span{
+  font-size:13px;
+  color:#777;
 }
 
-.timeline-item.is-visible{
-  opacity:1;
-  transform:none;
+/* SERVICES & DONATIONS */
+.cards{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
 }
 
-.timeline-card{
+.card{
+  padding:28px;
+  border-radius:20px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:28px;
 }
 
 /* CONTACT */
@@ -191,50 +166,107 @@ p{
 
 <nav>
   <span data-i="0">Inicio</span>
-  <span data-i="1">Sobre mí</span>
-  <span data-i="2">Portfolio</span>
-  <span data-i="3">CV</span>
-  <span data-i="4">Contacto</span>
+  <span data-i="1">Quiénes somos</span>
+  <span data-i="2">Borregos</span>
+  <span data-i="3">Servicios</span>
+  <span data-i="4">Donaciones</span>
+  <span data-i="5">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <h1>Nombre<br>Apellido</h1>
-    <div class="hero-sub">Portfolio · Diseño industrial</div>
+    <h1>Borregos<br>S.L</h1>
+    <div class="hero-sub">k de queso</div>
   </div>
 </section>
 
+<!-- QUIÉNES SOMOS -->
 <section class="section">
   <div class="section-block">
-    <h1>Sobre mí</h1>
-    <div class="about">
-      <p>
-        Texto personal sobre tu perfil, enfoque de diseño, intereses y forma de trabajar.
-      </p>
-      <img src="foto.jpg">
+    <h1>Quiénes somos</h1>
+    <p>
+      Borregos S.L es una organización informal formada por aproximadamente
+      diez individuos con criterio cuestionable y una fuerte dependencia
+      emocional del queso. Nuestra misión es clara: estar presentes donde no
+      se nos necesita, opinar sin conocimiento previo y empeorar situaciones
+      sociales de forma sistemática.
+    </p>
+    <p>
+      No ofrecemos soluciones. No garantizamos resultados. Pero sí aseguramos
+      un alto nivel de incomodidad, ruido innecesario y decisiones mal tomadas.
+    </p>
+  </div>
+</section>
+
+<!-- BORREGOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Los borregos</h1>
+    <div class="borregos">
+      <div class="borrego">
+        <img src="b1.jpg">
+        <strong>Borrego 01</strong>
+        <span>Especialista en liarla</span>
+      </div>
+      <div class="borrego">
+        <img src="b2.jpg">
+        <strong>Borrego 02</strong>
+        <span>Opinólogo senior</span>
+      </div>
+      <div class="borrego">
+        <img src="b3.jpg">
+        <strong>Borrego 03</strong>
+        <span>Logística del caos</span>
+      </div>
+      <!-- añade hasta 10 -->
     </div>
   </div>
 </section>
 
+<!-- SERVICIOS -->
 <section class="section">
   <div class="section-block">
-    <h1>Portfolio</h1>
-    <div class="portfolio-wrapper">
-      <div class="portfolio-carousel">
-        <div class="project-card"><div class="project-image"><img src="1.jpg"></div>Proyecto 1</div>
-        <div class="project-card"><div class="project-image"><img src="2.jpg"></div>Proyecto 2</div>
-        <div class="project-card"><div class="project-image"><img src="3.jpg"></div>Proyecto 3</div>
+    <h1>Servicios</h1>
+    <div class="cards">
+      <div class="card">
+        <strong>Estropear eventos</strong>
+        <p>Aparición no solicitada, comentarios fuera de lugar y abandono temprano.</p>
+      </div>
+      <div class="card">
+        <strong>Fiestas</strong>
+        <p>Ruido excesivo, música cuestionable y decisiones irreversibles.</p>
+      </div>
+      <div class="card">
+        <strong>Asesoría no profesional</strong>
+        <p>Opiniones sin fundamento sobre cualquier tema.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- DONACIONES -->
+<section class="section">
+  <div class="section-block">
+    <h1>Donaciones</h1>
+    <p>
+      Tu aportación económica nos ayuda a seguir siendo inútiles de forma
+      sostenible. Todo el dinero será destinado a queso, transporte y multas.
+    </p>
+    <div class="cards">
+      <div class="card">Bizum: +34 600 000 000</div>
+      <div class="card">PayPal: borregos@queso.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
     <div class="contact">
-      <a href="mailto:email@email.com">Email</a>
-      <a href="#">LinkedIn</a>
+      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+      <a href="#">Instagram oficial</a>
     </div>
   </div>
 </section>
@@ -249,8 +281,7 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".project-card,.timeline-item")
-  .forEach(el=>observer.observe(el));
+document.querySelectorAll(".borrego").forEach(el=>observer.observe(el));
 </script>
 
 </body>
