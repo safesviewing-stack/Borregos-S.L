@@ -13,7 +13,6 @@
   --bg:#0a0a0a;
   --fg:#f5f5f5;
   --muted:#777;
-
   --glass-bg:rgba(255,255,255,.08);
   --glass-border:rgba(255,255,255,.18);
   --glass-glow:rgba(255,255,255,.25);
@@ -22,16 +21,15 @@ body.light{
   --bg:#f4f4f4;
   --fg:#0a0a0a;
   --muted:#555;
-
   --glass-bg:rgba(255,255,255,.55);
   --glass-border:rgba(0,0,0,.12);
   --glass-glow:rgba(0,0,0,.18);
 }
 
-/* ================= RESET ================= */
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ================= BODY ================= */
+/* BODY */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -39,14 +37,14 @@ body{
   transition:.3s;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 .header{
   position:fixed;
   top:24px;
   right:32px;
   display:flex;
   gap:12px;
-  z-index:1000;
+  z-index:1001;
 }
 .header button{
   width:42px;
@@ -57,19 +55,9 @@ body{
   color:var(--fg);
   cursor:pointer;
   backdrop-filter:blur(14px);
-  opacity:0;
-  transform:translateY(-20px) scale(.9);
-  animation:iconIn .8s ease forwards;
-}
-.header button:nth-child(1){animation-delay:.1s}
-.header button:nth-child(2){animation-delay:.2s}
-.header button:nth-child(3){animation-delay:.3s}
-
-@keyframes iconIn{
-  to{opacity:1;transform:none}
 }
 
-/* ================= OVERLAY ================= */
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
@@ -78,14 +66,14 @@ body{
   opacity:0;
   pointer-events:none;
   transition:.4s;
-  z-index:800;
+  z-index:900;
 }
 .overlay.active{
   opacity:1;
   pointer-events:auto;
 }
 
-/* ================= MENU ================= */
+/* MENU */
 .menu{
   position:fixed;
   top:0;
@@ -97,7 +85,7 @@ body{
   backdrop-filter:blur(24px);
   transform:translateX(100%);
   transition:.5s ease;
-  z-index:900;
+  z-index:1000;
 }
 .menu.open{transform:none;}
 .menu span{
@@ -109,7 +97,7 @@ body{
   cursor:pointer;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
@@ -124,14 +112,9 @@ body{
   filter:none;
 }
 
-/* ================= TITLES ================= */
-h1{
-  font-size:clamp(72px,6vw,130px);
-  font-weight:500;
-}
-.hero h1{
-  font-size:clamp(130px,11vw,220px);
-}
+/* TITLES */
+h1{font-size:clamp(72px,6vw,130px);font-weight:500}
+.hero h1{font-size:clamp(130px,11vw,220px)}
 .hero-sub{
   margin-top:24px;
   font-size:22px;
@@ -139,15 +122,10 @@ h1{
   color:var(--muted);
 }
 
-/* ================= TEXT ================= */
-p{
-  margin-top:24px;
-  max-width:720px;
-  line-height:1.7;
-  color:var(--muted);
-}
+/* TEXT */
+p{margin-top:24px;max-width:720px;line-height:1.7;color:var(--muted)}
 
-/* ================= GRID ================= */
+/* GRID */
 .grid{
   margin-top:64px;
   display:grid;
@@ -155,46 +133,37 @@ p{
   gap:36px;
 }
 
-/* ================= GLASS CARDS ================= */
-.card,
-.counter-card,
-.contact a{
+/* GLASS CARDS */
+.card,.counter-card,.contact a{
   position:relative;
   padding:32px;
   border-radius:22px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(18px) saturate(160%);
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
   overflow:hidden;
   transition:.35s ease;
 }
+.card:hover,.counter-card:hover,.contact a:hover{transform:translateY(-6px)}
 
-/* Glow dinámico */
-.card::before,
-.counter-card::before,
-.contact a::before{
+.card::before,.counter-card::before,.contact a::before{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(
-      400px circle at var(--x,50%) var(--y,50%),
-      var(--glass-glow),
-      transparent 40%
-    );
+  background:radial-gradient(
+    400px circle at var(--x,50%) var(--y,50%),
+    var(--glass-glow),
+    transparent 40%
+  );
   opacity:0;
   transition:.3s;
 }
 .card:hover::before,
 .counter-card:hover::before,
 .contact a:hover::before{opacity:1}
-.card:hover,
-.counter-card:hover,
-.contact a:hover{transform:translateY(-6px)}
 
-/* ================= BORREGOS ================= */
-.borrego{text-align:center;}
+/* BORREGOS */
+.borrego{text-align:center}
 .borrego img{
   width:100%;
   height:280px;
@@ -203,16 +172,7 @@ p{
   margin-bottom:12px;
 }
 
-/* ================= BLOG ================= */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:18px;
-}
-
-/* ================= INVENTARIO ================= */
+/* INVENTORY */
 .counters{
   margin-top:48px;
   display:grid;
@@ -221,26 +181,23 @@ p{
 }
 .counter-value{font-size:64px}
 
-/* ================= CONTACT ================= */
+/* CONTACT */
 .contact{
   margin-top:40px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:28px;
 }
-.contact a{
-  color:var(--fg);
-  text-decoration:none;
-}
+.contact a{color:var(--fg);text-decoration:none}
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
   padding:80px 10vw;
   text-align:center;
   border-top:1px solid var(--glass-border);
   color:var(--muted);
 }
-footer strong{color:var(--fg);}
+footer strong{color:var(--fg)}
 </style>
 </head>
 
@@ -267,53 +224,9 @@ footer strong{color:var(--fg);}
   <span data-i="7">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <h1>Borregos<br>S.L</h1>
   <div class="hero-sub">K DE QUESO</div>
-</section>
-
-<section class="section">
-  <h1>Quiénes somos</h1>
-  <p>
-    Borregos S.L es un grupo de amigos con criterio dudoso, gusto por el caos
-    y una sorprendente capacidad organizativa cuando nadie lo espera.
-  </p>
-</section>
-
-<section class="section">
-  <h1>Los borregos</h1>
-  <div class="grid">
-    <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
-    <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
-    <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
-    <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
-    <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
-    <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
-    <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
-    <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
-    <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
-    <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos con precisión</div>
-    <div class="card">Fiestas improvisadas</div>
-    <div class="card">Opiniones no solicitadas</div>
-    <div class="card">Presencia incómoda garantizada</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
-    <div class="blog-item"><img src="blog2.jpg"></div>
-  </div>
 </section>
 
 <section class="section">
@@ -324,77 +237,61 @@ footer strong{color:var(--fg);}
       Objetos registrados
     </div>
   </div>
-
   <div class="grid">
     <div class="card">Cono de tráfico</div>
     <div class="card">Silla rota</div>
     <div class="card">Carrito metálico</div>
     <div class="card">Altavoz dudoso</div>
-    <div class="card">Mesa coja</div>
-    <div class="card">Cable infinito</div>
-    <div class="card">Caja misteriosa</div>
-    <div class="card">Señal de obra</div>
-    <div class="card">Taburete rescatado</div>
-    <div class="card">Foco viejo</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <div class="card">Bizum · +34 600 000 000</div>
-    <div class="card">PayPal · borregos@queso.com</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Contacto</h1>
-  <div class="contact">
-    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-    <a href="#">Instagram</a>
   </div>
 </section>
 
 <footer>
   <strong>Borregos S.L</strong><br>
   k de queso<br><br>
-  © 2026 — Todos los derechos dudosos reservados
+  © 2026
 </footer>
 
 <script>
-/* MENU + BLUR */
-menuBtn.onclick=()=>{
+/* ===== ELEMENTOS ===== */
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+const overlay = document.getElementById("overlay");
+const themeBtn = document.getElementById("themeBtn");
+const counterEl = document.getElementById("counter");
+
+/* ===== MENU ===== */
+menuBtn.addEventListener("click",()=>{
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
-};
-overlay.onclick=()=>{
+});
+overlay.addEventListener("click",()=>{
   menu.classList.remove("open");
   overlay.classList.remove("active");
-};
+});
 
-/* THEME */
+/* ===== THEME ===== */
 if(localStorage.theme==="light") document.body.classList.add("light");
-themeBtn.onclick=()=>{
+themeBtn.addEventListener("click",()=>{
   document.body.classList.toggle("light");
   localStorage.theme=document.body.classList.contains("light")?"light":"dark";
-};
+});
 
-/* COUNTER */
-let count=Number(localStorage.items)||0;
-counter.textContent=count;
+/* ===== COUNTER ===== */
+let count = Number(localStorage.items)||0;
+counterEl.textContent=count;
 setInterval(()=>{
   count++;
-  counter.textContent=count;
+  counterEl.textContent=count;
   localStorage.items=count;
 },3000);
 
-/* SECTION ANIMATION */
-const observer=new IntersectionObserver(e=>{
-  e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
+/* ===== SECTION ANIMATION ===== */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
 },{threshold:.25});
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
-/* GLOW FOLLOW CURSOR */
+/* ===== GLOW FOLLOW CURSOR ===== */
 document.querySelectorAll(".card,.counter-card,.contact a").forEach(el=>{
   el.addEventListener("mousemove",e=>{
     const r=el.getBoundingClientRect();
