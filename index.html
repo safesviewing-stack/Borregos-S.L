@@ -1,116 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Borregos S.L — k de queso</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ========= VARIABLES ========= */
+/* ====== VARIABLES ====== */
 :root{
   --bg:#ffffff;
   --fg:#0a0a0a;
   --muted:#666;
   --line:#e5e5e5;
-  --accent:#000;
 }
 body.dark{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
   --muted:#888;
   --line:#222;
-  --accent:#fff;
 }
 
-/* ========= RESET ========= */
+/* ====== RESET ====== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ========= BODY ========= */
+/* ====== BODY ====== */
 body{
   background:var(--bg);
   color:var(--fg);
   transition:.3s;
 }
 
-/* ========= HEADER ========= */
+/* ====== HEADER ====== */
 .header{
   position:fixed;
   top:32px;
   right:32px;
+  display:flex;
+  gap:12px;
   z-index:1000;
 }
 .header button{
-  background:none;
   border:1px solid var(--line);
+  background:none;
   padding:10px 14px;
   cursor:pointer;
-  font-size:14px;
 }
 
-/* ========= SECTIONS ========= */
+/* ====== MENU ====== */
+.menu{
+  position:fixed;
+  top:0;right:0;
+  width:280px;
+  height:100vh;
+  background:var(--bg);
+  border-left:1px solid var(--line);
+  padding:120px 32px;
+  transform:translateX(100%);
+  transition:.4s ease;
+  z-index:900;
+}
+.menu.open{transform:none;}
+.menu a{
+  display:block;
+  margin-bottom:20px;
+  color:var(--fg);
+  text-decoration:none;
+  cursor:pointer;
+}
+
+/* ====== SECTIONS ====== */
 .section{
   min-height:100vh;
   padding:160px 12vw;
   border-bottom:1px solid var(--line);
   opacity:0;
-  transform:translateY(12px);
+  transform:translateY(20px);
   transition:.6s ease;
-  cursor:pointer;
 }
 .section.visible{
   opacity:1;
   transform:none;
 }
+.section *{cursor:pointer}
 
-/* ========= TYPO ========= */
+/* ====== TYPO ====== */
 h1{
   font-size:clamp(56px,7vw,120px);
   font-weight:400;
 }
-.hero span{
-  font-size:.35em;
-  margin-left:12px;
-}
+.hero span{font-size:.35em;opacity:.6}
 .hero-sub{
   margin-top:24px;
   letter-spacing:.4em;
   color:var(--muted);
 }
-
 p{
-  max-width:640px;
   margin-top:24px;
+  max-width:640px;
   line-height:1.7;
   color:var(--muted);
 }
 
-/* ========= LIST / GRID ========= */
-.list{
+/* ====== GRID ====== */
+.grid{
   margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:24px;
 }
-.item{
-  padding:24px;
+.card{
   border:1px solid var(--line);
-  cursor:pointer;
+  padding:24px;
   transition:.2s;
 }
-.item:hover{
-  background:var(--accent);
+.card:hover{
+  background:var(--fg);
   color:var(--bg);
 }
 
-/* ========= INVENTORY ========= */
+/* ====== INVENTORY ====== */
 .counter{
   font-size:56px;
-  margin-top:24px;
+  margin:24px 0;
 }
 
-/* ========= DONATIONS ========= */
+/* ====== DONATIONS ====== */
 .progress{
   height:2px;
   background:var(--line);
@@ -119,32 +135,28 @@ p{
 .progress-bar{
   height:100%;
   width:0%;
-  background:var(--accent);
-  transition:width .4s ease;
-}
-.actions{
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
+  background:var(--fg);
+  transition:.4s;
 }
 .actions button{
-  background:none;
   border:1px solid var(--line);
+  background:none;
   padding:10px 18px;
+  margin-right:12px;
   cursor:pointer;
 }
 
-/* ========= FORM ========= */
+/* ====== FORM ====== */
 form{
-  margin-top:48px;
   max-width:520px;
+  margin-top:48px;
 }
 input,textarea{
   width:100%;
   border:1px solid var(--line);
+  background:none;
   padding:12px;
   margin-bottom:16px;
-  background:none;
   color:var(--fg);
 }
 button.send{
@@ -154,7 +166,7 @@ button.send{
   cursor:pointer;
 }
 
-/* ========= FOOTER ========= */
+/* ====== FOOTER ====== */
 footer{
   padding:80px 12vw;
   font-size:14px;
@@ -165,9 +177,23 @@ footer{
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <button id="themeBtn">Modo</button>
+  <button id="menuBtn">☰</button>
 </div>
+
+<!-- MENU -->
+<nav class="menu" id="menu">
+  <a data-i="0">Inicio</a>
+  <a data-i="1">Quiénes somos</a>
+  <a data-i="2">Borregos</a>
+  <a data-i="3">Servicios</a>
+  <a data-i="4">Blog</a>
+  <a data-i="5">Inventario</a>
+  <a data-i="6">Donaciones</a>
+  <a data-i="7">Contacto</a>
+</nav>
 
 <!-- HERO -->
 <section class="section hero">
@@ -175,77 +201,64 @@ footer{
   <div class="hero-sub">K DE QUESO</div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
 <section class="section">
   <h1>Quiénes somos</h1>
-  <p>
-    Grupo de amigos con criterio dudoso y constancia sorprendente.
-    Operamos sin garantías, pero con mucha presencia.
-  </p>
+  <p>Grupo de amigos con criterio discutible y constancia admirable.</p>
 </section>
 
-<!-- BORREGOS -->
 <section class="section">
   <h1>Los borregos</h1>
-  <div class="list">
-    <div class="item">Borrego 01</div>
-    <div class="item">Borrego 02</div>
-    <div class="item">Borrego 03</div>
-    <div class="item">Borrego 04</div>
-    <div class="item">Borrego 05</div>
-    <div class="item">Borrego 06</div>
-    <div class="item">Borrego 07</div>
-    <div class="item">Borrego 08</div>
-    <div class="item">Borrego 09</div>
-    <div class="item">Borrego 10</div>
+  <div class="grid">
+    <div class="card">Borrego 01</div>
+    <div class="card">Borrego 02</div>
+    <div class="card">Borrego 03</div>
+    <div class="card">Borrego 04</div>
+    <div class="card">Borrego 05</div>
+    <div class="card">Borrego 06</div>
+    <div class="card">Borrego 07</div>
+    <div class="card">Borrego 08</div>
+    <div class="card">Borrego 09</div>
+    <div class="card">Borrego 10</div>
   </div>
 </section>
 
-<!-- SERVICIOS -->
 <section class="section">
   <h1>Servicios</h1>
-  <div class="list">
-    <div class="item">Estropear eventos</div>
-    <div class="item">Fiestas improvisadas</div>
-    <div class="item">Opiniones no solicitadas</div>
-    <div class="item">Presencia incómoda</div>
+  <div class="grid">
+    <div class="card">Estropear eventos</div>
+    <div class="card">Fiestas improvisadas</div>
+    <div class="card">Opiniones no solicitadas</div>
+    <div class="card">Presencia incómoda</div>
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="section">
   <h1>Blog</h1>
-  <div class="list">
-    <div class="item">Foto o vídeo 01</div>
-    <div class="item">Foto o vídeo 02</div>
-    <div class="item">Foto o vídeo 03</div>
+  <div class="grid">
+    <div class="card">Foto / vídeo 01</div>
+    <div class="card">Foto / vídeo 02</div>
+    <div class="card">Foto / vídeo 03</div>
   </div>
 </section>
 
-<!-- INVENTARIO -->
 <section class="section">
   <h1>Inventario</h1>
-  <div class="counter" id="invCount">0</div>
-  <div class="list">
-    <div class="item">Cono de tráfico</div>
-    <div class="item">Silla rota</div>
-    <div class="item">Carrito metálico</div>
-    <div class="item">Altavoz dudoso</div>
-    <div class="item">Cable infinito</div>
-    <div class="item">Caja misteriosa</div>
+  <div class="counter" id="inv">0</div>
+  <div class="grid">
+    <div class="card">Cono de tráfico</div>
+    <div class="card">Silla rota</div>
+    <div class="card">Carrito metálico</div>
+    <div class="card">Altavoz dudoso</div>
+    <div class="card">Cable infinito</div>
+    <div class="card">Caja misteriosa</div>
   </div>
 </section>
 
-<!-- DONACIONES -->
 <section class="section">
   <h1>Donaciones</h1>
   <p>Financia el próximo error.</p>
-
-  <div class="progress">
-    <div class="progress-bar" id="bar"></div>
-  </div>
-  <p id="donText">0€ / 300€ recaudados</p>
-
+  <div class="progress"><div class="progress-bar" id="bar"></div></div>
+  <p id="donText">0€ / 300€</p>
   <div class="actions">
     <button onclick="donate(5)">+5€</button>
     <button onclick="donate(10)">+10€</button>
@@ -253,7 +266,6 @@ footer{
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="section">
   <h1>Contacto</h1>
   <form>
@@ -265,48 +277,52 @@ footer{
 </section>
 
 <footer>
-  Borregos S.L — k de queso<br>
-  © 2026
+  Borregos S.L — k de queso · © 2026
 </footer>
 
 <script>
-/* THEME */
-themeBtn.onclick=()=>{
-  document.body.classList.toggle("dark");
-};
+/* MENU */
+menuBtn.onclick=()=>menu.classList.toggle("open");
+document.querySelectorAll(".menu a").forEach((a,i)=>{
+  a.onclick=()=>{
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+    menu.classList.remove("open");
+  }
+});
 
-/* SCROLL ANIMATION */
+/* THEME */
+themeBtn.onclick=()=>document.body.classList.toggle("dark");
+
+/* SCROLL */
 const obs=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.2});
 document.querySelectorAll(".section").forEach(s=>obs.observe(s));
 
-/* INVENTORY COUNTER */
+/* INVENTORY */
 let inv=Number(localStorage.inv)||0;
-invCount.textContent=inv;
+invEl=document.getElementById("inv");
+invEl.textContent=inv;
 setInterval(()=>{
   inv++;
-  invCount.textContent=inv;
+  invEl.textContent=inv;
   localStorage.inv=inv;
 },4000);
 
 /* DONATIONS */
 const GOAL=300;
 let total=Number(localStorage.don)||0;
-const bar=document.getElementById("bar");
-const donText=document.getElementById("donText");
-
-function updateDon(){
+function update(){
   const pct=Math.min(total/GOAL*100,100);
   bar.style.width=pct+"%";
-  donText.textContent=`${total}€ / ${GOAL}€ recaudados`;
+  donText.textContent=`${total}€ / ${GOAL}€`;
 }
 function donate(v){
   total+=v;
   localStorage.don=total;
-  updateDon();
+  update();
 }
-updateDon();
+update();
 </script>
 
 </body>
