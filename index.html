@@ -20,107 +20,68 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
 /* BODY */
-body{
-  background:var(--bg);
-  color:var(--fg);
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--fg);overflow-x:hidden}
 
 /* OVERLAY */
 .overlay{
-  position:fixed;
-  inset:0;
+  position:fixed; inset:0;
   background:rgba(0,0,0,.6);
-  opacity:0;
-  pointer-events:none;
-  transition:.4s;
-  z-index:900;
+  opacity:0; pointer-events:none;
+  transition:.4s; z-index:900;
 }
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
+.overlay.active{opacity:1;pointer-events:auto}
 
 /* HEADER */
 .header{
-  position:fixed;
-  top:24px;
-  right:32px;
-  display:flex;
-  gap:12px;
-  z-index:1001;
+  position:fixed; top:24px; right:32px;
+  display:flex; gap:12px; z-index:1001;
 }
 .header button{
-  width:42px;
-  height:42px;
-  border-radius:999px;
+  width:42px; height:42px; border-radius:999px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(14px);
-  color:var(--fg);
-  cursor:pointer;
+  color:var(--fg); cursor:pointer;
 }
 
 /* MENU */
 .menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:300px;
-  height:100vh;
+  position:fixed; top:0; right:0;
+  width:300px; height:100vh;
   padding:120px 40px;
   background:rgba(10,10,10,.88);
   backdrop-filter:blur(24px);
   transform:translateX(100%);
-  transition:.4s ease;
-  z-index:1000;
+  transition:.4s ease; z-index:1000;
 }
 .menu.open{transform:none}
 .menu a{
-  display:block;
-  margin-bottom:24px;
-  font-size:14px;
-  letter-spacing:.3em;
-  color:var(--fg);
-  text-decoration:none;
+  display:block; margin-bottom:24px;
+  font-size:14px; letter-spacing:.3em;
+  color:var(--fg); text-decoration:none;
 }
 
 /* SECTIONS */
 .section{
-  min-height:100vh;
-  padding:180px 12vw;
-  opacity:0;
-  transform:translateY(40px);
+  min-height:100vh; padding:180px 12vw;
+  opacity:0; transform:translateY(40px);
   transition:.8s ease;
 }
-.section.visible{
-  opacity:1;
-  transform:none;
-}
+.section.visible{opacity:1;transform:none}
 
 /* TITLES */
-h1{
-  font-size:clamp(72px,6vw,130px);
-  font-weight:500;
-}
-.hero h1{
-  font-size:clamp(120px,10vw,200px);
-}
+h1{font-size:clamp(72px,6vw,130px);font-weight:500}
+.hero h1{font-size:clamp(120px,10vw,200px)}
 .hero-sub{
-  margin-top:24px;
-  font-size:20px;
-  letter-spacing:.4em;
-  color:var(--muted);
+  margin-top:24px; font-size:20px;
+  letter-spacing:.4em; color:var(--muted);
 }
 
 /* TEXT */
 .about-text{
-  max-width:900px;
-  margin-top:32px;
-  line-height:1.9;
-  color:var(--muted);
-  text-align:justify;
-  text-justify:inter-word;
+  max-width:900px; margin-top:32px;
+  line-height:1.9; color:var(--muted);
+  text-align:justify; text-justify:inter-word;
 }
 
 /* GRID */
@@ -137,46 +98,33 @@ h1{
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(18px);
-  overflow:hidden;
-  text-decoration:none;
-  color:var(--fg);
-  transition:.3s;
+  overflow:hidden; color:var(--fg);
+  text-decoration:none; transition:.3s;
 }
 .card:hover{transform:translateY(-6px)}
 .card-content{padding:32px}
 
 /* BORREGOS */
-.borrego img{
-  width:100%;
-  height:280px;
-  object-fit:cover;
-}
-.borrego .info{
-  padding:20px;
-  text-align:center;
-}
+.borrego img{width:100%;height:280px;object-fit:cover}
+.borrego .info{padding:20px;text-align:center}
 
 /* BLOG */
-.blog img,
-.blog video{
-  width:100%;
-  height:280px;
-  object-fit:cover;
+.blog img,.blog video{
+  width:100%;height:280px;object-fit:cover;display:block
 }
 
 /* INVENTARIO */
-.counter{
-  font-size:64px;
-  font-weight:500;
-  margin-bottom:8px;
-}
+.inventory-summary{max-width:520px;margin-top:48px}
+.counter{font-size:64px;font-weight:500}
+.inventory-text{margin-top:16px;line-height:1.6;color:var(--muted)}
+.inventory-item strong{display:block;font-size:18px;margin-bottom:6px}
+.inventory-item span{font-size:13px;color:var(--muted)}
 
 /* FOOTER */
 footer{
   padding:80px 12vw;
   border-top:1px solid var(--glass-border);
-  text-align:center;
-  color:var(--muted);
+  text-align:center; color:var(--muted);
 }
 footer strong{color:var(--fg)}
 </style>
@@ -208,7 +156,7 @@ footer strong{color:var(--fg)}
 <section class="section" id="about">
   <h1>Sobre nosotros</h1>
   <p class="about-text">
-    Borregos S.L nació en Valencia durante las Fallas del año pasado, cuando un grupo de personas se juntó sin un plan claro y decidió, contra toda lógica, seguir haciéndolo. Desde aquel momento se fueron uniendo más borregos a la secta, creciendo el grupo y empeorando progresivamente la toma de decisiones. Somos unos cuantos, cada uno con una característica distinta que no puede detallarse sin consecuencias legales, y nos llamamos Borregos porque actuamos como tales: seguimos al grupo, avanzamos sin pensar demasiado y aprendemos siempre a base de errores. Ovejas jóvenes, con menos de un año de experiencia mental, que han hecho muchas locuras y que, pase lo que pase, siempre acaban yendo juntas.
+    Borregos S.L nació en Valencia durante las Fallas del año pasado, cuando un grupo de personas se juntó sin un plan claro y decidió, contra toda lógica, seguir haciéndolo. Desde entonces se fueron uniendo más borregos a la secta, creciendo el grupo y empeorando progresivamente la toma de decisiones; somos unos cuantos, cada uno con una característica distinta que no puede detallarse sin consecuencias legales, y nos llamamos Borregos porque actuamos como tales: seguimos al grupo, avanzamos sin pensar demasiado y aprendemos siempre a base de errores, ovejas jóvenes con menos de un año de experiencia mental que han hecho muchas locuras y que, pase lo que pase, siempre acaban yendo juntas.
   </p>
 </section>
 
@@ -233,11 +181,24 @@ footer strong{color:var(--fg)}
 
 <section class="section" id="inventory">
   <h1>Inventario</h1>
-  <div class="card">
+
+  <div class="card inventory-summary">
     <div class="card-content">
       <div class="counter" id="counter">0</div>
-      Objetos registrados
+      <p class="inventory-text">
+        Objetos recogidos, adoptados o adquiridos sin ningún tipo de supervisión.
+        El inventario crece de forma constante y rara vez disminuye.
+      </p>
     </div>
+  </div>
+
+  <div class="grid inventory-grid">
+    <div class="card inventory-item"><div class="card-content"><strong>Cono de tráfico</strong><span>Estado: funcional</span></div></div>
+    <div class="card inventory-item"><div class="card-content"><strong>Silla rota</strong><span>Estado: sorprendentemente estable</span></div></div>
+    <div class="card inventory-item"><div class="card-content"><strong>Carrito metálico</strong><span>Estado: vehículo oficial</span></div></div>
+    <div class="card inventory-item"><div class="card-content"><strong>Caja misteriosa</strong><span>Estado: no abrir</span></div></div>
+    <div class="card inventory-item"><div class="card-content"><strong>Mesa coja</strong><span>Estado: nivelada a ojo</span></div></div>
+    <div class="card inventory-item"><div class="card-content"><strong>Cable infinito</strong><span>Estado: origen desconocido</span></div></div>
   </div>
 </section>
 
@@ -245,9 +206,7 @@ footer strong{color:var(--fg)}
   <h1>Donaciones</h1>
   <div class="grid">
     <a class="card" href="https://paypal.me" target="_blank">
-      <div class="card-content">
-        Apoyar el caos → PayPal
-      </div>
+      <div class="card-content">Apoyar el caos → PayPal</div>
     </a>
   </div>
 </section>
@@ -255,12 +214,8 @@ footer strong{color:var(--fg)}
 <section class="section" id="contact">
   <h1>Contacto</h1>
   <div class="grid">
-    <a class="card" href="mailto:borregos@queso.com">
-      <div class="card-content">borregos@queso.com</div>
-    </a>
-    <a class="card" href="#">
-      <div class="card-content">Instagram →</div>
-    </a>
+    <a class="card" href="mailto:borregos@queso.com"><div class="card-content">borregos@queso.com</div></a>
+    <a class="card" href="#"><div class="card-content">Instagram →</div></a>
   </div>
 </section>
 
@@ -289,13 +244,11 @@ const obs=new IntersectionObserver(e=>{
 },{threshold:.25});
 document.querySelectorAll(".section").forEach(s=>obs.observe(s));
 
-/* COUNTER */
 const counter=document.getElementById("counter");
 let count=Number(localStorage.items)||0;
 counter.textContent=count;
 setInterval(()=>{
-  count++;
-  counter.textContent=count;
+  count++; counter.textContent=count;
   localStorage.items=count;
 },3000);
 </script>
