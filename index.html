@@ -11,35 +11,35 @@
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
-  --muted:#777;
-  --glass-bg:rgba(255,255,255,.08);
-  --glass-border:rgba(255,255,255,.18);
-  --glass-glow:rgba(255,255,255,.25);
-}
-body.light{
-  --bg:#f4f4f4;
-  --fg:#0a0a0a;
-  --muted:#555;
-  --glass-bg:rgba(255,255,255,.6);
-  --glass-border:rgba(0,0,0,.12);
-  --glass-glow:rgba(0,0,0,.18);
+  --muted:#8a8a8a;
+  --glass-bg:rgba(255,255,255,.04);
+  --glass-border:rgba(255,255,255,.12);
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:var(--bg);color:var(--fg);overflow-x:hidden}
+
+/* BODY */
+body{
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+}
 
 /* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.6);
   opacity:0;
   pointer-events:none;
   transition:.4s;
   z-index:900;
 }
-.overlay.active{opacity:1;pointer-events:auto}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
 
 /* HEADER */
 .header{
@@ -69,22 +69,20 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
   width:300px;
   height:100vh;
   padding:120px 40px;
-  background:rgba(20,20,20,.9);
+  background:rgba(10,10,10,.85);
   backdrop-filter:blur(24px);
   transform:translateX(100%);
   transition:.4s ease;
   z-index:1000;
 }
 .menu.open{transform:none}
-.menu button{
-  background:none;
-  border:none;
-  color:var(--fg);
+.menu a{
+  display:block;
   margin-bottom:24px;
   font-size:14px;
   letter-spacing:.3em;
-  cursor:pointer;
-  text-align:left;
+  color:var(--fg);
+  text-decoration:none;
 }
 
 /* SECTIONS */
@@ -95,12 +93,33 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
   transform:translateY(40px);
   transition:.8s ease;
 }
-.section.visible{opacity:1;transform:none}
+.section.visible{
+  opacity:1;
+  transform:none;
+}
 
 /* TITLES */
-h1{font-size:clamp(72px,6vw,130px);font-weight:500}
-.hero h1{font-size:clamp(120px,10vw,200px)}
-.hero-sub{margin-top:24px;font-size:22px;letter-spacing:.35em;color:var(--muted)}
+h1{
+  font-size:clamp(72px,6vw,130px);
+  font-weight:500;
+}
+.hero h1{
+  font-size:clamp(120px,10vw,200px);
+}
+.hero-sub{
+  margin-top:24px;
+  font-size:20px;
+  letter-spacing:.4em;
+  color:var(--muted);
+}
+
+/* TEXT */
+p{
+  max-width:820px;
+  margin-top:24px;
+  line-height:1.9;
+  color:var(--muted);
+}
 
 /* GRID */
 .grid{
@@ -117,11 +136,12 @@ h1{font-size:clamp(72px,6vw,130px);font-weight:500}
   border:1px solid var(--glass-border);
   backdrop-filter:blur(18px);
   overflow:hidden;
-  transition:.3s;
   text-decoration:none;
   color:var(--fg);
+  transition:.3s;
 }
 .card:hover{transform:translateY(-6px)}
+.card-content{padding:32px}
 
 /* BORREGOS */
 .borrego img{
@@ -130,9 +150,16 @@ h1{font-size:clamp(72px,6vw,130px);font-weight:500}
   object-fit:cover;
 }
 .borrego .info{
-  padding:24px;
+  padding:20px;
   text-align:center;
-  font-weight:500;
+}
+
+/* BLOG */
+.blog img,
+.blog video{
+  width:100%;
+  height:280px;
+  object-fit:cover;
 }
 
 /* FOOTER */
@@ -151,24 +178,44 @@ footer strong{color:var(--fg)}
 <div class="overlay" id="overlay"></div>
 
 <div class="header">
-  <button id="langBtn">ES</button>
   <button id="menuBtn">☰</button>
 </div>
 
 <nav class="menu" id="menu">
-  <button data-target="hero">INICIO</button>
-  <button data-target="about">QUIÉNES SOMOS</button>
-  <button data-target="borregos">BORREGOS</button>
+  <a href="#hero">INICIO</a>
+  <a href="#about">SOBRE NOSOTROS</a>
+  <a href="#borregos">BORREGOS</a>
+  <a href="#blog">BLOG</a>
 </nav>
 
-<section class="section hero visible" id="hero">
+<section class="section hero" id="hero">
   <h1>Borregos S.L</h1>
   <div class="hero-sub">K DE QUESO</div>
 </section>
 
 <section class="section" id="about">
-  <h1>Quiénes somos</h1>
-  <p>Un grupo que nació en Fallas y nunca se recuperó.</p>
+  <h1>Sobre nosotros</h1>
+
+  <p>
+    Borregos S.L nació en Valencia durante las Fallas del año pasado.
+    Un grupo de personas se juntó sin un plan claro y, contra toda lógica,
+    decidió seguir haciéndolo. Desde entonces, la cosa se fue torciendo
+    poco a poco hasta convertirse en lo que es hoy.
+  </p>
+
+  <p>
+    Con el tiempo se unieron más borregos a la secta. Somos varios,
+    cada uno con una forma distinta de entender el desastre y con
+    características que es mejor no detallar si queremos dormir en
+    casa todas las noches.
+  </p>
+
+  <p>
+    Nos llamamos Borregos porque actuamos como tales: seguimos al grupo,
+    tomamos decisiones cuestionables y aprendemos tarde. Ovejas jóvenes,
+    con menos de un año mental de experiencia, avanzando juntas sin
+    mirar demasiado las consecuencias.
+  </p>
 </section>
 
 <section class="section" id="borregos">
@@ -181,9 +228,19 @@ footer strong{color:var(--fg)}
   </div>
 </section>
 
+<section class="section" id="blog">
+  <h1>Blog</h1>
+  <div class="grid">
+    <div class="card blog"><img src="blog1.jpg"></div>
+    <div class="card blog"><video src="video1.mp4" controls></video></div>
+    <div class="card blog"><img src="blog2.jpg"></div>
+  </div>
+</section>
+
 <footer>
   <strong>Borregos S.L</strong><br>
-  k de queso
+  k de queso<br><br>
+  © 2026
 </footer>
 
 <script>
@@ -200,16 +257,6 @@ overlay.onclick=()=>{
   overlay.classList.remove("active");
 };
 
-menu.querySelectorAll("button").forEach(btn=>{
-  btn.onclick=()=>{
-    document.getElementById(btn.dataset.target)
-      .scrollIntoView({behavior:"smooth"});
-    menu.classList.remove("open");
-    overlay.classList.remove("active");
-  };
-});
-
-/* ANIM */
 const obs=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.25});
