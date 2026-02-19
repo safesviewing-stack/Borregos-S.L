@@ -33,7 +33,7 @@ nav{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:48px;
+  gap:42px;
   background:rgba(10,10,10,.45);
   backdrop-filter:blur(12px);
   z-index:100;
@@ -57,7 +57,7 @@ nav span{
 .section-block{
   position:sticky;
   top:260px;
-  max-width:1100px;
+  max-width:1200px;
 }
 
 h1{
@@ -86,21 +86,22 @@ h1{
 /* TEXT */
 p{
   margin-top:16px;
-  max-width:620px;
+  max-width:640px;
   font-size:15px;
   line-height:1.6;
   color:#aaa;
   text-align:justify;
 }
 
-/* BORREGOS GRID */
-.borregos{
+/* GRID GENERIC */
+.grid{
   margin-top:56px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:32px;
 }
 
+/* BORREGOS */
 .borrego{
   opacity:0;
   transform:translateY(16px);
@@ -117,6 +118,7 @@ p{
   height:280px;
   object-fit:cover;
   margin-bottom:12px;
+  background:#111;
 }
 
 .borrego strong{
@@ -128,14 +130,22 @@ p{
   color:#777;
 }
 
-/* SERVICES & DONATIONS */
-.cards{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+/* BLOG */
+.blog-item img,
+.blog-item video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  margin-bottom:12px;
+  background:#111;
 }
 
+.blog-item span{
+  font-size:13px;
+  color:#777;
+}
+
+/* CARDS */
 .card{
   padding:28px;
   border-radius:20px;
@@ -169,8 +179,10 @@ p{
   <span data-i="1">Quiénes somos</span>
   <span data-i="2">Borregos</span>
   <span data-i="3">Servicios</span>
-  <span data-i="4">Donaciones</span>
-  <span data-i="5">Contacto</span>
+  <span data-i="4">Blog</span>
+  <span data-i="5">Inventario</span>
+  <span data-i="6">Donaciones</span>
+  <span data-i="7">Contacto</span>
 </nav>
 
 <!-- HERO -->
@@ -186,15 +198,10 @@ p{
   <div class="section-block">
     <h1>Quiénes somos</h1>
     <p>
-      Borregos S.L es una organización informal formada por aproximadamente
-      diez individuos con criterio cuestionable y una fuerte dependencia
-      emocional del queso. Nuestra misión es clara: estar presentes donde no
-      se nos necesita, opinar sin conocimiento previo y empeorar situaciones
-      sociales de forma sistemática.
-    </p>
-    <p>
-      No ofrecemos soluciones. No garantizamos resultados. Pero sí aseguramos
-      un alto nivel de incomodidad, ruido innecesario y decisiones mal tomadas.
+      Borregos S.L es un colectivo de diez individuos con un talento especial
+      para la improvisación, la toma de malas decisiones y la acumulación de
+      objetos innecesarios. Funcionamos como grupo, como empresa ficticia y
+      como advertencia social.
     </p>
   </div>
 </section>
@@ -203,23 +210,18 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Los borregos</h1>
-    <div class="borregos">
-      <div class="borrego">
-        <img src="b1.jpg">
-        <strong>Borrego 01</strong>
-        <span>Especialista en liarla</span>
-      </div>
-      <div class="borrego">
-        <img src="b2.jpg">
-        <strong>Borrego 02</strong>
-        <span>Opinólogo senior</span>
-      </div>
-      <div class="borrego">
-        <img src="b3.jpg">
-        <strong>Borrego 03</strong>
-        <span>Logística del caos</span>
-      </div>
-      <!-- añade hasta 10 -->
+    <div class="grid">
+      <!-- 10 CUADROS -->
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong><span>Caos operativo</span></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong><span>Ruido ambiental</span></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong><span>Logística dudosa</span></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong><span>Ideas malas</span></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong><span>Opiniones fuertes</span></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong><span>Finanzas</span></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong><span>Relaciones públicas</span></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong><span>Seguridad inexistente</span></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong><span>Material perdido</span></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong><span>Director general</span></div>
     </div>
   </div>
 </section>
@@ -228,19 +230,52 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Servicios</h1>
-    <div class="cards">
-      <div class="card">
-        <strong>Estropear eventos</strong>
-        <p>Aparición no solicitada, comentarios fuera de lugar y abandono temprano.</p>
+    <div class="grid">
+      <div class="card">Estropear eventos</div>
+      <div class="card">Fiestas sin control</div>
+      <div class="card">Asesoría no solicitada</div>
+      <div class="card">Presencia incómoda</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <div class="section-block">
+    <h1>Blog</h1>
+    <div class="grid">
+      <div class="blog-item">
+        <img src="blog1.jpg">
+        <strong>Día 14</strong>
+        <span>Documentación innecesaria</span>
       </div>
-      <div class="card">
-        <strong>Fiestas</strong>
-        <p>Ruido excesivo, música cuestionable y decisiones irreversibles.</p>
+      <div class="blog-item">
+        <video src="video1.mp4" controls></video>
+        <strong>Incidente menor</strong>
+        <span>No pasó nada grave</span>
       </div>
-      <div class="card">
-        <strong>Asesoría no profesional</strong>
-        <p>Opiniones sin fundamento sobre cualquier tema.</p>
+      <div class="blog-item">
+        <img src="blog2.jpg">
+        <strong>Hallazgo</strong>
+        <span>Objeto no identificado</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTARIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Inventario</h1>
+    <p>
+      Archivo no oficial de objetos encontrados en la calle, adquiridos por
+      error o cuya procedencia preferimos no detallar.
+    </p>
+    <div class="grid">
+      <div class="card">Silla coja · Estado crítico</div>
+      <div class="card">Cono de tráfico · Funcional</div>
+      <div class="card">Carrito metálico · Dudoso</div>
+      <div class="card">Altavoz roto · Sigue sonando</div>
     </div>
   </div>
 </section>
@@ -250,12 +285,11 @@ p{
   <div class="section-block">
     <h1>Donaciones</h1>
     <p>
-      Tu aportación económica nos ayuda a seguir siendo inútiles de forma
-      sostenible. Todo el dinero será destinado a queso, transporte y multas.
+      Toda aportación económica será invertida de manera irresponsable.
     </p>
-    <div class="cards">
-      <div class="card">Bizum: +34 600 000 000</div>
-      <div class="card">PayPal: borregos@queso.com</div>
+    <div class="grid">
+      <div class="card">Bizum · +34 600 000 000</div>
+      <div class="card">PayPal · borregos@queso.com</div>
     </div>
   </div>
 </section>
@@ -281,7 +315,7 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
 },{threshold:.2});
 
-document.querySelectorAll(".borrego").forEach(el=>observer.observe(el));
+document.querySelectorAll(".borrego,.blog-item").forEach(el=>observer.observe(el));
 </script>
 
 </body>
