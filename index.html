@@ -26,13 +26,20 @@ body.light{
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:var(--bg);color:var(--fg);overflow-x:hidden}
 
-body{
-  background:var(--bg);
-  color:var(--fg);
-  overflow-x:hidden;
-  transition:.3s;
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px);
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:900;
 }
+.overlay.active{opacity:1;pointer-events:auto}
 
 /* HEADER */
 .header{
@@ -41,7 +48,7 @@ body{
   right:32px;
   display:flex;
   gap:12px;
-  z-index:1000;
+  z-index:1001;
 }
 .header button{
   width:42px;
@@ -66,11 +73,10 @@ body{
   backdrop-filter:blur(24px);
   transform:translateX(100%);
   transition:.4s ease;
-  z-index:999;
+  z-index:1000;
 }
-.menu.open{transform:none;}
+.menu.open{transform:none}
 .menu button{
-  display:block;
   background:none;
   border:none;
   color:var(--fg);
@@ -89,25 +95,12 @@ body{
   transform:translateY(40px);
   transition:.8s ease;
 }
-.section.visible{
-  opacity:1;
-  transform:none;
-}
+.section.visible{opacity:1;transform:none}
 
 /* TITLES */
-h1{
-  font-size:clamp(72px,6vw,130px);
-  font-weight:500;
-}
-.hero h1{
-  font-size:clamp(120px,10vw,200px);
-}
-.hero-sub{
-  margin-top:24px;
-  font-size:22px;
-  letter-spacing:.35em;
-  color:var(--muted);
-}
+h1{font-size:clamp(72px,6vw,130px);font-weight:500}
+.hero h1{font-size:clamp(120px,10vw,200px)}
+.hero-sub{margin-top:24px;font-size:22px;letter-spacing:.35em;color:var(--muted)}
 
 /* GRID */
 .grid{
@@ -119,7 +112,6 @@ h1{
 
 /* GLASS CARD */
 .card{
-  position:relative;
   border-radius:22px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
@@ -130,24 +122,6 @@ h1{
   color:var(--fg);
 }
 .card:hover{transform:translateY(-6px)}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(
-    400px circle at var(--x,50%) var(--y,50%),
-    var(--glass-glow),
-    transparent 40%
-  );
-  opacity:0;
-  transition:.3s;
-}
-.card:hover::before{opacity:1}
-
-/* CARD CONTENT */
-.card-content{
-  padding:32px;
-}
 
 /* BORREGOS */
 .borrego img{
@@ -158,36 +132,6 @@ h1{
 .borrego .info{
   padding:24px;
   text-align:center;
-}
-
-/* BLOG */
-.blog img,
-.blog video{
-  width:100%;
-  height:280px;
-  object-fit:cover;
-  display:block;
-}
-
-/* ACTION CARD */
-.action span{
-  display:block;
-  font-size:12px;
-  letter-spacing:.3em;
-  color:var(--muted);
-  margin-bottom:12px;
-}
-.action strong{
-  font-size:20px;
-}
-
-/* INVENTORY */
-.counter-box{
-  max-width:360px;
-  margin-top:64px;
-}
-.counter{
-  font-size:64px;
   font-weight:500;
 }
 
@@ -198,170 +142,78 @@ footer{
   text-align:center;
   color:var(--muted);
 }
-footer strong{color:var(--fg);}
+footer strong{color:var(--fg)}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<div class="overlay" id="overlay"></div>
+
 <div class="header">
   <button id="langBtn">ES</button>
-  <button id="themeBtn">🌗</button>
   <button id="menuBtn">☰</button>
 </div>
 
-<!-- MENU -->
 <nav class="menu" id="menu">
   <button data-target="hero">INICIO</button>
   <button data-target="about">QUIÉNES SOMOS</button>
   <button data-target="borregos">BORREGOS</button>
-  <button data-target="blog">BLOG</button>
-  <button data-target="inventory">INVENTARIO</button>
-  <button data-target="donations">DONACIONES</button>
-  <button data-target="contact">CONTACTO</button>
 </nav>
 
-<!-- HERO -->
-<section class="section hero" id="hero">
+<section class="section hero visible" id="hero">
   <h1>Borregos S.L</h1>
   <div class="hero-sub">K DE QUESO</div>
 </section>
 
 <section class="section" id="about">
   <h1>Quiénes somos</h1>
-  <p>Grupo de amigos con una sorprendente capacidad para organizar el caos.</p>
+  <p>Un grupo que nació en Fallas y nunca se recuperó.</p>
 </section>
 
 <section class="section" id="borregos">
   <h1>Los borregos</h1>
   <div class="grid">
-    <a class="card borrego" href="#"><img src="b1.jpg"><div class="info">Borrego 01</div></a>
-    <a class="card borrego" href="#"><img src="b2.jpg"><div class="info">Borrego 02</div></a>
-    <a class="card borrego" href="#"><img src="b3.jpg"><div class="info">Borrego 03</div></a>
-    <a class="card borrego" href="#"><img src="b4.jpg"><div class="info">Borrego 04</div></a>
-    <a class="card borrego" href="#"><img src="b5.jpg"><div class="info">Borrego 05</div></a>
-    <a class="card borrego" href="#"><img src="b6.jpg"><div class="info">Borrego 06</div></a>
-    <a class="card borrego" href="#"><img src="b7.jpg"><div class="info">Borrego 07</div></a>
-    <a class="card borrego" href="#"><img src="b8.jpg"><div class="info">Borrego 08</div></a>
-    <a class="card borrego" href="#"><img src="b9.jpg"><div class="info">Borrego 09</div></a>
-    <a class="card borrego" href="#"><img src="b10.jpg"><div class="info">Borrego 10</div></a>
-  </div>
-</section>
-
-<section class="section" id="blog">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="card blog"><img src="blog1.jpg"></div>
-    <div class="card blog"><video src="video1.mp4" controls></video></div>
-    <div class="card blog"><img src="blog2.jpg"></div>
-  </div>
-</section>
-
-<section class="section" id="inventory">
-  <h1>Inventario</h1>
-
-  <!-- CONTADOR EN CAJA -->
-  <div class="card counter-box">
-    <div class="card-content">
-      <div class="counter" id="counter">0</div>
-      Objetos registrados
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="card"><div class="card-content">Cono de tráfico</div></div>
-    <div class="card"><div class="card-content">Silla rota</div></div>
-    <div class="card"><div class="card-content">Carrito metálico</div></div>
-    <div class="card"><div class="card-content">Caja misteriosa</div></div>
-  </div>
-</section>
-
-<section class="section" id="donations">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <a class="card action" href="https://paypal.me" target="_blank">
-      <div class="card-content">
-        <span>APOYAR EL CAOS</span>
-        <strong>Donar con PayPal →</strong>
-      </div>
-    </a>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <h1>Contacto</h1>
-  <div class="grid">
-    <a class="card action" href="mailto:borregos@queso.com">
-      <div class="card-content">
-        <span>EMAIL</span>
-        <strong>borregos@queso.com</strong>
-      </div>
-    </a>
-    <a class="card action" href="#" target="_blank">
-      <div class="card-content">
-        <span>REDES</span>
-        <strong>Instagram →</strong>
-      </div>
-    </a>
+    <a class="card borrego" href="borrego-01.html"><img src="b1.jpg"><div class="info">Borrego 01</div></a>
+    <a class="card borrego" href="borrego-02.html"><img src="b2.jpg"><div class="info">Borrego 02</div></a>
+    <a class="card borrego" href="borrego-03.html"><img src="b3.jpg"><div class="info">Borrego 03</div></a>
+    <a class="card borrego" href="borrego-04.html"><img src="b4.jpg"><div class="info">Borrego 04</div></a>
   </div>
 </section>
 
 <footer>
   <strong>Borregos S.L</strong><br>
-  k de queso<br><br>
-  © 2026
+  k de queso
 </footer>
 
 <script>
-/* MENU */
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
-menuBtn.onclick=()=>menu.classList.toggle("open");
+const overlay=document.getElementById("overlay");
+
+menuBtn.onclick=()=>{
+  menu.classList.toggle("open");
+  overlay.classList.toggle("active");
+};
+overlay.onclick=()=>{
+  menu.classList.remove("open");
+  overlay.classList.remove("active");
+};
+
 menu.querySelectorAll("button").forEach(btn=>{
   btn.onclick=()=>{
     document.getElementById(btn.dataset.target)
       .scrollIntoView({behavior:"smooth"});
     menu.classList.remove("open");
+    overlay.classList.remove("active");
   };
 });
 
-/* THEME */
-const themeBtn=document.getElementById("themeBtn");
-if(localStorage.theme==="light") document.body.classList.add("light");
-themeBtn.onclick=()=>{
-  document.body.classList.toggle("light");
-  localStorage.theme=document.body.classList.contains("light")?"light":"dark";
-};
-
-/* LANGUAGE */
-const langBtn=document.getElementById("langBtn");
-langBtn.onclick=()=>langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
-
-/* COUNTER */
-const counter=document.getElementById("counter");
-let count=Number(localStorage.items)||0;
-counter.textContent=count;
-setInterval(()=>{
-  count++;
-  counter.textContent=count;
-  localStorage.items=count;
-},3000);
-
-/* ANIMATION */
-const observer=new IntersectionObserver(e=>{
+/* ANIM */
+const obs=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.25});
-document.querySelectorAll(".section").forEach(s=>observer.observe(s));
-
-/* GLOW */
-document.querySelectorAll(".card").forEach(el=>{
-  el.onmousemove=e=>{
-    const r=el.getBoundingClientRect();
-    el.style.setProperty("--x",`${e.clientX-r.left}px`);
-    el.style.setProperty("--y",`${e.clientY-r.top}px`);
-  };
-});
+document.querySelectorAll(".section").forEach(s=>obs.observe(s));
 </script>
 
 </body>
