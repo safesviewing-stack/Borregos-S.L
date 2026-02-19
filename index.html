@@ -31,22 +31,6 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(16px);
-  opacity:0;
-  pointer-events:none;
-  transition:.4s;
-  z-index:300;
-}
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
 /* MENU */
 .menu-btn{
   position:fixed;
@@ -65,15 +49,6 @@ body{
   background:#fff;
   transition:.4s;
 }
-.menu-btn.open span:nth-child(1){
-  transform:rotate(45deg) translateY(10px);
-}
-.menu-btn.open span:nth-child(2){
-  opacity:0;
-}
-.menu-btn.open span:nth-child(3){
-  transform:rotate(-45deg) translateY(-10px);
-}
 
 .menu{
   position:fixed;
@@ -83,13 +58,12 @@ body{
   height:100vh;
   padding:140px 48px;
   background:rgba(15,15,15,.7);
-  backdrop-filter:blur(24px) saturate(160%);
-  border-left:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(24px);
   transform:translateX(100%);
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:500;
 }
-.menu.open{transform:none;}
+.menu.open{transform:none}
 .menu span{
   display:block;
   margin-bottom:26px;
@@ -106,13 +80,20 @@ body{
   scroll-snap-align:start;
 
   opacity:0;
-  transform:translateY(60px);
   transition:
     opacity .7s ease,
     transform .7s ease;
 }
 
-/* VISIBILITY */
+/* ESTADOS OCULTOS */
+.section.hidden-down{
+  transform:translateY(80px);
+}
+.section.hidden-up{
+  transform:translateY(-80px);
+}
+
+/* ESTADOS VISIBLES */
 .section.visible{
   opacity:1;
   transform:translateY(0);
@@ -125,45 +106,37 @@ body{
   font-weight:500;
 
   opacity:0;
-  transform:translateY(40px);
   transition:
     opacity .7s ease,
     transform .7s ease;
 }
 
-/* HERO TITLE */
+/* HERO */
 .hero h1{
   font-size:clamp(130px,11vw,220px);
 }
-
-/* TITLE ENTRANCE FROM BOTTOM (SCROLL DOWN) */
-.section.visible.down h1{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* TITLE ENTRANCE FROM TOP (SCROLL UP) */
-.section.visible.up h1{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* HIDDEN STATES */
-.section.hidden.down h1{
-  opacity:0;
-  transform:translateY(40px);
-}
-.section.hidden.up h1{
-  opacity:0;
-  transform:translateY(-40px);
-}
-
-/* HERO SUB */
 .hero-sub{
   margin-top:28px;
   font-size:14px;
   letter-spacing:.28em;
   color:var(--muted);
+}
+
+/* TITULO SEGÚN DIRECCIÓN */
+.section.visible.down h1{
+  opacity:1;
+  transform:translateY(0);
+}
+.section.visible.up h1{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section.hidden-down h1{
+  transform:translateY(40px);
+}
+.section.hidden-up h1{
+  transform:translateY(-40px);
 }
 
 /* TEXT */
@@ -201,41 +174,6 @@ p{
   height:300px;
   object-fit:cover;
   background:#111;
-  margin-bottom:14px;
-}
-
-/* BLOG */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  background:#111;
-  margin-bottom:14px;
-}
-
-/* COUNTERS */
-.counters{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.counter-card{
-  padding:36px;
-  border-radius:22px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-}
-.counter-value{
-  font-size:64px;
-}
-.counter-label{
-  margin-top:12px;
-  font-size:12px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--muted);
 }
 
 /* CONTACT */
@@ -258,8 +196,6 @@ p{
 
 <body>
 
-<div class="overlay" id="overlay"></div>
-
 <div class="menu-btn" id="menuBtn">
   <span></span><span></span><span></span>
 </div>
@@ -275,7 +211,6 @@ p{
   <span data-i="7">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <h1>Borregos<br>S.L</h1>
   <div class="hero-sub">k de queso</div>
@@ -283,10 +218,7 @@ p{
 
 <section class="section">
   <h1>Quiénes somos</h1>
-  <p>
-    Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
-    No somos una empresa, pero actuamos como tal cuando conviene.
-  </p>
+  <p>Grupo de amigos que decidió tomarse poco en serio.</p>
 </section>
 
 <section class="section">
@@ -296,12 +228,6 @@ p{
     <div class="borrego"><img src="b2.jpg"></div>
     <div class="borrego"><img src="b3.jpg"></div>
     <div class="borrego"><img src="b4.jpg"></div>
-    <div class="borrego"><img src="b5.jpg"></div>
-    <div class="borrego"><img src="b6.jpg"></div>
-    <div class="borrego"><img src="b7.jpg"></div>
-    <div class="borrego"><img src="b8.jpg"></div>
-    <div class="borrego"><img src="b9.jpg"></div>
-    <div class="borrego"><img src="b10.jpg"></div>
   </div>
 </section>
 
@@ -311,41 +237,14 @@ p{
     <div class="card">Estropear eventos</div>
     <div class="card">Fiestas improvisadas</div>
     <div class="card">Opiniones no solicitadas</div>
-    <div class="card">Presencia incómoda</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Inventario</h1>
-  <div class="counters">
-    <div class="counter-card">
-      <div class="counter-value" id="itemCount">0</div>
-      <div class="counter-label">Objetos recogidos</div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <div class="card">Bizum</div>
-    <div class="card">PayPal</div>
   </div>
 </section>
 
 <section class="section">
   <h1>Contacto</h1>
   <div class="contact">
-    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
     <a href="#">Instagram</a>
+    <a href="#">Email</a>
   </div>
 </section>
 
@@ -353,56 +252,28 @@ p{
 /* MENU */
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
-const overlay=document.getElementById("overlay");
-
-menuBtn.onclick=()=>{
-  menuBtn.classList.toggle("open");
-  menu.classList.toggle("open");
-  overlay.classList.toggle("active");
-};
-overlay.onclick=()=>{
-  menuBtn.classList.remove("open");
-  menu.classList.remove("open");
-  overlay.classList.remove("active");
-};
-
-document.querySelectorAll(".menu span").forEach((b,i)=>{
-  b.onclick=()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-    overlay.click();
-  };
-});
-
-/* COUNTER */
-let items=Number(localStorage.items)||0;
-const counter=document.getElementById("itemCount");
-counter.textContent=items;
-setInterval(()=>{
-  items++;
-  localStorage.items=items;
-  counter.textContent=items;
-},3000);
+menuBtn.onclick=()=>menu.classList.toggle("open");
 
 /* SCROLL DIRECTION */
 let lastScrollY=window.scrollY;
-let scrollDir="down";
+let direction="down";
 
 window.addEventListener("scroll",()=>{
-  scrollDir=window.scrollY>lastScrollY?"down":"up";
+  direction=window.scrollY>lastScrollY?"down":"up";
   lastScrollY=window.scrollY;
 });
 
-/* INTERSECTION OBSERVER */
+/* OBSERVER */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     const s=entry.target;
 
+    s.classList.remove("visible","up","down","hidden-up","hidden-down");
+
     if(entry.isIntersecting){
-      s.classList.add("visible",scrollDir);
-      s.classList.remove("hidden");
+      s.classList.add("visible",direction);
     }else{
-      s.classList.remove("visible","up","down");
+      s.classList.add(direction==="down"?"hidden-down":"hidden-up");
     }
   });
 },{threshold:.25});
