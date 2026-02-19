@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Diseño Industrial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+body{
+  background:#0a0a0a;
+  color:#f5f5f5;
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  height:80px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:48px;
+  background:rgba(10,10,10,.45);
+  backdrop-filter:blur(12px);
+  z-index:100;
+}
+
+nav span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#bbb;
+  cursor:pointer;
+}
+
+/* SECTIONS */
+.section{
+  min-height:100vh;
+  scroll-snap-align:start;
+  padding:180px 10vw 160px 22vw;
+}
+
+.section-block{
+  position:sticky;
+  top:260px;
+  max-width:1100px;
+}
+
+h1{
+  font-size:clamp(70px,6vw,120px);
+  font-weight:500;
+  line-height:1.05;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  align-items:center;
+}
+
+.hero h1{
+  font-size:clamp(80px,7vw,140px);
+}
+
+.hero-sub{
+  margin-top:24px;
+  font-size:14px;
+  letter-spacing:.25em;
+  color:#777;
+}
+
+/* TEXT */
+p{
+  margin-top:16px;
+  max-width:600px;
+  font-size:15px;
+  line-height:1.6;
+  color:#aaa;
+  text-align:justify;
+}
+
+/* ABOUT */
+.about{
+  display:flex;
+  gap:48px;
+  margin-top:32px;
+}
+
+.about img{
+  width:360px;
+  height:480px;
+  object-fit:cover;
+  opacity:.9;
+}
+
+/* PORTFOLIO */
+.portfolio-wrapper{
+  margin-top:56px;
+  overflow:hidden;
+}
+
+.portfolio-carousel{
+  display:flex;
+  gap:48px;
+  overflow-x:auto;
+  padding-bottom:28px;
+}
+
+.project-card{
+  min-width:540px;
+  opacity:0;
+  transform:translateY(12px);
+  transition:.8s ease;
+}
+
+.project-card.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.project-image{
+  height:310px;
+  margin-bottom:16px;
+}
+
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* CV */
+.timeline{
+  margin-top:60px;
+  padding-left:60px;
+}
+
+.timeline-item{
+  margin-bottom:80px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
+}
+
+.timeline-item.is-visible{
+  opacity:1;
+  transform:none;
+}
+
+.timeline-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:28px;
+}
+
+/* CONTACT */
+.contact{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+.contact a{
+  padding:28px;
+  border-radius:20px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <span data-i="0">Inicio</span>
+  <span data-i="1">Sobre mí</span>
+  <span data-i="2">Portfolio</span>
+  <span data-i="3">CV</span>
+  <span data-i="4">Contacto</span>
+</nav>
+
+<section class="section hero">
+  <div class="section-block">
+    <h1>Nombre<br>Apellido</h1>
+    <div class="hero-sub">Portfolio · Diseño industrial</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-block">
+    <h1>Sobre mí</h1>
+    <div class="about">
+      <p>
+        Texto personal sobre tu perfil, enfoque de diseño, intereses y forma de trabajar.
+      </p>
+      <img src="foto.jpg">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-block">
+    <h1>Portfolio</h1>
+    <div class="portfolio-wrapper">
+      <div class="portfolio-carousel">
+        <div class="project-card"><div class="project-image"><img src="1.jpg"></div>Proyecto 1</div>
+        <div class="project-card"><div class="project-image"><img src="2.jpg"></div>Proyecto 2</div>
+        <div class="project-card"><div class="project-image"><img src="3.jpg"></div>Proyecto 3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:email@email.com">Email</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll("nav span").forEach((b,i)=>{
+  b.onclick=()=>document.querySelectorAll(".section")[i]
+    .scrollIntoView({behavior:"smooth"});
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+},{threshold:.2});
+
+document.querySelectorAll(".project-card,.timeline-item")
+  .forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
