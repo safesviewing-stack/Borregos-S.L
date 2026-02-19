@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
@@ -26,10 +25,8 @@ body.light{
   --glass-glow:rgba(0,0,0,.18);
 }
 
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -37,7 +34,7 @@ body{
   transition:.3s;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 .header{
   position:fixed;
   top:24px;
@@ -55,13 +52,9 @@ body{
   backdrop-filter:blur(14px);
   color:var(--fg);
   cursor:pointer;
-  transition:.3s;
-}
-.header button:hover{
-  box-shadow:0 0 20px var(--glass-glow);
 }
 
-/* ================= MENU ================= */
+/* MENU */
 .menu{
   position:fixed;
   top:0;
@@ -88,7 +81,7 @@ body{
   text-align:left;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 12vw;
@@ -101,7 +94,7 @@ body{
   transform:none;
 }
 
-/* ================= TITLES ================= */
+/* TITLES */
 h1{
   font-size:clamp(72px,6vw,130px);
   font-weight:500;
@@ -116,15 +109,7 @@ h1{
   color:var(--muted);
 }
 
-/* ================= TEXT ================= */
-p{
-  margin-top:24px;
-  max-width:720px;
-  line-height:1.7;
-  color:var(--muted);
-}
-
-/* ================= GRID ================= */
+/* GRID */
 .grid{
   margin-top:64px;
   display:grid;
@@ -132,16 +117,17 @@ p{
   gap:36px;
 }
 
-/* ================= GLASS CARD ================= */
+/* GLASS CARD */
 .card{
   position:relative;
-  padding:32px;
   border-radius:22px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(18px);
   overflow:hidden;
   transition:.3s;
+  text-decoration:none;
+  color:var(--fg);
 }
 .card:hover{transform:translateY(-6px)}
 .card::before{
@@ -158,30 +144,55 @@ p{
 }
 .card:hover::before{opacity:1}
 
-/* ================= BORREGOS ================= */
-.borrego{text-align:center}
+/* BORREGOS */
 .borrego img{
   width:100%;
   height:280px;
   object-fit:cover;
-  border-radius:18px;
-  margin-bottom:12px;
+}
+.borrego .info{
+  padding:24px;
+  text-align:center;
 }
 
-/* ================= INVENTORY ================= */
+/* BLOG */
+.blog img,
+.blog video{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  display:block;
+}
+
+/* ACTION CARD */
+.action{
+  padding:36px;
+}
+.action span{
+  display:block;
+  font-size:12px;
+  letter-spacing:.3em;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+.action strong{
+  font-size:20px;
+}
+
+/* INVENTORY */
 .counter{
   font-size:64px;
   margin-top:48px;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
   padding:80px 12vw;
   border-top:1px solid var(--glass-border);
   text-align:center;
   color:var(--muted);
 }
-footer strong{color:var(--fg)}
+footer strong{color:var(--fg);}
 </style>
 </head>
 
@@ -199,7 +210,6 @@ footer strong{color:var(--fg)}
   <button data-target="hero">INICIO</button>
   <button data-target="about">QUIÉNES SOMOS</button>
   <button data-target="borregos">BORREGOS</button>
-  <button data-target="services">SERVICIOS</button>
   <button data-target="blog">BLOG</button>
   <button data-target="inventory">INVENTARIO</button>
   <button data-target="donations">DONACIONES</button>
@@ -214,44 +224,31 @@ footer strong{color:var(--fg)}
 
 <section class="section" id="about">
   <h1>Quiénes somos</h1>
-  <p>
-    Borregos S.L es un grupo de amigos con una capacidad excepcional
-    para complicarse la vida de forma colectiva.
-  </p>
+  <p>Grupo de amigos con una sorprendente capacidad para organizar el caos.</p>
 </section>
 
 <section class="section" id="borregos">
   <h1>Los borregos</h1>
   <div class="grid">
-    <div class="borrego card">Borrego 01</div>
-    <div class="borrego card">Borrego 02</div>
-    <div class="borrego card">Borrego 03</div>
-    <div class="borrego card">Borrego 04</div>
-    <div class="borrego card">Borrego 05</div>
-    <div class="borrego card">Borrego 06</div>
-    <div class="borrego card">Borrego 07</div>
-    <div class="borrego card">Borrego 08</div>
-    <div class="borrego card">Borrego 09</div>
-    <div class="borrego card">Borrego 10</div>
-  </div>
-</section>
-
-<section class="section" id="services">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos</div>
-    <div class="card">Fiestas improvisadas</div>
-    <div class="card">Opiniones no solicitadas</div>
-    <div class="card">Presencia incómoda</div>
+    <a class="card borrego" href="#"><img src="b1.jpg"><div class="info">Borrego 01</div></a>
+    <a class="card borrego" href="#"><img src="b2.jpg"><div class="info">Borrego 02</div></a>
+    <a class="card borrego" href="#"><img src="b3.jpg"><div class="info">Borrego 03</div></a>
+    <a class="card borrego" href="#"><img src="b4.jpg"><div class="info">Borrego 04</div></a>
+    <a class="card borrego" href="#"><img src="b5.jpg"><div class="info">Borrego 05</div></a>
+    <a class="card borrego" href="#"><img src="b6.jpg"><div class="info">Borrego 06</div></a>
+    <a class="card borrego" href="#"><img src="b7.jpg"><div class="info">Borrego 07</div></a>
+    <a class="card borrego" href="#"><img src="b8.jpg"><div class="info">Borrego 08</div></a>
+    <a class="card borrego" href="#"><img src="b9.jpg"><div class="info">Borrego 09</div></a>
+    <a class="card borrego" href="#"><img src="b10.jpg"><div class="info">Borrego 10</div></a>
   </div>
 </section>
 
 <section class="section" id="blog">
   <h1>Blog</h1>
   <div class="grid">
-    <div class="card">Registro visual 01</div>
-    <div class="card">Registro visual 02</div>
-    <div class="card">Registro visual 03</div>
+    <div class="card blog"><img src="blog1.jpg"></div>
+    <div class="card blog"><video src="video1.mp4" controls></video></div>
+    <div class="card blog"><img src="blog2.jpg"></div>
   </div>
 </section>
 
@@ -259,20 +256,19 @@ footer strong{color:var(--fg)}
   <h1>Inventario</h1>
   <div class="counter" id="counter">0</div>
   <div class="grid">
-    <div class="card">Cono de tráfico</div>
-    <div class="card">Silla rota</div>
-    <div class="card">Carrito metálico</div>
-    <div class="card">Caja misteriosa</div>
-    <div class="card">Mesa coja</div>
-    <div class="card">Cable infinito</div>
+    <div class="card action"><strong>Cono de tráfico</strong></div>
+    <div class="card action"><strong>Silla rota</strong></div>
+    <div class="card action"><strong>Carrito metálico</strong></div>
+    <div class="card action"><strong>Caja misteriosa</strong></div>
   </div>
 </section>
 
 <section class="section" id="donations">
   <h1>Donaciones</h1>
   <div class="grid">
-    <a class="card" href="https://paypal.me" target="_blank">
-      Donar vía PayPal →
+    <a class="card action" href="https://paypal.me" target="_blank">
+      <span>APOYAR EL CAOS</span>
+      <strong>Donar con PayPal →</strong>
     </a>
   </div>
 </section>
@@ -280,11 +276,13 @@ footer strong{color:var(--fg)}
 <section class="section" id="contact">
   <h1>Contacto</h1>
   <div class="grid">
-    <a class="card" href="mailto:borregos@queso.com">
-      borregos@queso.com
+    <a class="card action" href="mailto:borregos@queso.com">
+      <span>EMAIL</span>
+      <strong>borregos@queso.com</strong>
     </a>
-    <a class="card" href="#" target="_blank">
-      Instagram →
+    <a class="card action" href="#" target="_blank">
+      <span>REDES</span>
+      <strong>Instagram →</strong>
     </a>
   </div>
 </section>
@@ -296,12 +294,10 @@ footer strong{color:var(--fg)}
 </footer>
 
 <script>
-/* ===== MENU ===== */
+/* MENU */
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
-
 menuBtn.onclick=()=>menu.classList.toggle("open");
-
 menu.querySelectorAll("button").forEach(btn=>{
   btn.onclick=()=>{
     document.getElementById(btn.dataset.target)
@@ -310,7 +306,7 @@ menu.querySelectorAll("button").forEach(btn=>{
   };
 });
 
-/* ===== THEME ===== */
+/* THEME */
 const themeBtn=document.getElementById("themeBtn");
 if(localStorage.theme==="light") document.body.classList.add("light");
 themeBtn.onclick=()=>{
@@ -318,13 +314,11 @@ themeBtn.onclick=()=>{
   localStorage.theme=document.body.classList.contains("light")?"light":"dark";
 };
 
-/* ===== LANGUAGE ===== */
+/* LANGUAGE */
 const langBtn=document.getElementById("langBtn");
-langBtn.onclick=()=>{
-  langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
-};
+langBtn.onclick=()=>langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
 
-/* ===== COUNTER ===== */
+/* COUNTER */
 const counter=document.getElementById("counter");
 let count=Number(localStorage.items)||0;
 counter.textContent=count;
@@ -334,13 +328,13 @@ setInterval(()=>{
   localStorage.items=count;
 },3000);
 
-/* ===== SECTION ANIMATION ===== */
+/* ANIMATION */
 const observer=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.25});
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
-/* ===== GLOW ===== */
+/* GLOW */
 document.querySelectorAll(".card").forEach(el=>{
   el.onmousemove=e=>{
     const r=el.getBoundingClientRect();
