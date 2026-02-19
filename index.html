@@ -89,9 +89,7 @@ body{
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:500;
 }
-.menu.open{
-  transform:none;
-}
+.menu.open{transform:none;}
 .menu span{
   display:block;
   margin-bottom:26px;
@@ -107,31 +105,60 @@ body{
   padding:180px 10vw 160px 14vw;
   scroll-snap-align:start;
 
-  /* animación base */
   opacity:0;
   transform:translateY(60px);
-  transition:opacity .7s ease, transform .7s ease;
-}
-.section.visible{
-  opacity:1;
-  transform:none;
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
 }
 
-.section-block{
-  max-width:1200px;
+/* VISIBILITY */
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* TITLES */
-h1{
+.section h1{
   margin-left:-4px;
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
+
+  opacity:0;
+  transform:translateY(40px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
 }
+
+/* HERO TITLE */
 .hero h1{
   font-size:clamp(130px,11vw,220px);
 }
 
-/* HERO */
+/* TITLE ENTRANCE FROM BOTTOM (SCROLL DOWN) */
+.section.visible.down h1{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* TITLE ENTRANCE FROM TOP (SCROLL UP) */
+.section.visible.up h1{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* HIDDEN STATES */
+.section.hidden.down h1{
+  opacity:0;
+  transform:translateY(40px);
+}
+.section.hidden.up h1{
+  opacity:0;
+  transform:translateY(-40px);
+}
+
+/* HERO SUB */
 .hero-sub{
   margin-top:28px;
   font-size:14px;
@@ -250,129 +277,75 @@ p{
 
 <!-- HERO -->
 <section class="section hero">
-  <div class="section-block">
-    <h1>Borregos<br>S.L</h1>
-    <div class="hero-sub">k de queso</div>
+  <h1>Borregos<br>S.L</h1>
+  <div class="hero-sub">k de queso</div>
+</section>
+
+<section class="section">
+  <h1>Quiénes somos</h1>
+  <p>
+    Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
+    No somos una empresa, pero actuamos como tal cuando conviene.
+  </p>
+</section>
+
+<section class="section">
+  <h1>Los borregos</h1>
+  <div class="grid">
+    <div class="borrego"><img src="b1.jpg"></div>
+    <div class="borrego"><img src="b2.jpg"></div>
+    <div class="borrego"><img src="b3.jpg"></div>
+    <div class="borrego"><img src="b4.jpg"></div>
+    <div class="borrego"><img src="b5.jpg"></div>
+    <div class="borrego"><img src="b6.jpg"></div>
+    <div class="borrego"><img src="b7.jpg"></div>
+    <div class="borrego"><img src="b8.jpg"></div>
+    <div class="borrego"><img src="b9.jpg"></div>
+    <div class="borrego"><img src="b10.jpg"></div>
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
 <section class="section">
-  <div class="section-block">
-    <h1>Quiénes somos</h1>
-    <p>
-      Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
-      No somos una empresa, pero actuamos como tal cuando conviene. Nos une
-      la amistad, el humor cuestionable y una capacidad sorprendente para
-      meternos en situaciones innecesarias.
-    </p>
+  <h1>Servicios</h1>
+  <div class="grid">
+    <div class="card">Estropear eventos</div>
+    <div class="card">Fiestas improvisadas</div>
+    <div class="card">Opiniones no solicitadas</div>
+    <div class="card">Presencia incómoda</div>
   </div>
 </section>
 
-<!-- BORREGOS -->
 <section class="section">
-  <div class="section-block">
-    <h1>Los borregos</h1>
-    <p>
-      Diez individuos distintos, pero peligrosamente compatibles. Cada uno
-      aporta su caos particular al conjunto.
-    </p>
-    <div class="grid">
-      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
-      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
-      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
-      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
-      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
-      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
-      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
-      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
-      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
-      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+  <h1>Blog</h1>
+  <div class="grid">
+    <div class="blog-item"><img src="blog1.jpg"></div>
+    <div class="blog-item"><video src="video1.mp4" controls></video></div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Inventario</h1>
+  <div class="counters">
+    <div class="counter-card">
+      <div class="counter-value" id="itemCount">0</div>
+      <div class="counter-label">Objetos recogidos</div>
     </div>
   </div>
 </section>
 
-<!-- SERVICIOS -->
 <section class="section">
-  <div class="section-block">
-    <h1>Servicios</h1>
-    <p>
-      Ofrecemos soluciones que nadie ha pedido, pero que siempre llegan.
-    </p>
-    <div class="grid">
-      <div class="card">Estropear eventos con precisión</div>
-      <div class="card">Organización de fiestas improvisadas</div>
-      <div class="card">Opiniones no solicitadas</div>
-      <div class="card">Presencia incómoda garantizada</div>
-    </div>
+  <h1>Donaciones</h1>
+  <div class="grid">
+    <div class="card">Bizum</div>
+    <div class="card">PayPal</div>
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="section">
-  <div class="section-block">
-    <h1>Blog</h1>
-    <p>
-      Registro visual de momentos que probablemente no deberían repetirse.
-    </p>
-    <div class="grid">
-      <div class="blog-item"><img src="blog1.jpg"></div>
-      <div class="blog-item"><video src="video1.mp4" controls></video></div>
-      <div class="blog-item"><img src="blog2.jpg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- INVENTARIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Inventario</h1>
-    <p>
-      Objetos recogidos de la calle, comprados sin justificación o
-      adquiridos por error. Todos cumplen una función desconocida.
-    </p>
-    <div class="counters">
-      <div class="counter-card">
-        <div class="counter-value" id="itemCount">0</div>
-        <div class="counter-label">Objetos registrados</div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card">Cono de tráfico</div>
-      <div class="card">Silla rota</div>
-      <div class="card">Carrito metálico</div>
-      <div class="card">Altavoz dudoso</div>
-    </div>
-  </div>
-</section>
-
-<!-- DONACIONES -->
-<section class="section">
-  <div class="section-block">
-    <h1>Donaciones</h1>
-    <p>
-      Toda aportación será gestionada con responsabilidad variable y
-      destinada principalmente a mantener el espíritu del grupo.
-    </p>
-    <div class="grid">
-      <div class="card">Bizum · +34 600 000 000</div>
-      <div class="card">PayPal · borregos@queso.com</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <p>
-      Si quieres colaborar, preguntar o simplemente observar desde
-      una distancia segura, aquí nos puedes encontrar.
-    </p>
-    <div class="contact">
-      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-      <a href="#">Instagram</a>
-    </div>
+  <h1>Contacto</h1>
+  <div class="contact">
+    <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+    <a href="#">Instagram</a>
   </div>
 </section>
 
@@ -411,13 +384,25 @@ setInterval(()=>{
   counter.textContent=items;
 },3000);
 
-/* ANIMATION OBSERVER (SIEMPRE ACTIVO) */
+/* SCROLL DIRECTION */
+let lastScrollY=window.scrollY;
+let scrollDir="down";
+
+window.addEventListener("scroll",()=>{
+  scrollDir=window.scrollY>lastScrollY?"down":"up";
+  lastScrollY=window.scrollY;
+});
+
+/* INTERSECTION OBSERVER */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("visible");
+  entries.forEach(entry=>{
+    const s=entry.target;
+
+    if(entry.isIntersecting){
+      s.classList.add("visible",scrollDir);
+      s.classList.remove("hidden");
     }else{
-      e.target.classList.remove("visible");
+      s.classList.remove("visible","up","down");
     }
   });
 },{threshold:.25});
