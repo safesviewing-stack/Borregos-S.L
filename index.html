@@ -14,12 +14,14 @@
   --fg:#f5f5f5;
   --muted:#777;
   --glass:rgba(255,255,255,.06);
+  --accent:#ffb703;
 }
 
 body.borrego{
   --bg:#140f0f;
   --fg:#fff2d9;
   --muted:#cfa;
+  --accent:#ff006e;
 }
 
 /* ================= RESET ================= */
@@ -36,24 +38,17 @@ body{
   color:var(--fg);
   scroll-snap-type:y mandatory;
   overflow-y:scroll;
-  transition:.6s ease;
+  transition:.4s ease;
 }
 
 /* ================= GLOBAL CHAOS ================= */
 body.borrego{
-  animation:bodyPulse 6s infinite alternate;
-}
-@keyframes bodyPulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.015)}
+  animation:pageDrift 4s infinite alternate;
 }
 
-body.borrego h1{
-  animation:titleShake .25s infinite alternate;
-}
-@keyframes titleShake{
-  from{transform:translateX(-2px)}
-  to{transform:translateX(2px)}
+@keyframes pageDrift{
+  0%{transform:translate(0,0) rotate(0deg)}
+  100%{transform:translate(3px,-3px) rotate(.15deg)}
 }
 
 /* ================= OVERLAY ================= */
@@ -64,13 +59,10 @@ body.borrego h1{
   backdrop-filter:blur(14px);
   opacity:0;
   pointer-events:none;
-  transition:.5s ease;
+  transition:.5s;
   z-index:200;
 }
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
+.overlay.active{opacity:1;pointer-events:auto}
 
 /* ================= MENU BUTTON ================= */
 .menu-btn{
@@ -85,23 +77,7 @@ body.borrego h1{
   cursor:pointer;
   z-index:500;
 }
-
-.menu-btn span{
-  height:2px;
-  width:100%;
-  background:#fff;
-  transition:.4s ease;
-}
-
-.menu-btn.open span:nth-child(1){
-  transform:rotate(45deg) translateY(10px);
-}
-.menu-btn.open span:nth-child(2){
-  opacity:0;
-}
-.menu-btn.open span:nth-child(3){
-  transform:rotate(-45deg) translateY(-10px);
-}
+.menu-btn span{height:2px;background:#fff;transition:.4s}
 
 /* ================= MENU ================= */
 .menu{
@@ -121,7 +97,7 @@ body.borrego h1{
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:300;
 }
-.menu.open{transform:none;}
+.menu.open{transform:none}
 
 .menu span{
   font-size:13px;
@@ -134,40 +110,68 @@ body.borrego h1{
 /* ================= MODE TOGGLE ================= */
 .toggle{
   position:fixed;
-  bottom:32px;
-  right:40px;
-  padding:14px 20px;
-  font-size:11px;
-  letter-spacing:.25em;
-  background:#111;
-  border:1px solid #333;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:16px 36px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.3em;
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(12px);
   cursor:pointer;
-  z-index:600;
+  z-index:700;
+  transition:.4s ease;
+}
+
+body.borrego .toggle{
+  background:var(--accent);
+  color:#000;
+  animation:toggleShake .25s infinite alternate;
+}
+
+@keyframes toggleShake{
+  from{transform:translateX(-50%) translateY(0)}
+  to{transform:translateX(-50%) translateY(-2px)}
 }
 
 /* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
-  padding:180px 10vw 160px 14vw;
+  padding:180px 10vw 160px 12vw;
 }
+
 .section-block{
   position:sticky;
-  top:240px;
+  top:220px;
   max-width:1200px;
 }
 
 /* ================= TITLES ================= */
 h1{
+  margin-left:-24px;
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
   line-height:1.02;
+  transition:.2s;
+}
+
+body.borrego h1{
+  animation:titleChaos .35s infinite alternate;
+}
+
+@keyframes titleChaos{
+  from{transform:translate(-2px,-2px) rotate(-.2deg)}
+  to{transform:translate(2px,2px) rotate(.2deg)}
 }
 
 /* ================= HERO ================= */
 .hero h1{
-  font-size:clamp(120px,10vw,210px);
+  font-size:clamp(130px,11vw,220px);
 }
+
 .hero-sub{
   margin-top:28px;
   font-size:14px;
@@ -182,7 +186,6 @@ p{
   font-size:15px;
   line-height:1.65;
   color:#aaa;
-  text-align:justify;
 }
 
 /* ================= GRID ================= */
@@ -191,6 +194,15 @@ p{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:36px;
+}
+
+/* ================= CARD ================= */
+.card{
+  padding:32px;
+  border-radius:22px;
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.1);
+  transition:.15s ease;
 }
 
 /* ================= BORREGOS ================= */
@@ -212,15 +224,6 @@ p{
   margin-bottom:14px;
 }
 
-/* ================= CARD ================= */
-.card{
-  padding:32px;
-  border-radius:22px;
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,.1);
-  transition:.3s ease;
-}
-
 /* ================= COUNTERS ================= */
 .counters{
   margin-top:48px;
@@ -228,6 +231,7 @@ p{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
 }
+
 .counter-card{
   padding:36px;
   border-radius:22px;
@@ -238,10 +242,12 @@ p{
   );
   border:1px solid rgba(255,255,255,.15);
 }
+
 .counter-value{
   font-size:64px;
   font-weight:500;
 }
+
 .counter-label{
   margin-top:12px;
   font-size:12px;
@@ -257,6 +263,7 @@ p{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:28px;
 }
+
 .contact a{
   padding:32px;
   border-radius:22px;
@@ -269,13 +276,14 @@ p{
 /* ================= SHEEP ================= */
 .sheep{
   position:fixed;
-  font-size:32px;
+  font-size:34px;
   pointer-events:none;
-  animation:floatSheep 5s ease-in-out infinite;
+  animation:floatSheep 3s ease-in-out infinite;
 }
+
 @keyframes floatSheep{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-25px)}
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(0,-30px)}
 }
 </style>
 </head>
@@ -315,8 +323,7 @@ p{
     <h1>Quiénes somos</h1>
     <p id="whoText">
       Borregos S.L es un grupo de diez individuos con una coordinación
-      cuestionable, una capacidad limitada para la toma de decisiones
-      y una dependencia emocional del queso.
+      cuestionable y una obsesión colectiva con el caos.
     </p>
   </div>
 </section>
@@ -326,7 +333,6 @@ p{
   <div class="section-block">
     <h1>Los borregos</h1>
     <div class="grid">
-      <!-- 10 BORREGOS -->
       <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
       <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
       <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
@@ -461,19 +467,19 @@ const heroSub=document.getElementById("heroSub");
 const whoText=document.getElementById("whoText");
 
 const subs=[
-  "k de queso",
-  "demasiadas ovejas",
-  "esto no es una empresa",
-  "nadie nos supervisa",
-  "error administrativo"
+  "demasiado borrego",
+  "esto se ha ido de las manos",
+  "no apagues esto",
+  "error institucional",
+  "nadie supervisa esto"
 ];
 
 const whoTexts=[
   "Diez individuos sin supervisión.",
-  "Esto empezó como una broma.",
-  "No hay plan ni presupuesto.",
-  "Un fallo organizativo persistente.",
-  "No nos hagas responsables."
+  "Esto ya no es una empresa.",
+  "No hay plan ni responsables.",
+  "El caos es estructural.",
+  "Demasiado tarde para parar."
 ];
 
 let textLoop=null;
@@ -486,7 +492,7 @@ function enableBorrego(){
   textLoop=setInterval(()=>{
     heroSub.textContent=subs[Math.floor(Math.random()*subs.length)];
     whoText.textContent=whoTexts[Math.floor(Math.random()*whoTexts.length)];
-  },2500);
+  },2000);
 
   spawnSheep();
 }
@@ -508,10 +514,10 @@ toggle.onclick=()=>{
     : enableBorrego();
 };
 
-/* ================= SHEEP SPAWN ================= */
+/* ================= SHEEP ================= */
 function spawnSheep(){
   document.querySelectorAll(".sheep").forEach(s=>s.remove());
-  for(let i=0;i<10;i++){
+  for(let i=0;i<12;i++){
     const s=document.createElement("div");
     s.className="sheep";
     s.textContent="🐑";
@@ -524,7 +530,7 @@ function spawnSheep(){
   sheepCount.textContent=sheep;
 }
 
-/* ================= CARDS HUYEN ================= */
+/* ================= CARD CHAOS ================= */
 document.addEventListener("mousemove",e=>{
   if(!document.body.classList.contains("borrego")) return;
 
@@ -537,13 +543,10 @@ document.addEventListener("mousemove",e=>{
     const dy=cy-e.clientY;
     const dist=Math.sqrt(dx*dx+dy*dy);
 
-    if(dist<180){
-      const force=(180-dist)/180;
-      card.style.transform=
-        `translate(${dx*0.2*force}px,${dy*0.2*force}px) rotate(${(Math.random()-.5)*4}deg)`;
-    }else{
-      card.style.transform="translate(0,0)";
-    }
+    const force=Math.max(0,(220-dist)/220);
+    card.style.transform=
+      `translate(${dx*0.25*force}px,${dy*0.25*force}px)
+       rotate(${(Math.random()-.5)*8}deg)`;
   });
 });
 </script>
