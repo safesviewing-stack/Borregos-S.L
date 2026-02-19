@@ -14,13 +14,6 @@
   --fg:#f5f5f5;
   --muted:#777;
   --glass:rgba(255,255,255,.06);
-  --accent:#ffb703;
-}
-
-body.borrego{
-  --bg:#140f0f;
-  --fg:#fff2d9;
-  --muted:#cfa;
   --accent:#ff006e;
 }
 
@@ -32,138 +25,50 @@ body.borrego{
   font-family:"Inter",sans-serif;
 }
 
-/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
-  scroll-snap-type:y mandatory;
-  overflow-y:scroll;
-  transition:.4s ease;
+  overflow-x:hidden;
+  transition:background .4s;
 }
 
-/* ================= GLOBAL CHAOS ================= */
+/* ================= GRAVITY MODE ================= */
 body.borrego{
-  animation:pageDrift 3s infinite alternate;
+  background:#140f0f;
 }
 
-@keyframes pageDrift{
-  0%{transform:translate(0,0) rotate(0deg)}
-  100%{transform:translate(4px,-4px) rotate(.25deg)}
+/* contenedor de todo */
+.world{
+  transition:transform 1s cubic-bezier(.22,.61,.36,1);
+  transform-origin:top center;
 }
 
-/* ================= OVERLAY ================= */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(14px);
-  opacity:0;
-  pointer-events:none;
-  transition:.5s;
-  z-index:200;
-}
-.overlay.active{opacity:1;pointer-events:auto}
-
-/* ================= MENU BUTTON ================= */
-.menu-btn{
-  position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  cursor:pointer;
-  z-index:500;
-}
-.menu-btn span{height:2px;background:#fff;transition:.4s}
-
-/* ================= MENU ================= */
-.menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:340px;
-  height:100vh;
-  padding:140px 56px;
-  background:rgba(15,15,15,.65);
-  backdrop-filter:blur(24px) saturate(160%);
-  border-left:1px solid rgba(255,255,255,.1);
-  display:flex;
-  flex-direction:column;
-  gap:32px;
-  transform:translateX(100%);
-  transition:.6s cubic-bezier(.2,.8,.2,1);
-  z-index:300;
-}
-.menu.open{transform:none}
-
-.menu span{
-  font-size:13px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  color:#ccc;
-  cursor:pointer;
+/* gravedad activa */
+body.borrego .world{
+  transform:translateY(80px) rotate(0.8deg);
 }
 
-/* ================= MODE TOGGLE ================= */
-.toggle{
-  position:fixed;
-  bottom:24px;
-  right:24px;
-  padding:16px 28px;
-  border-radius:999px;
-  font-size:11px;
-  letter-spacing:.3em;
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,.2);
-  backdrop-filter:blur(12px);
-  cursor:pointer;
-  z-index:800;
-  transition:.3s ease;
+/* secciones caen distinto */
+body.borrego .section{
+  animation:fall 3s ease-in-out infinite alternate;
 }
 
-body.borrego .toggle{
-  background:var(--accent);
-  color:#000;
-  animation:toggleShake .25s infinite alternate;
-}
-
-@keyframes toggleShake{
-  from{transform:translateY(0)}
-  to{transform:translateY(-3px)}
+@keyframes fall{
+  from{transform:translateY(0) rotate(0deg)}
+  to{transform:translateY(20px) rotate(0.4deg)}
 }
 
 /* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
-  scroll-snap-align:start;
   padding:180px 10vw 160px 14vw;
+  transition:transform 1s cubic-bezier(.22,.61,.36,1);
 }
 
-.section-block{
-  position:sticky;
-  top:220px;
-  max-width:1200px;
-}
-
-/* ================= TITLES ================= */
 h1{
-  margin-left:-6px;
+  margin-left:-4px;
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
-  line-height:1.02;
-  transition:.2s;
-}
-
-body.borrego h1{
-  animation:titleChaos .3s infinite alternate;
-}
-
-@keyframes titleChaos{
-  from{transform:translate(-2px,1px) rotate(-.15deg)}
-  to{transform:translate(2px,-1px) rotate(.15deg)}
 }
 
 /* ================= HERO ================= */
@@ -176,15 +81,6 @@ body.borrego h1{
   font-size:14px;
   letter-spacing:.28em;
   color:var(--muted);
-}
-
-/* ================= TEXT ================= */
-p{
-  margin-top:20px;
-  max-width:680px;
-  font-size:15px;
-  line-height:1.65;
-  color:#aaa;
 }
 
 /* ================= GRID ================= */
@@ -201,7 +97,12 @@ p{
   border-radius:22px;
   background:var(--glass);
   border:1px solid rgba(255,255,255,.1);
-  transition:.2s ease;
+  transition:transform 1s cubic-bezier(.22,.61,.36,1);
+}
+
+/* gravedad en cards */
+body.borrego .card{
+  transform:translateY(30px) rotate(1deg);
 }
 
 /* ================= BORREGOS ================= */
@@ -210,7 +111,6 @@ p{
   height:300px;
   object-fit:cover;
   background:#111;
-  margin-bottom:14px;
 }
 
 /* ================= BLOG ================= */
@@ -220,7 +120,6 @@ p{
   height:260px;
   object-fit:cover;
   background:#111;
-  margin-bottom:14px;
 }
 
 /* ================= COUNTERS ================= */
@@ -234,25 +133,12 @@ p{
 .counter-card{
   padding:36px;
   border-radius:22px;
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.1),
-    rgba(255,255,255,.03)
-  );
+  background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.15);
 }
 
 .counter-value{
   font-size:64px;
-  font-weight:500;
-}
-
-.counter-label{
-  margin-top:12px;
-  font-size:12px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--muted);
 }
 
 /* ================= CONTACT ================= */
@@ -270,261 +156,102 @@ p{
   border:1px solid rgba(255,255,255,.1);
   color:#fff;
   text-decoration:none;
-  transition:.2s ease;
 }
 
-/* ================= SHEEP ================= */
-.sheep{
+/* ================= MODE BUTTON ================= */
+.toggle{
   position:fixed;
-  font-size:34px;
-  pointer-events:none;
-  animation:floatSheep 3s ease-in-out infinite;
+  bottom:24px;
+  right:24px;
+  padding:18px 34px;
+  border-radius:999px;
+  font-size:11px;
+  letter-spacing:.3em;
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+  z-index:999;
+  transition:transform .4s ease, background .4s;
 }
 
-@keyframes floatSheep{
-  0%,100%{transform:translate(0,0)}
-  50%{transform:translate(0,-30px)}
+/* botón con peso */
+body.borrego .toggle{
+  background:var(--accent);
+  color:#000;
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<div class="menu-btn" id="menuBtn">
-  <span></span><span></span><span></span>
-</div>
-
-<nav class="menu" id="menu">
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Borregos</span>
-  <span data-i="3">Servicios</span>
-  <span data-i="4">Blog</span>
-  <span data-i="5">Inventario</span>
-  <span data-i="6">Donaciones</span>
-  <span data-i="7">Contacto</span>
-</nav>
-
 <div class="toggle" id="toggleMode">MODO BORREGO</div>
+
+<div class="world" id="world">
 
 <!-- HERO -->
 <section class="section hero">
-  <div class="section-block">
-    <h1 id="heroTitle">Borregos<br>S.L</h1>
-    <div class="hero-sub" id="heroSub">k de queso</div>
+  <h1>Borregos<br>S.L</h1>
+  <div class="hero-sub">k de queso</div>
+</section>
+
+<section class="section">
+  <h1>Quiénes somos</h1>
+  <p>Diez individuos con una relación problemática con la responsabilidad.</p>
+</section>
+
+<section class="section">
+  <h1>Servicios</h1>
+  <div class="grid">
+    <div class="card">Estropear eventos</div>
+    <div class="card">Fiestas sin control</div>
+    <div class="card">Opiniones no pedidas</div>
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
 <section class="section">
-  <div class="section-block">
-    <h1>Quiénes somos</h1>
-    <p id="whoText">
-      Borregos S.L es un grupo de diez individuos con una coordinación
-      cuestionable y una obsesión colectiva con el caos.
-    </p>
-  </div>
-</section>
-
-<!-- BORREGOS -->
-<section class="section">
-  <div class="section-block">
-    <h1>Los borregos</h1>
-    <div class="grid">
-      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
-      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
-      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
-      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
-      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
-      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
-      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
-      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
-      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
-      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+  <h1>Inventario</h1>
+  <div class="counters">
+    <div class="counter-card">
+      <div class="counter-value">42</div>
+      <div>Objetos recogidos</div>
     </div>
   </div>
 </section>
 
-<!-- SERVICIOS -->
 <section class="section">
-  <div class="section-block">
-    <h1>Servicios</h1>
-    <div class="grid">
-      <div class="card">Estropear eventos</div>
-      <div class="card">Fiestas sin control</div>
-      <div class="card">Opiniones no solicitadas</div>
-      <div class="card">Presencia incómoda</div>
-    </div>
+  <h1>Contacto</h1>
+  <div class="contact">
+    <a href="#">Instagram</a>
+    <a href="#">Email</a>
   </div>
 </section>
 
-<!-- BLOG -->
-<section class="section">
-  <div class="section-block">
-    <h1>Blog</h1>
-    <div class="grid">
-      <div class="blog-item"><img src="blog1.jpg"></div>
-      <div class="blog-item"><video src="video1.mp4" controls></video></div>
-      <div class="blog-item"><img src="blog2.jpg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- INVENTARIO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Inventario</h1>
-    <div class="counters">
-      <div class="counter-card">
-        <div class="counter-value" id="itemCount">0</div>
-        <div class="counter-label">Objetos recogidos</div>
-      </div>
-      <div class="counter-card">
-        <div class="counter-value" id="sheepCount">0</div>
-        <div class="counter-label">Ovejas invocadas</div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="card">#001 Cono de tráfico</div>
-      <div class="card">#002 Silla rota</div>
-      <div class="card">#003 Carrito metálico</div>
-      <div class="card">#004 Altavoz dudoso</div>
-    </div>
-  </div>
-</section>
-
-<!-- DONACIONES -->
-<section class="section">
-  <div class="section-block">
-    <h1>Donaciones</h1>
-    <p>
-      Toda aportación económica será gestionada con una ética flexible
-      y destinada principalmente a queso.
-    </p>
-    <div class="grid">
-      <div class="card">Bizum · +34 600 000 000</div>
-      <div class="card">PayPal · borregos@queso.com</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="section">
-  <div class="section-block">
-    <h1>Contacto</h1>
-    <div class="contact">
-      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-      <a href="#">Instagram oficial</a>
-    </div>
-  </div>
-</section>
+</div>
 
 <script>
-/* ================= COUNTERS ================= */
-let items=Number(localStorage.items)||0;
-let sheep=Number(localStorage.sheep)||0;
-
-itemCount.textContent=items;
-sheepCount.textContent=sheep;
-
-setInterval(()=>{
-  items++;
-  localStorage.items=items;
-  itemCount.textContent=items;
-},3000);
-
-/* ================= MODE BORREGO ================= */
+/* ================= GRAVITY TOGGLE ================= */
 const toggle=document.getElementById("toggleMode");
-const heroTitle=document.getElementById("heroTitle");
-const heroSub=document.getElementById("heroSub");
-const whoText=document.getElementById("whoText");
+const body=document.body;
+const world=document.getElementById("world");
 
-const subs=[
-  "esto no va bien",
-  "demasiado borrego",
-  "nadie controla esto",
-  "error institucional",
-  "esto empeora"
-];
+let gravity=false;
 
-const whoTexts=[
-  "Diez individuos sin supervisión.",
-  "Esto ya no es una empresa.",
-  "El caos es estructural.",
-  "No hay plan de salida.",
-  "Demasiado tarde para parar."
-];
-
-let textLoop=null;
-let buttonChaos=null;
-
-function enableBorrego(){
-  document.body.classList.add("borrego");
-  localStorage.mode="borrego";
-  heroTitle.innerHTML="Borregos<br>definitivos";
-
-  textLoop=setInterval(()=>{
-    heroSub.textContent=subs[Math.floor(Math.random()*subs.length)];
-    whoText.textContent=whoTexts[Math.floor(Math.random()*whoTexts.length)];
-  },2000);
-
-  spawnSheep();
-  startButtonChaos();
-}
-
-function disableBorrego(){
-  document.body.classList.remove("borrego");
-  localStorage.mode="normal";
-  heroTitle.innerHTML="Borregos<br>S.L";
-  heroSub.textContent="k de queso";
-  clearInterval(textLoop);
-  clearInterval(buttonChaos);
-  document.querySelectorAll(".sheep").forEach(s=>s.remove());
-  resetButtons();
-}
-
-if(localStorage.mode==="borrego") enableBorrego();
+/* botón acompaña al scroll con peso */
+window.addEventListener("scroll",()=>{
+  if(!gravity) return;
+  const offset=window.scrollY*0.02;
+  toggle.style.transform=`translateY(${offset}px)`;
+});
 
 toggle.onclick=()=>{
-  document.body.classList.contains("borrego")
-    ? disableBorrego()
-    : enableBorrego();
-};
+  gravity=!gravity;
+  body.classList.toggle("borrego");
 
-/* ================= SHEEP ================= */
-function spawnSheep(){
-  document.querySelectorAll(".sheep").forEach(s=>s.remove());
-  for(let i=0;i<14;i++){
-    const s=document.createElement("div");
-    s.className="sheep";
-    s.textContent="🐑";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    document.body.appendChild(s);
-    sheep++;
+  if(!gravity){
+    toggle.style.transform="translateY(0)";
   }
-  localStorage.sheep=sheep;
-  sheepCount.textContent=sheep;
-}
-
-/* ================= BUTTON CHAOS ================= */
-function startButtonChaos(){
-  buttonChaos=setInterval(()=>{
-    document.querySelectorAll(".card, .contact a").forEach(el=>{
-      const x=(Math.random()-.5)*20;
-      const y=(Math.random()-.5)*20;
-      el.style.transform=`translate(${x}px,${y}px) rotate(${(Math.random()-.5)*4}deg)`;
-    });
-  },1500);
-}
-
-function resetButtons(){
-  document.querySelectorAll(".card, .contact a").forEach(el=>{
-    el.style.transform="none";
-  });
-}
+};
 </script>
 
 </body>
