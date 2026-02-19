@@ -3,163 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borregos S.L — k de queso</title>
+<title>LOS BORREGOS</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#f7f7f5;
-  --fg:#111;
-  --muted:#666;
-  --border:#111;
+  --bg1:#ff00ff;
+  --bg2:#00ffff;
+  --bg3:#ffff00;
 }
 
 *{
-  margin:0;
-  padding:0;
   box-sizing:border-box;
-  font-family:Inter, sans-serif;
+  font-family:"Comic Neue", cursive;
 }
 
 body{
-  background:var(--bg);
-  color:var(--fg);
+  margin:0;
+  background:linear-gradient(45deg,var(--bg1),var(--bg2),var(--bg3));
+  background-size:400% 400%;
+  animation:bgMove 6s infinite linear;
+  overflow-x:hidden;
 }
 
-/* GRID BASE */
-.wrapper{
-  display:grid;
-  grid-template-columns: 1fr;
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* HEADER */
 header{
   position:fixed;
   top:0;
-  left:0;
-  right:0;
-  background:var(--bg);
-  border-bottom:2px solid var(--border);
-  padding:24px 5vw;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:100;
+  width:100%;
+  padding:12px;
+  background:#fff;
+  border-bottom:6px dashed #000;
+  text-align:center;
+  z-index:999;
 }
 
-.logo{
-  font-weight:600;
-  letter-spacing:.05em;
+header h1{
+  margin:0;
+  font-size:32px;
+  animation:shake 0.6s infinite;
 }
 
-nav a{
-  margin-left:32px;
-  text-decoration:none;
-  color:var(--fg);
-  font-size:13px;
-  letter-spacing:.2em;
+#chaosBtn{
+  margin-top:8px;
+  padding:8px 16px;
+  font-size:14px;
+  border:3px solid #000;
+  background:red;
+  color:white;
+  cursor:pointer;
+}
+
+@keyframes shake{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(1deg)}
+  50%{transform:rotate(-1deg)}
+  75%{transform:rotate(1deg)}
+  100%{transform:rotate(0)}
 }
 
 /* SECTIONS */
 section{
-  padding:140px 5vw;
-  border-bottom:2px solid var(--border);
+  min-height:100vh;
+  padding:140px 20px 80px;
+  text-align:center;
 }
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+.hero h2{
+  font-size:clamp(64px,12vw,140px);
+  margin:0;
+  animation:zoom 1.2s infinite alternate;
 }
 
-.hero h1{
-  font-size:clamp(80px,12vw,180px);
-  font-weight:500;
-  line-height:.95;
+@keyframes zoom{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
 }
 
-.hero span{
+.hero p{
+  font-size:20px;
   margin-top:24px;
-  font-size:14px;
-  letter-spacing:.4em;
-  color:var(--muted);
 }
 
-/* FRAME BLOCK */
-.frame{
-  border:2px solid var(--border);
-  padding:48px;
-  margin-top:48px;
+/* BUTTON */
+button.bad{
+  padding:16px 32px;
+  font-size:18px;
+  background:yellow;
+  border:4px solid black;
+  cursor:pointer;
+  margin-top:32px;
 }
 
-/* TEXT */
-.about-text{
-  max-width:900px;
-  line-height:1.8;
-  color:var(--muted);
+button.bad:hover{
+  animation:spin 0.6s infinite linear;
+}
+
+@keyframes spin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:24px;
-  margin-top:48px;
+  margin-top:64px;
 }
 
-/* CARDS */
 .card{
-  border:2px solid var(--border);
-  text-decoration:none;
-  color:var(--fg);
-  display:flex;
-  flex-direction:column;
+  background:#fff;
+  border:6px solid #000;
+  padding:16px;
+  animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+  100%{transform:translateY(0)}
 }
 
 .card img{
   width:100%;
-  height:260px;
+  height:200px;
   object-fit:cover;
-  border-bottom:2px solid var(--border);
+  border:4px dotted #000;
 }
 
-.card-content{
-  padding:24px;
-  font-size:14px;
-  letter-spacing:.15em;
+/* MARQUEE */
+.marquee{
+  font-size:24px;
+  white-space:nowrap;
+  overflow:hidden;
+  background:black;
+  color:lime;
 }
 
-/* BLOG */
-.blog img,
-.blog video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll 8s linear infinite;
 }
 
-/* INVENTORY */
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-100%)}
+}
+
+/* COUNTER */
 .counter{
   font-size:96px;
-  font-weight:500;
+  animation:pulse 0.5s infinite alternate;
 }
 
-.inventory-text{
-  margin-top:16px;
-  max-width:520px;
-  color:var(--muted);
-  line-height:1.6;
+@keyframes pulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.3)}
 }
 
 /* FOOTER */
 footer{
-  padding:80px 5vw;
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-  border-top:2px solid var(--border);
+  padding:40px;
+  background:#000;
+  color:#fff;
+  text-align:center;
+}
+
+/* ===== MODO DEMASIADOS EFECTOS ===== */
+
+body.chaos{
+  animation: screenShake 0.15s infinite;
+}
+
+@keyframes screenShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(4px,-4px)}
+  50%{transform:translate(-4px,4px)}
+  75%{transform:translate(4px,4px)}
+  100%{transform:translate(0,0)}
+}
+
+body.chaos *{
+  animation: chaosSpin 1s infinite linear !important;
+}
+
+@keyframes chaosSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+body.chaos img{
+  filter:hue-rotate(360deg) saturate(500%);
+}
+
+body.chaos h1,
+body.chaos h2{
+  text-shadow:
+    4px 4px red,
+    -4px -4px blue,
+    6px 6px yellow;
+}
+
+body.chaos button{
+  animation:blink 0.2s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1}
+  50%{opacity:0}
+  100%{opacity:1}
+}
+
+/* BORREGOS FLOTANTES */
+.borrego-fly{
+  position:fixed;
+  font-size:48px;
+  animation:fly 6s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes fly{
+  from{left:-10%}
+  to{left:110%}
 }
 </style>
 </head>
@@ -167,113 +242,91 @@ footer{
 <body>
 
 <header>
-  <div class="logo">BORREGOS S.L</div>
-  <nav>
-    <a href="#about">NOSOTROS</a>
-    <a href="#borregos">BORREGOS</a>
-    <a href="#blog">BLOG</a>
-    <a href="#inventory">INVENTARIO</a>
-    <a href="#contact">CONTACTO</a>
-  </nav>
+  <h1>🐑 LOS BORREGOS 🐑</h1>
+  <button id="chaosBtn">ACTIVAR MODO DEMASIADOS EFECTOS</button>
 </header>
 
 <section class="hero">
-  <h1>Borregos<br>S.L</h1>
-  <span>K DE QUESO</span>
+  <h2>NO SOMOS UN ESTUDIO</h2>
+  <p>somos un grupo sin rumbo pero con wifi</p>
+  <button class="bad" onclick="alert('ERROR GRAVE DE JUICIO')">NO TOQUES ESTO</button>
 </section>
 
-<section id="about">
-  <h2>Sobre nosotros</h2>
+<div class="marquee">
+  <span>LOS BORREGOS · SIN OBJETIVO · SIN FUTURO · PERO JUNTOS · </span>
+</div>
 
-  <div class="frame">
-    <p class="about-text">
-      Borregos S.L nació en Valencia durante las Fallas del año pasado, cuando el ruido,
-      el humo y la falta de sueño hicieron que cualquier idea pareciera razonable.
-      Un grupo de personas se juntó sin un plan claro y decidió, contra toda lógica,
-      seguir haciéndolo. Desde entonces se fueron uniendo más borregos a la secta,
-      creciendo el grupo y empeorando progresivamente la toma de decisiones.
-      Actuamos como borregos: seguimos al grupo, aprendemos a base de errores
-      y, pase lo que pase, siempre acabamos yendo juntos.
-    </p>
-  </div>
-</section>
-
-<section id="borregos">
-  <h2>Los borregos</h2>
-
+<section>
+  <h2>NUESTROS BORREGOS</h2>
   <div class="grid">
-    <a class="card" href="#">
-      <img src="jose.jpg">
-      <div class="card-content">BORREGO 01 · JOSE</div>
-    </a>
-
-    <a class="card" href="#">
-      <img src="luis.jpg">
-      <div class="card-content">BORREGO 02 · LUIS</div>
-    </a>
-
-    <a class="card" href="#">
-      <img src="pablo.jpg">
-      <div class="card-content">BORREGO 03 · PABLO</div>
-    </a>
-
-    <a class="card" href="#">
-      <img src="b4.jpg">
-      <div class="card-content">BORREGO 04</div>
-    </a>
+    <div class="card"><img src="jose.jpg"><p>JOSE<br>confía demasiado</p></div>
+    <div class="card"><img src="luis.jpg"><p>LUIS<br>rompe cosas</p></div>
+    <div class="card"><img src="pablo.jpg"><p>PABLO<br>no estaba avisado</p></div>
   </div>
 </section>
 
-<section id="blog">
-  <h2>Blog</h2>
-
-  <div class="grid">
-    <div class="card blog"><img src="blog1.jpg"></div>
-    <div class="card blog"><video src="video1.mp4" controls></video></div>
-    <div class="card blog"><img src="blog2.jpg"></div>
-  </div>
-</section>
-
-<section id="inventory">
-  <h2>Inventario</h2>
-
-  <div class="frame">
-    <div class="counter" id="counter">0</div>
-    <p class="inventory-text">
-      Objetos recogidos, adoptados o adquiridos sin supervisión alguna.
-      El inventario crece constantemente y rara vez disminuye.
-    </p>
-  </div>
-</section>
-
-<section id="contact">
-  <h2>Contacto</h2>
-
-  <div class="grid">
-    <a class="card" href="mailto:borregos@queso.com">
-      <div class="card-content">borregos@queso.com</div>
-    </a>
-    <a class="card" href="#">
-      <div class="card-content">INSTAGRAM →</div>
-    </a>
-  </div>
+<section>
+  <h2>INVENTARIO ABSURDO</h2>
+  <div class="counter" id="counter">0</div>
+  <p>objetos inútiles acumulados sin motivo</p>
 </section>
 
 <footer>
-  <div>© 2026 BORREGOS S.L</div>
-  <div>K DE QUESO</div>
+  © 2026 LOS BORREGOS<br>
+  ninguna neurona fue dañada porque no había
 </footer>
 
+<audio id="horn" src="https://www.myinstants.com/media/sounds/airhorn.mp3"></audio>
+
 <script>
+/* CONTADOR */
+let count = 0;
 const counter = document.getElementById("counter");
-let count = Number(localStorage.items) || 0;
-counter.textContent = count;
 
 setInterval(()=>{
   count++;
   counter.textContent = count;
-  localStorage.items = count;
-},3000);
+  if(count % 10 === 0){
+    alert("WARNING: demasiados borregos");
+  }
+},500);
+
+/* CHAOS MODE */
+const chaosBtn = document.getElementById("chaosBtn");
+const horn = document.getElementById("horn");
+let chaos = false;
+
+chaosBtn.onclick = ()=>{
+  chaos = !chaos;
+  document.body.classList.toggle("chaos");
+  chaosBtn.textContent = chaos
+    ? "DESACTIVAR MODO DEMASIADOS EFECTOS"
+    : "ACTIVAR MODO DEMASIADOS EFECTOS";
+
+  if(chaos){
+    horn.play();
+    spawnBorregos();
+  }
+};
+
+/* RATÓN INFERNAL */
+document.addEventListener("mousemove", e=>{
+  if(!document.body.classList.contains("chaos")) return;
+  document.body.style.backgroundPosition =
+    `${e.clientX/3}px ${e.clientY/3}px`;
+});
+
+/* BORREGOS VOLADORES */
+function spawnBorregos(){
+  for(let i=0;i<5;i++){
+    const b=document.createElement("div");
+    b.className="borrego-fly";
+    b.textContent="🐑";
+    b.style.top=Math.random()*100+"%";
+    b.style.animationDuration=3+Math.random()*5+"s";
+    document.body.appendChild(b);
+  }
+}
 </script>
 
 </body>
