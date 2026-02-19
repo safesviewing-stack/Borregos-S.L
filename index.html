@@ -26,8 +26,8 @@ body.borrego{
 body{
   background:var(--bg);
   color:var(--fg);
-  scroll-snap-type:y mandatory;
   overflow-y:scroll;
+  scroll-snap-type:y mandatory;
   transition:.6s ease;
 }
 
@@ -44,18 +44,13 @@ body{
 }
 .overlay.active{opacity:1;pointer-events:auto}
 
-/* MENU BUTTON */
+/* MENU BTN */
 .menu-btn{
-  position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
-  display:flex;
-  flex-direction:column;
+  position:fixed;top:32px;right:40px;
+  width:28px;height:22px;
+  display:flex;flex-direction:column;
   justify-content:space-between;
-  cursor:pointer;
-  z-index:400;
+  cursor:pointer;z-index:500;
 }
 .menu-btn span{height:2px;background:#fff;transition:.4s}
 .menu-btn.open span:nth-child(1){transform:rotate(45deg) translateY(10px)}
@@ -64,24 +59,19 @@ body{
 
 /* MENU */
 .menu{
-  position:fixed;
-  right:0;
-  top:0;
-  width:340px;
-  height:100vh;
+  position:fixed;top:0;right:0;
+  width:340px;height:100vh;
   padding:140px 56px;
   background:rgba(15,15,15,.65);
   backdrop-filter:blur(24px) saturate(160%);
   border-left:1px solid rgba(255,255,255,.1);
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
   gap:32px;
   transform:translateX(100%);
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:300;
 }
 .menu.open{transform:none}
-
 .menu span{
   font-size:13px;
   letter-spacing:.32em;
@@ -90,7 +80,7 @@ body{
   cursor:pointer;
 }
 
-/* TOGGLE */
+/* MODE TOGGLE */
 .toggle{
   position:fixed;
   bottom:32px;
@@ -101,7 +91,7 @@ body{
   background:#111;
   border:1px solid #333;
   cursor:pointer;
-  z-index:500;
+  z-index:600;
 }
 
 /* SECTIONS */
@@ -261,13 +251,67 @@ p{
 
 <div class="toggle" id="toggleMode">MODO BORREGO</div>
 
-<audio id="glassSound" src="sounds/glass.mp3"></audio>
-
 <!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1 id="heroTitle">Borregos<br>S.L</h1>
     <div class="hero-sub" id="heroSub">k de queso</div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Quiénes somos</h1>
+    <p>
+      Borregos S.L es un grupo de diez individuos con una coordinación
+      cuestionable, una capacidad limitada para la toma de decisiones
+      y una dependencia emocional del queso.
+    </p>
+  </div>
+</section>
+
+<!-- BORREGOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Los borregos</h1>
+    <div class="grid">
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Servicios</h1>
+    <div class="grid">
+      <div class="card">Estropear eventos</div>
+      <div class="card">Fiestas sin control</div>
+      <div class="card">Opiniones no solicitadas</div>
+      <div class="card">Presencia incómoda</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <div class="section-block">
+    <h1>Blog</h1>
+    <div class="grid">
+      <div class="blog-item"><img src="blog1.jpg"></div>
+      <div class="blog-item"><video src="video1.mp4" controls></video></div>
+      <div class="blog-item"><img src="blog2.jpg"></div>
+    </div>
   </div>
 </section>
 
@@ -285,6 +329,38 @@ p{
         <div class="counter-label">Quesos acumulados</div>
       </div>
     </div>
+    <div class="grid">
+      <div class="card">#001 Cono de tráfico</div>
+      <div class="card">#002 Silla rota</div>
+      <div class="card">#003 Carrito metálico</div>
+      <div class="card">#004 Altavoz dudoso</div>
+    </div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section class="section">
+  <div class="section-block">
+    <h1>Donaciones</h1>
+    <p>
+      Toda aportación económica será gestionada con una ética flexible
+      y destinada principalmente a queso.
+    </p>
+    <div class="grid">
+      <div class="card">Bizum · +34 600 000 000</div>
+      <div class="card">PayPal · borregos@queso.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+      <a href="#">Instagram oficial</a>
+    </div>
   </div>
 </section>
 
@@ -293,14 +369,11 @@ p{
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 const overlay=document.getElementById("overlay");
-const glass=document.getElementById("glassSound");
 
 menuBtn.onclick=()=>{
   menuBtn.classList.toggle("open");
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
-  glass.currentTime=0;
-  glass.play();
 };
 
 overlay.onclick=()=>{
@@ -311,28 +384,23 @@ overlay.onclick=()=>{
 
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
     overlay.click();
   };
 });
 
-/* COUNTERS with localStorage */
+/* COUNTERS (persistentes) */
 let items=Number(localStorage.items)||0;
 let cheese=Number(localStorage.cheese)||0;
 itemCount.textContent=items;
 cheeseCount.textContent=cheese;
 
 setInterval(()=>{
-  items++;
-  localStorage.items=items;
-  itemCount.textContent=items;
+  items++;localStorage.items=items;itemCount.textContent=items;
 },3000);
 
 setInterval(()=>{
-  cheese++;
-  localStorage.cheese=cheese;
-  cheeseCount.textContent=cheese;
+  cheese++;localStorage.cheese=cheese;cheeseCount.textContent=cheese;
 },2000);
 
 /* MODE BORREGO */
@@ -355,8 +423,9 @@ toggle.onclick=()=>{
   else document.querySelectorAll(".cheese").forEach(c=>c.remove());
 };
 
-/* CHEESE SPAWN */
+/* CHEESE */
 function spawnCheese(){
+  document.querySelectorAll(".cheese").forEach(c=>c.remove());
   for(let i=0;i<8;i++){
     const c=document.createElement("div");
     c.className="cheese";
