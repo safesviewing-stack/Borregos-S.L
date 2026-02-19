@@ -144,6 +144,11 @@ h1{
 }
 .card:hover::before{opacity:1}
 
+/* CARD CONTENT */
+.card-content{
+  padding:32px;
+}
+
 /* BORREGOS */
 .borrego img{
   width:100%;
@@ -165,9 +170,6 @@ h1{
 }
 
 /* ACTION CARD */
-.action{
-  padding:36px;
-}
 .action span{
   display:block;
   font-size:12px;
@@ -180,9 +182,13 @@ h1{
 }
 
 /* INVENTORY */
+.counter-box{
+  max-width:360px;
+  margin-top:64px;
+}
 .counter{
   font-size:64px;
-  margin-top:48px;
+  font-weight:500;
 }
 
 /* FOOTER */
@@ -254,12 +260,20 @@ footer strong{color:var(--fg);}
 
 <section class="section" id="inventory">
   <h1>Inventario</h1>
-  <div class="counter" id="counter">0</div>
+
+  <!-- CONTADOR EN CAJA -->
+  <div class="card counter-box">
+    <div class="card-content">
+      <div class="counter" id="counter">0</div>
+      Objetos registrados
+    </div>
+  </div>
+
   <div class="grid">
-    <div class="card action"><strong>Cono de tráfico</strong></div>
-    <div class="card action"><strong>Silla rota</strong></div>
-    <div class="card action"><strong>Carrito metálico</strong></div>
-    <div class="card action"><strong>Caja misteriosa</strong></div>
+    <div class="card"><div class="card-content">Cono de tráfico</div></div>
+    <div class="card"><div class="card-content">Silla rota</div></div>
+    <div class="card"><div class="card-content">Carrito metálico</div></div>
+    <div class="card"><div class="card-content">Caja misteriosa</div></div>
   </div>
 </section>
 
@@ -267,8 +281,10 @@ footer strong{color:var(--fg);}
   <h1>Donaciones</h1>
   <div class="grid">
     <a class="card action" href="https://paypal.me" target="_blank">
-      <span>APOYAR EL CAOS</span>
-      <strong>Donar con PayPal →</strong>
+      <div class="card-content">
+        <span>APOYAR EL CAOS</span>
+        <strong>Donar con PayPal →</strong>
+      </div>
     </a>
   </div>
 </section>
@@ -277,12 +293,16 @@ footer strong{color:var(--fg);}
   <h1>Contacto</h1>
   <div class="grid">
     <a class="card action" href="mailto:borregos@queso.com">
-      <span>EMAIL</span>
-      <strong>borregos@queso.com</strong>
+      <div class="card-content">
+        <span>EMAIL</span>
+        <strong>borregos@queso.com</strong>
+      </div>
     </a>
     <a class="card action" href="#" target="_blank">
-      <span>REDES</span>
-      <strong>Instagram →</strong>
+      <div class="card-content">
+        <span>REDES</span>
+        <strong>Instagram →</strong>
+      </div>
     </a>
   </div>
 </section>
