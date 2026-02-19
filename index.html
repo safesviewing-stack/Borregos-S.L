@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+html{scroll-behavior:smooth}
+
 :root{
   --bg:#f7f7f5;
   --fg:#111;
@@ -26,6 +28,7 @@ body{
   background:var(--bg);
   color:var(--fg);
   line-height:1.6;
+  transition:.4s;
 }
 
 /* HEADER */
@@ -42,10 +45,7 @@ header{
   z-index:100;
 }
 
-.logo{
-  font-weight:600;
-  letter-spacing:.05em;
-}
+.logo{font-weight:600;letter-spacing:.05em}
 
 nav a{
   margin-left:28px;
@@ -59,6 +59,14 @@ nav a{
 section{
   padding:140px 6vw;
   border-bottom:1px solid var(--border);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s ease;
+}
+
+section.visible{
+  opacity:1;
+  transform:none;
 }
 
 h1{
@@ -67,17 +75,10 @@ h1{
   line-height:.9;
 }
 
-h2{
-  font-size:32px;
-  margin-bottom:32px;
-}
+h2{font-size:32px;margin-bottom:32px}
 
-p{
-  max-width:900px;
-  color:var(--muted);
-}
+p{max-width:900px;color:var(--muted)}
 
-/* HERO */
 .hero span{
   display:block;
   margin-top:24px;
@@ -99,17 +100,29 @@ p{
   border:1px solid var(--border);
   padding:24px;
   transition:.3s;
+  position:relative;
+  overflow:hidden;
 }
 
-.card:hover{
-  transform:translateY(-6px);
+.card:hover{transform:translateY(-6px)}
+
+.card .alt{
+  position:absolute;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+  opacity:0;
+  transition:.3s;
+  font-size:14px;
 }
+
+.card:hover .alt{opacity:1}
 
 /* BORREGOS */
-.borrego{
-  text-align:center;
-}
-
 .borrego img{
   width:100%;
   height:260px;
@@ -124,21 +137,27 @@ p{
   margin-bottom:16px;
 }
 
-/* DONATIONS */
-.donate{
-  text-decoration:none;
-  color:var(--fg);
-  font-weight:500;
+/* BUTTONS */
+#presentBtn,#chaosBtn{
+  position:fixed;
+  bottom:24px;
+  padding:12px 16px;
+  font-size:12px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  cursor:pointer;
 }
 
-/* FOOTER */
-footer{
-  padding:80px 6vw;
-  text-align:center;
-  color:var(--muted);
+#presentBtn{right:180px}
+#chaosBtn{right:24px}
+
+/* PRESENTABLE MODE */
+body.presentable .alt,
+body.presentable .humor{
+  display:none;
 }
 
-/* ===== MODO DEMASIADOS EFECTOS ===== */
+/* CHAOS MODE */
 body.chaos{
   animation:shake .15s infinite;
 }
@@ -149,22 +168,15 @@ body.chaos{
 }
 
 body.chaos *{
-  animation:spin 3s infinite linear;
+  animation:spin 4s infinite linear;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-#chaosBtn{
-  position:fixed;
-  bottom:24px;
-  right:24px;
-  padding:12px 16px;
-  font-size:12px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  cursor:pointer;
+footer{
+  padding:80px 6vw;
+  text-align:center;
+  color:var(--muted);
 }
 </style>
 </head>
@@ -186,16 +198,14 @@ body.chaos *{
 
 <section id="inicio" class="hero">
   <h1>Los<br>Borregos</h1>
-  <span>Grupo organizado sin objetivo claro</span>
+  <span>Organización sin objetivo definido</span>
 </section>
 
 <section id="about">
   <h2>Sobre nosotros</h2>
-  <p>
-    Los Borregos nacieron de una decisión colectiva cuestionable y se mantienen
-    gracias a una sorprendente falta de criterio. Somos un grupo unido por la inercia,
-    el tiempo libre mal gestionado y una tendencia a seguir adelante aunque nadie
-    sepa muy bien por qué. No prometemos resultados, pero sí constancia.
+  <p class="humor">
+    Somos un grupo unido por la inercia, la confianza excesiva y la firme creencia
+    de que las cosas acabarán saliendo bien aunque no haya pruebas de ello.
   </p>
 </section>
 
@@ -205,17 +215,20 @@ body.chaos *{
     <div class="card borrego">
       <img src="jose.jpg">
       <strong>Jose</strong>
-      <p>Confía demasiado en el grupo</p>
+      <p>Decisiones valientes</p>
+      <div class="alt">No suele saber cuáles</div>
     </div>
     <div class="card borrego">
       <img src="luis.jpg">
       <strong>Luis</strong>
-      <p>Rompe cosas con intención noble</p>
+      <p>Capacidad técnica</p>
+      <div class="alt">Rompe lo que arregla</div>
     </div>
     <div class="card borrego">
       <img src="pablo.jpg">
       <strong>Pablo</strong>
-      <p>No recuerda haberse apuntado</p>
+      <p>Presencia intermitente</p>
+      <div class="alt">No recuerda haberse apuntado</div>
     </div>
   </div>
 </section>
@@ -223,26 +236,26 @@ body.chaos *{
 <section id="blog">
   <h2>Blog</h2>
   <div class="grid">
-    <div class="card">Reflexiones innecesarias</div>
-    <div class="card">Decisiones mal tomadas</div>
-    <div class="card">Fotos borrosas sin contexto</div>
+    <div class="card">Reflexiones profundas<div class="alt">no tanto</div></div>
+    <div class="card">Crónicas<div class="alt">sin contexto</div></div>
+    <div class="card">Documentación<div class="alt">perdida</div></div>
   </div>
 </section>
 
 <section id="inventory">
   <h2>Inventario</h2>
   <div class="counter" id="counter">0</div>
-  <p>
-    Objetos recogidos, heredados o encontrados cuyo origen
-    nadie recuerda con claridad.
+  <p class="humor">
+    Objetos acumulados con la esperanza de que algún día
+    tengan sentido.
   </p>
 </section>
 
 <section id="donations">
   <h2>Donaciones</h2>
-  <a class="donate" href="#">
-    Apoyar decisiones futuras cuestionables →
-  </a>
+  <p class="humor">
+    Apoya futuras decisiones cuestionables →
+  </p>
 </section>
 
 <section id="contact">
@@ -251,24 +264,32 @@ body.chaos *{
 </section>
 
 <footer>
-  © 2026 Los Borregos · seguimos adelante sin saber por qué
+  © 2026 Los Borregos · seguimos adelante
 </footer>
 
+<button id="presentBtn">Modo presentable</button>
 <button id="chaosBtn">Modo demasiados efectos</button>
 
 <script>
-/* CONTADOR */
-const counter=document.getElementById("counter");
-let count=Number(localStorage.items)||0;
-counter.textContent=count;
+/* SCROLL ANIMATIONS */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
+},{threshold:.25});
+document.querySelectorAll("section").forEach(s=>obs.observe(s));
 
+/* INVENTARIO */
+let count=Number(localStorage.items)||0;
+const counter=document.getElementById("counter");
+counter.textContent=count;
 setInterval(()=>{
-  count++;
-  counter.textContent=count;
-  localStorage.items=count;
+  count++;counter.textContent=count;localStorage.items=count;
 },3000);
 
-/* CHAOS MODE */
+/* MODES */
+document.getElementById("presentBtn").onclick=()=>{
+  document.body.classList.toggle("presentable");
+};
+
 document.getElementById("chaosBtn").onclick=()=>{
   document.body.classList.toggle("chaos");
 };
