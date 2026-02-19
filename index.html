@@ -8,70 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
+/* ============ VARIABLES ============ */
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
   --muted:#777;
-  --glass:rgba(255,255,255,.06);
   --card:rgba(255,255,255,.06);
 }
 
 body.light{
-  --bg:#f5f5f5;
+  --bg:#f4f4f4;
   --fg:#0a0a0a;
   --muted:#555;
-  --glass:rgba(0,0,0,.05);
-  --card:rgba(0,0,0,.04);
+  --card:rgba(0,0,0,.05);
 }
 
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
+/* ============ RESET ============ */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ================= BODY ================= */
+/* ============ BODY ============ */
 body{
   background:var(--bg);
   color:var(--fg);
+  transition:.3s;
   overflow-x:hidden;
-  transition:background .3s,color .3s;
 }
 
-/* ================= HEADER ================= */
+/* ============ HEADER ============ */
 .header{
   position:fixed;
   top:24px;
   right:32px;
   display:flex;
-  align-items:center;
-  gap:14px;
-  z-index:600;
+  gap:12px;
+  z-index:1000;
 }
-
 .header button{
   width:42px;
   height:42px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.15);
-  background:var(--glass);
+  background:var(--card);
   color:var(--fg);
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
   backdrop-filter:blur(10px);
-  transition:.3s;
-}
-.header button:hover{
-  transform:translateY(-2px);
 }
 
-/* ================= MENU ================= */
+/* ============ MENU ============ */
 .menu{
   position:fixed;
   top:0;
@@ -80,22 +63,21 @@ body{
   height:100vh;
   padding:140px 48px;
   background:var(--bg);
-  border-left:1px solid rgba(255,255,255,.1);
   transform:translateX(100%);
   transition:.5s ease;
-  z-index:500;
+  z-index:900;
 }
 .menu.open{transform:none;}
 .menu span{
   display:block;
   margin-bottom:26px;
-  font-size:13px;
   letter-spacing:.3em;
+  font-size:13px;
   cursor:pointer;
   color:var(--muted);
 }
 
-/* ================= SECTIONS ================= */
+/* ============ SECTIONS ============ */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
@@ -108,32 +90,29 @@ body{
   transform:none;
 }
 
-/* ================= TITLES ================= */
+/* ============ TITLES ============ */
 h1{
-  margin-left:-4px;
-  font-size:clamp(76px,6vw,130px);
+  font-size:clamp(72px,6vw,130px);
   font-weight:500;
 }
 .hero h1{
   font-size:clamp(130px,11vw,220px);
 }
 .hero-sub{
-  margin-top:28px;
-  font-size:14px;
+  margin-top:24px;
   letter-spacing:.28em;
   color:var(--muted);
 }
 
-/* ================= TEXT ================= */
+/* ============ TEXT ============ */
 p{
   margin-top:24px;
   max-width:720px;
-  font-size:15px;
   line-height:1.7;
   color:var(--muted);
 }
 
-/* ================= GRID ================= */
+/* ============ GRID ============ */
 .grid{
   margin-top:64px;
   display:grid;
@@ -141,19 +120,42 @@ p{
   gap:36px;
 }
 
-/* ================= CARD ================= */
+/* ============ CARD ============ */
 .card{
   padding:32px;
   border-radius:22px;
   background:var(--card);
-  border:1px solid rgba(255,255,255,.1);
   transition:.3s ease;
 }
-.card:hover{
-  transform:translateY(-6px);
+.card:hover{transform:translateY(-6px);}
+
+/* ============ BORREGOS ============ */
+.borrego img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  background:#111;
+  border-radius:18px;
+  margin-bottom:12px;
 }
 
-/* ================= CONTACT ================= */
+/* ============ BLOG ============ */
+.blog-item img,
+.blog-item video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  background:#111;
+  border-radius:18px;
+}
+
+/* ============ INVENTORY ============ */
+.counter{
+  margin-top:48px;
+  font-size:64px;
+}
+
+/* ============ CONTACT ============ */
 .contact{
   margin-top:40px;
   display:grid;
@@ -164,15 +166,8 @@ p{
   padding:32px;
   border-radius:22px;
   background:var(--card);
-  border:1px solid rgba(255,255,255,.1);
   color:var(--fg);
   text-decoration:none;
-}
-
-/* ================= COUNTER ================= */
-.counter{
-  margin-top:48px;
-  font-size:64px;
 }
 </style>
 </head>
@@ -190,39 +185,85 @@ p{
 <nav class="menu" id="menu">
   <span data-i="0">Inicio</span>
   <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Servicios</span>
-  <span data-i="3">Inventario</span>
-  <span data-i="4">Contacto</span>
+  <span data-i="2">Borregos</span>
+  <span data-i="3">Servicios</span>
+  <span data-i="4">Blog</span>
+  <span data-i="5">Inventario</span>
+  <span data-i="6">Donaciones</span>
+  <span data-i="7">Contacto</span>
 </nav>
 
+<!-- HERO -->
 <section class="section hero">
-  <h1 id="title">Borregos<br>S.L</h1>
-  <div class="hero-sub" id="slogan">k de queso</div>
+  <h1>Borregos<br>S.L</h1>
+  <div class="hero-sub">k de queso</div>
 </section>
 
 <section class="section">
-  <h1 id="aboutTitle">Quiénes somos</h1>
-  <p id="aboutText">
-    Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
+  <h1>Quiénes somos</h1>
+  <p>
+    Borregos S.L es un grupo de amigos que decidió tomarse poco en serio,
+    pero hacerlo todo junto. No somos una empresa, pero operamos como tal
+    cuando conviene.
   </p>
 </section>
 
 <section class="section">
-  <h1 id="servicesTitle">Servicios</h1>
+  <h1>Los borregos</h1>
   <div class="grid">
-    <div class="card" id="s1">Estropear eventos</div>
-    <div class="card" id="s2">Fiestas improvisadas</div>
-    <div class="card" id="s3">Opiniones no solicitadas</div>
+    ${Array.from({length:10},(_,i)=>`
+      <div class="borrego">
+        <img src="b${i+1}.jpg">
+        <strong>Borrego ${i+1}</strong>
+      </div>`).join("")}
   </div>
 </section>
 
 <section class="section">
-  <h1 id="inventoryTitle">Inventario</h1>
-  <div class="counter" id="counter">0</div>
+  <h1>Servicios</h1>
+  <div class="grid">
+    <div class="card">Estropear eventos con precisión</div>
+    <div class="card">Fiestas improvisadas</div>
+    <div class="card">Opiniones no solicitadas</div>
+    <div class="card">Presencia incómoda garantizada</div>
+  </div>
 </section>
 
 <section class="section">
-  <h1 id="contactTitle">Contacto</h1>
+  <h1>Blog</h1>
+  <p>Registro visual de decisiones cuestionables.</p>
+  <div class="grid">
+    <div class="blog-item"><img src="blog1.jpg"></div>
+    <div class="blog-item"><video src="video1.mp4" controls></video></div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Inventario</h1>
+  <p>Objetos encontrados, comprados o heredados sin explicación.</p>
+  <div class="counter" id="counter">0</div>
+  <div class="grid">
+    <div class="card">Cono de tráfico</div>
+    <div class="card">Silla rota</div>
+    <div class="card">Carrito metálico</div>
+    <div class="card">Altavoz dudoso</div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Donaciones</h1>
+  <p>
+    Toda contribución será utilizada con responsabilidad variable.
+  </p>
+  <div class="grid">
+    <div class="card">Bizum · +34 600 000 000</div>
+    <div class="card">PayPal · borregos@queso.com</div>
+  </div>
+</section>
+
+<section class="section">
+  <h1>Contacto</h1>
+  <p>Para colaborar, preguntar o simplemente observar.</p>
   <div class="contact">
     <a href="mailto:borregos@queso.com">borregos@queso.com</a>
     <a href="#">Instagram</a>
@@ -235,6 +276,14 @@ const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 menuBtn.onclick=()=>menu.classList.toggle("open");
 
+document.querySelectorAll(".menu span").forEach((b,i)=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".section")[i]
+      .scrollIntoView({behavior:"smooth"});
+    menu.classList.remove("open");
+  };
+});
+
 /* THEME */
 const themeBtn=document.getElementById("themeBtn");
 if(localStorage.theme==="light") document.body.classList.add("light");
@@ -243,29 +292,11 @@ themeBtn.onclick=()=>{
   localStorage.theme=document.body.classList.contains("light")?"light":"dark";
 };
 
-/* LANGUAGE */
+/* LANGUAGE (básico, ampliable) */
 const langBtn=document.getElementById("langBtn");
-let lang=localStorage.lang||"es";
-const texts={
-  es:{
-    about:"Borregos S.L es un grupo de amigos que decidió formalizar lo informal.",
-    services:["Estropear eventos","Fiestas improvisadas","Opiniones no solicitadas"]
-  },
-  en:{
-    about:"Borregos S.L is a group of friends who decided to formalize the informal.",
-    services:["Ruining events","Improvised parties","Unrequested opinions"]
-  }
+langBtn.onclick=()=>{
+  langBtn.textContent=langBtn.textContent==="ES"?"EN":"ES";
 };
-function setLang(l){
-  document.getElementById("aboutText").textContent=texts[l].about;
-  document.getElementById("s1").textContent=texts[l].services[0];
-  document.getElementById("s2").textContent=texts[l].services[1];
-  document.getElementById("s3").textContent=texts[l].services[2];
-  langBtn.textContent=l.toUpperCase();
-  localStorage.lang=l;
-}
-setLang(lang);
-langBtn.onclick=()=>setLang(lang=lang==="es"?"en":"es");
 
 /* COUNTER */
 let count=Number(localStorage.items)||0;
@@ -280,13 +311,10 @@ setInterval(()=>{
 /* ANIMATIONS */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("visible");
-    }else{
-      e.target.classList.remove("visible");
-    }
+    e.target.classList.toggle("visible",e.isIntersecting);
   });
 },{threshold:.25});
+
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 </script>
 
