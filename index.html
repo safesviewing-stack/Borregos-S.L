@@ -31,76 +31,47 @@ body{
   transition:.6s ease;
 }
 
-/* OVERLAY GLASS */
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.4);
   opacity:0;
   pointer-events:none;
-  transition:.5s ease;
+  transition:.5s;
   z-index:250;
 }
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
+.overlay.active{opacity:1;pointer-events:auto}
 
-/* MENU BUTTON */
+/* MENU BTN */
 .menu-btn{
-  position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
-  display:flex;
-  flex-direction:column;
+  position:fixed;top:32px;right:40px;
+  width:28px;height:22px;
+  display:flex;flex-direction:column;
   justify-content:space-between;
-  cursor:pointer;
-  z-index:500;
+  cursor:pointer;z-index:500;
 }
+.menu-btn span{height:2px;background:#fff;transition:.4s}
+.menu-btn.open span:nth-child(1){transform:rotate(45deg) translateY(10px)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:rotate(-45deg) translateY(-10px)}
 
-.menu-btn span{
-  height:2px;
-  width:100%;
-  background:#fff;
-  transition:.4s ease;
-}
-
-.menu-btn.open span:nth-child(1){
-  transform:rotate(45deg) translateY(10px);
-}
-.menu-btn.open span:nth-child(2){
-  opacity:0;
-}
-.menu-btn.open span:nth-child(3){
-  transform:rotate(-45deg) translateY(-10px);
-}
-
-/* MENU PANEL */
+/* MENU */
 .menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:340px;
-  height:100vh;
+  position:fixed;top:0;right:0;
+  width:340px;height:100vh;
   padding:140px 56px;
-  background:rgba(15,15,15,.6);
+  background:rgba(15,15,15,.65);
   backdrop-filter:blur(22px) saturate(140%);
   border-left:1px solid rgba(255,255,255,.08);
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
   gap:32px;
   transform:translateX(100%);
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:300;
 }
-
-.menu.open{
-  transform:none;
-}
-
+.menu.open{transform:none}
 .menu span{
   font-size:13px;
   letter-spacing:.32em;
@@ -109,18 +80,25 @@ body{
   cursor:pointer;
 }
 
+/* TOGGLE */
+.toggle{
+  position:fixed;bottom:32px;right:40px;
+  padding:14px 20px;
+  font-size:11px;
+  letter-spacing:.25em;
+  background:#111;
+  border:1px solid #333;
+  cursor:pointer;
+  z-index:600;
+}
+
 /* SECTIONS */
 .section{
   min-height:100vh;
   scroll-snap-align:start;
   padding:180px 10vw 160px 14vw;
 }
-
-.section-block{
-  position:sticky;
-  top:240px;
-  max-width:1200px;
-}
+.section-block{position:sticky;top:240px;max-width:1200px}
 
 /* TITLES */
 h1{
@@ -130,30 +108,13 @@ h1{
 }
 
 /* HERO */
-.hero{
-  display:flex;
-  align-items:center;
-}
-
-.hero h1{
-  font-size:clamp(110px,9vw,190px);
-}
-
+.hero{display:flex;align-items:center}
+.hero h1{font-size:clamp(110px,9vw,190px)}
 .hero-sub{
   margin-top:28px;
   font-size:14px;
   letter-spacing:.28em;
   color:var(--muted);
-}
-
-/* LOGO FLOAT */
-.logo{
-  animation:float 6s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-14px)}
 }
 
 /* TEXT */
@@ -176,30 +137,21 @@ p{
 
 /* BORREGOS */
 .borrego{
-  opacity:0;
-  transform:translateY(24px);
+  opacity:0;transform:translateY(24px);
   transition:.8s ease;
 }
-.borrego.is-visible{
-  opacity:1;
-  transform:none;
-}
-
+.borrego.is-visible{opacity:1;transform:none}
 .borrego img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  background:#111;
+  width:100%;height:300px;
+  object-fit:cover;background:#111;
   margin-bottom:14px;
 }
 
 /* BLOG */
 .blog-item img,
 .blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  background:#111;
+  width:100%;height:260px;
+  object-fit:cover;background:#111;
   margin-bottom:14px;
 }
 
@@ -213,12 +165,11 @@ p{
 
 /* COUNTERS */
 .counters{
+  margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
-  margin-top:48px;
 }
-
 .counter-card{
   padding:36px;
   border-radius:22px;
@@ -229,13 +180,7 @@ p{
   );
   border:1px solid rgba(255,255,255,.12);
 }
-
-.counter-value{
-  font-size:64px;
-  font-weight:500;
-  line-height:1;
-}
-
+.counter-value{font-size:64px;font-weight:500}
 .counter-label{
   margin-top:12px;
   font-size:12px;
@@ -251,7 +196,6 @@ p{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:28px;
 }
-
 .contact a{
   padding:32px;
   border-radius:22px;
@@ -260,20 +204,6 @@ p{
   color:#fff;
   text-decoration:none;
 }
-
-/* MODE TOGGLE */
-.toggle{
-  position:fixed;
-  bottom:32px;
-  right:40px;
-  padding:14px 20px;
-  font-size:11px;
-  letter-spacing:.25em;
-  background:#111;
-  border:1px solid #333;
-  cursor:pointer;
-  z-index:600;
-}
 </style>
 </head>
 
@@ -281,9 +211,7 @@ p{
 
 <div class="overlay" id="overlay"></div>
 
-<div class="menu-btn" id="menuBtn">
-  <span></span><span></span><span></span>
-</div>
+<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
 
 <nav class="menu" id="menu">
   <span data-i="0">Inicio</span>
@@ -301,8 +229,61 @@ p{
 <!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <h1 class="logo">Borregos<br>S.L</h1>
+    <h1>Borregos<br>S.L</h1>
     <div class="hero-sub">k de queso</div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Quiénes somos</h1>
+    <p>
+      Borregos S.L es un grupo de diez individuos con criterio dudoso,
+      coordinación irregular y una clara obsesión por el queso.
+    </p>
+  </div>
+</section>
+
+<!-- BORREGOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Los borregos</h1>
+    <div class="grid">
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Servicios</h1>
+    <div class="grid">
+      <div class="card">Estropear eventos</div>
+      <div class="card">Fiestas sin control</div>
+      <div class="card">Opiniones no pedidas</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <div class="section-block">
+    <h1>Blog</h1>
+    <div class="grid">
+      <div class="blog-item"><img src="blog1.jpg"></div>
+      <div class="blog-item"><video src="video1.mp4" controls></video></div>
+    </div>
   </div>
 </section>
 
@@ -319,6 +300,34 @@ p{
         <div class="counter-value" id="cheeseCount">0</div>
         <div class="counter-label">Quesos acumulados</div>
       </div>
+    </div>
+    <div class="grid">
+      <div class="card">#001 Cono de tráfico</div>
+      <div class="card">#002 Silla rota</div>
+      <div class="card">#003 Carrito metálico</div>
+    </div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section class="section">
+  <div class="section-block">
+    <h1>Donaciones</h1>
+    <p>Tu aportación nos permite seguir siendo irresponsables.</p>
+    <div class="grid">
+      <div class="card">Bizum · +34 600 000 000</div>
+      <div class="card">PayPal · borregos@queso.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <div class="contact">
+      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+      <a href="#">Instagram oficial</a>
     </div>
   </div>
 </section>
@@ -343,20 +352,25 @@ overlay.onclick=()=>{
 
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
     menuBtn.classList.remove("open");
     menu.classList.remove("open");
     overlay.classList.remove("active");
   };
 });
 
+/* OBSERVER */
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting))
+},{threshold:.2});
+document.querySelectorAll(".borrego").forEach(el=>observer.observe(el));
+
 /* COUNTERS */
 let items=0,cheese=0;
-setInterval(()=>{items++;document.getElementById("itemCount").textContent=items},2800);
-setInterval(()=>{cheese++;document.getElementById("cheeseCount").textContent=cheese},1800);
+setInterval(()=>{items++;itemCount.textContent=items},2800);
+setInterval(()=>{cheese++;cheeseCount.textContent=cheese},1800);
 
-/* MODE */
+/* MODE BORREGO */
 document.getElementById("toggleMode").onclick=()=>{
   document.body.classList.toggle("borrego");
 };
