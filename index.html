@@ -9,194 +9,72 @@
 
 <style>
 html{scroll-behavior:smooth}
-
 :root{
-  --bg:#f7f7f5;
-  --fg:#111;
-  --muted:#666;
-  --border:#111;
+  --bg:#f7f7f5; --fg:#111; --muted:#666; --border:#111;
 }
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,sans-serif;
-}
-
-body{
-  background:var(--bg);
-  color:var(--fg);
-  line-height:1.6;
-  transition:.4s ease;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:var(--bg);color:var(--fg);line-height:1.6;transition:.4s}
 
 /* HEADER */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:20px 6vw;
-  background:var(--bg);
+  position:fixed;top:0;width:100%;
+  padding:20px 6vw;background:var(--bg);
   border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:100;
+  display:flex;justify-content:space-between;align-items:center;z-index:100
 }
-
-.logo{
-  font-weight:600;
-  letter-spacing:.05em;
-}
-
-nav a{
-  margin-left:24px;
-  text-decoration:none;
-  font-size:12px;
-  letter-spacing:.25em;
-  color:var(--fg);
-}
+.logo{font-weight:600;letter-spacing:.05em;cursor:pointer}
+nav a{margin-left:24px;text-decoration:none;font-size:12px;letter-spacing:.25em;color:var(--fg)}
 
 /* SECTIONS */
 section{
-  padding:140px 6vw;
-  border-bottom:1px solid var(--border);
-  opacity:0;
-  transform:translateY(40px);
-  transition:.8s ease;
+  padding:140px 6vw;border-bottom:1px solid var(--border);
+  opacity:0;transform:translateY(40px);transition:.8s ease
 }
+section.visible{opacity:1;transform:none}
+h1{font-size:clamp(80px,12vw,180px);font-weight:500;line-height:.9}
+h2{font-size:32px;margin-bottom:32px}
+p{max-width:900px;color:var(--muted)}
+.hero span{display:block;margin-top:24px;font-size:13px;letter-spacing:.4em;color:var(--muted)}
 
-section.visible{
-  opacity:1;
-  transform:none;
-}
-
-h1{
-  font-size:clamp(80px,12vw,180px);
-  font-weight:500;
-  line-height:.9;
-}
-
-h2{
-  font-size:32px;
-  margin-bottom:32px;
-}
-
-p{
-  max-width:900px;
-  color:var(--muted);
-}
-
-/* HERO */
-.hero span{
-  display:block;
-  margin-top:24px;
-  font-size:13px;
-  letter-spacing:.4em;
-  color:var(--muted);
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-  margin-top:48px;
-}
-
-/* CARD */
+/* GRID / CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin-top:48px}
 .card{
-  border:1px solid var(--border);
-  padding:24px;
-  position:relative;
-  transition:.3s;
-  overflow:hidden;
+  border:1px solid var(--border);padding:24px;position:relative;overflow:hidden;transition:.3s
 }
-
-.card:hover{
-  transform:translateY(-6px);
-}
-
-/* HOVER HUMOR */
+.card:hover{transform:translateY(-6px)}
 .card .alt{
-  position:absolute;
-  inset:0;
-  background:var(--bg);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-  opacity:0;
-  transition:.3s;
-  font-size:14px;
+  position:absolute;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:24px;opacity:0;transition:.3s;font-size:14px
 }
-
-.card:hover .alt{
-  opacity:1;
-}
+.card:hover .alt{opacity:1}
 
 /* BORREGOS */
-.borrego img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  margin-bottom:16px;
-}
+.borrego img{width:100%;height:260px;object-fit:cover;margin-bottom:16px}
 
 /* INVENTARIO */
-.counter{
-  font-size:96px;
-  font-weight:500;
-  margin-bottom:16px;
-}
+.counter{font-size:96px;font-weight:500;margin-bottom:16px}
 
 /* FOOTER */
-footer{
-  padding:80px 6vw;
-  text-align:center;
-  color:var(--muted);
-}
+footer{padding:80px 6vw;text-align:center;color:var(--muted)}
 
 /* CONTROLS */
 .control{
-  position:fixed;
-  bottom:24px;
-  padding:10px 14px;
-  font-size:11px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  cursor:pointer;
+  position:fixed;bottom:24px;padding:10px 14px;font-size:11px;
+  border:1px solid var(--border);background:var(--bg);cursor:pointer
 }
-
 #presentBtn{right:260px}
 #borregoBtn{right:140px}
 #chaosBtn{right:24px}
 
 /* MODOS */
-body.presentable .humor,
-body.presentable .alt{
-  display:none;
-}
+body.presentable .humor, body.presentable .alt{display:none}
 
-/* CHAOS MODE */
-body.chaos{
-  animation:shake .15s infinite;
-}
-
-@keyframes shake{
-  25%{transform:translate(2px,-2px)}
-  50%{transform:translate(-2px,2px)}
-}
-
-body.chaos *{
-  animation:spin 4s infinite linear;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
+/* CHAOS MODE (opcional) */
+body.chaos{animation:shake .15s infinite}
+@keyframes shake{25%{transform:translate(2px,-2px)}50%{transform:translate(-2px,2px)}}
+body.chaos *{animation:spin 4s infinite linear}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -229,9 +107,8 @@ body.chaos *{
 <section id="about">
   <h2>Sobre nosotros</h2>
   <p class="humor">
-    Los Borregos somos un grupo unido por la inercia, la confianza excesiva
-    y una sorprendente capacidad para seguir adelante sin un objetivo claro.
-    No destacamos por la planificación, pero sí por la constancia.
+    Grupo unido por la inercia, la confianza excesiva y la capacidad
+    de seguir adelante sin un objetivo claro. No planificamos, pero persistimos.
   </p>
 </section>
 
@@ -240,20 +117,17 @@ body.chaos *{
   <div class="grid">
     <div class="card borrego">
       <img src="jose.jpg">
-      <strong>Jose</strong>
-      <p>Decisiones rápidas</p>
+      <strong>Jose</strong><p>Decisiones rápidas</p>
       <div class="alt">Sin información suficiente</div>
     </div>
     <div class="card borrego">
       <img src="luis.jpg">
-      <strong>Luis</strong>
-      <p>Capacidad técnica</p>
+      <strong>Luis</strong><p>Capacidad técnica</p>
       <div class="alt">Aplicada al azar</div>
     </div>
     <div class="card borrego">
       <img src="pablo.jpg">
-      <strong>Pablo</strong>
-      <p>Participación variable</p>
+      <strong>Pablo</strong><p>Participación variable</p>
       <div class="alt">No recuerda por qué está aquí</div>
     </div>
   </div>
@@ -271,17 +145,12 @@ body.chaos *{
 <section id="inventory">
   <h2>Inventario</h2>
   <div class="counter" id="counter">0</div>
-  <p class="humor">
-    Objetos acumulados con la esperanza
-    de que algún día tengan sentido.
-  </p>
+  <p class="humor">Objetos acumulados con la esperanza de que algún día tengan sentido.</p>
 </section>
 
 <section id="donations">
   <h2>Donaciones</h2>
-  <p class="humor">
-    Apoya futuras decisiones cuestionables →
-  </p>
+  <p class="humor">Apoya futuras decisiones cuestionables →</p>
 </section>
 
 <section id="contact">
@@ -289,52 +158,37 @@ body.chaos *{
   <p>borregos@ningunsitio.com</p>
 </section>
 
-<footer>
-  © 2026 Los Borregos · seguimos adelante
-</footer>
+<footer>© 2026 Los Borregos · seguimos adelante</footer>
 
 <button id="presentBtn" class="control">Modo presentable</button>
 <button id="borregoBtn" class="control">Modo borrego</button>
 <button id="chaosBtn" class="control">Demasiados efectos</button>
 
 <script>
-/* SCROLL REVEAL */
+/* Scroll reveal */
 const obs=new IntersectionObserver(e=>{
   e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
 },{threshold:.2});
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
 
-/* INVENTARIO */
+/* Inventario persistente */
 let count=Number(localStorage.items)||0;
 const counter=document.getElementById("counter");
 counter.textContent=count;
-setInterval(()=>{
-  count++;
-  counter.textContent=count;
-  localStorage.items=count;
-},3000);
+setInterval(()=>{count++;counter.textContent=count;localStorage.items=count},3000);
 
-/* MODES */
+/* Modos */
 presentBtn.onclick=()=>{
   document.body.classList.add("presentable");
   document.body.classList.remove("chaos");
 };
+borregoBtn.onclick=()=>document.body.classList.remove("presentable");
+chaosBtn.onclick=()=>document.body.classList.toggle("chaos");
 
-borregoBtn.onclick=()=>{
-  document.body.classList.remove("presentable");
-};
-
-chaosBtn.onclick=()=>{
-  document.body.classList.toggle("chaos");
-};
-
-/* EASTER EGG */
+/* Easter egg */
 let clicks=0;
 document.querySelector(".logo").onclick=()=>{
-  clicks++;
-  if(clicks===5){
-    alert("🐑 Has desbloqueado el modo borrego interior");
-  }
+  if(++clicks===5) alert("🐑 Modo borrego interior desbloqueado");
 };
 </script>
 
