@@ -16,13 +16,10 @@
   --glass-border:rgba(255,255,255,.12);
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* BODY */
 body{background:var(--bg);color:var(--fg);overflow-x:hidden}
 
-/* OVERLAY */
 .overlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,.6);
@@ -31,7 +28,6 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
 }
 .overlay.active{opacity:1;pointer-events:auto}
 
-/* HEADER */
 .header{
   position:fixed; top:24px; right:32px;
   display:flex; gap:12px; z-index:1001;
@@ -44,7 +40,6 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
   color:var(--fg); cursor:pointer;
 }
 
-/* MENU */
 .menu{
   position:fixed; top:0; right:0;
   width:300px; height:100vh;
@@ -61,7 +56,6 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
   color:var(--fg); text-decoration:none;
 }
 
-/* SECTIONS */
 .section{
   min-height:100vh; padding:180px 12vw;
   opacity:0; transform:translateY(40px);
@@ -69,7 +63,6 @@ body{background:var(--bg);color:var(--fg);overflow-x:hidden}
 }
 .section.visible{opacity:1;transform:none}
 
-/* TITLES */
 h1{font-size:clamp(72px,6vw,130px);font-weight:500}
 .hero h1{font-size:clamp(120px,10vw,200px)}
 .hero-sub{
@@ -77,14 +70,12 @@ h1{font-size:clamp(72px,6vw,130px);font-weight:500}
   letter-spacing:.4em; color:var(--muted);
 }
 
-/* TEXT */
 .about-text{
   max-width:900px; margin-top:32px;
   line-height:1.9; color:var(--muted);
   text-align:justify; text-justify:inter-word;
 }
 
-/* GRID */
 .grid{
   margin-top:64px;
   display:grid;
@@ -92,7 +83,6 @@ h1{font-size:clamp(72px,6vw,130px);font-weight:500}
   gap:36px;
 }
 
-/* GLASS CARD */
 .card{
   border-radius:22px;
   background:var(--glass-bg);
@@ -104,23 +94,19 @@ h1{font-size:clamp(72px,6vw,130px);font-weight:500}
 .card:hover{transform:translateY(-6px)}
 .card-content{padding:32px}
 
-/* BORREGOS */
 .borrego img{width:100%;height:280px;object-fit:cover}
 .borrego .info{padding:20px;text-align:center}
 
-/* BLOG */
 .blog img,.blog video{
   width:100%;height:280px;object-fit:cover;display:block
 }
 
-/* INVENTARIO */
 .inventory-summary{max-width:520px;margin-top:48px}
 .counter{font-size:64px;font-weight:500}
 .inventory-text{margin-top:16px;line-height:1.6;color:var(--muted)}
 .inventory-item strong{display:block;font-size:18px;margin-bottom:6px}
 .inventory-item span{font-size:13px;color:var(--muted)}
 
-/* FOOTER */
 footer{
   padding:80px 12vw;
   border-top:1px solid var(--glass-border);
@@ -156,17 +142,40 @@ footer strong{color:var(--fg)}
 <section class="section" id="about">
   <h1>Sobre nosotros</h1>
   <p class="about-text">
-    Borregos S.L nació en Valencia durante las Fallas del año pasado, cuando un grupo de personas se juntó sin un plan claro y decidió, contra toda lógica, seguir haciéndolo. Desde entonces se fueron uniendo más borregos a la secta, creciendo el grupo y empeorando progresivamente la toma de decisiones; somos unos cuantos, cada uno con una característica distinta que no puede detallarse sin consecuencias legales, y nos llamamos Borregos porque actuamos como tales: seguimos al grupo, avanzamos sin pensar demasiado y aprendemos siempre a base de errores, ovejas jóvenes con menos de un año de experiencia mental que han hecho muchas locuras y que, pase lo que pase, siempre acaban yendo juntas.
+    Borregos S.L nació en Valencia durante las Fallas del año pasado, cuando un grupo
+    de personas se juntó sin un plan claro y decidió, contra toda lógica, seguir haciéndolo.
+    Desde entonces se fueron uniendo más borregos a la secta, creciendo el grupo y
+    empeorando progresivamente la toma de decisiones; somos unos cuantos, cada uno
+    con una característica distinta que no puede detallarse sin consecuencias legales,
+    y nos llamamos Borregos porque actuamos como tales: seguimos al grupo, avanzamos
+    sin pensar demasiado y aprendemos siempre a base de errores, ovejas jóvenes con
+    menos de un año de experiencia mental que han hecho muchas locuras y que, pase
+    lo que pase, siempre acaban yendo juntas.
   </p>
 </section>
 
 <section class="section" id="borregos">
   <h1>Los borregos</h1>
   <div class="grid">
-    <a class="card borrego" href="borrego-01.html"><img src="b1.jpg"><div class="info">Borrego 01</div></a>
-    <a class="card borrego" href="borrego-02.html"><img src="b2.jpg"><div class="info">Borrego 02</div></a>
-    <a class="card borrego" href="borrego-03.html"><img src="b3.jpg"><div class="info">Borrego 03</div></a>
-    <a class="card borrego" href="borrego-04.html"><img src="b4.jpg"><div class="info">Borrego 04</div></a>
+    <a class="card borrego" href="borrego-01.html">
+      <img src="jose.jpg">
+      <div class="info">Borrego 01</div>
+    </a>
+
+    <a class="card borrego" href="borrego-02.html">
+      <img src="luis.jpg">
+      <div class="info">Borrego 02</div>
+    </a>
+
+    <a class="card borrego" href="borrego-03.html">
+      <img src="pablo.jpg">
+      <div class="info">Borrego 03</div>
+    </a>
+
+    <a class="card borrego" href="borrego-04.html">
+      <img src="b4.jpg">
+      <div class="info">Borrego 04</div>
+    </a>
   </div>
 </section>
 
@@ -214,8 +223,12 @@ footer strong{color:var(--fg)}
 <section class="section" id="contact">
   <h1>Contacto</h1>
   <div class="grid">
-    <a class="card" href="mailto:borregos@queso.com"><div class="card-content">borregos@queso.com</div></a>
-    <a class="card" href="#"><div class="card-content">Instagram →</div></a>
+    <a class="card" href="mailto:borregos@queso.com">
+      <div class="card-content">borregos@queso.com</div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-content">Instagram →</div>
+    </a>
   </div>
 </section>
 
@@ -226,31 +239,37 @@ footer strong{color:var(--fg)}
 </footer>
 
 <script>
-const menuBtn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-const overlay=document.getElementById("overlay");
+const menuBtn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+const overlay = document.getElementById("overlay");
 
-menuBtn.onclick=()=>{
+menuBtn.onclick = () => {
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
 };
-overlay.onclick=()=>{
+
+overlay.onclick = () => {
   menu.classList.remove("open");
   overlay.classList.remove("active");
 };
 
-const obs=new IntersectionObserver(e=>{
-  e.forEach(v=>v.target.classList.toggle("visible",v.isIntersecting));
-},{threshold:.25});
-document.querySelectorAll(".section").forEach(s=>obs.observe(s));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry =>
+    entry.target.classList.toggle("visible", entry.isIntersecting)
+  );
+},{ threshold: 0.25 });
 
-const counter=document.getElementById("counter");
-let count=Number(localStorage.items)||0;
-counter.textContent=count;
-setInterval(()=>{
-  count++; counter.textContent=count;
-  localStorage.items=count;
-},3000);
+document.querySelectorAll(".section").forEach(s => obs.observe(s));
+
+const counter = document.getElementById("counter");
+let count = Number(localStorage.items) || 0;
+counter.textContent = count;
+
+setInterval(() => {
+  count++;
+  counter.textContent = count;
+  localStorage.items = count;
+}, 3000);
 </script>
 
 </body>
