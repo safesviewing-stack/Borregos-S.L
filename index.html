@@ -8,30 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
 :root{
   --bg:#0b0b0b;
   --fg:#f5f5f5;
   --muted:#777;
-
   --glass-bg:rgba(255,255,255,.08);
   --glass-border:rgba(255,255,255,.18);
   --glass-glow:rgba(255,255,255,.25);
+  --accent:#9cffc9;
 }
 body.light{
   --bg:#f4f4f4;
   --fg:#0a0a0a;
   --muted:#555;
-
   --glass-bg:rgba(255,255,255,.6);
   --glass-border:rgba(0,0,0,.12);
   --glass-glow:rgba(0,0,0,.18);
 }
 
-/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* ================= BODY ================= */
 body{
   background:var(--bg);
   color:var(--fg);
@@ -39,7 +35,6 @@ body{
   transition:.3s;
 }
 
-/* ================= HEADER ================= */
 .header{
   position:fixed;
   top:24px;
@@ -57,66 +52,15 @@ body{
   color:var(--fg);
   cursor:pointer;
   backdrop-filter:blur(12px);
-  transform:translateY(-20px) scale(.9);
-  opacity:0;
-  animation:iconIn .8s ease forwards;
-}
-.header button:nth-child(1){animation-delay:.1s}
-.header button:nth-child(2){animation-delay:.2s}
-.header button:nth-child(3){animation-delay:.3s}
-
-@keyframes iconIn{
-  to{transform:none;opacity:1;}
 }
 
-/* ================= OVERLAY ================= */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(14px);
-  opacity:0;
-  pointer-events:none;
-  transition:.4s;
-  z-index:800;
-}
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* ================= MENU ================= */
-.menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:320px;
-  height:100vh;
-  padding:140px 48px;
-  background:rgba(20,20,20,.85);
-  backdrop-filter:blur(24px);
-  transform:translateX(100%);
-  transition:.5s ease;
-  z-index:900;
-}
-.menu.open{transform:none;}
-.menu span{
-  display:block;
-  margin-bottom:26px;
-  font-size:13px;
-  letter-spacing:.3em;
-  color:var(--muted);
-  cursor:pointer;
-}
-
-/* ================= SECTIONS ================= */
 .section{
   min-height:100vh;
-  padding:180px 12vw 160px 14vw;
+  padding:180px 12vw;
   opacity:0;
   transform:translateY(30px);
-  filter:blur(10px);
-  transition:.9s ease;
+  filter:blur(8px);
+  transition:.8s ease;
 }
 .section.visible{
   opacity:1;
@@ -124,27 +68,19 @@ body{
   filter:none;
 }
 
-/* ================= TITLES ================= */
 h1{
-  font-size:clamp(72px,6vw,130px);
+  font-size:clamp(64px,6vw,120px);
   font-weight:500;
 }
-.hero h1{
-  font-size:clamp(120px,10vw,200px);
-}
-.hero h1 span{
-  font-size:.35em;
-  letter-spacing:.1em;
-  opacity:.7;
-}
+.hero h1{font-size:clamp(120px,10vw,200px);}
+.hero span{font-size:.35em;opacity:.7}
+
 .hero-sub{
   margin-top:24px;
-  font-size:22px;
   letter-spacing:.35em;
   color:var(--muted);
 }
 
-/* ================= TEXT ================= */
 p{
   margin-top:24px;
   max-width:720px;
@@ -152,31 +88,24 @@ p{
   color:var(--muted);
 }
 
-/* ================= GRID ================= */
 .grid{
   margin-top:64px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:36px;
+  gap:32px;
 }
 
-/* ================= GLASS BOXES ================= */
-.card,
-.counter-card,
-.contact-form{
+/* GLASS CARD */
+.card{
   position:relative;
   padding:32px;
   border-radius:22px;
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
-  backdrop-filter:blur(18px) saturate(160%);
+  backdrop-filter:blur(18px);
   overflow:hidden;
-  transition:.35s ease;
 }
-
-.card::before,
-.counter-card::before,
-.contact-form::before{
+.card::before{
   content:"";
   position:absolute;
   inset:0;
@@ -189,63 +118,30 @@ p{
   opacity:0;
   transition:.3s;
 }
+.card:hover::before{opacity:1}
 
-.card:hover::before,
-.counter-card:hover::before,
-.contact-form:hover::before{
-  opacity:1;
+/* DONATIONS */
+.progress{
+  height:14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  overflow:hidden;
+  margin:32px 0 16px;
 }
-.card:hover,
-.counter-card:hover,
-.contact-form:hover{
-  transform:translateY(-6px);
-}
-
-/* ================= BORREGOS ================= */
-.borrego{text-align:center;}
-.borrego img{
-  width:100%;
-  height:280px;
-  object-fit:cover;
-  border-radius:18px;
-  margin-bottom:12px;
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),#6fffd1);
+  transition:width .6s ease;
 }
 
-/* ================= BLOG ================= */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:18px;
+.donation-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:24px;
 }
-
-/* ================= INVENTORY ================= */
-.counters{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.counter-value{font-size:64px}
-
-/* ================= CONTACT FORM ================= */
-.contact-form input,
-.contact-form textarea{
-  width:100%;
-  margin-top:16px;
-  padding:14px 16px;
-  border-radius:14px;
-  border:1px solid var(--glass-border);
-  background:transparent;
-  color:var(--fg);
-}
-.contact-form textarea{
-  resize:none;
-  height:140px;
-}
-.contact-form button{
-  margin-top:20px;
+.donation-buttons button{
   padding:14px 22px;
   border-radius:999px;
   border:1px solid var(--glass-border);
@@ -254,9 +150,8 @@ p{
   cursor:pointer;
 }
 
-/* ================= FOOTER ================= */
 footer{
-  padding:100px 12vw;
+  padding:80px 12vw;
   text-align:center;
   border-top:1px solid var(--glass-border);
   color:var(--muted);
@@ -267,26 +162,9 @@ footer strong{color:var(--fg);}
 
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<!-- HEADER -->
 <div class="header">
-  <button id="langBtn">ES</button>
   <button id="themeBtn">🌗</button>
-  <button id="menuBtn">☰</button>
 </div>
-
-<!-- MENU -->
-<nav class="menu" id="menu">
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Borregos</span>
-  <span data-i="3">Servicios</span>
-  <span data-i="4">Blog</span>
-  <span data-i="5">Inventario</span>
-  <span data-i="6">Donaciones</span>
-  <span data-i="7">Contacto</span>
-</nav>
 
 <section class="section hero">
   <h1>Borregos <span>S.L</span></h1>
@@ -294,12 +172,25 @@ footer strong{color:var(--fg);}
 </section>
 
 <section class="section">
-  <h1>Contacto</h1>
-  <div class="contact-form">
-    <input type="text" placeholder="Tu nombre">
-    <input type="email" placeholder="Tu email">
-    <textarea placeholder="Escribe tu mensaje…"></textarea>
-    <button>Enviar mensaje</button>
+  <h1>Donaciones</h1>
+  <p>Ayúdanos a financiar el próximo error.</p>
+
+  <div class="card" id="donationCard">
+    <strong>🎯 Objetivo actual</strong>
+    <p>Nuevo altavoz (otra vez)</p>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div id="progressText">0€ / 300€ recaudados</div>
+    <p id="absurdText">Dinero mal invertido hasta ahora: 0€</p>
+
+    <div class="donation-buttons">
+      <button onclick="donate(5)">+5€ · Cable</button>
+      <button onclick="donate(10)">+10€ · Queso</button>
+      <button onclick="donate(25)">+25€ · Caja misteriosa</button>
+    </div>
   </div>
 </section>
 
@@ -310,16 +201,6 @@ footer strong{color:var(--fg);}
 </footer>
 
 <script>
-/* MENU */
-menuBtn.onclick=()=>{
-  menu.classList.toggle("open");
-  overlay.classList.toggle("active");
-};
-overlay.onclick=()=>{
-  menu.classList.remove("open");
-  overlay.classList.remove("active");
-};
-
 /* THEME */
 if(localStorage.theme==="light") document.body.classList.add("light");
 themeBtn.onclick=()=>{
@@ -334,13 +215,41 @@ const observer=new IntersectionObserver(e=>{
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 
 /* GLOW FOLLOW CURSOR */
-document.querySelectorAll(".card,.counter-card,.contact-form").forEach(el=>{
+document.querySelectorAll(".card").forEach(el=>{
   el.addEventListener("mousemove",e=>{
     const r=el.getBoundingClientRect();
     el.style.setProperty("--x",`${e.clientX-r.left}px`);
     el.style.setProperty("--y",`${e.clientY-r.top}px`);
   });
 });
+
+/* DONATION LOGIC */
+const GOAL = 300;
+let total = Number(localStorage.donations) || 0;
+
+const bar = document.getElementById("progressBar");
+const text = document.getElementById("progressText");
+const absurd = document.getElementById("absurdText");
+
+function updateUI(){
+  const percent = Math.min((total / GOAL) * 100, 100);
+  bar.style.width = percent + "%";
+  text.textContent = `${total}€ / ${GOAL}€ recaudados`;
+  absurd.textContent = `Dinero mal invertido hasta ahora: ${total}€`;
+
+  if(total >= GOAL){
+    absurd.textContent = "Objetivo completado. Esto ya es irreversible.";
+    bar.style.background = "linear-gradient(90deg,#ffe29f,#ffa99f)";
+  }
+}
+
+function donate(amount){
+  total += amount;
+  localStorage.donations = total;
+  updateUI();
+}
+
+updateUI();
 </script>
 
 </body>
