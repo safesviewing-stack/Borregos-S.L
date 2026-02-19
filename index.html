@@ -42,7 +42,7 @@ body{
   pointer-events:auto;
 }
 
-/* MENU BUTTON */
+/* MENU */
 .menu-btn{
   position:fixed;
   top:32px;
@@ -70,7 +70,6 @@ body{
   transform:rotate(-45deg) translateY(-10px);
 }
 
-/* MENU */
 .menu{
   position:fixed;
   top:0;
@@ -85,7 +84,7 @@ body{
   transition:.6s cubic-bezier(.2,.8,.2,1);
   z-index:500;
 }
-.menu.open{transform:none;}
+.menu.open{transform:none}
 .menu span{
   display:block;
   margin-bottom:26px;
@@ -100,7 +99,15 @@ body{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
   scroll-snap-align:start;
+  opacity:0;
+  transform:translateY(60px);
+  transition:opacity .8s ease, transform .8s ease;
 }
+.section.visible{
+  opacity:1;
+  transform:none;
+}
+
 .section-block{
   position:sticky;
   top:220px;
@@ -112,7 +119,16 @@ h1{
   margin-left:-4px;
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease;
 }
+.section.visible h1{
+  opacity:1;
+  transform:none;
+  transition-delay:.1s;
+}
+
 .hero h1{
   font-size:clamp(130px,11vw,220px);
 }
@@ -123,6 +139,13 @@ h1{
   font-size:14px;
   letter-spacing:.28em;
   color:var(--muted);
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease .2s;
+}
+.section.visible .hero-sub{
+  opacity:1;
+  transform:none;
 }
 
 /* TEXT */
@@ -132,11 +155,30 @@ p{
   font-size:15px;
   line-height:1.65;
   color:#aaa;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.8s ease .3s;
+}
+.section.visible p{
+  opacity:1;
+  transform:none;
 }
 
 /* GRID */
-.grid{
+.grid,
+.counters{
   margin-top:64px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:.8s ease .4s;
+}
+.section.visible .grid,
+.section.visible .counters{
+  opacity:1;
+  transform:none;
+}
+
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:36px;
@@ -171,7 +213,6 @@ p{
 
 /* COUNTERS */
 .counters{
-  margin-top:48px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
@@ -230,7 +271,6 @@ p{
   <span data-i="7">Contacto</span>
 </nav>
 
-<!-- HERO -->
 <section class="section hero">
   <div class="section-block">
     <h1>Borregos<br>S.L</h1>
@@ -238,18 +278,13 @@ p{
   </div>
 </section>
 
-<!-- QUIÉNES SOMOS -->
 <section class="section">
   <div class="section-block">
     <h1>Quiénes somos</h1>
-    <p>
-      Borregos S.L es un grupo de amigos con criterio dudoso,
-      organización cuestionable y una sorprendente perseverancia.
-    </p>
+    <p>Grupo de amigos con criterio dudoso y mucha constancia.</p>
   </div>
 </section>
 
-<!-- BORREGOS -->
 <section class="section">
   <div class="section-block">
     <h1>Los borregos</h1>
@@ -268,7 +303,6 @@ p{
   </div>
 </section>
 
-<!-- SERVICIOS -->
 <section class="section">
   <div class="section-block">
     <h1>Servicios</h1>
@@ -281,7 +315,6 @@ p{
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="section">
   <div class="section-block">
     <h1>Blog</h1>
@@ -293,7 +326,6 @@ p{
   </div>
 </section>
 
-<!-- INVENTARIO -->
 <section class="section">
   <div class="section-block">
     <h1>Inventario</h1>
@@ -303,16 +335,9 @@ p{
         <div class="counter-label">Objetos recogidos</div>
       </div>
     </div>
-    <div class="grid">
-      <div class="card">#001 Cono de tráfico</div>
-      <div class="card">#002 Silla rota</div>
-      <div class="card">#003 Carrito metálico</div>
-      <div class="card">#004 Altavoz dudoso</div>
-    </div>
   </div>
 </section>
 
-<!-- DONACIONES -->
 <section class="section">
   <div class="section-block">
     <h1>Donaciones</h1>
@@ -323,7 +348,6 @@ p{
   </div>
 </section>
 
-<!-- CONTACTO -->
 <section class="section">
   <div class="section-block">
     <h1>Contacto</h1>
@@ -335,6 +359,7 @@ p{
 </section>
 
 <script>
+/* MENU */
 const menuBtn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 const overlay=document.getElementById("overlay");
@@ -344,13 +369,13 @@ menuBtn.onclick=()=>{
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
 };
-
 overlay.onclick=()=>{
   menuBtn.classList.remove("open");
   menu.classList.remove("open");
   overlay.classList.remove("active");
 };
 
+/* SCROLL TO */
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
     document.querySelectorAll(".section")[i]
@@ -361,14 +386,26 @@ document.querySelectorAll(".menu span").forEach((b,i)=>{
 
 /* COUNTER */
 let items=Number(localStorage.items)||0;
-const el=document.getElementById("itemCount");
-el.textContent=items;
-
+const counter=document.getElementById("itemCount");
+counter.textContent=items;
 setInterval(()=>{
   items++;
   localStorage.items=items;
-  el.textContent=items;
+  counter.textContent=items;
 },3000);
+
+/* INTERSECTION OBSERVER */
+const sections=document.querySelectorAll(".section");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+
+sections.forEach(s=>observer.observe(s));
 </script>
 
 </body>
