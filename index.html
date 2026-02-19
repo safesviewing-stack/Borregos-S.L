@@ -8,233 +8,91 @@
 <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg1:#ff00ff;
-  --bg2:#00ffff;
-  --bg3:#ffff00;
-}
-
-*{
-  box-sizing:border-box;
-  font-family:"Comic Neue", cursive;
-}
-
+*{box-sizing:border-box;font-family:"Comic Neue",cursive}
 body{
   margin:0;
-  background:linear-gradient(45deg,var(--bg1),var(--bg2),var(--bg3));
+  background:linear-gradient(45deg,#ff00ff,#00ffff,#ffff00);
   background-size:400% 400%;
   animation:bgMove 6s infinite linear;
   overflow-x:hidden;
 }
+@keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-/* HEADER */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:12px;
-  background:#fff;
-  border-bottom:6px dashed #000;
-  text-align:center;
-  z-index:999;
+  position:fixed;top:0;width:100%;
+  background:#fff;border-bottom:6px dashed #000;
+  padding:12px;text-align:center;z-index:999;
 }
+header h1{margin:0;animation:shake .6s infinite}
+@keyframes shake{0%{transform:rotate(0)}25%{transform:rotate(1deg)}50%{transform:rotate(-1deg)}75%{transform:rotate(1deg)}100%{transform:rotate(0)}}
 
-header h1{
-  margin:0;
-  font-size:32px;
-  animation:shake 0.6s infinite;
+#chaosBtn,#doomBtn{
+  margin:6px;padding:8px 16px;font-size:14px;
+  border:3px solid #000;cursor:pointer
 }
+#chaosBtn{background:red;color:#fff}
+#doomBtn{background:black;color:lime}
 
-#chaosBtn{
-  margin-top:8px;
-  padding:8px 16px;
-  font-size:14px;
-  border:3px solid #000;
-  background:red;
-  color:white;
-  cursor:pointer;
-}
+section{min-height:100vh;padding:140px 20px 80px;text-align:center}
 
-@keyframes shake{
-  0%{transform:rotate(0)}
-  25%{transform:rotate(1deg)}
-  50%{transform:rotate(-1deg)}
-  75%{transform:rotate(1deg)}
-  100%{transform:rotate(0)}
-}
-
-/* SECTIONS */
-section{
-  min-height:100vh;
-  padding:140px 20px 80px;
-  text-align:center;
-}
-
-/* HERO */
 .hero h2{
   font-size:clamp(64px,12vw,140px);
-  margin:0;
-  animation:zoom 1.2s infinite alternate;
+  animation:zoom 1s infinite alternate
 }
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.15)}}
 
-@keyframes zoom{
-  from{transform:scale(1)}
-  to{transform:scale(1.15)}
-}
-
-.hero p{
-  font-size:20px;
-  margin-top:24px;
-}
-
-/* BUTTON */
 button.bad{
-  padding:16px 32px;
-  font-size:18px;
-  background:yellow;
-  border:4px solid black;
-  cursor:pointer;
-  margin-top:32px;
+  padding:16px 32px;font-size:18px;
+  background:yellow;border:4px solid #000;cursor:pointer
 }
+button.bad:hover{animation:spin .6s infinite linear}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-button.bad:hover{
-  animation:spin 0.6s infinite linear;
-}
-
-@keyframes spin{
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
-}
-
-/* GRID */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:24px;
-  margin-top:64px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:24px;margin-top:64px
 }
-
 .card{
-  background:#fff;
-  border:6px solid #000;
-  padding:16px;
-  animation:float 2s infinite ease-in-out;
+  background:#fff;border:6px solid #000;padding:16px;
+  animation:float 2s infinite ease-in-out
 }
+@keyframes float{50%{transform:translateY(-20px)}}
+.card img{width:100%;height:200px;object-fit:cover;border:4px dotted #000}
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-  100%{transform:translateY(0)}
-}
+.marquee{background:#000;color:lime;font-size:24px;overflow:hidden;white-space:nowrap}
+.marquee span{display:inline-block;padding-left:100%;animation:scroll 8s linear infinite}
+@keyframes scroll{to{transform:translateX(-100%)}}
 
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border:4px dotted #000;
-}
+.counter{font-size:96px;animation:pulse .5s infinite alternate}
+@keyframes pulse{to{transform:scale(1.3)}}
 
-/* MARQUEE */
-.marquee{
-  font-size:24px;
-  white-space:nowrap;
-  overflow:hidden;
-  background:black;
-  color:lime;
-}
+footer{background:#000;color:#fff;padding:40px}
 
-.marquee span{
-  display:inline-block;
-  padding-left:100%;
-  animation:scroll 8s linear infinite;
-}
+/* ===== CHAOS MODE ===== */
+body.chaos{animation:screenShake .15s infinite}
+@keyframes screenShake{25%{transform:translate(4px,-4px)}50%{transform:translate(-4px,4px)}}
+body.chaos *{animation:chaosSpin 1s infinite linear!important}
+@keyframes chaosSpin{to{transform:rotate(360deg)}}
+body.chaos img{filter:hue-rotate(360deg) saturate(500%)}
+body.chaos button{animation:blink .2s infinite}
+@keyframes blink{50%{opacity:0}}
 
-@keyframes scroll{
-  from{transform:translateX(0)}
-  to{transform:translateX(-100%)}
-}
-
-/* COUNTER */
-.counter{
-  font-size:96px;
-  animation:pulse 0.5s infinite alternate;
-}
-
-@keyframes pulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.3)}
-}
-
-/* FOOTER */
-footer{
-  padding:40px;
-  background:#000;
-  color:#fff;
-  text-align:center;
-}
-
-/* ===== MODO DEMASIADOS EFECTOS ===== */
-
-body.chaos{
-  animation: screenShake 0.15s infinite;
-}
-
-@keyframes screenShake{
-  0%{transform:translate(0,0)}
-  25%{transform:translate(4px,-4px)}
-  50%{transform:translate(-4px,4px)}
-  75%{transform:translate(4px,4px)}
-  100%{transform:translate(0,0)}
-}
-
-body.chaos *{
-  animation: chaosSpin 1s infinite linear !important;
-}
-
-@keyframes chaosSpin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-
-body.chaos img{
-  filter:hue-rotate(360deg) saturate(500%);
-}
-
-body.chaos h1,
-body.chaos h2{
-  text-shadow:
-    4px 4px red,
-    -4px -4px blue,
-    6px 6px yellow;
-}
-
-body.chaos button{
-  animation:blink 0.2s infinite;
-}
-
-@keyframes blink{
-  0%{opacity:1}
-  50%{opacity:0}
-  100%{opacity:1}
-}
-
-/* BORREGOS FLOTANTES */
 .borrego-fly{
-  position:fixed;
-  font-size:48px;
-  animation:fly 6s linear infinite;
-  pointer-events:none;
+  position:fixed;font-size:48px;pointer-events:none;
+  animation:fly linear infinite
+}
+@keyframes fly{from{left:-10%}to{left:110%}}
+
+/* ===== FAKE CRASH ===== */
+#crash{
+  position:fixed;inset:0;background:#000;color:#0f0;
+  display:none;z-index:2000;padding:40px;font-size:18px
 }
 
-@keyframes fly{
-  from{left:-10%}
-  to{left:110%}
+/* ===== MINIGAME ===== */
+#game{
+  border:6px solid #000;background:#fff;
+  padding:20px;margin:40px auto;max-width:400px
 }
 </style>
 </head>
@@ -244,12 +102,13 @@ body.chaos button{
 <header>
   <h1>🐑 LOS BORREGOS 🐑</h1>
   <button id="chaosBtn">ACTIVAR MODO DEMASIADOS EFECTOS</button>
+  <button id="doomBtn">AUTODESTRUCCIÓN</button>
 </header>
 
 <section class="hero">
   <h2>NO SOMOS UN ESTUDIO</h2>
   <p>somos un grupo sin rumbo pero con wifi</p>
-  <button class="bad" onclick="alert('ERROR GRAVE DE JUICIO')">NO TOQUES ESTO</button>
+  <button class="bad" onclick="alert('MALA DECISIÓN')">NO TOQUES ESTO</button>
 </section>
 
 <div class="marquee">
@@ -266,67 +125,86 @@ body.chaos button{
 </section>
 
 <section>
-  <h2>INVENTARIO ABSURDO</h2>
-  <div class="counter" id="counter">0</div>
-  <p>objetos inútiles acumulados sin motivo</p>
+  <h2>CONTADORES IMPORTANTES</h2>
+  <div class="counter" id="items">0</div>
+  <p>objetos inútiles</p>
+  <div class="counter" id="neurons">100</div>
+  <p>neuronas restantes</p>
+
+  <div id="game">
+    <h3>MINIJUEGO INÚTIL</h3>
+    <p>Haz clic para perder</p>
+    <button onclick="lose()">PERDER</button>
+    <p id="score">Derrotas: 0</p>
+  </div>
 </section>
 
 <footer>
   © 2026 LOS BORREGOS<br>
-  ninguna neurona fue dañada porque no había
+  ninguna neurona fue dañada (mentira)
 </footer>
+
+<div id="crash">
+  <p>:(</p>
+  <p>El sistema ha encontrado demasiados borregos.</p>
+  <p>Recogiendo datos del desastre… 0%</p>
+</div>
 
 <audio id="horn" src="https://www.myinstants.com/media/sounds/airhorn.mp3"></audio>
 
 <script>
-/* CONTADOR */
-let count = 0;
-const counter = document.getElementById("counter");
-
+/* CONTADORES */
+let items=0,neurons=100,losses=0;
 setInterval(()=>{
-  count++;
-  counter.textContent = count;
-  if(count % 10 === 0){
-    alert("WARNING: demasiados borregos");
-  }
-},500);
+  items++; document.getElementById("items").textContent=items;
+  neurons--; if(neurons<0) neurons=0;
+  document.getElementById("neurons").textContent=neurons;
+  if(items%10===0) alert("WARNING: BORREGOS DETECTADOS");
+},700);
+
+/* MINIJUEGO */
+function lose(){
+  losses++;
+  document.getElementById("score").textContent="Derrotas: "+losses;
+  alert("HAS PERDIDO (como estaba previsto)");
+}
 
 /* CHAOS MODE */
-const chaosBtn = document.getElementById("chaosBtn");
-const horn = document.getElementById("horn");
-let chaos = false;
+const chaosBtn=document.getElementById("chaosBtn");
+const horn=document.getElementById("horn");
+let chaos=false;
 
-chaosBtn.onclick = ()=>{
-  chaos = !chaos;
+chaosBtn.onclick=()=>{
+  chaos=!chaos;
   document.body.classList.toggle("chaos");
-  chaosBtn.textContent = chaos
-    ? "DESACTIVAR MODO DEMASIADOS EFECTOS"
-    : "ACTIVAR MODO DEMASIADOS EFECTOS";
-
-  if(chaos){
-    horn.play();
-    spawnBorregos();
-  }
+  chaosBtn.textContent=chaos?"DESACTIVAR CAOS":"ACTIVAR MODO DEMASIADOS EFECTOS";
+  if(chaos){horn.play();spawnBorregos();}
 };
 
 /* RATÓN INFERNAL */
-document.addEventListener("mousemove", e=>{
-  if(!document.body.classList.contains("chaos")) return;
-  document.body.style.backgroundPosition =
-    `${e.clientX/3}px ${e.clientY/3}px`;
+document.addEventListener("mousemove",e=>{
+  if(!document.body.classList.contains("chaos"))return;
+  document.body.style.backgroundPosition=`${e.clientX/3}px ${e.clientY/3}px`;
 });
 
 /* BORREGOS VOLADORES */
 function spawnBorregos(){
-  for(let i=0;i<5;i++){
+  for(let i=0;i<10;i++){
     const b=document.createElement("div");
     b.className="borrego-fly";
     b.textContent="🐑";
     b.style.top=Math.random()*100+"%";
-    b.style.animationDuration=3+Math.random()*5+"s";
+    b.style.animationDuration=2+Math.random()*4+"s";
     document.body.appendChild(b);
   }
 }
+
+/* AUTODESTRUCCIÓN */
+document.getElementById("doomBtn").onclick=()=>{
+  document.getElementById("crash").style.display="block";
+  setTimeout(()=>{document.getElementById("crash").innerHTML+="<p>ERROR FATAL</p>";},2000);
+  setTimeout(()=>{location.reload();},6000);
+};
 </script>
 
 </body>
