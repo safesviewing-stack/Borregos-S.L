@@ -8,78 +8,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
+:root{
+  --bg:#0a0a0a;
+  --fg:#f5f5f5;
+  --muted:#777;
 }
 
-/* BODY */
+body.borrego{
+  --bg:#140f0f;
+  --fg:#fff2d9;
+  --muted:#cfa;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif;}
+
 body{
-  background:#0a0a0a;
-  color:#f5f5f5;
-  overflow-y:scroll;
+  background:var(--bg);
+  color:var(--fg);
   scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+  transition:.6s ease;
 }
 
-/* MENU BUTTON */
+/* MENU */
 .menu-btn{
-  position:fixed;
-  top:32px;
-  right:40px;
-  width:28px;
-  height:22px;
-  display:flex;
-  flex-direction:column;
+  position:fixed;top:32px;right:40px;
+  width:28px;height:22px;
+  display:flex;flex-direction:column;
   justify-content:space-between;
-  cursor:pointer;
-  z-index:300;
+  cursor:pointer;z-index:500;
 }
+.menu-btn span{height:2px;background:#fff;transition:.4s}
+.menu-btn.open span:nth-child(1){transform:rotate(45deg) translateY(10px)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:rotate(-45deg) translateY(-10px)}
 
-.menu-btn span{
-  height:2px;
-  width:100%;
-  background:#fff;
-  transition:.4s ease;
-}
-
-.menu-btn.open span:nth-child(1){
-  transform:rotate(45deg) translateY(10px);
-}
-.menu-btn.open span:nth-child(2){
-  opacity:0;
-}
-.menu-btn.open span:nth-child(3){
-  transform:rotate(-45deg) translateY(-10px);
-}
-
-/* MENU PANEL */
 .menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:320px;
-  height:100vh;
-  padding:140px 48px;
-  background:rgba(10,10,10,.8);
+  position:fixed;right:0;top:0;
+  width:320px;height:100vh;
+  background:rgba(10,10,10,.85);
   backdrop-filter:blur(16px);
-  display:flex;
-  flex-direction:column;
+  padding:140px 48px;
+  display:flex;flex-direction:column;
   gap:28px;
   transform:translateX(100%);
-  transition:.5s ease;
-  z-index:200;
+  transition:.5s;z-index:400;
 }
-
-.menu.open{
-  transform:none;
-}
-
+.menu.open{transform:none}
 .menu span{
-  font-size:13px;
   letter-spacing:.3em;
+  font-size:13px;
   text-transform:uppercase;
   color:#bbb;
   cursor:pointer;
@@ -91,46 +69,30 @@ body{
   scroll-snap-align:start;
   padding:180px 10vw 160px 22vw;
 }
+.section-block{position:sticky;top:260px;max-width:1200px}
 
-.section-block{
-  position:sticky;
-  top:260px;
-  max-width:1200px;
-}
-
-/* TITLES */
-h1{
-  font-size:clamp(70px,6vw,120px);
-  font-weight:500;
-  line-height:1.05;
-}
-
-/* HERO */
-.hero{
-  display:flex;
-  align-items:center;
-}
-
-.hero h1{
-  font-size:clamp(80px,7vw,140px);
-}
+h1{font-size:clamp(70px,6vw,120px);font-weight:500;line-height:1.05}
+.hero h1{font-size:clamp(90px,7vw,150px)}
 
 .hero-sub{
   margin-top:24px;
   font-size:14px;
   letter-spacing:.25em;
-  color:#777;
+  color:var(--muted);
+}
+
+/* LOGO */
+.logo{
+  display:inline-block;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
 
 /* TEXT */
-p{
-  margin-top:16px;
-  max-width:650px;
-  font-size:15px;
-  line-height:1.6;
-  color:#aaa;
-  text-align:justify;
-}
+p{margin-top:16px;max-width:650px;color:#aaa;line-height:1.6;text-align:justify}
 
 /* GRID */
 .grid{
@@ -142,83 +104,64 @@ p{
 
 /* BORREGOS */
 .borrego{
-  opacity:0;
-  transform:translateY(16px);
-  transition:.8s ease;
+  opacity:0;transform:translateY(20px);
+  transition:.8s;
 }
-
-.borrego.is-visible{
-  opacity:1;
-  transform:none;
-}
-
+.borrego.is-visible{opacity:1;transform:none}
 .borrego img{
-  width:100%;
-  height:280px;
-  object-fit:cover;
-  background:#111;
+  width:100%;height:280px;
+  object-fit:cover;background:#111;
   margin-bottom:12px;
-}
-
-.borrego strong{
-  display:block;
-}
-
-.borrego span{
-  font-size:13px;
-  color:#777;
 }
 
 /* BLOG */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  background:#111;
-  margin-bottom:12px;
+.blog-item img,.blog-item video{
+  width:100%;height:260px;
+  object-fit:cover;background:#111;
 }
 
-.blog-item span{
-  font-size:13px;
-  color:#777;
-}
-
-/* CARDS */
+/* CARD */
 .card{
-  padding:28px;
-  border-radius:20px;
+  padding:28px;border-radius:20px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
+}
+
+/* COUNTERS */
+.counter{
+  font-size:48px;
+  font-weight:500;
+  margin-top:16px;
 }
 
 /* CONTACT */
-.contact{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
-}
-
+.contact{margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .contact a{
-  padding:28px;
-  border-radius:20px;
+  padding:28px;border-radius:20px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  color:#fff;
-  text-decoration:none;
+  color:#fff;text-decoration:none;
+}
+
+/* MODE TOGGLE */
+.toggle{
+  position:fixed;
+  bottom:32px;
+  right:40px;
+  padding:12px 18px;
+  font-size:12px;
+  letter-spacing:.2em;
+  background:#111;
+  border:1px solid #333;
+  cursor:pointer;
+  z-index:600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="menu-btn" id="menuBtn">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
 
 <nav class="menu" id="menu">
   <span data-i="0">Inicio</span>
@@ -231,10 +174,12 @@ p{
   <span data-i="7">Contacto</span>
 </nav>
 
+<div class="toggle" id="toggleMode">MODO BORREGO</div>
+
 <!-- HERO -->
 <section class="section hero">
   <div class="section-block">
-    <h1>Borregos<br>S.L</h1>
+    <h1 class="logo">Borregos<br>S.L</h1>
     <div class="hero-sub">k de queso</div>
   </div>
 </section>
@@ -243,15 +188,7 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Quiénes somos</h1>
-    <p>
-      Borregos S.L es un grupo de diez individuos con capacidades cuestionables,
-      una coordinación dudosa y una obsesión injustificada por el queso.
-      Operamos como colectivo, como empresa ficticia y como error recurrente.
-    </p>
-    <p>
-      Nuestra actividad principal consiste en aparecer donde no se nos llama,
-      opinar sin base y acumular objetos sin utilidad clara.
-    </p>
+    <p>Diez individuos, una identidad colectiva y una gestión irresponsable.</p>
   </div>
 </section>
 
@@ -260,16 +197,16 @@ p{
   <div class="section-block">
     <h1>Los borregos</h1>
     <div class="grid">
-      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong><span>Caos operativo</span></div>
-      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong><span>Opiniones no pedidas</span></div>
-      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong><span>Logística dudosa</span></div>
-      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong><span>Ideas malas</span></div>
-      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong><span>Ruido ambiental</span></div>
-      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong><span>Finanzas creativas</span></div>
-      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong><span>Relaciones públicas</span></div>
-      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong><span>Seguridad inexistente</span></div>
-      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong><span>Material perdido</span></div>
-      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong><span>Director general</span></div>
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
     </div>
   </div>
 </section>
@@ -281,8 +218,7 @@ p{
     <div class="grid">
       <div class="card">Estropear eventos</div>
       <div class="card">Fiestas sin control</div>
-      <div class="card">Asesoría no solicitada</div>
-      <div class="card">Presencia incómoda</div>
+      <div class="card">Opiniones no pedidas</div>
     </div>
   </div>
 </section>
@@ -292,21 +228,8 @@ p{
   <div class="section-block">
     <h1>Blog</h1>
     <div class="grid">
-      <div class="blog-item">
-        <img src="blog1.jpg">
-        <strong>Día documentado</strong>
-        <span>No era necesario</span>
-      </div>
-      <div class="blog-item">
-        <video src="video1.mp4" controls></video>
-        <strong>Incidente menor</strong>
-        <span>Todo salió mal</span>
-      </div>
-      <div class="blog-item">
-        <img src="blog2.jpg">
-        <strong>Hallazgo</strong>
-        <span>Objeto sin explicación</span>
-      </div>
+      <div class="blog-item"><img src="blog1.jpg"><strong>Documento innecesario</strong></div>
+      <div class="blog-item"><video src="video1.mp4" controls></video></div>
     </div>
   </div>
 </section>
@@ -315,15 +238,11 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Inventario</h1>
-    <p>
-      Registro interno de objetos recogidos de la calle,
-      comprados por error o adquiridos sin consenso.
-    </p>
+    <div class="counter" id="itemCount">0</div>
     <div class="grid">
-      <div class="card">Silla coja · Estado crítico</div>
-      <div class="card">Cono de tráfico · Funcional</div>
-      <div class="card">Carrito metálico · Dudoso</div>
-      <div class="card">Altavoz roto · Sigue sonando</div>
+      <div class="card">#001 Cono de tráfico</div>
+      <div class="card">#002 Silla rota</div>
+      <div class="card">#003 Carrito metálico</div>
     </div>
   </div>
 </section>
@@ -332,14 +251,8 @@ p{
 <section class="section">
   <div class="section-block">
     <h1>Donaciones</h1>
-    <p>
-      Toda aportación económica será gestionada con irresponsabilidad
-      y destinada principalmente a queso.
-    </p>
-    <div class="grid">
-      <div class="card">Bizum · +34 600 000 000</div>
-      <div class="card">PayPal · borregos@queso.com</div>
-    </div>
+    <div class="counter" id="cheeseCount">0</div>
+    <p>Quesos acumulados</p>
   </div>
 </section>
 
@@ -349,37 +262,38 @@ p{
     <h1>Contacto</h1>
     <div class="contact">
       <a href="mailto:borregos@queso.com">borregos@queso.com</a>
-      <a href="#">Instagram oficial</a>
+      <a href="#">Instagram</a>
     </div>
   </div>
 </section>
 
 <script>
 /* MENU */
-const menuBtn = document.getElementById("menuBtn");
-const menu = document.getElementById("menu");
-
-menuBtn.onclick = () => {
-  menuBtn.classList.toggle("open");
-  menu.classList.toggle("open");
-};
-
+const menuBtn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+menuBtn.onclick=()=>{menuBtn.classList.toggle("open");menu.classList.toggle("open")};
 document.querySelectorAll(".menu span").forEach((b,i)=>{
-  b.onclick = () => {
-    document.querySelectorAll(".section")[i]
-      .scrollIntoView({behavior:"smooth"});
-    menu.classList.remove("open");
-    menuBtn.classList.remove("open");
-  };
+  b.onclick=()=>{
+    document.querySelectorAll(".section")[i].scrollIntoView({behavior:"smooth"});
+    menu.classList.remove("open");menuBtn.classList.remove("open");
+  }
 });
 
 /* OBSERVER */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("is-visible",e.isIntersecting));
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>x.target.classList.toggle("is-visible",x.isIntersecting))
 },{threshold:.2});
+document.querySelectorAll(".borrego").forEach(el=>observer.observe(el));
 
-document.querySelectorAll(".borrego,.blog-item")
-  .forEach(el=>observer.observe(el));
+/* MODE */
+document.getElementById("toggleMode").onclick=()=>{
+  document.body.classList.toggle("borrego");
+};
+
+/* COUNTERS */
+let items=0, cheese=0;
+setInterval(()=>{items++;document.getElementById("itemCount").textContent=items},3000);
+setInterval(()=>{cheese++;document.getElementById("cheeseCount").textContent=cheese},2000);
 </script>
 
 </body>
