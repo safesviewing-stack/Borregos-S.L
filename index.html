@@ -13,11 +13,15 @@
   --fg:#f5f5f5;
   --muted:#777;
   --glass:rgba(255,255,255,.06);
-  --glow:rgba(255,255,255,.18);
 }
 
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
 
 /* BODY */
 body{
@@ -27,26 +31,94 @@ body{
   scroll-snap-type:y mandatory;
 }
 
-/* OVERLAY + MENU */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:.4s;z-index:300}
-.overlay.active{opacity:1;pointer-events:auto}
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(16px);
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:300;
+}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
 
-.menu-btn{position:fixed;top:32px;right:40px;width:28px;height:22px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;z-index:600}
-.menu-btn span{height:2px;background:#fff;transition:.4s}
-.menu-btn.open span:nth-child(1){transform:rotate(45deg) translateY(10px)}
-.menu-btn.open span:nth-child(2){opacity:0}
-.menu-btn.open span:nth-child(3){transform:rotate(-45deg) translateY(-10px)}
+/* MENU */
+.menu-btn{
+  position:fixed;
+  top:32px;
+  right:40px;
+  width:28px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  z-index:600;
+}
+.menu-btn span{
+  height:2px;
+  background:#fff;
+  transition:.4s;
+}
+.menu-btn.open span:nth-child(1){
+  transform:rotate(45deg) translateY(10px);
+}
+.menu-btn.open span:nth-child(2){
+  opacity:0;
+}
+.menu-btn.open span:nth-child(3){
+  transform:rotate(-45deg) translateY(-10px);
+}
 
-.menu{position:fixed;top:0;right:0;width:320px;height:100vh;padding:140px 48px;background:rgba(15,15,15,.7);backdrop-filter:blur(24px) saturate(160%);border-left:1px solid rgba(255,255,255,.1);transform:translateX(100%);transition:.6s cubic-bezier(.2,.8,.2,1);z-index:500}
-.menu.open{transform:none}
-.menu span{display:block;margin-bottom:26px;font-size:13px;letter-spacing:.3em;color:#ccc;cursor:pointer}
+.menu{
+  position:fixed;
+  top:0;
+  right:0;
+  width:320px;
+  height:100vh;
+  padding:140px 48px;
+  background:rgba(15,15,15,.7);
+  backdrop-filter:blur(24px) saturate(160%);
+  border-left:1px solid rgba(255,255,255,.1);
+  transform:translateX(100%);
+  transition:.6s cubic-bezier(.2,.8,.2,1);
+  z-index:500;
+}
+.menu.open{
+  transform:none;
+}
+.menu span{
+  display:block;
+  margin-bottom:26px;
+  font-size:13px;
+  letter-spacing:.3em;
+  cursor:pointer;
+  color:#ccc;
+}
 
 /* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
   scroll-snap-align:start;
+
+  /* animación base */
   opacity:0;
+  transform:translateY(60px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.section.visible{
+  opacity:1;
+  transform:none;
+}
+
+.section-block{
+  max-width:1200px;
 }
 
 /* TITLES */
@@ -55,18 +127,36 @@ h1{
   font-size:clamp(76px,6vw,130px);
   font-weight:500;
 }
+.hero h1{
+  font-size:clamp(130px,11vw,220px);
+}
 
 /* HERO */
-.hero h1{font-size:clamp(130px,11vw,220px)}
-.hero-sub{margin-top:28px;font-size:14px;letter-spacing:.28em;color:var(--muted)}
+.hero-sub{
+  margin-top:28px;
+  font-size:14px;
+  letter-spacing:.28em;
+  color:var(--muted);
+}
 
 /* TEXT */
-p{margin-top:20px;max-width:680px;font-size:15px;line-height:1.65;color:#aaa}
+p{
+  margin-top:24px;
+  max-width:720px;
+  font-size:15px;
+  line-height:1.7;
+  color:#aaa;
+}
 
 /* GRID */
-.grid{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+.grid{
+  margin-top:64px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:36px;
+}
 
-/* CARDS */
+/* CARD */
 .card{
   padding:32px;
   border-radius:22px;
@@ -75,52 +165,67 @@ p{margin-top:20px;max-width:680px;font-size:15px;line-height:1.65;color:#aaa}
   transition:.3s ease;
 }
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 40px rgba(0,0,0,.4),0 0 0 1px var(--glow);
+  transform:translateY(-6px);
 }
 
 /* BORREGOS */
-.borrego{overflow:hidden;border-radius:18px}
-.borrego img{width:100%;height:300px;object-fit:cover;transition:.4s}
-.borrego:hover img{transform:scale(1.05)}
+.borrego img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  background:#111;
+  margin-bottom:14px;
+}
 
 /* BLOG */
-.blog-item img,.blog-item video{width:100%;height:260px;object-fit:cover}
+.blog-item img,
+.blog-item video{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  background:#111;
+  margin-bottom:14px;
+}
 
 /* COUNTERS */
-.counters{margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
-.counter-card{padding:36px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)}
-.counter-value{font-size:64px}
-.counter-label{margin-top:12px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.counters{
+  margin-top:48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.counter-card{
+  padding:36px;
+  border-radius:22px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+}
+.counter-value{
+  font-size:64px;
+}
+.counter-label{
+  margin-top:12px;
+  font-size:12px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
 
 /* CONTACT */
-.contact{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
-.contact a{padding:32px;border-radius:22px;background:var(--glass);border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;position:relative}
-.contact a::after{
-  content:"";
-  position:absolute;
-  left:32px;right:32px;bottom:20px;
-  height:1px;background:#fff;
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:.3s;
+.contact{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
 }
-.contact a:hover::after{transform:scaleX(1)}
-
-/* ===== ANIMATIONS ===== */
-.show-hero{animation:heroIn .9s ease forwards}
-.show-fade{animation:fadeUp .8s ease forwards}
-.show-left{animation:slideLeft .8s ease forwards}
-.show-right{animation:slideRight .8s ease forwards}
-.show-blur{animation:fadeBlur .9s ease forwards}
-.show-scale{animation:scaleIn .8s ease forwards}
-
-@keyframes heroIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
-@keyframes slideLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:none}}
-@keyframes slideRight{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:none}}
-@keyframes fadeBlur{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+.contact a{
+  padding:32px;
+  border-radius:22px;
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.1);
+  color:#fff;
+  text-decoration:none;
+}
 </style>
 </head>
 
@@ -128,7 +233,9 @@ p{margin-top:20px;max-width:680px;font-size:15px;line-height:1.65;color:#aaa}
 
 <div class="overlay" id="overlay"></div>
 
-<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+<div class="menu-btn" id="menuBtn">
+  <span></span><span></span><span></span>
+</div>
 
 <nav class="menu" id="menu">
   <span data-i="0">Inicio</span>
@@ -141,63 +248,131 @@ p{margin-top:20px;max-width:680px;font-size:15px;line-height:1.65;color:#aaa}
   <span data-i="7">Contacto</span>
 </nav>
 
-<section class="section hero" data-anim="hero">
-  <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">k de queso</div>
-</section>
-
-<section class="section" data-anim="fade">
-  <h1>Quiénes somos</h1>
-  <p>Grupo de amigos con criterio dudoso y una sorprendente constancia.</p>
-</section>
-
-<section class="section" data-anim="left">
-  <h1>Los borregos</h1>
-  <div class="grid">
-    ${Array.from({length:10},(_,i)=>`<div class="borrego"><img src="b${i+1}.jpg"></div>`).join("")}
+<!-- HERO -->
+<section class="section hero">
+  <div class="section-block">
+    <h1>Borregos<br>S.L</h1>
+    <div class="hero-sub">k de queso</div>
   </div>
 </section>
 
-<section class="section" data-anim="fade">
-  <h1>Servicios</h1>
-  <div class="grid">
-    <div class="card">Estropear eventos</div>
-    <div class="card">Fiestas sin control</div>
-    <div class="card">Opiniones no solicitadas</div>
+<!-- QUIÉNES SOMOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Quiénes somos</h1>
+    <p>
+      Borregos S.L es un grupo de amigos que decidió formalizar lo informal.
+      No somos una empresa, pero actuamos como tal cuando conviene. Nos une
+      la amistad, el humor cuestionable y una capacidad sorprendente para
+      meternos en situaciones innecesarias.
+    </p>
   </div>
 </section>
 
-<section class="section" data-anim="blur">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
-  </div>
-</section>
-
-<section class="section" data-anim="scale">
-  <h1>Inventario</h1>
-  <div class="counters">
-    <div class="counter-card">
-      <div class="counter-value" id="itemCount">0</div>
-      <div class="counter-label">Objetos recogidos</div>
+<!-- BORREGOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Los borregos</h1>
+    <p>
+      Diez individuos distintos, pero peligrosamente compatibles. Cada uno
+      aporta su caos particular al conjunto.
+    </p>
+    <div class="grid">
+      <div class="borrego"><img src="b1.jpg"><strong>Borrego 01</strong></div>
+      <div class="borrego"><img src="b2.jpg"><strong>Borrego 02</strong></div>
+      <div class="borrego"><img src="b3.jpg"><strong>Borrego 03</strong></div>
+      <div class="borrego"><img src="b4.jpg"><strong>Borrego 04</strong></div>
+      <div class="borrego"><img src="b5.jpg"><strong>Borrego 05</strong></div>
+      <div class="borrego"><img src="b6.jpg"><strong>Borrego 06</strong></div>
+      <div class="borrego"><img src="b7.jpg"><strong>Borrego 07</strong></div>
+      <div class="borrego"><img src="b8.jpg"><strong>Borrego 08</strong></div>
+      <div class="borrego"><img src="b9.jpg"><strong>Borrego 09</strong></div>
+      <div class="borrego"><img src="b10.jpg"><strong>Borrego 10</strong></div>
     </div>
   </div>
 </section>
 
-<section class="section" data-anim="right">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <div class="card">Bizum</div>
-    <div class="card">PayPal</div>
+<!-- SERVICIOS -->
+<section class="section">
+  <div class="section-block">
+    <h1>Servicios</h1>
+    <p>
+      Ofrecemos soluciones que nadie ha pedido, pero que siempre llegan.
+    </p>
+    <div class="grid">
+      <div class="card">Estropear eventos con precisión</div>
+      <div class="card">Organización de fiestas improvisadas</div>
+      <div class="card">Opiniones no solicitadas</div>
+      <div class="card">Presencia incómoda garantizada</div>
+    </div>
   </div>
 </section>
 
-<section class="section" data-anim="fade">
-  <h1>Contacto</h1>
-  <div class="contact">
-    <a href="#">Instagram</a>
-    <a href="#">Email</a>
+<!-- BLOG -->
+<section class="section">
+  <div class="section-block">
+    <h1>Blog</h1>
+    <p>
+      Registro visual de momentos que probablemente no deberían repetirse.
+    </p>
+    <div class="grid">
+      <div class="blog-item"><img src="blog1.jpg"></div>
+      <div class="blog-item"><video src="video1.mp4" controls></video></div>
+      <div class="blog-item"><img src="blog2.jpg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTARIO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Inventario</h1>
+    <p>
+      Objetos recogidos de la calle, comprados sin justificación o
+      adquiridos por error. Todos cumplen una función desconocida.
+    </p>
+    <div class="counters">
+      <div class="counter-card">
+        <div class="counter-value" id="itemCount">0</div>
+        <div class="counter-label">Objetos registrados</div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">Cono de tráfico</div>
+      <div class="card">Silla rota</div>
+      <div class="card">Carrito metálico</div>
+      <div class="card">Altavoz dudoso</div>
+    </div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section class="section">
+  <div class="section-block">
+    <h1>Donaciones</h1>
+    <p>
+      Toda aportación será gestionada con responsabilidad variable y
+      destinada principalmente a mantener el espíritu del grupo.
+    </p>
+    <div class="grid">
+      <div class="card">Bizum · +34 600 000 000</div>
+      <div class="card">PayPal · borregos@queso.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section">
+  <div class="section-block">
+    <h1>Contacto</h1>
+    <p>
+      Si quieres colaborar, preguntar o simplemente observar desde
+      una distancia segura, aquí nos puedes encontrar.
+    </p>
+    <div class="contact">
+      <a href="mailto:borregos@queso.com">borregos@queso.com</a>
+      <a href="#">Instagram</a>
+    </div>
   </div>
 </section>
 
@@ -212,7 +387,11 @@ menuBtn.onclick=()=>{
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
 };
-overlay.onclick=()=>menuBtn.click();
+overlay.onclick=()=>{
+  menuBtn.classList.remove("open");
+  menu.classList.remove("open");
+  overlay.classList.remove("active");
+};
 
 document.querySelectorAll(".menu span").forEach((b,i)=>{
   b.onclick=()=>{
@@ -224,25 +403,24 @@ document.querySelectorAll(".menu span").forEach((b,i)=>{
 
 /* COUNTER */
 let items=Number(localStorage.items)||0;
-const el=document.getElementById("itemCount");
-el.textContent=items;
-setInterval(()=>{items++;localStorage.items=items;el.textContent=items},3000);
+const counter=document.getElementById("itemCount");
+counter.textContent=items;
+setInterval(()=>{
+  items++;
+  localStorage.items=items;
+  counter.textContent=items;
+},3000);
 
-/* OBSERVER (SIEMPRE ACTIVO) */
+/* ANIMATION OBSERVER (SIEMPRE ACTIVO) */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    const anim=e.target.dataset.anim;
-    e.target.className="section";
     if(e.isIntersecting){
-      if(anim==="hero") e.target.classList.add("show-hero");
-      if(anim==="fade") e.target.classList.add("show-fade");
-      if(anim==="left") e.target.classList.add("show-left");
-      if(anim==="right") e.target.classList.add("show-right");
-      if(anim==="blur") e.target.classList.add("show-blur");
-      if(anim==="scale") e.target.classList.add("show-scale");
+      e.target.classList.add("visible");
+    }else{
+      e.target.classList.remove("visible");
     }
   });
-},{threshold:.3});
+},{threshold:.25});
 
 document.querySelectorAll(".section").forEach(s=>observer.observe(s));
 </script>
