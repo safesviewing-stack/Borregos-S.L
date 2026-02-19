@@ -1,305 +1,74 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borregos S.L — k de queso</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-/* ================= VARIABLES ================= */
-:root{
-  --bg:#0a0a0a;
-  --fg:#f5f5f5;
-  --muted:#777;
-  --glass-bg:rgba(255,255,255,.08);
-  --glass-border:rgba(255,255,255,.18);
-  --glass-glow:rgba(255,255,255,.25);
-}
-body.light{
-  --bg:#f4f4f4;
-  --fg:#0a0a0a;
-  --muted:#555;
-  --glass-bg:rgba(255,255,255,.55);
-  --glass-border:rgba(0,0,0,.12);
-  --glass-glow:rgba(0,0,0,.18);
-}
-
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-
-/* BODY */
-body{
-  background:var(--bg);
-  color:var(--fg);
-  overflow-x:hidden;
-  transition:.3s;
-}
-
-/* HEADER */
-.header{
-  position:fixed;
-  top:24px;
-  right:32px;
-  display:flex;
-  gap:12px;
-  z-index:1001;
-}
-.header button{
-  width:42px;
-  height:42px;
-  border-radius:999px;
-  border:1px solid var(--glass-border);
-  background:var(--glass-bg);
-  color:var(--fg);
-  cursor:pointer;
-  backdrop-filter:blur(14px);
-}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(14px);
-  opacity:0;
-  pointer-events:none;
-  transition:.4s;
-  z-index:900;
-}
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* MENU */
-.menu{
-  position:fixed;
-  top:0;
-  right:0;
-  width:320px;
-  height:100vh;
-  padding:140px 48px;
-  background:rgba(20,20,20,.85);
-  backdrop-filter:blur(24px);
-  transform:translateX(100%);
-  transition:.5s ease;
-  z-index:1000;
-}
-.menu.open{transform:none;}
-.menu span{
-  display:block;
-  margin-bottom:26px;
-  font-size:13px;
-  letter-spacing:.3em;
-  color:var(--muted);
-  cursor:pointer;
-}
-
-/* SECTIONS */
-.section{
-  min-height:100vh;
-  padding:180px 10vw 160px 14vw;
-  opacity:0;
-  transform:translateY(30px);
-  filter:blur(8px);
-  transition:.8s ease;
-}
-.section.visible{
-  opacity:1;
-  transform:none;
-  filter:none;
-}
-
-/* TITLES */
-h1{font-size:clamp(72px,6vw,130px);font-weight:500}
-.hero h1{font-size:clamp(130px,11vw,220px)}
-.hero-sub{
-  margin-top:24px;
-  font-size:22px;
-  letter-spacing:.35em;
-  color:var(--muted);
-}
-
-/* TEXT */
-p{margin-top:24px;max-width:720px;line-height:1.7;color:var(--muted)}
-
-/* GRID */
-.grid{
-  margin-top:64px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:36px;
-}
-
-/* GLASS CARDS */
-.card,.counter-card,.contact a{
-  position:relative;
-  padding:32px;
-  border-radius:22px;
-  background:var(--glass-bg);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(18px) saturate(160%);
-  overflow:hidden;
-  transition:.35s ease;
-}
-.card:hover,.counter-card:hover,.contact a:hover{transform:translateY(-6px)}
-
-.card::before,.counter-card::before,.contact a::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(
-    400px circle at var(--x,50%) var(--y,50%),
-    var(--glass-glow),
-    transparent 40%
-  );
-  opacity:0;
-  transition:.3s;
-}
-.card:hover::before,
-.counter-card:hover::before,
-.contact a:hover::before{opacity:1}
-
-/* BORREGOS */
-.borrego{text-align:center}
-.borrego img{
-  width:100%;
-  height:280px;
-  object-fit:cover;
-  border-radius:18px;
-  margin-bottom:12px;
-}
-
-/* INVENTORY */
-.counters{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.counter-value{font-size:64px}
-
-/* CONTACT */
-.contact{
-  margin-top:40px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-.contact a{color:var(--fg);text-decoration:none}
-
-/* FOOTER */
-footer{
-  padding:80px 10vw;
-  text-align:center;
-  border-top:1px solid var(--glass-border);
-  color:var(--muted);
-}
-footer strong{color:var(--fg)}
-</style>
-</head>
-
-<body>
-
-<div class="overlay" id="overlay"></div>
-
-<!-- HEADER -->
-<div class="header">
-  <button id="langBtn">ES</button>
-  <button id="themeBtn">🌗</button>
-  <button id="menuBtn">☰</button>
-</div>
-
-<!-- MENU -->
-<nav class="menu" id="menu">
-  <span data-i="0">Inicio</span>
-  <span data-i="1">Quiénes somos</span>
-  <span data-i="2">Borregos</span>
-  <span data-i="3">Servicios</span>
-  <span data-i="4">Blog</span>
-  <span data-i="5">Inventario</span>
-  <span data-i="6">Donaciones</span>
-  <span data-i="7">Contacto</span>
-</nav>
-
-<section class="section hero">
-  <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">K DE QUESO</div>
-</section>
-
-<section class="section">
-  <h1>Inventario</h1>
-  <div class="counters">
-    <div class="counter-card">
-      <div class="counter-value" id="counter">0</div>
-      Objetos registrados
-    </div>
-  </div>
-  <div class="grid">
-    <div class="card">Cono de tráfico</div>
-    <div class="card">Silla rota</div>
-    <div class="card">Carrito metálico</div>
-    <div class="card">Altavoz dudoso</div>
-  </div>
-</section>
-
-<footer>
-  <strong>Borregos S.L</strong><br>
-  k de queso<br><br>
-  © 2026
-</footer>
-
 <script>
 /* ===== ELEMENTOS ===== */
-const menuBtn = document.getElementById("menuBtn");
-const menu = document.getElementById("menu");
-const overlay = document.getElementById("overlay");
-const themeBtn = document.getElementById("themeBtn");
+const menuBtn   = document.getElementById("menuBtn");
+const menu      = document.getElementById("menu");
+const overlay   = document.getElementById("overlay");
+const themeBtn  = document.getElementById("themeBtn");
 const counterEl = document.getElementById("counter");
 
-/* ===== MENU ===== */
-menuBtn.addEventListener("click",()=>{
+const menuItems = document.querySelectorAll(".menu span");
+const sections  = document.querySelectorAll(".section");
+
+/* ===== MENU ABRIR / CERRAR ===== */
+menuBtn.addEventListener("click", () => {
   menu.classList.toggle("open");
   overlay.classList.toggle("active");
 });
-overlay.addEventListener("click",()=>{
+
+overlay.addEventListener("click", () => {
+  closeMenu();
+});
+
+function closeMenu(){
   menu.classList.remove("open");
   overlay.classList.remove("active");
+}
+
+/* ===== MENU SCROLL ===== */
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    sections[index].scrollIntoView({ behavior: "smooth" });
+    closeMenu();
+  });
 });
 
 /* ===== THEME ===== */
-if(localStorage.theme==="light") document.body.classList.add("light");
-themeBtn.addEventListener("click",()=>{
+if (localStorage.theme === "light") {
+  document.body.classList.add("light");
+}
+
+themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
-  localStorage.theme=document.body.classList.contains("light")?"light":"dark";
+  localStorage.theme = document.body.classList.contains("light")
+    ? "light"
+    : "dark";
 });
 
 /* ===== COUNTER ===== */
-let count = Number(localStorage.items)||0;
-counterEl.textContent=count;
-setInterval(()=>{
+let count = Number(localStorage.items) || 0;
+counterEl.textContent = count;
+
+setInterval(() => {
   count++;
-  counterEl.textContent=count;
-  localStorage.items=count;
-},3000);
+  counterEl.textContent = count;
+  localStorage.items = count;
+}, 3000);
 
 /* ===== SECTION ANIMATION ===== */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
-},{threshold:.25});
-document.querySelectorAll(".section").forEach(s=>observer.observe(s));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    entry.target.classList.toggle("visible", entry.isIntersecting);
+  });
+},{ threshold: 0.25 });
+
+sections.forEach(section => observer.observe(section));
 
 /* ===== GLOW FOLLOW CURSOR ===== */
-document.querySelectorAll(".card,.counter-card,.contact a").forEach(el=>{
-  el.addEventListener("mousemove",e=>{
-    const r=el.getBoundingClientRect();
-    el.style.setProperty("--x",`${e.clientX-r.left}px`);
-    el.style.setProperty("--y",`${e.clientY-r.top}px`);
+document.querySelectorAll(".card,.counter-card,.contact a").forEach(el => {
+  el.addEventListener("mousemove", e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - r.left}px`);
+    el.style.setProperty("--y", `${e.clientY - r.top}px`);
   });
 });
 </script>
-
-</body>
-</html>
