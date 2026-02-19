@@ -4,68 +4,76 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Borregos S.L — k de queso</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#0a0a0a;
   --fg:#f5f5f5;
-  --muted:#777;
   --glass:rgba(255,255,255,.06);
   --accent:#ff006e;
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 
-/* BODY */
 body{
   background:var(--bg);
   color:var(--fg);
   overflow-x:hidden;
-  transition:background .4s;
-}
-body.borrego{
-  background:#140f0f;
+  transition:.4s;
 }
 
-/* WORLD (TODO) */
+/* WORLD */
 .world{
   transform-origin:top center;
-  transition:transform 1s cubic-bezier(.22,.61,.36,1);
+  transition:transform 1.2s cubic-bezier(.22,.61,.36,1);
 }
-body.borrego .world{
+
+/* ===== GRAVITY ===== */
+body.gravity .world{
   transform:translateY(120px) rotate(.8deg);
+}
+body.gravity .section{
+  transform:translateY(40px) rotate(.4deg);
+}
+
+/* ===== DESINTEGRATE ===== */
+body.disintegrate .section,
+body.disintegrate .card,
+body.disintegrate h1,
+body.disintegrate p{
+  animation:disintegrate 1.2s forwards;
+}
+
+@keyframes disintegrate{
+  to{
+    transform:
+      translate(
+        calc((random() - .5) * 300px),
+        calc((random() - .5) * 300px)
+      )
+      rotate(12deg);
+    opacity:0;
+    filter:blur(8px);
+  }
 }
 
 /* SECTIONS */
 .section{
   min-height:100vh;
   padding:180px 10vw 160px 14vw;
-  transition:transform 1s cubic-bezier(.22,.61,.36,1);
-}
-body.borrego .section{
-  transform:translateY(30px) rotate(.3deg);
+  transition:transform 1.2s cubic-bezier(.22,.61,.36,1);
 }
 
 /* TITLES */
 h1{
-  margin-left:-2px;
+  margin-left:-4px;
   font-size:clamp(76px,6vw,130px);
-  font-weight:500;
 }
-.hero h1{
-  font-size:clamp(130px,11vw,220px);
-}
+.hero h1{font-size:clamp(130px,11vw,220px)}
 
 /* TEXT */
-p{
-  margin-top:20px;
-  max-width:680px;
-  color:#aaa;
-  line-height:1.6;
-}
+p{max-width:680px;color:#aaa;margin-top:20px}
 
 /* GRID */
 .grid{
@@ -75,92 +83,13 @@ p{
   gap:36px;
 }
 
-/* CARDS */
+/* CARD */
 .card{
   padding:32px;
   border-radius:22px;
   background:var(--glass);
   border:1px solid rgba(255,255,255,.1);
-  transition:transform 1s cubic-bezier(.22,.61,.36,1);
-}
-body.borrego .card{
-  transform:translateY(60px) rotate(1deg);
-}
-
-/* BORREGOS */
-.borrego img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  background:#111;
-}
-
-/* BLOG */
-.blog-item img,
-.blog-item video{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  background:#111;
-}
-
-/* COUNTERS */
-.counters{
-  margin-top:48px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.counter-card{
-  padding:36px;
-  border-radius:22px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-}
-.counter-value{font-size:64px}
-
-/* CONTACT */
-.contact{
-  margin-top:56px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-.contact a{
-  padding:32px;
-  border-radius:22px;
-  background:var(--glass);
-  color:#fff;
-  text-decoration:none;
-}
-
-/* MENU */
-.menu-btn{
-  position:fixed;top:32px;right:40px;
-  width:28px;height:22px;
-  display:flex;flex-direction:column;
-  justify-content:space-between;
-  z-index:600;cursor:pointer;
-}
-.menu-btn span{height:2px;background:#fff}
-
-.menu{
-  position:fixed;top:0;right:0;
-  width:320px;height:100vh;
-  padding:140px 48px;
-  background:rgba(15,15,15,.7);
-  backdrop-filter:blur(20px);
-  transform:translateX(100%);
-  transition:.6s;
-  z-index:500;
-}
-.menu.open{transform:none}
-.menu span{
-  display:block;
-  margin-bottom:24px;
-  letter-spacing:.3em;
-  font-size:13px;
-  cursor:pointer;
+  transition:transform 1.2s cubic-bezier(.22,.61,.36,1);
 }
 
 /* TOGGLE */
@@ -168,62 +97,47 @@ body.borrego .card{
   position:fixed;
   bottom:24px;
   right:24px;
-  padding:18px 34px;
+  padding:18px 36px;
   border-radius:999px;
   background:var(--glass);
   border:1px solid rgba(255,255,255,.2);
   backdrop-filter:blur(12px);
   cursor:pointer;
-  z-index:700;
-  transition:transform .4s;
-}
-body.borrego .toggle{
-  background:var(--accent);
-  color:#000;
+  z-index:999;
+  letter-spacing:.3em;
+  transition:.3s;
 }
 
-/* SHEEP */
-.sheep{
-  position:fixed;
-  font-size:32px;
-  pointer-events:none;
-  animation:floatSheep 4s ease-in-out infinite;
+body.gravity .toggle{
+  background:#ffb703;
+  color:#000;
 }
-@keyframes floatSheep{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-30px)}
+body.disintegrate .toggle{
+  background:var(--accent);
+  animation:panic .15s infinite alternate;
+}
+
+@keyframes panic{
+  from{transform:translateY(0)}
+  to{transform:translateY(-3px)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
-<div class="menu" id="menu">
-  <span>Inicio</span><span>Quiénes</span><span>Borregos</span>
-  <span>Servicios</span><span>Blog</span><span>Inventario</span>
-  <span>Donaciones</span><span>Contacto</span>
-</div>
-
 <div class="toggle" id="toggle">MODO BORREGO</div>
 
-<div class="world" id="world">
+<div class="world">
 
 <section class="section hero">
   <h1>Borregos<br>S.L</h1>
-  <div class="hero-sub">k de queso</div>
+  <div>k de queso</div>
 </section>
 
 <section class="section">
   <h1>Quiénes somos</h1>
-  <p>Diez individuos con criterio dudoso y ningún plan.</p>
-</section>
-
-<section class="section">
-  <h1>Los borregos</h1>
-  <div class="grid">
-    ${[...Array(10)].map((_,i)=>`<div class="borrego"><img src="b${i+1}.jpg"><strong>Borrego ${i+1}</strong></div>`).join("")}
-  </div>
+  <p>Diez individuos con cero supervisión.</p>
 </section>
 
 <section class="section">
@@ -236,34 +150,10 @@ body.borrego .toggle{
 </section>
 
 <section class="section">
-  <h1>Blog</h1>
-  <div class="grid">
-    <div class="blog-item"><img src="blog1.jpg"></div>
-    <div class="blog-item"><video src="video1.mp4" controls></video></div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Inventario</h1>
-  <div class="counters">
-    <div class="counter-card"><div class="counter-value" id="itemCount">0</div>Objetos</div>
-    <div class="counter-card"><div class="counter-value" id="sheepCount">0</div>Ovejas</div>
-  </div>
-</section>
-
-<section class="section">
-  <h1>Donaciones</h1>
-  <div class="grid">
-    <div class="card">Bizum</div>
-    <div class="card">PayPal</div>
-  </div>
-</section>
-
-<section class="section">
   <h1>Contacto</h1>
-  <div class="contact">
-    <a href="#">Instagram</a>
-    <a href="#">Email</a>
+  <div class="grid">
+    <div class="card">Instagram</div>
+    <div class="card">Email</div>
   </div>
 </section>
 
@@ -272,45 +162,21 @@ body.borrego .toggle{
 <script>
 const toggle=document.getElementById("toggle");
 const body=document.body;
-const menuBtn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
 
-menuBtn.onclick=()=>menu.classList.toggle("open");
-
-let sheepCount=Number(localStorage.sheep)||0;
-let itemCount=Number(localStorage.items)||0;
-
-document.getElementById("sheepCount").textContent=sheepCount;
-document.getElementById("itemCount").textContent=itemCount;
-
-setInterval(()=>{
-  itemCount++;
-  localStorage.items=itemCount;
-  document.getElementById("itemCount").textContent=itemCount;
-},3000);
+let mode=0; // 0 normal | 1 gravity | 2 disintegrate
 
 toggle.onclick=()=>{
-  body.classList.toggle("borrego");
-  if(body.classList.contains("borrego")){
-    for(let i=0;i<12;i++){
-      const s=document.createElement("div");
-      s.className="sheep";
-      s.textContent="🐑";
-      s.style.left=Math.random()*100+"vw";
-      s.style.top=Math.random()*100+"vh";
-      document.body.appendChild(s);
-      sheepCount++;
-    }
-    localStorage.sheep=sheepCount;
-    document.getElementById("sheepCount").textContent=sheepCount;
-  }else{
-    document.querySelectorAll(".sheep").forEach(s=>s.remove());
-  }
+  body.classList.remove("gravity","disintegrate");
+  mode=(mode+1)%3;
+
+  if(mode===1) body.classList.add("gravity");
+  if(mode===2) body.classList.add("disintegrate");
 };
 
+/* BOTÓN CON PESO */
 window.addEventListener("scroll",()=>{
-  if(body.classList.contains("borrego")){
-    toggle.style.transform=`translateY(${window.scrollY*0.02}px)`;
+  if(body.classList.contains("gravity")){
+    toggle.style.transform=`translateY(${scrollY*0.02}px)`;
   }else{
     toggle.style.transform="translateY(0)";
   }
