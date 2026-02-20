@@ -12,30 +12,14 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 
-/* ================= APP WRAPPER ================= */
-.app{
-  transition:transform .45s cubic-bezier(.4,0,.2,1);
-}
-.app.menu-open{
-  transform:translateX(60px); /* 👈 desplazamiento del contenido */
-}
-
 /* ================= MENU BUTTON ================= */
 .menu-btn{
-  position:fixed;
-  top:24px;
-  right:24px;
-  width:30px;
-  height:22px;
-  cursor:pointer;
-  z-index:300;
+  position:fixed;top:24px;right:24px;
+  width:30px;height:22px;cursor:pointer;z-index:300
 }
 .menu-btn span{
-  position:absolute;
-  width:100%;
-  height:2px;
-  background:#fff;
-  transition:.3s;
+  position:absolute;width:100%;height:2px;
+  background:#fff;transition:.3s
 }
 .menu-btn span:nth-child(1){top:0}
 .menu-btn span:nth-child(2){top:10px}
@@ -46,46 +30,27 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 
 /* ================= MENU OVERLAY ================= */
 .menu{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:rgba(0,0,0,.6);
-  opacity:0;
-  pointer-events:none;
-  transition:.4s ease;
-  z-index:200;
+  opacity:0;pointer-events:none;
+  transition:.4s ease;z-index:200
 }
-.menu.active{
-  opacity:1;
-  pointer-events:auto;
-}
+.menu.active{opacity:1;pointer-events:auto}
 
 /* ================= MENU PANEL ================= */
 .menu-panel{
-  position:absolute;
-  top:0;
-  right:0;
-  width:min(420px,80vw);
-  height:100%;
+  position:absolute;top:0;right:0;
+  width:min(420px,80vw);height:100%;
   background:#0b0b0b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   transform:translateX(100%);
-  transition:.45s cubic-bezier(.4,0,.2,1);
+  transition:.45s cubic-bezier(.4,0,.2,1)
 }
-.menu.active .menu-panel{
-  transform:translateX(0);
-}
-.menu-panel ul{
-  list-style:none;
-  text-align:right;
-  padding-right:48px;
-}
+.menu.active .menu-panel{transform:translateX(0)}
+.menu-panel ul{list-style:none;text-align:right;padding-right:48px}
 .menu-panel li{
   font-size:clamp(18px,2.6vw,26px);
-  margin:16px 0;
-  cursor:pointer;
-  transition:.3s;
+  margin:16px 0;cursor:pointer;transition:.3s
 }
 .menu-panel li:hover{opacity:.6}
 
@@ -105,10 +70,12 @@ h1{
   margin-bottom:32px;
 }
 
-/* ================= CONTENT ================= */
+/* ================= CONTENT SHIFT ================= */
 .content{
   margin-left:12px;
 }
+
+/* ================= TEXT ================= */
 p{
   max-width:820px;
   font-size:16px;
@@ -155,14 +122,36 @@ p{
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:40px;
 }
-.card{
-  padding:30px;
+
+/* ================= EL REBAÑO ================= */
+.herd{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:32px;
+}
+.borrego{
+  text-align:left;
+}
+.borrego img{
+  width:100%;
   border-radius:18px;
+  margin-bottom:14px;
+  filter:grayscale(100%);
+}
+.borrego span{
+  display:block;
+  font-size:14px;
+  color:#888;
+  margin-top:4px;
+}
+
+/* ================= CARDS ================= */
+.card{
+  padding:30px;border-radius:18px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  opacity:0;
-  transform:translateY(24px);
-  transition:.8s cubic-bezier(.4,0,.2,1);
+  opacity:0;transform:translateY(24px);
+  transition:.8s cubic-bezier(.4,0,.2,1)
 }
 .card.visible{opacity:1;transform:none}
 
@@ -170,55 +159,40 @@ p{
 .inventory{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:26px;
-  margin-top:32px;
+  gap:26px;margin-top:32px
 }
-.inventory img{
-  width:100%;
-  border-radius:16px;
-  opacity:.9;
-}
+.inventory img{width:100%;border-radius:16px;opacity:.9}
 .inventory-controls{margin-top:32px}
-button{
-  padding:12px 22px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.25);
-  background:none;
-  color:#fff;
-  cursor:pointer;
-  transition:.3s;
-}
-button:hover{background:rgba(255,255,255,.12)}
-.counter{margin-top:20px;font-size:22px}
 
-/* ================= DONATIONS ================= */
+/* ================= BLOG ================= */
+.blog-post{margin-top:48px}
+.blog-post img{
+  width:100%;max-width:760px;
+  border-radius:18px;margin-bottom:18px
+}
+
+/* ================= DONACIONES ================= */
 .bar{
-  height:10px;
-  background:#222;
-  border-radius:6px;
-  overflow:hidden;
-  margin-top:20px;
+  height:10px;background:#222;
+  border-radius:6px;overflow:hidden;
+  margin-top:20px
 }
 .fill{
-  height:100%;
-  width:0%;
+  height:100%;width:0;
   background:#fff;
-  transition:1s cubic-bezier(.4,0,.2,1);
+  transition:1s cubic-bezier(.4,0,.2,1)
 }
 .donations{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:28px;
-  margin-top:32px;
+  gap:28px;margin-top:32px
 }
 .donation{
-  padding:24px;
-  border-radius:18px;
+  padding:24px;border-radius:18px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  cursor:pointer;
-  transition:.3s;
+  text-align:center;cursor:pointer;
+  transition:.3s
 }
 .donation:hover{transform:translateY(-6px)}
 
@@ -226,16 +200,14 @@ button:hover{background:rgba(255,255,255,.12)}
 footer{
   padding:70px 12vw;
   border-top:1px solid rgba(255,255,255,.1);
-  text-align:center;
-  color:#777;
+  text-align:center;color:#777
 }
 
 /* ================= MOBILE ================= */
 @media(max-width:768px){
-  .app.menu-open{transform:none}
   section{padding:130px 8vw}
   .content{margin-left:0}
-  .grid,.inventory,.donations{grid-template-columns:1fr}
+  .grid,.inventory,.donations,.herd{grid-template-columns:1fr}
   .hero h1{white-space:normal}
   .hero .kqueso{margin-left:0}
 }
@@ -255,23 +227,23 @@ footer{
     <ul>
       <li data-s="0">Inicio</li>
       <li data-s="1">Quiénes somos</li>
-      <li data-s="2">Qué hacemos</li>
-      <li data-s="3">Inventario</li>
-      <li data-s="4">Blog</li>
-      <li data-s="5">Donaciones</li>
-      <li data-s="6">Contacto</li>
+      <li data-s="2">El Rebaño</li>
+      <li data-s="3">Qué hacemos</li>
+      <li data-s="4">Inventario</li>
+      <li data-s="5">Blog</li>
+      <li data-s="6">Donaciones</li>
+      <li data-s="7">Contacto</li>
     </ul>
   </div>
 </div>
 
-<!-- APP CONTENT -->
-<div class="app" id="app">
-
+<!-- HERO -->
 <section class="hero fade">
   <h1>Borregos <span>S.L.</span></h1>
   <div class="kqueso">K DE QUESO</div>
 </section>
 
+<!-- QUIÉNES SOMOS -->
 <section class="fade">
   <h1>Quiénes somos</h1>
   <div class="content">
@@ -281,6 +253,46 @@ footer{
   </div>
 </section>
 
+<!-- EL REBAÑO -->
+<section>
+  <h1 class="fade">El Rebaño</h1>
+  <div class="content">
+    <div class="herd">
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 01
+        <span>Presencia</span>
+      </div>
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 02
+        <span>Logística emocional</span>
+      </div>
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 03
+        <span>Observación pasiva</span>
+      </div>
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 04
+        <span>Deriva</span>
+      </div>
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 05
+        <span>Decisiones tardías</span>
+      </div>
+      <div class="borrego fade">
+        <img src="https://via.placeholder.com/400x500">
+        Borrego 06
+        <span>Soporte técnico</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ HACEMOS -->
 <section>
   <h1 class="fade">Qué hacemos</h1>
   <div class="content">
@@ -293,6 +305,7 @@ footer{
   </div>
 </section>
 
+<!-- INVENTARIO -->
 <section>
   <h1 class="fade">Inventario</h1>
   <div class="content">
@@ -304,6 +317,33 @@ footer{
   </div>
 </section>
 
+<!-- BLOG -->
+<section>
+  <h1 class="fade">Blog</h1>
+  <div class="content">
+    <div class="blog-post">
+      <img src="https://via.placeholder.com/900x500">
+      <h3>Pensar en grupo</h3>
+      <p>Reflexiones sin conclusión sobre procesos colectivos y decisiones compartidas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section>
+  <h1 class="fade">Donaciones</h1>
+  <div class="content">
+    <p>El dinero no resolverá nada, pero ayudará a que nada continúe.</p>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="donations">
+      <div class="donation" onclick="donar(0.5)">50 céntimos</div>
+      <div class="donation" onclick="donar(1)">1 €</div>
+      <div class="donation" onclick="donar(2)">2 €</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
 <section class="fade">
   <h1>Contacto</h1>
   <div class="content">
@@ -313,45 +353,31 @@ footer{
 
 <footer>© Borregos S.L. · Desde Fallas · K de queso</footer>
 
-</div>
-
 <script>
 /* MENU */
-const btn = document.getElementById("menuBtn");
-const menu = document.getElementById("menu");
-const app  = document.getElementById("app");
+const btn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
 
-btn.onclick = () => {
-  btn.classList.toggle("active");
-  menu.classList.toggle("active");
-  app.classList.toggle("menu-open");
-};
-
+btn.onclick=()=>{btn.classList.toggle("active");menu.classList.toggle("active")};
 menu.addEventListener("click",e=>{
-  if(e.target===menu){
-    btn.classList.remove("active");
-    menu.classList.remove("active");
-    app.classList.remove("menu-open");
-  }
+  if(e.target===menu){btn.classList.remove("active");menu.classList.remove("active")}
 });
-
 menu.querySelectorAll("li").forEach(li=>{
   li.onclick=()=>{
     document.querySelectorAll("section")[li.dataset.s]
       .scrollIntoView({behavior:"smooth"});
     btn.classList.remove("active");
     menu.classList.remove("active");
-    app.classList.remove("menu-open");
   };
 });
 
-/* SCROLL ANIMATIONS */
+/* ANIMATIONS */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
 },{threshold:.15});
 document.querySelectorAll(".fade,.card").forEach(el=>obs.observe(el));
 
-/* INVENTORY */
+/* INVENTARIO */
 let count=0;
 const inventory=document.getElementById("inventory");
 const counterText=document.getElementById("counterText");
@@ -367,6 +393,15 @@ function updateCounter(){
   <small>${count>=20?"Mercadillo activado.":"Si llegamos a 20 hacemos mercadillo."}</small>`;
 }
 updateCounter();
+
+/* DONACIONES */
+let raised=0,goal=100;
+const fill=document.getElementById("fill");
+function donar(amount){
+  raised+=amount;
+  fill.style.width=Math.min(100,(raised/goal)*100)+"%";
+  window.location.href="https://www.paypal.com";
+}
 </script>
 
 </body>
