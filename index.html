@@ -246,7 +246,11 @@ footer{
   <h1>Quiénes somos</h1>
   <div class="content">
     <p style="text-align:justify">
-      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad, y esa repetición acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. No respondemos a encargos ni perseguimos objetivos medibles, nos movemos en un espacio intermedio entre la intención y la inercia, produciendo situaciones prescindibles sostenidas con una seriedad desproporcionada. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
+      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad, y fue precisamente esa repetición la que acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. Con el tiempo entendimos que ser borrego no es una condición pasiva, sino una filosofía activa: aceptar la deriva como sistema, asumir el error como herramienta y avanzar sin una dirección precisa, pero con una convicción sorprendentemente firme.
+      <br><br>
+      No respondemos a encargos ni perseguimos objetivos medibles en el sentido tradicional. Nos movemos en un espacio intermedio entre la intención y la inercia, donde las decisiones se toman tarde, pero se sostienen con una seriedad casi institucional. Producimos situaciones prescindibles, presencias injustificadas y desplazamientos innecesarios tratados con rigor metodológico. Practicamos la locura controlada como forma de análisis y la inacción colectiva como gesto consciente.
+      <br><br>
+      Si alguien desea contratarnos para animar espacios, activar entornos excesivamente estables o introducir un grado razonable de caos reflexivo en lugares donde todo parece funcionar demasiado bien, no lo duden. No garantizamos resultados, pero sí una experiencia difícil de explicar y aún más difícil de repetir. Seis personas, un criterio flexible, una tolerancia elevada al absurdo y una ética borrega aplicada con constancia. K de queso.
     </p>
   </div>
 </section>
@@ -345,13 +349,13 @@ menu.querySelectorAll("li").forEach(li=>{
   };
 });
 
-/* SCROLL ANIMATIONS */
+/* ANIMATIONS */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
 },{threshold:.15});
 document.querySelectorAll(".fade,.card").forEach(el=>obs.observe(el));
 
-/* INVENTARIO (SUBIDA REAL DE FOTOS) */
+/* INVENTARIO */
 let count=0;
 const inventory=document.getElementById("inventory");
 const counterText=document.getElementById("counterText");
