@@ -12,22 +12,30 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
 body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 
-/* ================= APP SHIFT ================= */
+/* ================= APP WRAPPER ================= */
 .app{
-  transition:.45s cubic-bezier(.4,0,.2,1);
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
 }
-.app.shift{
-  transform:translateX(60px);
+.app.menu-open{
+  transform:translateX(60px); /* 👈 desplazamiento del contenido */
 }
 
 /* ================= MENU BUTTON ================= */
 .menu-btn{
-  position:fixed;top:24px;right:24px;
-  width:30px;height:22px;cursor:pointer;z-index:300
+  position:fixed;
+  top:24px;
+  right:24px;
+  width:30px;
+  height:22px;
+  cursor:pointer;
+  z-index:300;
 }
 .menu-btn span{
-  position:absolute;width:100%;height:2px;
-  background:#fff;transition:.3s
+  position:absolute;
+  width:100%;
+  height:2px;
+  background:#fff;
+  transition:.3s;
 }
 .menu-btn span:nth-child(1){top:0}
 .menu-btn span:nth-child(2){top:10px}
@@ -36,27 +44,48 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 .menu-btn.active span:nth-child(2){opacity:0}
 .menu-btn.active span:nth-child(3){transform:rotate(-45deg);bottom:10px}
 
-/* ================= MENU ================= */
+/* ================= MENU OVERLAY ================= */
 .menu{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:rgba(0,0,0,.6);
-  opacity:0;pointer-events:none;
-  transition:.4s ease;z-index:200
+  opacity:0;
+  pointer-events:none;
+  transition:.4s ease;
+  z-index:200;
 }
-.menu.active{opacity:1;pointer-events:auto}
+.menu.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ================= MENU PANEL ================= */
 .menu-panel{
-  position:absolute;top:0;right:0;
-  width:min(420px,80vw);height:100%;
+  position:absolute;
+  top:0;
+  right:0;
+  width:min(420px,80vw);
+  height:100%;
   background:#0b0b0b;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   transform:translateX(100%);
-  transition:.45s cubic-bezier(.4,0,.2,1)
+  transition:.45s cubic-bezier(.4,0,.2,1);
 }
-.menu.active .menu-panel{transform:translateX(0)}
-.menu-panel ul{list-style:none;text-align:right;padding-right:48px}
+.menu.active .menu-panel{
+  transform:translateX(0);
+}
+.menu-panel ul{
+  list-style:none;
+  text-align:right;
+  padding-right:48px;
+}
 .menu-panel li{
   font-size:clamp(18px,2.6vw,26px);
-  margin:16px 0;cursor:pointer;transition:.3s
+  margin:16px 0;
+  cursor:pointer;
+  transition:.3s;
 }
 .menu-panel li:hover{opacity:.6}
 
@@ -64,9 +93,10 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 section{
   min-height:100vh;
   padding:150px 12vw;
+}
+section + section{
   border-top:1px solid rgba(255,255,255,.06);
 }
-section:first-child{border-top:none}
 
 /* ================= TITLES ================= */
 h1{
@@ -76,7 +106,9 @@ h1{
 }
 
 /* ================= CONTENT ================= */
-.content{margin-left:12px}
+.content{
+  margin-left:12px;
+}
 p{
   max-width:820px;
   font-size:16px;
@@ -94,9 +126,14 @@ p{
 .hero h1{
   font-size:clamp(88px,12vw,200px);
   line-height:.95;
+  white-space:nowrap;
 }
-.hero span{opacity:.6;font-size:.3em;margin-left:12px}
-.kqueso{
+.hero h1 span{
+  font-size:clamp(28px,4vw,48px);
+  opacity:.6;
+  margin-left:16px;
+}
+.hero .kqueso{
   margin-top:32px;
   margin-left:10vw;
   font-size:clamp(32px,4.5vw,56px);
@@ -104,38 +141,86 @@ p{
   color:#aaa;
 }
 
+/* ================= ANIMATIONS ================= */
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s cubic-bezier(.4,0,.2,1);
+}
+.fade.visible{opacity:1;transform:none}
+
 /* ================= GRID ================= */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:36px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
 }
 .card{
+  padding:30px;
+  border-radius:18px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:28px;
-  cursor:pointer;
-  transition:.35s;
+  opacity:0;
+  transform:translateY(24px);
+  transition:.8s cubic-bezier(.4,0,.2,1);
 }
-.card:hover{transform:translateY(-6px)}
-.card img{
-  width:100%;
-  border-radius:14px;
-  margin-bottom:14px;
-}
+.card.visible{opacity:1;transform:none}
 
-/* ================= PROFILE VIEW ================= */
-.profile{
-  display:none;
+/* ================= INVENTORY ================= */
+.inventory{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+  margin-top:32px;
 }
-.profile.active{display:block}
-.profile img{
+.inventory img{
   width:100%;
-  max-width:420px;
-  border-radius:20px;
-  margin-bottom:32px;
+  border-radius:16px;
+  opacity:.9;
 }
+.inventory-controls{margin-top:32px}
+button{
+  padding:12px 22px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.25);
+  background:none;
+  color:#fff;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{background:rgba(255,255,255,.12)}
+.counter{margin-top:20px;font-size:22px}
+
+/* ================= DONATIONS ================= */
+.bar{
+  height:10px;
+  background:#222;
+  border-radius:6px;
+  overflow:hidden;
+  margin-top:20px;
+}
+.fill{
+  height:100%;
+  width:0%;
+  background:#fff;
+  transition:1s cubic-bezier(.4,0,.2,1);
+}
+.donations{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:28px;
+  margin-top:32px;
+}
+.donation{
+  padding:24px;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.donation:hover{transform:translateY(-6px)}
 
 /* ================= FOOTER ================= */
 footer{
@@ -147,9 +232,12 @@ footer{
 
 /* ================= MOBILE ================= */
 @media(max-width:768px){
+  .app.menu-open{transform:none}
   section{padding:130px 8vw}
   .content{margin-left:0}
-  .app.shift{transform:none}
+  .grid,.inventory,.donations{grid-template-columns:1fr}
+  .hero h1{white-space:normal}
+  .hero .kqueso{margin-left:0}
 }
 </style>
 </head>
@@ -165,63 +253,58 @@ footer{
 <div class="menu" id="menu">
   <div class="menu-panel">
     <ul>
-      <li data-go="home">Inicio</li>
-      <li data-go="about">Quiénes somos</li>
-      <li data-go="rebanio">El rebaño</li>
-      <li data-go="contact">Contacto</li>
+      <li data-s="0">Inicio</li>
+      <li data-s="1">Quiénes somos</li>
+      <li data-s="2">Qué hacemos</li>
+      <li data-s="3">Inventario</li>
+      <li data-s="4">Blog</li>
+      <li data-s="5">Donaciones</li>
+      <li data-s="6">Contacto</li>
     </ul>
   </div>
 </div>
 
+<!-- APP CONTENT -->
 <div class="app" id="app">
 
-<!-- HERO -->
-<section id="home" class="hero">
+<section class="hero fade">
   <h1>Borregos <span>S.L.</span></h1>
   <div class="kqueso">K DE QUESO</div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
+<section class="fade">
   <h1>Quiénes somos</h1>
   <div class="content">
-    <p>
-      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas...
+    <p style="text-align:justify">
+      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad, y esa repetición acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. No respondemos a encargos ni perseguimos objetivos medibles, nos movemos en un espacio intermedio entre la intención y la inercia, produciendo situaciones prescindibles sostenidas con una seriedad desproporcionada. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
     </p>
   </div>
 </section>
 
-<!-- EL REBAÑO -->
-<section id="rebanio">
-  <h1>El rebaño</h1>
+<section>
+  <h1 class="fade">Qué hacemos</h1>
   <div class="content">
     <div class="grid">
-      <div class="card" onclick="openProfile(1)">
-        <img src="https://via.placeholder.com/400x300">
-        <strong>Integrante 01</strong>
-      </div>
-      <div class="card" onclick="openProfile(2)">
-        <img src="https://via.placeholder.com/400x300">
-        <strong>Integrante 02</strong>
-      </div>
-      <div class="card" onclick="openProfile(3)">
-        <img src="https://via.placeholder.com/400x300">
-        <strong>Integrante 03</strong>
-      </div>
+      <div class="card">Prácticas cercanas al delito que se estudian con rigor y se abandonan a tiempo.</div>
+      <div class="card">Desplazamientos cuidadosamente planificados hacia lugares donde no ocurre nada.</div>
+      <div class="card">Ir diez personas a una discoteca para que una sola ligue.</div>
+      <div class="card">Permanecer en espacios públicos el tiempo suficiente como para incomodar.</div>
     </div>
   </div>
 </section>
 
-<!-- PROFILE -->
-<section class="profile" id="profile">
-  <h1 id="profileName"></h1>
-  <img id="profileImg">
-  <p id="profileText"></p>
-  <button onclick="closeProfile()">Volver</button>
+<section>
+  <h1 class="fade">Inventario</h1>
+  <div class="content">
+    <div class="inventory" id="inventory"></div>
+    <div class="inventory-controls">
+      <button onclick="addItem()">Añadir objeto</button>
+      <div class="counter" id="counterText"></div>
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
+<section class="fade">
   <h1>Contacto</h1>
   <div class="content">
     <p>Borregoasqueroso@gmail.com</p>
@@ -233,53 +316,57 @@ footer{
 </div>
 
 <script>
-const btn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-const app=document.getElementById("app");
-
 /* MENU */
-btn.onclick=()=>{
+const btn = document.getElementById("menuBtn");
+const menu = document.getElementById("menu");
+const app  = document.getElementById("app");
+
+btn.onclick = () => {
   btn.classList.toggle("active");
   menu.classList.toggle("active");
-  app.classList.toggle("shift");
+  app.classList.toggle("menu-open");
 };
 
 menu.addEventListener("click",e=>{
   if(e.target===menu){
-    btn.click();
+    btn.classList.remove("active");
+    menu.classList.remove("active");
+    app.classList.remove("menu-open");
   }
 });
 
-/* NAV */
 menu.querySelectorAll("li").forEach(li=>{
   li.onclick=()=>{
-    document.getElementById(li.dataset.go)
+    document.querySelectorAll("section")[li.dataset.s]
       .scrollIntoView({behavior:"smooth"});
-    btn.click();
+    btn.classList.remove("active");
+    menu.classList.remove("active");
+    app.classList.remove("menu-open");
   };
 });
 
-/* PROFILES */
-const profiles={
-  1:{name:"Integrante 01",img:"https://via.placeholder.com/600x400",text:"Descripción seria pero absurda."},
-  2:{name:"Integrante 02",img:"https://via.placeholder.com/600x400",text:"Otro perfil perfectamente prescindible."},
-  3:{name:"Integrante 03",img:"https://via.placeholder.com/600x400",text:"Miembro clave sin funciones claras."}
-};
+/* SCROLL ANIMATIONS */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
+},{threshold:.15});
+document.querySelectorAll(".fade,.card").forEach(el=>obs.observe(el));
 
-function openProfile(id){
-  document.querySelectorAll("section").forEach(s=>s.style.display="none");
-  const p=document.getElementById("profile");
-  p.style.display="block";
-  document.getElementById("profileName").innerText=profiles[id].name;
-  document.getElementById("profileImg").src=profiles[id].img;
-  document.getElementById("profileText").innerText=profiles[id].text;
-  window.scrollTo(0,0);
+/* INVENTORY */
+let count=0;
+const inventory=document.getElementById("inventory");
+const counterText=document.getElementById("counterText");
+function addItem(){
+  count++;
+  const img=document.createElement("img");
+  img.src="https://via.placeholder.com/400x300";
+  inventory.appendChild(img);
+  updateCounter();
 }
-
-function closeProfile(){
-  document.querySelectorAll("section").forEach(s=>s.style.display="block");
-  document.getElementById("profile").style.display="none";
+function updateCounter(){
+  counterText.innerHTML=`Objetos: <strong>${count}/20</strong><br>
+  <small>${count>=20?"Mercadillo activado.":"Si llegamos a 20 hacemos mercadillo."}</small>`;
 }
+updateCounter();
 </script>
 
 </body>
