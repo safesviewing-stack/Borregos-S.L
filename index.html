@@ -101,13 +101,16 @@ p{
   color:#aaa;
 }
 
-/* ================= ANIMATIONS ================= */
+/* ================= FADE ANIMATION ================= */
 .fade{
   opacity:0;
   transform:translateY(28px);
   transition:1s cubic-bezier(.4,0,.2,1);
 }
-.fade.visible{opacity:1;transform:none}
+.fade.visible{
+  opacity:1;
+  transform:none;
+}
 
 /* ================= GRID ================= */
 .grid{
@@ -116,13 +119,11 @@ p{
   gap:36px;
 }
 .card{
-  padding:28px;border-radius:18px;
+  padding:28px;
+  border-radius:18px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  opacity:0;transform:translateY(22px);
-  transition:.8s cubic-bezier(.4,0,.2,1)
 }
-.card.visible{opacity:1;transform:none}
 
 /* ================= EL REBAÑO ================= */
 .herd{
@@ -246,18 +247,16 @@ footer{
   <h1>Quiénes somos</h1>
   <div class="content">
     <p style="text-align:justify">
-      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad, y fue precisamente esa repetición la que acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. Con el tiempo entendimos que ser borrego no es una condición pasiva, sino una filosofía activa: aceptar la deriva como sistema, asumir el error como herramienta y avanzar sin una dirección precisa, pero con una convicción sorprendentemente firme.
+      Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad. Esa repetición acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. Con el tiempo entendimos que ser borrego no es una condición pasiva, sino una filosofía activa: aceptar la deriva como sistema, asumir el error como herramienta y avanzar sin una dirección precisa, pero con convicción.
       <br><br>
-      No respondemos a encargos ni perseguimos objetivos medibles en el sentido tradicional. Nos movemos en un espacio intermedio entre la intención y la inercia, donde las decisiones se toman tarde, pero se sostienen con una seriedad casi institucional. Producimos situaciones prescindibles, presencias injustificadas y desplazamientos innecesarios tratados con rigor metodológico. Practicamos la locura controlada como forma de análisis y la inacción colectiva como gesto consciente.
-      <br><br>
-      Si alguien desea contratarnos para animar espacios, activar entornos excesivamente estables o introducir un grado razonable de caos reflexivo en lugares donde todo parece funcionar demasiado bien, no lo duden. No garantizamos resultados, pero sí una experiencia difícil de explicar y aún más difícil de repetir. Seis personas, un criterio flexible, una tolerancia elevada al absurdo y una ética borrega aplicada con constancia. K de queso.
+      Practicamos la locura controlada, el desplazamiento innecesario y la presencia injustificada como forma de intervención. Si alguien desea contratarnos para animar espacios, alterar ambientes excesivamente estables o introducir un grado razonable de caos reflexivo, no lo duden. No garantizamos resultados, pero sí experiencias difíciles de justificar. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
     </p>
   </div>
 </section>
 
 <!-- EL REBAÑO -->
-<section>
-  <h1 class="fade">El Rebaño</h1>
+<section class="fade">
+  <h1>El Rebaño</h1>
   <div class="content">
     <div class="herd">
       <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><strong>Borrego 01</strong><span>Presencia</span></div>
@@ -271,21 +270,21 @@ footer{
 </section>
 
 <!-- QUÉ HACEMOS -->
-<section>
-  <h1 class="fade">Qué hacemos</h1>
+<section class="fade">
+  <h1>Qué hacemos</h1>
   <div class="content">
     <div class="grid">
-      <div class="card">Prácticas cercanas al delito que se estudian con rigor y se abandonan a tiempo.</div>
-      <div class="card">Desplazamientos cuidadosamente planificados hacia lugares donde no ocurre nada.</div>
-      <div class="card">Ir diez personas a una discoteca para que una sola ligue.</div>
-      <div class="card">Permanecer en espacios públicos el tiempo suficiente como para incomodar.</div>
+      <div class="card fade">Prácticas cercanas al delito que se estudian con rigor y se abandonan a tiempo.</div>
+      <div class="card fade">Desplazamientos cuidadosamente planificados hacia lugares donde no ocurre nada.</div>
+      <div class="card fade">Ir diez personas a una discoteca para que una sola ligue.</div>
+      <div class="card fade">Permanecer en espacios públicos el tiempo suficiente como para incomodar.</div>
     </div>
   </div>
 </section>
 
 <!-- INVENTARIO -->
-<section>
-  <h1 class="fade">Inventario</h1>
+<section class="fade">
+  <h1>Inventario</h1>
   <div class="content">
     <div class="inventory" id="inventory"></div>
     <div class="inventory-controls">
@@ -297,10 +296,10 @@ footer{
 </section>
 
 <!-- BLOG -->
-<section>
-  <h1 class="fade">Blog</h1>
+<section class="fade">
+  <h1>Blog</h1>
   <div class="content">
-    <div class="blog-post">
+    <div class="blog-post fade">
       <img src="https://via.placeholder.com/900x500">
       <h3>Pensar en grupo</h3>
       <p>Notas sin conclusión sobre decisiones compartidas.</p>
@@ -309,15 +308,15 @@ footer{
 </section>
 
 <!-- DONACIONES -->
-<section>
-  <h1 class="fade">Donaciones</h1>
+<section class="fade">
+  <h1>Donaciones</h1>
   <div class="content">
     <p>El dinero no resolverá nada, pero ayudará a que nada continúe.</p>
     <div class="bar"><div class="fill" id="fill"></div></div>
     <div class="donations">
-      <div class="donation" onclick="donar(0.5)">50 céntimos</div>
-      <div class="donation" onclick="donar(1)">1 €</div>
-      <div class="donation" onclick="donar(2)">2 €</div>
+      <div class="donation fade" onclick="donar(0.5)">50 céntimos</div>
+      <div class="donation fade" onclick="donar(1)">1 €</div>
+      <div class="donation fade" onclick="donar(2)">2 €</div>
     </div>
   </div>
 </section>
@@ -330,7 +329,7 @@ footer{
   </div>
 </section>
 
-<footer>© Borregos S.L. · Desde Fallas · K de queso</footer>
+<footer class="fade">© Borregos S.L. · Desde Fallas · K de queso</footer>
 
 <script>
 /* MENU */
@@ -349,11 +348,21 @@ menu.querySelectorAll("li").forEach(li=>{
   };
 });
 
-/* ANIMATIONS */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>e.target.classList.toggle("visible",e.isIntersecting));
-},{threshold:.15});
-document.querySelectorAll(".fade,.card").forEach(el=>obs.observe(el));
+/* FADE IN / OUT SCROLL */
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.intersectionRatio > 0.15) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  },
+  { threshold: [0, 0.15, 1] }
+);
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
 
 /* INVENTARIO */
 let count=0;
