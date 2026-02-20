@@ -47,10 +47,16 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
   transition:.45s cubic-bezier(.4,0,.2,1)
 }
 .menu.active .menu-panel{transform:translateX(0)}
-.menu-panel ul{list-style:none;text-align:right;padding-right:48px}
+.menu-panel ul{
+  list-style:none;
+  text-align:right;
+  padding-right:48px;
+}
 .menu-panel li{
-  font-size:clamp(22px,3.2vw,32px);
-  margin:18px 0;cursor:pointer;transition:.3s
+  font-size:clamp(18px,2.6vw,26px); /* 👈 MÁS PEQUEÑO */
+  margin:16px 0;
+  cursor:pointer;
+  transition:.3s;
 }
 .menu-panel li:hover{opacity:.6}
 
@@ -72,7 +78,7 @@ h1{
 
 /* ================= CONTENT SHIFT ================= */
 .content{
-  margin-left:16px; /* ajuste final, muy sutil */
+  margin-left:12px; /* 👈 ajuste final, muy sutil */
 }
 
 /* ================= TEXT ================= */
