@@ -28,7 +28,7 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
 .menu-btn.active span:nth-child(2){opacity:0}
 .menu-btn.active span:nth-child(3){transform:rotate(-45deg);bottom:10px}
 
-/* ================= MENU OVERLAY ================= */
+/* ================= MENU ================= */
 .menu{
   position:fixed;inset:0;
   background:rgba(0,0,0,.6);
@@ -36,8 +36,6 @@ body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
   transition:.4s ease;z-index:200
 }
 .menu.active{opacity:1;pointer-events:auto}
-
-/* ================= MENU PANEL ================= */
 .menu-panel{
   position:absolute;top:0;right:0;
   width:min(420px,80vw);height:100%;
@@ -63,19 +61,23 @@ section + section{
   border-top:1px solid rgba(255,255,255,.06);
 }
 
-/* ================= TITLES ================= */
-h1{
+/* ================= SECTION HEAD ================= */
+.section-head{
+  height:140px;               /* TODOS los títulos caen aquí */
+  display:flex;
+  align-items:flex-end;
+}
+.section-head h1{
   font-size:clamp(56px,8vw,120px);
   font-weight:500;
-  margin-bottom:32px;
+  margin:0;
 }
 
-/* ================= CONTENT SHIFT ================= */
+/* ================= CONTENT ================= */
 .content{
   margin-left:12px;
+  margin-top:12px;
 }
-
-/* ================= TEXT ================= */
 p{
   max-width:820px;
   font-size:16px;
@@ -86,14 +88,16 @@ p{
 
 /* ================= HERO ================= */
 .hero{
+  min-height:100vh;
+  padding:150px 12vw;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
 .hero h1{
   font-size:clamp(88px,12vw,200px);
+  font-weight:500;
   line-height:.95;
-  white-space:nowrap;
 }
 .hero h1 span{
   font-size:clamp(28px,4vw,48px);
@@ -116,36 +120,12 @@ p{
 }
 .fade.visible{opacity:1;transform:none}
 
-/* ================= GRID ================= */
+/* ================= GRIDS ================= */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:40px;
 }
-
-/* ================= EL REBAÑO ================= */
-.herd{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:32px;
-}
-.borrego{
-  text-align:left;
-}
-.borrego img{
-  width:100%;
-  border-radius:18px;
-  margin-bottom:14px;
-  filter:grayscale(100%);
-}
-.borrego span{
-  display:block;
-  font-size:14px;
-  color:#888;
-  margin-top:4px;
-}
-
-/* ================= CARDS ================= */
 .card{
   padding:30px;border-radius:18px;
   background:rgba(255,255,255,.04);
@@ -155,20 +135,37 @@ p{
 }
 .card.visible{opacity:1;transform:none}
 
-/* ================= INVENTORY ================= */
+/* ================= EL REBAÑO ================= */
+.herd{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:32px;
+}
+.borrego img{
+  width:100%;
+  border-radius:18px;
+  filter:grayscale(100%);
+  margin-bottom:12px;
+}
+.borrego span{
+  font-size:14px;
+  color:#888;
+}
+
+/* ================= INVENTARIO ================= */
 .inventory{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:26px;margin-top:32px
+  gap:26px;margin-top:24px
 }
-.inventory img{width:100%;border-radius:16px;opacity:.9}
-.inventory-controls{margin-top:32px}
+.inventory img{width:100%;border-radius:16px}
+.inventory-controls{margin-top:28px}
 
 /* ================= BLOG ================= */
-.blog-post{margin-top:48px}
+.blog-post{margin-top:36px}
 .blog-post img{
   width:100%;max-width:760px;
-  border-radius:18px;margin-bottom:18px
+  border-radius:18px;margin-bottom:16px
 }
 
 /* ================= DONACIONES ================= */
@@ -205,10 +202,9 @@ footer{
 
 /* ================= MOBILE ================= */
 @media(max-width:768px){
-  section{padding:130px 8vw}
+  section,.hero{padding:130px 8vw}
   .content{margin-left:0}
   .grid,.inventory,.donations,.herd{grid-template-columns:1fr}
-  .hero h1{white-space:normal}
   .hero .kqueso{margin-left:0}
 }
 </style>
@@ -245,7 +241,7 @@ footer{
 
 <!-- QUIÉNES SOMOS -->
 <section class="fade">
-  <h1>Quiénes somos</h1>
+  <div class="section-head"><h1>Quiénes somos</h1></div>
   <div class="content">
     <p style="text-align:justify">
       Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por repetición que por voluntad, y esa repetición acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. No respondemos a encargos ni perseguimos objetivos medibles, nos movemos en un espacio intermedio entre la intención y la inercia, produciendo situaciones prescindibles sostenidas con una seriedad desproporcionada. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
@@ -255,46 +251,22 @@ footer{
 
 <!-- EL REBAÑO -->
 <section>
-  <h1 class="fade">El Rebaño</h1>
+  <div class="section-head"><h1>El Rebaño</h1></div>
   <div class="content">
     <div class="herd">
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 01
-        <span>Presencia</span>
-      </div>
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 02
-        <span>Logística emocional</span>
-      </div>
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 03
-        <span>Observación pasiva</span>
-      </div>
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 04
-        <span>Deriva</span>
-      </div>
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 05
-        <span>Decisiones tardías</span>
-      </div>
-      <div class="borrego fade">
-        <img src="https://via.placeholder.com/400x500">
-        Borrego 06
-        <span>Soporte técnico</span>
-      </div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 01</span></div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 02</span></div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 03</span></div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 04</span></div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 05</span></div>
+      <div class="borrego fade"><img src="https://via.placeholder.com/400x500"><span>Borrego 06</span></div>
     </div>
   </div>
 </section>
 
 <!-- QUÉ HACEMOS -->
 <section>
-  <h1 class="fade">Qué hacemos</h1>
+  <div class="section-head"><h1>Qué hacemos</h1></div>
   <div class="content">
     <div class="grid">
       <div class="card">Prácticas cercanas al delito que se estudian con rigor y se abandonan a tiempo.</div>
@@ -307,7 +279,7 @@ footer{
 
 <!-- INVENTARIO -->
 <section>
-  <h1 class="fade">Inventario</h1>
+  <div class="section-head"><h1>Inventario</h1></div>
   <div class="content">
     <div class="inventory" id="inventory"></div>
     <div class="inventory-controls">
@@ -319,19 +291,19 @@ footer{
 
 <!-- BLOG -->
 <section>
-  <h1 class="fade">Blog</h1>
+  <div class="section-head"><h1>Blog</h1></div>
   <div class="content">
     <div class="blog-post">
       <img src="https://via.placeholder.com/900x500">
       <h3>Pensar en grupo</h3>
-      <p>Reflexiones sin conclusión sobre procesos colectivos y decisiones compartidas.</p>
+      <p>Reflexiones sin conclusión sobre procesos colectivos.</p>
     </div>
   </div>
 </section>
 
 <!-- DONACIONES -->
 <section>
-  <h1 class="fade">Donaciones</h1>
+  <div class="section-head"><h1>Donaciones</h1></div>
   <div class="content">
     <p>El dinero no resolverá nada, pero ayudará a que nada continúe.</p>
     <div class="bar"><div class="fill" id="fill"></div></div>
@@ -345,7 +317,7 @@ footer{
 
 <!-- CONTACTO -->
 <section class="fade">
-  <h1>Contacto</h1>
+  <div class="section-head"><h1>Contacto</h1></div>
   <div class="content">
     <p>Borregoasqueroso@gmail.com</p>
   </div>
@@ -357,7 +329,6 @@ footer{
 /* MENU */
 const btn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
-
 btn.onclick=()=>{btn.classList.toggle("active");menu.classList.toggle("active")};
 menu.addEventListener("click",e=>{
   if(e.target===menu){btn.classList.remove("active");menu.classList.remove("active")}
