@@ -8,36 +8,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
-body{
-  background:#0b0b0b;
-  color:#f2f2f2;
-  overflow-x:hidden;
+:root{
+  --bg:#0b0b0b;
+  --fg:#f2f2f2;
+  --muted:#888;
+  --card:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.08);
 }
 
-/* ================= MENU ================= */
-.menu-btn{
-  position:fixed;
-  top:32px;
-  right:32px;
-  width:28px;
-  height:20px;
-  cursor:pointer;
-  z-index:200;
-}
-.menu-btn span{
-  position:absolute;
-  width:100%;
-  height:2px;
-  background:#f2f2f2;
-  transition:.4s;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
+body{background:var(--bg);color:var(--fg);overflow-x:hidden}
+
+/* MENU */
+.menu-btn{position:fixed;top:24px;right:24px;width:28px;height:20px;z-index:200;cursor:pointer}
+.menu-btn span{position:absolute;width:100%;height:2px;background:#fff;transition:.4s}
 .menu-btn span:nth-child(1){top:0}
 .menu-btn span:nth-child(2){top:9px}
 .menu-btn span:nth-child(3){bottom:0}
@@ -46,337 +30,193 @@ body{
 .menu-btn.active span:nth-child(3){transform:rotate(-45deg);bottom:9px}
 
 .menu{
-  position:fixed;
-  inset:0;
-  background:rgba(10,10,10,.92);
-  backdrop-filter:blur(14px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:.6s ease;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(16px);
+  display:flex;justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;
+  transition:.6s cubic-bezier(.4,0,.2,1);
   z-index:150;
 }
-.menu.active{
-  opacity:1;
-  pointer-events:auto;
-}
-.menu ul{
-  list-style:none;
-  text-align:center;
-}
-.menu li{
-  font-size:36px;
-  margin:22px 0;
-  cursor:pointer;
-  transition:.3s;
-}
-.menu li:hover{opacity:.6}
+.menu.active{opacity:1;pointer-events:auto}
+.menu ul{text-align:center;list-style:none}
+.menu li{font-size:clamp(28px,6vw,40px);margin:20px 0;opacity:0;transform:translateY(20px)}
+.menu.active li{animation:menuIn .6s forwards}
+.menu li:nth-child(n){animation-delay:calc(var(--i)*.08s)}
 
-/* ================= SECTIONS ================= */
-section{
-  min-height:100vh;
-  padding:160px 12vw;
-}
-h1{
-  font-size:clamp(56px,6vw,96px);
-  font-weight:500;
-  margin-bottom:42px;
-}
-p{
-  max-width:760px;
-  font-size:16px;
-  line-height:1.8;
-  color:#cfcfcf;
-  margin-bottom:22px;
+@keyframes menuIn{
+  to{opacity:1;transform:none}
 }
 
-/* ================= HERO ================= */
-.hero{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.hero small{
-  margin-top:28px;
-  letter-spacing:.25em;
-  color:#777;
-}
+/* SECTIONS */
+section{min-height:100vh;padding:140px 12vw}
+h1{font-size:clamp(42px,8vw,96px);margin-bottom:40px;font-weight:500}
+p{max-width:760px;line-height:1.8;color:#ccc}
 
-/* ================= ANIMATIONS ================= */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.1s ease;
-}
-.fade.visible{
-  opacity:1;
-  transform:none;
-}
+/* HERO */
+.hero{display:flex;flex-direction:column;justify-content:center}
+.hero small{margin-top:24px;letter-spacing:.25em;color:var(--muted)}
 
-/* ================= GRID ================= */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:36px;
-}
+/* ANIMATIONS */
+.fade{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.4,0,.2,1)}
+.fade.visible{opacity:1;transform:none}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
 .card{
-  padding:30px;
-  border-radius:20px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  opacity:0;
-  transform:translateY(30px);
-  transition:.9s ease;
+  padding:28px;border-radius:18px;
+  background:var(--card);border:1px solid var(--border);
+  opacity:0;transform:translateY(30px);
+  transition:.9s cubic-bezier(.4,0,.2,1)
 }
-.card.visible{
-  opacity:1;
-  transform:none;
-}
+.card.visible{opacity:1;transform:none}
 
-/* ================= INVENTORY ================= */
-.inventory{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:22px;
-}
-.inventory img{
-  width:100%;
-  border-radius:14px;
-  opacity:.85;
-}
-.counter{
-  margin-top:42px;
-  font-size:26px;
-}
-.counter small{
-  display:block;
-  margin-top:10px;
-  color:#888;
-}
+/* INVENTORY */
+.inventory{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.inventory img{width:100%;border-radius:14px;opacity:.9}
+.counter{margin-top:32px;font-size:24px}
 
-/* ================= BLOG ================= */
-.blog-post{
-  margin-bottom:48px;
-}
-.blog-post img{
-  width:100%;
-  max-width:640px;
-  border-radius:16px;
-  margin-bottom:18px;
-  opacity:.9;
-}
-.blog-post span{
-  color:#777;
-  font-size:13px;
-}
+/* DONATIONS */
+.bar{height:10px;background:#222;border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:#fff;transition:1s cubic-bezier(.4,0,.2,1)}
+.donation-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;margin-top:32px}
+.donation{padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--border);text-align:center;cursor:pointer}
 
-/* ================= DONATIONS ================= */
-.progress{
-  margin-top:32px;
-}
-.bar{
-  height:10px;
-  background:#222;
-  border-radius:6px;
-  overflow:hidden;
-}
-.fill{
-  height:100%;
-  width:0%;
-  background:#f2f2f2;
-  transition:1.2s ease;
-}
-.donation-cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:26px;
-  margin-top:38px;
-}
-.donation{
-  padding:26px;
-  text-align:center;
-  border-radius:18px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  cursor:pointer;
-  transition:.35s;
-}
-.donation:hover{
-  transform:translateY(-8px);
-}
+/* BLOG */
+.blog-post img{width:100%;border-radius:16px;margin-bottom:14px}
 
-/* ================= FOOTER ================= */
-footer{
-  padding:64px 12vw;
-  border-top:1px solid rgba(255,255,255,.1);
-  text-align:center;
-  color:#777;
+/* FOOTER */
+footer{text-align:center;padding:60px 12vw;color:var(--muted);border-top:1px solid var(--border)}
+
+/* MOBILE */
+@media(max-width:768px){
+  section{padding:120px 8vw}
+  .grid,.inventory,.donation-cards{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="menu-btn" id="menuBtn">
-  <span></span><span></span><span></span>
-</div>
+<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
 
 <div class="menu" id="menu">
-  <ul>
-    <li data-s="0">Inicio</li>
-    <li data-s="1">Quiénes somos</li>
-    <li data-s="2">Qué hacemos</li>
-    <li data-s="3">Inventario</li>
-    <li data-s="4">Blog</li>
-    <li data-s="5">Donaciones</li>
-    <li data-s="6">Contacto</li>
-  </ul>
+<ul>
+<li style="--i:1" data-s="0">Inicio</li>
+<li style="--i:2" data-s="1">Quiénes somos</li>
+<li style="--i:3" data-s="2">Qué hacemos</li>
+<li style="--i:4" data-s="3">Inventario</li>
+<li style="--i:5" data-s="4">Blog</li>
+<li style="--i:6" data-s="5">Donaciones</li>
+<li style="--i:7" data-s="6">Contacto</li>
+</ul>
 </div>
 
-<!-- HERO -->
 <section class="hero fade">
-  <h1>EL REBAÑO</h1>
-  <p>Colectivo independiente de seis personas. Pensamiento, deriva y error sostenido.</p>
-  <small>K de queso</small>
+<h1>EL REBAÑO</h1>
+<p>Colectivo independiente de seis personas. Pensamiento, deriva y error sostenido.</p>
+<small>K de queso</small>
 </section>
 
-<!-- SOBRE NOSOTROS -->
 <section class="fade">
-  <h1>Quiénes somos</h1>
-  <p style="text-align:justify;">
-    Todo empezó en Fallas, Valencia, no como empiezan los proyectos relevantes sino como empiezan la mayoría de los errores persistentes: por acumulación de ruido, coincidencias reiteradas y una confianza excesiva en que algo terminaría adquiriendo sentido con el paso del tiempo. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas más por la repetición que por la voluntad, y esa repetición acabó generando costumbre, método y finalmente una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. No trabajamos bajo encargos ni respondemos a objetivos medibles, nos movemos en un espacio intermedio entre la intención y la inercia, donde las decisiones se toman tarde, se ejecutan a medias y se evalúan con una seriedad completamente desproporcionada respecto a su impacto real. No producimos resultados ni soluciones ni conclusiones finales, producimos situaciones, algunas inútiles, otras evitables, todas perfectamente prescindibles, sostenidas en el tiempo con una convicción que no se justifica pero se mantiene. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
-  </p>
+<h1>Quiénes somos</h1>
+<p style="text-align:justify">
+Todo empezó en Fallas, Valencia, por acumulación de ruido, coincidencias reiteradas y decisiones mal calibradas. Éramos seis personas sin una complementariedad clara ni una visión compartida, unidas por repetición más que por voluntad, y esa repetición acabó generando método, costumbre y una estructura informal que comenzó a operar como colectivo sin necesidad de definirse. No respondemos a encargos ni perseguimos objetivos medibles, nos movemos entre la intención y la inercia, produciendo situaciones prescindibles sostenidas con una seriedad desproporcionada. Seis personas, un criterio flexible y una tolerancia elevada al absurdo. K de queso.
+</p>
 </section>
 
-<!-- QUÉ HACEMOS -->
 <section>
-  <h1 class="fade">Qué hacemos</h1>
-  <div class="grid">
-    <div class="card">Prácticas limítrofes cercanas al delito que se estudian, se rozan y finalmente se abandonan.</div>
-    <div class="card">Desplazamientos cuidadosamente planificados hacia lugares donde no ocurre absolutamente nada.</div>
-    <div class="card">Operativos sociales nocturnos con grupos desproporcionados cuyo único objetivo es que uno ligue.</div>
-    <div class="card">Permanencia prolongada en espacios públicos sin intervención ni consecuencia.</div>
-  </div>
+<h1 class="fade">Qué hacemos</h1>
+<div class="grid">
+<div class="card">Prácticas cercanas al delito que nunca llegan a ejecutarse.</div>
+<div class="card">Desplazamientos extensos para no hacer nada.</div>
+<div class="card">Operativos sociales masivos para que uno ligue.</div>
+<div class="card">Observación prolongada sin intervención.</div>
+</div>
 </section>
 
-<!-- INVENTARIO -->
 <section>
-  <h1 class="fade">Inventario</h1>
-  <div class="inventory" id="inventory">
-    <img src="https://via.placeholder.com/400x300">
-    <img src="https://via.placeholder.com/400x300">
-    <img src="https://via.placeholder.com/400x300">
-  </div>
-  <div class="counter">
-    Objetos acumulados: <strong><span id="count">13</span> / 20</strong>
-    <small id="marketText">Si llegamos a 20 hacemos mercadillo.</small>
-  </div>
+<h1 class="fade">Inventario</h1>
+<div class="inventory" id="inventory"></div>
+<div class="counter" id="counterText"></div>
 </section>
 
-<!-- BLOG -->
 <section>
-  <h1 class="fade">Blog</h1>
-
-  <div class="blog-post">
-    <img src="https://via.placeholder.com/800x400">
-    <h3>Pensar en grupo</h3>
-    <span>Enero 2026</span>
-    <p>Reflexiones sin conclusión sobre procesos colectivos, decisiones compartidas y la dificultad de detenerse.</p>
-  </div>
-
-  <div class="blog-post">
-    <img src="https://via.placeholder.com/800x400">
-    <h3>Desplazarse sin motivo</h3>
-    <span>Diciembre 2025</span>
-    <p>Notas sobre viajes largos que no justifican su propio recorrido.</p>
-  </div>
+<h1 class="fade">Blog</h1>
+<div class="blog-post">
+<img src="https://via.placeholder.com/800x400">
+<h3>Pensar en grupo</h3>
+<p>Reflexiones sin conclusión.</p>
+</div>
 </section>
 
-<!-- DONACIONES -->
 <section>
-  <h1 class="fade">Donaciones</h1>
-  <p>El dinero no resolverá nada, pero ayudará a que nada continúe.</p>
-
-  <div class="progress">
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <small id="donationText">Objetivo: 100 €</small>
-  </div>
-
-  <div class="donation-cards">
-    <div class="donation" onclick="donar(0.5)">50 céntimos</div>
-    <div class="donation" onclick="donar(1)">1 €</div>
-    <div class="donation" onclick="donar(2)">2 €</div>
-  </div>
+<h1 class="fade">Donaciones</h1>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div class="donation-cards">
+<div class="donation" onclick="donar(.5)">50 céntimos</div>
+<div class="donation" onclick="donar(1)">1 €</div>
+<div class="donation" onclick="donar(2)">2 €</div>
+</div>
 </section>
 
-<!-- CONTACT -->
 <section class="fade">
-  <h1>Contacto</h1>
-  <p>Borregoasqueroso@gmail.com</p>
-  <p>Responderemos cuando tenga sentido.</p>
+<h1>Contacto</h1>
+<p>Borregoasqueroso@gmail.com</p>
 </section>
 
-<footer>
-  © El Rebaño · Desde Fallas · K de queso
-</footer>
+<footer id="footer">© El Rebaño · K de queso</footer>
 
 <script>
 /* MENU */
-const btn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-btn.onclick=()=>{
-  btn.classList.toggle("active");
-  menu.classList.toggle("active");
-};
-menu.querySelectorAll("li").forEach(li=>{
-  li.onclick=()=>{
-    document.querySelectorAll("section")[li.dataset.s]
-      .scrollIntoView({behavior:"smooth"});
-    btn.click();
-  };
+menuBtn.onclick=()=>menu.classList.toggle("active");
+
+/* SCROLL */
+document.querySelectorAll(".menu li").forEach(li=>{
+  li.onclick=()=>document.querySelectorAll("section")[li.dataset.s]
+    .scrollIntoView({behavior:"smooth"});
 });
 
 /* OBSERVER */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
-    else e.target.classList.remove("visible");
-  });
-},{threshold:.15});
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.target.classList.toggle("visible",x.isIntersecting)),{threshold:.2});
 document.querySelectorAll(".fade,.card").forEach(el=>obs.observe(el));
 
-/* INVENTORY */
-let count=13;
-const countEl=document.getElementById("count");
-const marketText=document.getElementById("marketText");
-function addItem(){
-  count++;
-  countEl.textContent=count;
-  if(count>=20){
-    marketText.textContent="Mercadillo activado.";
-  }
+/* INVENTORY EDITABLE */
+let items=13;
+const inv=document.getElementById("inventory");
+const counter=document.getElementById("counterText");
+function render(){
+  counter.innerHTML=`Objetos: <strong>${items}/20</strong><br><small>${items>=20?"Mercadillo activado.":"Si llegamos a 20 hacemos mercadillo."}</small>`;
 }
+render();
+
+/* ADMIN ADD (Ctrl + Click footer) */
+footer.addEventListener("click",e=>{
+  if(e.ctrlKey){
+    items++;
+    inv.innerHTML+=`<img src="https://via.placeholder.com/400x300">`;
+    render();
+  }
+});
 
 /* DONATIONS */
-let raised=35;
-const goal=100;
-const fill=document.getElementById("fill");
-const donationText=document.getElementById("donationText");
-function updateBar(){
-  const pct=Math.min(100,(raised/goal)*100);
-  fill.style.width=pct+"%";
-  donationText.textContent=`${Math.round(pct)}% del objetivo alcanzado`;
-}
-updateBar();
-
-function donar(amount){
-  raised+=amount;
-  updateBar();
+let raised=30,goal=100;
+function donar(a){
+  raised+=a;
+  fill.style.width=Math.min(100,(raised/goal)*100)+"%";
+  if(raised>=goal) alert("Objetivo alcanzado.");
   window.location.href="https://www.paypal.com";
 }
+
+/* EASTER EGG KDQ */
+let seq="";
+document.addEventListener("keydown",e=>{
+  seq+=e.key.toLowerCase();
+  if(seq.includes("kdq")){
+    alert("K de queso.");
+    seq="";
+  }
+});
 </script>
 
 </body>
