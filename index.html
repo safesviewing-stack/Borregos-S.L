@@ -1,189 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borregos S.L.</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Inter",sans-serif}
-body{background:#0b0b0b;color:#f2f2f2;overflow-x:hidden}
-
-/* MENU */
-.menu-btn{position:fixed;top:24px;right:24px;width:30px;height:22px;cursor:pointer;z-index:300}
-.menu-btn span{position:absolute;width:100%;height:2px;background:#fff;transition:.3s}
-.menu-btn span:nth-child(1){top:0}
-.menu-btn span:nth-child(2){top:10px}
-.menu-btn span:nth-child(3){bottom:0}
-.menu-btn.active span:nth-child(1){transform:rotate(45deg);top:10px}
-.menu-btn.active span:nth-child(2){opacity:0}
-.menu-btn.active span:nth-child(3){transform:rotate(-45deg);bottom:10px}
-
-.menu{position:fixed;inset:0;background:rgba(0,0,0,.65);opacity:0;pointer-events:none;transition:.4s;z-index:200}
-.menu.active{opacity:1;pointer-events:auto}
-.menu-panel{
-  position:absolute;top:0;right:0;width:min(400px,80vw);height:100%;
-  background:#0b0b0b;display:flex;align-items:center;justify-content:center;
-  transform:translateX(100%);transition:.45s cubic-bezier(.4,0,.2,1)
-}
-.menu.active .menu-panel{transform:translateX(0)}
-.menu-panel ul{list-style:none;text-align:right;padding-right:48px}
-.menu-panel li{font-size:clamp(18px,2.4vw,26px);margin:14px 0;cursor:pointer}
-.menu-panel li:hover{opacity:.6}
-
-/* SECTIONS */
-section{min-height:100vh;padding:140px 12vw}
-h1{font-size:clamp(54px,7.5vw,110px);font-weight:500;margin-bottom:28px}
-.content{margin-left:12px}
-p{max-width:820px;font-size:16px;line-height:1.85;color:#cfcfcf;margin-bottom:24px}
-
-/* HERO */
-.hero{display:flex;flex-direction:column;justify-content:center}
-.hero h1{font-size:clamp(90px,12vw,190px);line-height:.95}
-.hero h1 span{font-size:clamp(28px,4vw,46px);opacity:.6;margin-left:16px}
-.kqueso{margin-top:28px;margin-left:10vw;font-size:clamp(30px,4.2vw,52px);letter-spacing:.32em;color:#aaa}
-
-/* FADE */
-.fade{opacity:0;transform:translateY(28px);transition:1s cubic-bezier(.4,0,.2,1)}
-.fade.visible{opacity:1;transform:none}
-
-/* GRIDS */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px}
-.card{padding:28px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
-
-.herd{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
-.borrego img{width:100%;border-radius:18px;margin-bottom:12px;filter:grayscale(100%)}
-.borrego span{font-size:14px;color:#888}
-
-/* INVENTARIO */
-.inventory{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;margin-top:28px}
-.inventory img{width:100%;border-radius:16px}
-.inventory-controls{margin-top:28px}
-button{padding:12px 22px;border-radius:16px;border:1px solid rgba(255,255,255,.25);background:none;color:#fff;cursor:pointer}
-button:disabled{opacity:.4;cursor:not-allowed}
-.counter{margin-top:18px;font-size:18px}
-
-/* BLOG & DONACIONES */
-.blog-post img{width:100%;max-width:760px;border-radius:18px;margin-bottom:16px}
-.bar{height:10px;background:#222;border-radius:6px;overflow:hidden;margin-top:18px}
-.fill{height:100%;width:0;background:#fff;transition:1s}
-.donations{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;margin-top:28px}
-.donation{padding:22px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:center;cursor:pointer}
-.donation:hover{transform:translateY(-4px)}
-
-footer{padding:60px 12vw;text-align:center;color:#777}
-
-@media(max-width:768px){
-  section{padding:120px 8vw}
-  .content{margin-left:0}
-  .grid,.herd,.inventory,.donations{grid-template-columns:1fr}
-  .kqueso{margin-left:0}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Borregos S.L.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="light">
 
-<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
-
-<div class="menu" id="menu">
-  <div class="menu-panel">
-    <ul>
-      <li data-s="0">Inicio</li>
-      <li data-s="1">Quiénes somos</li>
-      <li data-s="2">El Rebaño</li>
-      <li data-s="3">Qué hacemos</li>
-      <li data-s="4">Inventario</li>
-      <li data-s="5">Blog</li>
-      <li data-s="6">Donaciones</li>
-      <li data-s="7">Contacto</li>
-    </ul>
+<!-- HEADER -->
+<header>
+  <div class="controls">
+    <button id="themeToggle">🌙</button>
+    <button id="langToggle">ES / EN</button>
+    <div id="burger" class="burger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
-</div>
+</header>
 
-<section class="hero fade">
-  <h1>Borregos <span>S.L.</span></h1>
-  <div class="kqueso">K DE QUESO</div>
+<!-- OVERLAY -->
+<div id="overlay"></div>
+
+<!-- SIDE MENU -->
+<nav id="sideMenu">
+  <a href="#inicio">Inicio</a>
+  <a href="#sobre">Sobre nosotros</a>
+  <a href="#rebano">Rebaño</a>
+  <a href="#servicios">Qué hacemos</a>
+  <a href="#inventario">Inventario</a>
+  <a href="#blog">Blog</a>
+  <a href="#donaciones">Donaciones</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<main>
+
+<!-- INICIO -->
+<section id="inicio" class="section hero">
+  <h1>Borregos S.L.</h1>
+  <h2>K de queso</h2>
 </section>
 
-<section class="fade">
-  <h1>Quiénes somos</h1>
-  <div class="content">
-    <p style="text-align:justify">
-      Todo empezó en Fallas, Valencia… (texto intacto)
-    </p>
+<!-- SOBRE -->
+<section id="sobre" class="section">
+  <h3>Sobre nosotros</h3>
+  <p>
+    Borregos S.L. es una entidad colectiva cuya razón de ser no responde a una
+    necesidad concreta, sino a una suma de coincidencias prolongadas en el tiempo.
+    Seis individuos avanzando con determinación injustificada, guiados por la
+    intuición, la inercia y una confianza sorprendente en que moverse es mejor
+    que pensar.
+  </p>
+</section>
+
+<!-- REBAÑO -->
+<section id="rebano" class="section">
+  <h3>El rebaño</h3>
+  <div class="grid">
+    <div class="card">Borrego 1<br><small>No lidera, pero opina</small></div>
+    <div class="card">Borrego 2<br><small>Llega tarde</small></div>
+    <div class="card">Borrego 3<br><small>Se queda</small></div>
+    <div class="card">Borrego 4<br><small>Improvisa</small></div>
+    <div class="card">Borrego 5<br><small>Trae cosas</small></div>
+    <div class="card">Borrego 6<br><small>Está</small></div>
   </div>
 </section>
 
-<section class="fade">
-  <h1>Inventario</h1>
-  <div class="content">
-    <div class="inventory" id="inventory"></div>
-    <div class="inventory-controls">
-      <button id="addBtn" onclick="addItem()">Añadir objeto</button>
-      <input type="file" id="fileInput" accept="image/*" hidden>
-      <div class="counter" id="counterText"></div>
+<!-- SERVICIOS -->
+<section id="servicios" class="section">
+  <h3>Qué hacemos</h3>
+  <div class="grid">
+    <div class="card">Ir a sitios para no hacer nada</div>
+    <div class="card">Aparecer en grupo sin motivo</div>
+    <div class="card">Ir 8 a la puerta para que ligue uno</div>
+  </div>
+</section>
+
+<!-- INVENTARIO -->
+<section id="inventario" class="section">
+  <h3>Inventario</h3>
+  <div class="grid">
+    <div class="card">Cable misterioso<br><small>12/03/2024</small></div>
+    <div class="card">Llave inútil<br><small>27/04/2024</small></div>
+    <div class="card">Objeto indefinido<br><small>09/06/2024</small></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="section">
+  <h3>Blog borreguil</h3>
+  <div class="grid">
+    <div class="card">Foto borrosa</div>
+    <div class="card">Vídeo mal grabado</div>
+    <div class="card">Momento cuestionable</div>
+  </div>
+</section>
+
+<!-- DONACIONES -->
+<section id="donaciones" class="section">
+  <h3>Apoya al rebaño</h3>
+  <div class="donations">
+    <div class="donation-options">
+      <button data-amount="1">1 €</button>
+      <button data-amount="2">2 €</button>
+      <button data-amount="5">5 €</button>
+    </div>
+    <div class="progress">
+      <div id="donationBar"></div>
     </div>
   </div>
 </section>
 
-<footer class="fade">© Borregos S.L. · Desde Fallas · K de queso</footer>
+<!-- CONTACTO -->
+<section id="contacto" class="section">
+  <h3>Contacto</h3>
+  <p>Borregoasqueroso@gmail.com</p>
+</section>
 
-<script>
-/* MENU */
-const btn=document.getElementById("menuBtn");
-const menu=document.getElementById("menu");
-btn.onclick=()=>{btn.classList.toggle("active");menu.classList.toggle("active")};
-menu.querySelectorAll("li").forEach(li=>{
-  li.onclick=()=>document.querySelectorAll("section")[li.dataset.s].scrollIntoView({behavior:"smooth"});
-});
+</main>
 
-/* FADE UP/DOWN */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    e.target.classList.toggle("visible",e.intersectionRatio>0.15)
-  })
-},{threshold:[0,0.15,1]});
-document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+<footer>
+  Borregos S.L. — haciendo poco desde siempre
+</footer>
 
-/* INVENTARIO — SOLO 5 */
-const MAX_ITEMS = 5;
-let count = 0;
-const inventory=document.getElementById("inventory");
-const counterText=document.getElementById("counterText");
-const addBtn=document.getElementById("addBtn");
-
-function addItem(){
-  if(count >= MAX_ITEMS) return;
-  document.getElementById("fileInput").click();
-}
-
-document.getElementById("fileInput").addEventListener("change",e=>{
-  const file=e.target.files[0];
-  if(!file || !file.type.startsWith("image/")) return;
-
-  const reader=new FileReader();
-  reader.onload=()=>{
-    const img=document.createElement("img");
-    img.src=reader.result;
-    inventory.appendChild(img);
-    count++;
-    updateCounter();
-  };
-  reader.readAsDataURL(file);
-});
-
-function updateCounter(){
-  counterText.textContent =
-    count < MAX_ITEMS
-      ? `Objetos: ${count}/${MAX_ITEMS}`
-      : `Inventario completo (${MAX_ITEMS}/${MAX_ITEMS})`;
-  addBtn.disabled = count >= MAX_ITEMS;
-}
-updateCounter();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
