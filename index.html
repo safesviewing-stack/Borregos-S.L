@@ -25,11 +25,18 @@
 
     header {
       position: fixed;
-      inset: 0 0 auto 0;
+      top: 0;
+      left: 0;
+      right: 0;
       padding: 2.2rem 2rem 1.6rem;
       display: flex;
       justify-content: center;
-      background: linear-gradient(180deg, rgba(11,11,11,0.85), rgba(11,11,11,0.6));
+      align-items: center;
+      background: linear-gradient(
+        180deg,
+        rgba(11,11,11,0.85),
+        rgba(11,11,11,0.6)
+      );
       backdrop-filter: blur(10px);
       z-index: 1100;
     }
@@ -43,23 +50,30 @@
       align-items: center;
     }
 
-    nav {
+    header nav {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
 
-    nav a {
-      color: white;
+    header nav a {
+      color: #ffffff;
       text-decoration: none;
       font-size: 0.85rem;
+      font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       opacity: 0.75;
+      cursor: default;
+      user-select: none;
+      transition: opacity 0.6s ease;
     }
 
-    nav a:hover { opacity: 1; }
+    header nav a:hover {
+      opacity: 1;
+    }
 
-    /* ================= TOGGLES ================= */
+    /* ================= THEME TOGGLE ================= */
 
     #themeToggle {
       position: absolute;
@@ -67,77 +81,32 @@
       width: 44px;
       height: 24px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 6px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.04);
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6px;
       font-size: 0.75rem;
     }
 
-    body.dark .sun { opacity: .2; }
-    body:not(.dark) .moon { opacity: .2; }
-
-    /* ================= HAMBURGER ================= */
-
-    #hamburger {
-      position: absolute;
-      left: 0;
-      width: 28px;
-      height: 20px;
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
+    #themeToggle span {
+      line-height: 1;
+      transition: opacity 0.3s ease;
     }
 
-    #hamburger span {
-      height: 2px;
-      background: white;
-      width: 100%;
+    body.dark #themeToggle {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.25);
     }
 
-    /* ================= MOBILE MENU ================= */
-
-    #menuOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      opacity: 0;
-      pointer-events: none;
-      transition: .4s;
-      z-index: 900;
+    body.dark #themeToggle .sun {
+      opacity: 0.2;
     }
 
-    #menuOverlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    #sideMenu {
-      position: fixed;
-      top: 0;
-      right: -320px;
-      width: 320px;
-      height: 100vh;
-      background: #111;
-      padding: 4rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.4rem;
-      transition: right .4s ease;
-      z-index: 1000;
-    }
-
-    #sideMenu.open { right: 0; }
-
-    #sideMenu a {
-      color: var(--text);
-      font-size: 1.4rem;
-      text-decoration: none;
+    body:not(.dark) #themeToggle .moon {
+      opacity: 0.2;
     }
 
     /* ================= SECTIONS ================= */
@@ -145,46 +114,72 @@
     section {
       max-width: 1200px;
       margin: auto;
-      padding: 8rem 1.5rem 5rem;
+      padding: 8rem 1.5rem 5rem calc(1.5rem + 0.4rem);
       scroll-margin-top: 120px;
     }
 
-    #inicio { padding-top: 5.5rem; }
+    /* 🔽 SOLO ESTO CAMBIA */
+    #inicio {
+      padding-top: 5.5rem;
+    }
 
     .section-title-big {
-      font-size: clamp(2.8rem,5vw,4rem);
+      font-size: clamp(2.8rem, 5vw, 4rem);
       margin-bottom: 2.2rem;
+      margin-left: 0.4rem;
+      letter-spacing: -0.02em;
     }
+
+    /* ================= CARDS ================= */
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.2rem;
+      margin-left: 0.4rem;
     }
 
     .card {
-      padding: 1.4rem;
+      cursor: pointer;
+      text-align: left;
+      padding: 1.4rem 1.4rem 1.6rem;
       border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.3s ease,
+                  transform 0.3s ease,
+                  background-color 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,0.25);
+      background-color: rgba(255,255,255,0.02);
+      transform: translateY(-2px);
     }
 
     .card img {
+      display: block;
       width: 100%;
       height: 260px;
-      background: #222;
       object-fit: cover;
+      background: #222;
     }
+
+    .card h3 {
+      margin: 0.4rem 0;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ================= FOOTER ================= */
 
     footer {
       padding: 2rem;
       text-align: center;
       color: var(--text-muted);
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media (max-width: 900px) {
-      nav { display: none; }
-      #hamburger { display: flex; }
     }
   </style>
 </head>
@@ -193,81 +188,96 @@
 
 <header>
   <div class="header-inner">
-    <div id="hamburger"><span></span><span></span><span></span></div>
-
     <nav>
       <a href="#inicio">Inicio</a>
       <a href="#sobre">Sobre</a>
       <a href="#rebano">Rebaño</a>
       <a href="#servicios">Qué hacemos</a>
-      <a href="#inventario">Inventario</a>
       <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <button id="themeToggle">
+    <button id="themeToggle" aria-label="Cambiar modo">
       <span class="sun">☀</span>
       <span class="moon">☾</span>
     </button>
   </div>
 </header>
 
-<div id="menuOverlay"></div>
-
-<aside id="sideMenu">
-  <a href="#inicio">Inicio</a>
-  <a href="#sobre">Sobre</a>
-  <a href="#rebano">Rebaño</a>
-  <a href="#servicios">Qué hacemos</a>
-  <a href="#inventario">Inventario</a>
-  <a href="#blog">Blog</a>
-  <a href="#contacto">Contacto</a>
-</aside>
-
-<section id="inicio" style="min-height:100vh;display:flex;align-items:center;">
+<section id="inicio" style="min-height:100vh; display:flex; align-items:center;">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem);margin:0;">Borregos S.L</h1>
-    <h2 style="color:var(--text-muted);font-weight:400;">K de queso</h2>
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem); line-height:0.95; margin:0;">
+      Borregos S.L
+    </h1>
+    <h2 style="margin:0.6rem 0 0 0.4rem; font-size:clamp(1.8rem,4vw,3rem); color:var(--text-muted); font-weight:400;">
+      K de queso
+    </h2>
   </div>
 </section>
 
 <section id="sobre">
   <h2 class="section-title-big">Sobre nosotros</h2>
-  <p>Somos, con orgullo irónico, un grupo de borregos conscientes...</p>
+  <p style="margin-left:0.5rem; max-width:100ch; text-align:justify;">
+    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas...
+  </p>
 </section>
 
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
   <div class="cards">
-    <div class="card"><h3>Borrego 1</h3><p>No hacer nada</p></div>
-    <div class="card"><h3>Borrego 2</h3><p>Logística absurda</p></div>
-    <div class="card"><h3>Borrego 3</h3><p>Ideas malas</p></div>
+    <div class="card"><img /><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div>
+    <div class="card"><img /><h3>Borrego 2</h3><p>Logística absurda</p></div>
+    <div class="card"><img /><h3>Borrego 3</h3><p>Relaciones públicas</p></div>
+    <div class="card"><img /><h3>Borrego 4</h3><p>Ideas malas</p></div>
+    <div class="card"><img /><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div>
+    <div class="card"><img /><h3>Borrego 6</h3><p>Documentación gráfica</p></div>
   </div>
 </section>
 
 <section id="servicios">
   <h2 class="section-title-big">Qué hacemos</h2>
   <div class="cards">
+    <div class="card"><p>Ir a sitios random sin motivo aparente</p></div>
+    <div class="card"><p>No hacer nada durante horas con total convicción</p></div>
+    <div class="card"><p>Buscar samaritanas del amor</p></div>
+    <div class="card"><p>Recoger objetos de la calle</p></div>
     <div class="card"><p>Perdernos en grupo</p></div>
-    <div class="card"><p>No hacer nada con convicción</p></div>
   </div>
 </section>
 
 <section id="inventario">
   <h2 class="section-title-big">Inventario callejero</h2>
   <div class="cards">
-    <div class="card"><img /><p>Objeto random</p></div>
-    <div class="card"><img /><p>Cosa rara</p></div>
+    <div class="card"><img /><p>Objeto random<br><small>12/03/2025</small></p></div>
+    <div class="card"><img /><p>Cosa rara<br><small>22/04/2025</small></p></div>
   </div>
 </section>
 
 <section id="blog">
   <h2 class="section-title-big">Blog borreguil</h2>
+  <div class="cards">
+    <div class="card"><img /><p>Noche absurda</p></div>
+    <div class="card"><img /><p>Experiencia innecesaria</p></div>
+  </div>
+</section>
+
+<section id="donar">
+  <h2 class="section-title-big">Donaciones</h2>
+  <div class="cards">
+    <div class="card" onclick="donar(1)">1€</div>
+    <div class="card" onclick="donar(2)">2€</div>
+    <div class="card" onclick="donar(5)">5€</div>
+  </div>
+  <div style="margin-left:0.4rem; margin-top:2rem; max-width:400px;">
+    <div style="height:10px; background:rgba(255,255,255,0.1); border-radius:6px;">
+      <div id="donationBar" style="height:100%; width:0%; background:var(--accent);"></div>
+    </div>
+  </div>
 </section>
 
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
-  <p>Borregoasqueroso@gmail.com</p>
+  <p style="margin-left:0.4rem;">Borregoasqueroso@gmail.com</p>
 </section>
 
 <footer>
@@ -277,24 +287,30 @@
 <script>
   const toggle = document.getElementById("themeToggle");
   const body = document.body;
-  toggle.onclick = () => body.classList.toggle("dark");
 
-  const burger = document.getElementById("hamburger");
-  const menu = document.getElementById("sideMenu");
-  const overlay = document.getElementById("menuOverlay");
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
 
-  const closeMenu = () => {
-    menu.classList.remove("open");
-    overlay.classList.remove("show");
-  };
+    if (body.classList.contains("dark")) {
+      document.documentElement.style.setProperty("--bg", "#0b0b0b");
+      document.documentElement.style.setProperty("--text", "#f5f5f5");
+      document.documentElement.style.setProperty("--text-muted", "#8f8f8f");
+    } else {
+      document.documentElement.style.setProperty("--bg", "#ffffff");
+      document.documentElement.style.setProperty("--text", "#111111");
+      document.documentElement.style.setProperty("--text-muted", "#555555");
+    }
+  });
 
-  burger.onclick = () => {
-    menu.classList.add("open");
-    overlay.classList.add("show");
-  };
+  let totalDonations = 0;
+  const donationGoal = 100;
 
-  overlay.onclick = closeMenu;
-  menu.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
+  function donar(amount) {
+    totalDonations += amount;
+    const percent = Math.min((totalDonations / donationGoal) * 100, 100);
+    document.getElementById("donationBar").style.width = percent + "%";
+    window.open("https://www.paypal.com/donate", "_blank");
+  }
 </script>
 
 </body>
