@@ -220,9 +220,7 @@
     z-index: 10;
 }
 
-        header * {
-    pointer-events: none;
-}
+    
 
 #quesoBtn {
     pointer-events: auto;
@@ -576,59 +574,8 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // 🧀 K DE QUESO — LLUVIA CONTROLADA
-let quesoInterval = null;
-
-document.getElementById('quesoBtn').addEventListener('click', (e) => {
-  e.stopPropagation();
-
-  const btn = e.currentTarget;
-
-  // animación del texto
-  btn.classList.remove('queso-active');
-  void btn.offsetWidth;
-  btn.classList.add('queso-active');
-
-  // evita spam
-  if (quesoInterval) return;
-
-  // empieza a caer queso
-  quesoInterval = setInterval(() => {
-    const q = document.createElement('div');
-    q.textContent = '🧀';
-    q.className = 'drop-fx';
-    q.style.left = Math.random() * 100 + 'vw';
-    q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
-    document.body.appendChild(q);
-    setTimeout(() => q.remove(), 3500);
-  }, 120);
-
-  // se detiene solo
-  setTimeout(() => {
-    clearInterval(quesoInterval);
-    quesoInterval = null;
-  }, 4000); // ⬅️ duración del queso
-});
-
-    // Reset animación (por si se pulsa rápido)
-    btn.classList.remove('queso-active');
-    void btn.offsetWidth; // fuerza reflow
-    btn.classList.add('queso-active');
-
-    // Lluvia de queso clara y visible
-    for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-            const q = document.createElement('div');
-            q.textContent = '🧀';
-            q.className = 'drop-fx';
-            q.style.left = Math.random() * 100 + 'vw';
-            q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
-            document.body.appendChild(q);
-            setTimeout(() => q.remove(), 3500);
-        }, i * 60);
-    }
-
-});
+      
+   
         // 7. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
             if(btn.classList.contains('exploded')) return; 
@@ -681,6 +628,38 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
   const scrollAmount = carousel.offsetWidth * 0.9;
   carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
 }
+
+
+
+        // 🧀 K DE QUESO — LLUVIA CONTROLADA (FIXED)
+let quesoInterval = null;
+
+document.getElementById('quesoBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  const btn = e.currentTarget;
+
+  btn.classList.remove('queso-active');
+  void btn.offsetWidth;
+  btn.classList.add('queso-active');
+
+  if (quesoInterval) return;
+
+  quesoInterval = setInterval(() => {
+    const q = document.createElement('div');
+    q.textContent = '🧀';
+    q.className = 'drop-fx';
+    q.style.left = Math.random() * 100 + 'vw';
+    q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
+    document.body.appendChild(q);
+    setTimeout(() => q.remove(), 3500);
+  }, 120);
+
+  setTimeout(() => {
+    clearInterval(quesoInterval);
+    quesoInterval = null;
+  }, 4000);
+});
     </script>
 </body>
 </html>
