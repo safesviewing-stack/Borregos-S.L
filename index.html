@@ -175,6 +175,29 @@
         footer { background: var(--dark); color: var(--bg-color); padding: 6rem 2rem; text-align: center; }
         .email-huge { font-size: clamp(1.5rem, 5vw, 4rem); color: var(--main-color); text-decoration: underline; word-break: break-all; transition: transform 0.3s, color 0.3s; display: inline-block; }
         .email-huge:hover { color: var(--accent-color); transform: scale(1.05) rotate(-2deg); }
+
+
+/* EFECTO QUESO GLITCH */
+@keyframes queso-glitch {
+    0% { transform: scale(1) rotate(0deg); }
+    20% { transform: scale(1.1) rotate(-2deg); }
+    40% { transform: scale(0.95) rotate(2deg); }
+    60% { transform: scale(1.15) rotate(-1deg); }
+    80% { transform: scale(1.05) rotate(1deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.queso-active {
+    animation: queso-glitch 0.4s ease-in-out;
+    color: var(--yellow);
+    text-shadow:
+        3px 3px 0 var(--main-color),
+        -3px -3px 0 var(--accent-color);
+}
+
+
+
+        
     </style>
 </head>
 <body>
@@ -445,17 +468,34 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // EASTER EGG (Queso)
-        document.getElementById('quesoBtn').addEventListener('click', () => {
-            for(let i=0; i<10; i++) setTimeout(() => {
-                const q = document.createElement('div');
-                q.textContent = '🧀'; q.className = 'drop-fx';
-                q.style.left = Math.random() * 90 + 'vw'; q.style.fontSize = (Math.random() * 3 + 2) + 'rem';
-                document.body.appendChild(q);
-                setTimeout(() => q.remove(), 3000);
-            }, i * 200);
-        });
+        // EASTER EGG (Queso PRO)
+document.getElementById('quesoBtn').addEventListener('click', (e) => {
 
+    const btn = e.currentTarget;
+
+    // Animación glitch
+    btn.classList.add('queso-active');
+    setTimeout(() => btn.classList.remove('queso-active'), 400);
+
+    // Micro vibración de pantalla
+    document.body.style.transform = 'translate(2px, -2px)';
+    setTimeout(() => document.body.style.transform = 'translate(-2px, 2px)', 50);
+    setTimeout(() => document.body.style.transform = 'translate(0, 0)', 100);
+
+    // Lluvia de queso mejorada
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const q = document.createElement('div');
+            q.textContent = '🧀';
+            q.className = 'drop-fx';
+            q.style.left = Math.random() * 100 + 'vw';
+            q.style.fontSize = (Math.random() * 3 + 2) + 'rem';
+            q.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(q);
+            setTimeout(() => q.remove(), 4000);
+        }, i * 80);
+    }
+});
         // 7. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
             if(btn.classList.contains('exploded')) return; 
