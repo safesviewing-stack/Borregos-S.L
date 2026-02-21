@@ -195,7 +195,22 @@
         -3px -3px 0 var(--accent-color);
 }
 
+/* EFECTO QUESO BOOST */
+@keyframes queso-punch {
+    0%   { transform: scale(1) rotate(0deg); }
+    25%  { transform: scale(1.2) rotate(-3deg); }
+    50%  { transform: scale(0.9) rotate(3deg); }
+    75%  { transform: scale(1.1) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
 
+#quesoBtn.queso-active {
+    animation: queso-punch 0.45s ease;
+    color: var(--yellow);
+    text-shadow:
+        4px 4px 0 var(--main-color),
+        -4px -4px 0 var(--accent-color);
+}
 
         
     </style>
@@ -468,33 +483,31 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // EASTER EGG (Queso PRO)
+        // EASTER EGG (Queso PRO que SÍ funciona)
 document.getElementById('quesoBtn').addEventListener('click', (e) => {
+
+    e.stopPropagation(); // 👈 MUY IMPORTANTE
 
     const btn = e.currentTarget;
 
-    // Animación glitch
+    // Reset animación (por si se pulsa rápido)
+    btn.classList.remove('queso-active');
+    void btn.offsetWidth; // fuerza reflow
     btn.classList.add('queso-active');
-    setTimeout(() => btn.classList.remove('queso-active'), 400);
 
-    // Micro vibración de pantalla
-    document.body.style.transform = 'translate(2px, -2px)';
-    setTimeout(() => document.body.style.transform = 'translate(-2px, 2px)', 50);
-    setTimeout(() => document.body.style.transform = 'translate(0, 0)', 100);
-
-    // Lluvia de queso mejorada
-    for (let i = 0; i < 20; i++) {
+    // Lluvia de queso clara y visible
+    for (let i = 0; i < 25; i++) {
         setTimeout(() => {
             const q = document.createElement('div');
             q.textContent = '🧀';
             q.className = 'drop-fx';
             q.style.left = Math.random() * 100 + 'vw';
-            q.style.fontSize = (Math.random() * 3 + 2) + 'rem';
-            q.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
             document.body.appendChild(q);
-            setTimeout(() => q.remove(), 4000);
-        }, i * 80);
+            setTimeout(() => q.remove(), 3500);
+        }, i * 60);
     }
+
 });
         // 7. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
