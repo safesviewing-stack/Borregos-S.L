@@ -33,12 +33,18 @@
     /* ===== HEADER ===== */
     header {
       position: fixed;
-      inset: 0 0 auto 0;
+      top: 0;
+      left: 0;
+      right: 0;
       padding: 2.2rem 2rem 1.6rem;
       display: flex;
       justify-content: center;
+      background: linear-gradient(
+        180deg,
+        rgba(11,11,11,0.85),
+        rgba(11,11,11,0.6)
+      );
       backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(11,11,11,.85), rgba(11,11,11,.6));
       z-index: 1000;
     }
 
@@ -56,13 +62,13 @@
     }
 
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
-      font-size: .85rem;
-      letter-spacing: .12em;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      opacity: .75;
-      transition: opacity .4s ease;
+      opacity: 0.75;
+      transition: opacity 0.4s ease;
       cursor: default;
     }
 
@@ -77,17 +83,17 @@
       height: 24px;
       border-radius: 999px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       padding: 0 6px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
       cursor: pointer;
-      font-size: .75rem;
+      font-size: 0.75rem;
     }
 
-    body.dark .sun { opacity: .2; }
-    body:not(.dark) .moon { opacity: .2; }
+    body.dark .sun { opacity: 0.2; }
+    body:not(.dark) .moon { opacity: 0.2; }
 
     /* ===== SECTIONS ===== */
     section {
@@ -106,7 +112,7 @@
 
     .section-title-big {
       font-size: clamp(2.8rem, 5vw, 4rem);
-      margin: 0 0 2.2rem .4rem;
+      margin: 0 0 2.2rem 0.4rem;
       letter-spacing: -0.02em;
     }
 
@@ -115,7 +121,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.2rem;
-      margin-left: .4rem;
+      margin-left: 0.4rem;
     }
 
     .card {
@@ -131,7 +137,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .5s ease;
+      transition: transform 0.5s ease;
     }
 
     .card:hover img {
@@ -145,7 +151,7 @@
       background: linear-gradient(
         180deg,
         rgba(0,0,0,0),
-        rgba(0,0,0,.7)
+        rgba(0,0,0,0.7)
       );
     }
 
@@ -155,8 +161,8 @@
     }
 
     .card p {
-      margin: .2rem 0 0;
-      font-size: .9rem;
+      margin: 0.2rem 0 0;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
@@ -177,6 +183,7 @@
       <a href="#sobre">Sobre</a>
       <a href="#rebano">Rebaño</a>
       <a href="#servicios">Qué hacemos</a>
+      <a href="#inventario">Inventario</a>
       <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -190,13 +197,22 @@
 
 <section id="inicio">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem);margin:0;line-height:.95;">
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem);margin:0;line-height:0.95;">
       Borregos S.L
     </h1>
-    <h2 style="margin:.6rem 0 0 .4rem;font-size:clamp(1.8rem,4vw,3rem);color:var(--text-muted);font-weight:400;">
+    <h2 style="margin:0.6rem 0 0 0.4rem;font-size:clamp(1.8rem,4vw,3rem);color:var(--text-muted);font-weight:400;">
       K de queso
     </h2>
   </div>
+</section>
+
+<section id="sobre">
+  <h2 class="section-title-big">Sobre nosotros</h2>
+  <p style="margin-left:0.5rem;max-width:100ch;text-align:justify;">
+    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas.
+    No por descuido, sino por vocación. Avanzamos en grupo, balamos con criterio y celebramos el
+    absurdo como disciplina compartida.
+  </p>
 </section>
 
 <section id="rebano">
@@ -209,7 +225,6 @@
         <p>Especialista en no hacer nada</p>
       </div>
     </div>
-
     <div class="card">
       <img src="" alt="">
       <div class="card-content">
@@ -217,7 +232,6 @@
         <p>Logística absurda</p>
       </div>
     </div>
-
     <div class="card">
       <img src="" alt="">
       <div class="card-content">
@@ -225,12 +239,75 @@
         <p>Relaciones públicas</p>
       </div>
     </div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 4</h3>
+        <p>Ideas malas</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 5</h3>
+        <p>Seguimiento del grupo</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 6</h3>
+        <p>Documentación gráfica</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <h2 class="section-title-big">Qué hacemos</h2>
+  <div class="cards">
+    <div class="card"><div class="card-content"><p>Ir a sitios random sin motivo</p></div></div>
+    <div class="card"><div class="card-content"><p>No hacer nada durante horas</p></div></div>
+    <div class="card"><div class="card-content"><p>Perdernos en grupo</p></div></div>
+    <div class="card"><div class="card-content"><p>Malinterpretar señales</p></div></div>
+  </div>
+</section>
+
+<section id="inventario">
+  <h2 class="section-title-big">Inventario callejero</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <p>Objeto random<br><small>12/03/2025</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <p>Cosa rara<br><small>22/04/2025</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <h2 class="section-title-big">Blog borreguil</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content"><p>Noche absurda</p></div>
+    </div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content"><p>Experiencia innecesaria</p></div>
+    </div>
   </div>
 </section>
 
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
-  <p style="margin-left:.4rem;">Borregoasqueroso@gmail.com</p>
+  <p style="margin-left:0.4rem;">Borregoasqueroso@gmail.com</p>
 </section>
 
 <footer>
