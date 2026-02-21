@@ -13,19 +13,15 @@
       --accent: #6fff95;
     }
 
-    /* ================= SCROLLBAR OFF ================= */
-
+    /* ===== SCROLLBAR OFF ===== */
     html, body {
-      scrollbar-width: none;          /* Firefox */
-      -ms-overflow-style: none;       /* IE / Edge antiguo */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-
     html::-webkit-scrollbar,
     body::-webkit-scrollbar {
-      display: none;                  /* Chrome / Safari */
+      display: none;
     }
-
-    /* ================= BASE ================= */
 
     body {
       margin: 0;
@@ -35,59 +31,45 @@
       transition: background-color 0.6s ease, color 0.6s ease;
     }
 
-    /* ================= HEADER ================= */
-
+    /* ===== HEADER ===== */
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
       padding: 2.2rem 2rem 1.6rem;
       display: flex;
       justify-content: center;
-      align-items: center;
-      background: linear-gradient(
-        180deg,
-        rgba(11,11,11,0.85),
-        rgba(11,11,11,0.6)
-      );
       backdrop-filter: blur(10px);
-      z-index: 1100;
+      background: linear-gradient(180deg, rgba(11,11,11,.85), rgba(11,11,11,.6));
+      z-index: 1000;
     }
 
     .header-inner {
-      position: relative;
       width: 100%;
       max-width: 1200px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      position: relative;
     }
 
-    header nav {
+    nav {
       display: flex;
       gap: 2rem;
-      align-items: center;
     }
 
-    header nav a {
-      color: #ffffff;
+    nav a {
+      color: white;
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: .85rem;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      opacity: 0.75;
+      opacity: .75;
+      transition: opacity .4s ease;
       cursor: default;
-      user-select: none;
-      transition: opacity 0.6s ease;
     }
 
-    header nav a:hover {
+    nav a:hover {
       opacity: 1;
     }
-
-    /* ================= THEME TOGGLE ================= */
 
     #themeToggle {
       position: absolute;
@@ -95,77 +77,58 @@
       width: 44px;
       height: 24px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: rgba(0,0,0,0.04);
-      cursor: pointer;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 0 6px;
-      font-size: 0.75rem;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.12);
+      cursor: pointer;
+      font-size: .75rem;
     }
 
-    #themeToggle span {
-      line-height: 1;
-      transition: opacity 0.3s ease;
-    }
+    body.dark .sun { opacity: .2; }
+    body:not(.dark) .moon { opacity: .2; }
 
-    body.dark #themeToggle {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.25);
-    }
-
-    body.dark #themeToggle .sun {
-      opacity: 0.2;
-    }
-
-    body:not(.dark) #themeToggle .moon {
-      opacity: 0.2;
-    }
-
-    /* ================= SECTIONS ================= */
-
+    /* ===== SECTIONS ===== */
     section {
       max-width: 1200px;
       margin: auto;
-      padding: 8rem 1.5rem 5rem calc(1.5rem + 0.4rem);
+      padding: 8rem 1.5rem 5rem;
       scroll-margin-top: 120px;
     }
 
-    /* 🔽 ajuste hero */
     #inicio {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
       padding-top: 5.5rem;
     }
 
     .section-title-big {
       font-size: clamp(2.8rem, 5vw, 4rem);
-      margin-bottom: 2.2rem;
-      margin-left: 0.4rem;
+      margin: 0 0 2.2rem .4rem;
       letter-spacing: -0.02em;
     }
 
-    /* ================= CARDS ================= */
-
+    /* ===== CARDS ===== */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.2rem;
-      margin-left: 0.4rem;
+      margin-left: .4rem;
     }
 
     .card {
-      cursor: pointer;
-      padding: 1.4rem 1.4rem 1.6rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: border-color 0.3s ease,
-                  transform 0.3s ease,
-                  background-color 0.3s ease;
+      padding: 1.4rem;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .3s ease, background-color .3s ease, border-color .3s ease;
     }
 
     .card:hover {
-      border-color: rgba(255,255,255,0.25);
-      background-color: rgba(255,255,255,0.02);
       transform: translateY(-2px);
+      background: rgba(255,255,255,.02);
+      border-color: rgba(255,255,255,.25);
     }
 
     .card img {
@@ -176,7 +139,8 @@
     }
 
     .card h3 {
-      margin: 0.4rem 0;
+      margin: .4rem 0;
+      font-size: 1.15rem;
     }
 
     .card p {
@@ -184,8 +148,6 @@
       color: var(--text-muted);
       line-height: 1.45;
     }
-
-    /* ================= FOOTER ================= */
 
     footer {
       padding: 2rem;
@@ -215,10 +177,12 @@
   </div>
 </header>
 
-<section id="inicio" style="min-height:100vh; display:flex; align-items:center;">
+<section id="inicio">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem); margin:0;">Borregos S.L</h1>
-    <h2 style="margin:0.6rem 0 0 0.4rem; font-size:clamp(1.8rem,4vw,3rem); color:var(--text-muted); font-weight:400;">
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem);margin:0;line-height:.95;">
+      Borregos S.L
+    </h1>
+    <h2 style="margin:.6rem 0 0 .4rem;font-size:clamp(1.8rem,4vw,3rem);color:var(--text-muted);font-weight:400;">
       K de queso
     </h2>
   </div>
@@ -226,7 +190,7 @@
 
 <section id="sobre">
   <h2 class="section-title-big">Sobre nosotros</h2>
-  <p style="margin-left:0.5rem; max-width:100ch; text-align:justify;">
+  <p style="margin-left:.5rem;max-width:100ch;text-align:justify;">
     Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas...
   </p>
 </section>
@@ -234,18 +198,36 @@
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
   <div class="cards">
-    <div class="card"><img /><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div>
-    <div class="card"><img /><h3>Borrego 2</h3><p>Logística absurda</p></div>
-    <div class="card"><img /><h3>Borrego 3</h3><p>Relaciones públicas</p></div>
-    <div class="card"><img /><h3>Borrego 4</h3><p>Ideas malas</p></div>
-    <div class="card"><img /><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div>
-    <div class="card"><img /><h3>Borrego 6</h3><p>Documentación gráfica</p></div>
+    <div class="card"><img><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div>
+    <div class="card"><img><h3>Borrego 2</h3><p>Logística absurda</p></div>
+    <div class="card"><img><h3>Borrego 3</h3><p>Relaciones públicas</p></div>
+    <div class="card"><img><h3>Borrego 4</h3><p>Ideas malas</p></div>
+    <div class="card"><img><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div>
+    <div class="card"><img><h3>Borrego 6</h3><p>Documentación gráfica</p></div>
+  </div>
+</section>
+
+<section id="servicios">
+  <h2 class="section-title-big">Qué hacemos</h2>
+  <div class="cards">
+    <div class="card"><p>No hacer nada durante horas</p></div>
+    <div class="card"><p>Perdernos en grupo</p></div>
+    <div class="card"><p>Malinterpretar señales</p></div>
+    <div class="card"><p>Apropiarnos de bancos</p></div>
+  </div>
+</section>
+
+<section id="blog">
+  <h2 class="section-title-big">Blog borreguil</h2>
+  <div class="cards">
+    <div class="card"><img><p>Noche absurda</p></div>
+    <div class="card"><img><p>Experiencia innecesaria</p></div>
   </div>
 </section>
 
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
-  <p style="margin-left:0.4rem;">Borregoasqueroso@gmail.com</p>
+  <p style="margin-left:.4rem;">Borregoasqueroso@gmail.com</p>
 </section>
 
 <footer>
@@ -253,8 +235,7 @@
 </footer>
 
 <script>
-  const toggle = document.getElementById("themeToggle");
-  toggle.addEventListener("click", () => {
+  document.getElementById("themeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
   });
 </script>
