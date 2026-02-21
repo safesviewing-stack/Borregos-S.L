@@ -13,6 +13,20 @@
       --accent: #6fff95;
     }
 
+    /* ================= SCROLLBAR OFF ================= */
+
+    html, body {
+      scrollbar-width: none;          /* Firefox */
+      -ms-overflow-style: none;       /* IE / Edge antiguo */
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;                  /* Chrome / Safari */
+    }
+
+    /* ================= BASE ================= */
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -118,7 +132,7 @@
       scroll-margin-top: 120px;
     }
 
-    /* 🔽 SOLO ESTO CAMBIA */
+    /* 🔽 ajuste hero */
     #inicio {
       padding-top: 5.5rem;
     }
@@ -141,7 +155,6 @@
 
     .card {
       cursor: pointer;
-      text-align: left;
       padding: 1.4rem 1.4rem 1.6rem;
       border: 1px solid rgba(255,255,255,0.08);
       transition: border-color 0.3s ease,
@@ -156,7 +169,6 @@
     }
 
     .card img {
-      display: block;
       width: 100%;
       height: 260px;
       object-fit: cover;
@@ -165,7 +177,6 @@
 
     .card h3 {
       margin: 0.4rem 0;
-      font-size: 1.15rem;
     }
 
     .card p {
@@ -197,7 +208,7 @@
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <button id="themeToggle" aria-label="Cambiar modo">
+    <button id="themeToggle">
       <span class="sun">☀</span>
       <span class="moon">☾</span>
     </button>
@@ -206,9 +217,7 @@
 
 <section id="inicio" style="min-height:100vh; display:flex; align-items:center;">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem); line-height:0.95; margin:0;">
-      Borregos S.L
-    </h1>
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem); margin:0;">Borregos S.L</h1>
     <h2 style="margin:0.6rem 0 0 0.4rem; font-size:clamp(1.8rem,4vw,3rem); color:var(--text-muted); font-weight:400;">
       K de queso
     </h2>
@@ -234,47 +243,6 @@
   </div>
 </section>
 
-<section id="servicios">
-  <h2 class="section-title-big">Qué hacemos</h2>
-  <div class="cards">
-    <div class="card"><p>Ir a sitios random sin motivo aparente</p></div>
-    <div class="card"><p>No hacer nada durante horas con total convicción</p></div>
-    <div class="card"><p>Buscar samaritanas del amor</p></div>
-    <div class="card"><p>Recoger objetos de la calle</p></div>
-    <div class="card"><p>Perdernos en grupo</p></div>
-  </div>
-</section>
-
-<section id="inventario">
-  <h2 class="section-title-big">Inventario callejero</h2>
-  <div class="cards">
-    <div class="card"><img /><p>Objeto random<br><small>12/03/2025</small></p></div>
-    <div class="card"><img /><p>Cosa rara<br><small>22/04/2025</small></p></div>
-  </div>
-</section>
-
-<section id="blog">
-  <h2 class="section-title-big">Blog borreguil</h2>
-  <div class="cards">
-    <div class="card"><img /><p>Noche absurda</p></div>
-    <div class="card"><img /><p>Experiencia innecesaria</p></div>
-  </div>
-</section>
-
-<section id="donar">
-  <h2 class="section-title-big">Donaciones</h2>
-  <div class="cards">
-    <div class="card" onclick="donar(1)">1€</div>
-    <div class="card" onclick="donar(2)">2€</div>
-    <div class="card" onclick="donar(5)">5€</div>
-  </div>
-  <div style="margin-left:0.4rem; margin-top:2rem; max-width:400px;">
-    <div style="height:10px; background:rgba(255,255,255,0.1); border-radius:6px;">
-      <div id="donationBar" style="height:100%; width:0%; background:var(--accent);"></div>
-    </div>
-  </div>
-</section>
-
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
   <p style="margin-left:0.4rem;">Borregoasqueroso@gmail.com</p>
@@ -286,31 +254,9 @@
 
 <script>
   const toggle = document.getElementById("themeToggle");
-  const body = document.body;
-
   toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-
-    if (body.classList.contains("dark")) {
-      document.documentElement.style.setProperty("--bg", "#0b0b0b");
-      document.documentElement.style.setProperty("--text", "#f5f5f5");
-      document.documentElement.style.setProperty("--text-muted", "#8f8f8f");
-    } else {
-      document.documentElement.style.setProperty("--bg", "#ffffff");
-      document.documentElement.style.setProperty("--text", "#111111");
-      document.documentElement.style.setProperty("--text-muted", "#555555");
-    }
+    document.body.classList.toggle("dark");
   });
-
-  let totalDonations = 0;
-  const donationGoal = 100;
-
-  function donar(amount) {
-    totalDonations += amount;
-    const percent = Math.min((totalDonations / donationGoal) * 100, 100);
-    document.getElementById("donationBar").style.width = percent + "%";
-    window.open("https://www.paypal.com/donate", "_blank");
-  }
 </script>
 
 </body>
