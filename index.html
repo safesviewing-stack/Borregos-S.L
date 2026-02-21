@@ -290,7 +290,16 @@
   transform: translateY(-50%) scale(1.05);
 }
 
+header {
+    position: relative;
+    z-index: 5;
+}
 
+        #quesoBtn {
+    position: relative;
+    z-index: 1001;
+    pointer-events: auto;
+}
         
     </style>
 </head>
@@ -636,8 +645,8 @@
 let quesoInterval = null;
 
 document.getElementById('quesoBtn').addEventListener('click', (e) => {
-  e.stopPropagation();
-
+e.preventDefault();
+e.stopImmediatePropagation();
   const btn = e.currentTarget;
 
   btn.classList.remove('queso-active');
