@@ -43,7 +43,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- EFECTOS FRAMER MOTION (Más suaves y fluidos) --- */
+        /* --- EFECTOS FRAMER MOTION (Suaves y fluidos) --- */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .reveal.active { opacity: 1; }
         .reveal-up { transform: translateY(50px); }
@@ -83,13 +83,14 @@
         .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
         .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* MENU LATERAL COMPACTO */
-        .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 6rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
+        /* MENU LATERAL (MÁS BAJO Y COMPACTO) */
+        /* padding-top ha subido de 6rem a 12rem para bajar los títulos */
+        .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 12rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
         .side-panel.open { right: 0; }
         .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: transform 0.3s ease, color 0.3s ease; display: block; }
         .side-panel a:hover { color: var(--accent-color); transform: translateX(10px); }
 
-        /* --- ESTILOS GENERALES Y BRUTALISMO SUAVE --- */
+        /* --- ESTILOS GENERALES Y BRUTALISMO --- */
         .brutal-border { border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
         .brutal-border:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); }
 
@@ -149,8 +150,21 @@
         .drop-fx { position: fixed; font-size: 2.5rem; z-index: 9999; animation: fall 3s linear forwards; pointer-events: none; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 
-        .beee-text { position: fixed; pointer-events: none; font-weight: 900; z-index: 99999; animation: floatup 1s ease-out forwards; font-size: 3.5rem; text-shadow: 3px 3px 0px #000; }
-        @keyframes floatup { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(-10deg); } 100% { opacity: 0; transform: translateY(-120px) scale(1.5) rotate(15deg); } }
+        /* EL BEEEEEE GIGANTE (Centrado en el ratón) */
+        .beee-text { 
+            position: fixed; 
+            pointer-events: none; 
+            font-weight: 900; 
+            z-index: 999999; 
+            animation: floatup 1s ease-out forwards; 
+            font-size: 3.5rem; 
+            text-shadow: 3px 3px 0px #000;
+            transform: translate(-50%, -50%); 
+        }
+        @keyframes floatup { 
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-10deg); } 
+            100% { opacity: 0; transform: translate(-50%, -120px) scale(1.5) rotate(15deg); } 
+        }
 
         /* FOOTER / CAOS */
         .chaos-btn-wrapper { text-align: center; padding: 4rem 2rem; background: var(--dark); border-top: 4px solid var(--main-color); }
@@ -167,9 +181,8 @@
 
     <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- CONTROLES -->
+    <!-- CONTROLES (Sin el botón de idioma) -->
     <div class="top-controls">
-        <div class="magnetic-btn"><button class="btn-control" id="langBtn" onclick="toggleLang()">ES</button></div>
         <div class="magnetic-btn"><button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button></div>
         <div class="magnetic-btn">
             <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
@@ -180,48 +193,48 @@
 
     <!-- MENÚ -->
     <nav class="side-panel" id="sideMenu">
-        <a href="#inicio" onclick="toggleMenu()" class="lang-text" data-es="Inicio" data-en="Home">Inicio</a>
-        <a href="#nosotros" onclick="toggleMenu()" class="lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
-        <a href="#rebano" onclick="toggleMenu()" class="lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</a>
-        <a href="#servicios" onclick="toggleMenu()" class="lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</a>
-        <a href="#inventario" onclick="toggleMenu()" class="lang-text" data-es="Inventario" data-en="Inventory">Inventario</a>
-        <a href="#blog" onclick="toggleMenu()" class="lang-text" data-es="Blog" data-en="Blog">Blog</a>
-        <a href="#donaciones" onclick="toggleMenu()" class="lang-text" data-es="Donaciones" data-en="Donations">Donaciones</a>
+        <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+        <a href="#nosotros" onclick="toggleMenu()">Sobre Nosotros</a>
+        <a href="#rebano" onclick="toggleMenu()">El Rebaño</a>
+        <a href="#servicios" onclick="toggleMenu()">Qué Hacemos</a>
+        <a href="#inventario" onclick="toggleMenu()">Inventario</a>
+        <a href="#blog" onclick="toggleMenu()">Blog</a>
+        <a href="#donaciones" onclick="toggleMenu()">Donaciones</a>
     </nav>
 
     <!-- INICIO -->
     <header id="inicio">
-        <div class="spinning-badge lang-text" data-es="100% OVEJA REAL" data-en="100% REAL SHEEP">100% OVEJA REAL</div>
+        <div class="spinning-badge">100% OVEJA REAL</div>
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
-        <div class="subtitle lang-text reveal reveal-up" data-es="K de queso" data-en="K for Kheese" id="quesoBtn">K de queso</div>
+        <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
     <section id="nosotros">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</h2>
-        <div class="about-text brutal-border reveal reveal-up lang-text" data-es="Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia." data-en="Since the dawn of humanity, the intrinsic dichotomy between being, nothingness, and chronic boredom has perplexed the most distinguished thinkers... We ignore all that because a pigeon eating a Cheeto is cooler.<br><br>Our corporate synergy is based on empirical procrastination. Ergo, we are an indissoluble amalgam of dilettante intellect, supine stupidity, and an alarming lack of survival instinct.">
+        <h2 class="section-title reveal reveal-left">Sobre Nosotros</h2>
+        <div class="about-text brutal-border reveal reveal-up">
             Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia.
         </div>
     </section>
 
     <!-- REBAÑO -->
     <section id="rebano">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</h2>
+        <h2 class="section-title reveal reveal-left">El Rebaño</h2>
         <div class="grid-3">
             <div class="card-rebano brutal-border reveal reveal-scale 3d-card" onclick="abrirPerfil('Borrego #1', 'El líder que nadie pidió.', 'Aparte de comer césped a deshoras, su principal habilidad consiste en mirar fijamente a la gente en el metro hasta incomodarla. Su mayor récord de no parpadear es de 14 minutos. Nadie le votó como CEO, simplemente se sentó en la silla más grande y empezó a balar muy fuerte hasta que los demás le hicieron caso.')">
                 <img src="https://picsum.photos/seed/borrego1/400" alt="Borrego">
                 <h3>Borrego #1</h3>
-                <p class="lang-text" data-es='"Si no hay pasto, comemos plástico."' data-en='"No grass, we eat plastic."'>"Si no hay pasto, comemos plástico."</p>
+                <p>"Si no hay pasto, comemos plástico."</p>
             </div>
             <div class="card-rebano brutal-border reveal reveal-scale 3d-card" onclick="abrirPerfil('Borrego #2', 'Estratega del caos.', 'Conocido en 3 distritos diferentes por hacer cálculos matemáticos completamente erróneos pero con mucha seguridad. Una vez intentó calcular la distancia a la luna usando un zapato y un chicle. Dice que la ironía es su mecanismo de defensa, pero en realidad es que no sabe conjugar los verbos.')">
                 <img src="https://picsum.photos/seed/borrego2/400" alt="Borrego">
                 <h3>Borrego #2</h3>
-                <p class="lang-text" data-es='"La ironía es mi mecanismo de defensa."' data-en='"Irony is my defense mechanism."'>"La ironía es mi mecanismo de defensa."</p>
+                <p>"La ironía es mi mecanismo de defensa."</p>
             </div>
             <div class="card-rebano brutal-border reveal reveal-scale 3d-card" onclick="abrirPerfil('Borrego #3', 'Experto en bulto.', 'Se perdió en el Ikea de Alcorcón en el año 2018 y desde entonces se ha adaptado a vivir en la sección de baños. Solo sale cuando huele a cervezas gratis o a croquetas. Es experto en asistir a reuniones, asentir despacio con la cabeza y no aportar absolutamente ninguna idea válida. Indispensable en la empresa.')">
                 <img src="https://picsum.photos/seed/borrego3/400" alt="Borrego">
                 <h3>Borrego #3</h3>
-                <p class="lang-text" data-es='"Vine por las cervezas gratis."' data-en='"I came for the free beers."'>"Vine por las cervezas gratis."</p>
+                <p>"Vine por las cervezas gratis."</p>
             </div>
         </div>
     </section>
@@ -229,7 +242,7 @@
     <!-- MODAL PERFIL INSTANTÁNEO -->
     <div id="modalPerfil" class="modal-perfil">
         <div class="modal-content brutal-border">
-            <button class="close-btn lang-text" data-es="X CERRAR" data-en="X CLOSE" onclick="cerrarPerfil()">X CERRAR</button>
+            <button class="close-btn" onclick="cerrarPerfil()">X CERRAR</button>
             <h2 id="perfilNombre" style="font-size: 3rem; margin-bottom: 0.5rem;">Nombre</h2>
             <h4 id="perfilSub" style="color: var(--main-color); margin-bottom: 1.5rem; font-size: 1.5rem;">Sub</h4>
             <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto</p>
@@ -238,29 +251,29 @@
 
     <!-- QUÉ HACEMOS -->
     <section id="servicios">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</h2>
+        <h2 class="section-title reveal reveal-left">Qué Hacemos</h2>
         <div class="service-card brutal-border reveal reveal-up" style="background: var(--yellow);">
-            <h3 class="lang-text" data-es="Escolta de Engaño Táctico" data-en="Tactical Deception Escort">Escolta de Engaño Táctico</h3>
-            <p class="lang-text" data-es="Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar. Éxito: -3%." data-en="Go as 8 idiots to a club just to take up space and let one try to flirt. Success rate: -3%.">Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar. Éxito: -3%.</p>
+            <h3>Escolta de Engaño Táctico</h3>
+            <p>Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar. Éxito: -3%.</p>
         </div>
         <div class="service-card brutal-border reveal reveal-up" style="background: var(--card-bg);">
-            <h3 class="lang-text" data-es="Presencia Cero" data-en="Zero Presence">Presencia Cero</h3>
-            <p class="lang-text" data-es="Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos." data-en="We attend your event, look at our phones, eat your snacks, and leave without talking.">Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos.</p>
+            <h3>Presencia Cero</h3>
+            <p>Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos.</p>
         </div>
     </section>
 
     <!-- INVENTARIO -->
     <section id="inventario">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="Inventario" data-en="Inventory">Inventario</h2>
+        <h2 class="section-title reveal reveal-left">Inventario</h2>
         <div class="grid-inventario reveal reveal-up">
             <div class="item-inventario brutal-border">
                 <img src="https://picsum.photos/seed/inv1/300" alt="Objeto">
-                <p class="lang-text" data-es="Cono de tráfico deprimido" data-en="Depressed Traffic Cone">Cono de tráfico deprimido</p>
+                <p>Cono de tráfico deprimido</p>
                 <span>12/10/2023</span>
             </div>
             <div class="item-inventario brutal-border">
                 <img src="https://picsum.photos/seed/inv2/300" alt="Objeto">
-                <p class="lang-text" data-es="Zapato solitario talla 42" data-en="Lonely Shoe Size 42">Zapato solitario talla 42</p>
+                <p>Zapato solitario talla 42</p>
                 <span>05/01/2024</span>
             </div>
         </div>
@@ -268,7 +281,7 @@
 
     <!-- BLOG -->
     <section id="blog">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="Blog / Archivo" data-en="Blog / Archive">Blog / Archivo</h2>
+        <h2 class="section-title reveal reveal-left">Blog / Archivo</h2>
         <div class="grid-blog reveal reveal-up">
             <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog1/600/400') center/cover;"></div>
             <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog2/600/400') center/cover;"></div>
@@ -279,9 +292,9 @@
 
     <!-- DONACIONES -->
     <section id="donaciones">
-        <h2 class="section-title reveal reveal-left lang-text" data-es="Fondos Reservados" data-en="Slush Fund">Fondos Reservados</h2>
+        <h2 class="section-title reveal reveal-left">Fondos Reservados</h2>
         <div class="donaciones-container brutal-border reveal reveal-scale">
-            <h3 class="lang-text" data-es="Ayúdanos a comprar cosas inútiles" data-en="Help us buy useless stuff">Ayúdanos a comprar cosas inútiles</h3>
+            <h3>Ayúdanos a comprar cosas inútiles</h3>
             <div class="donaciones-cajas">
                 <div class="magnetic-btn"><a href="https://www.paypal.com/paypalme/tuusuario/1" target="_blank" class="btn-donar" onclick="sumarDonacion(1)">1 €</a></div>
                 <div class="magnetic-btn"><a href="https://www.paypal.com/paypalme/tuusuario/2" target="_blank" class="btn-donar" onclick="sumarDonacion(2)">2 €</a></div>
@@ -290,8 +303,7 @@
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
                 <div class="progreso-texto">
-                    <span class="lang-text" data-es="Objetivo: Yate de lujo" data-en="Goal: Luxury Yacht">Objetivo: Yate de lujo</span> 
-                    (<span id="dineroRecaudado">0</span>€ / 300€)
+                    Objetivo: Yate de lujo (<span id="dineroRecaudado">0</span>€ / 300€)
                 </div>
             </div>
         </div>
@@ -299,12 +311,12 @@
 
     <!-- BOTÓN CAOS -->
     <div class="chaos-btn-wrapper">
-        <button class="btn-chaos lang-text" onclick="iniciarDestruccion(this)" data-es="NO PULSAR (AUTODESTRUCCIÓN)" data-en="DO NOT PRESS (SELF DESTRUCT)">NO PULSAR (AUTODESTRUCCIÓN)</button>
+        <button class="btn-chaos" onclick="iniciarDestruccion(this)">NO PULSAR (AUTODESTRUCCIÓN)</button>
     </div>
 
     <!-- FOOTER -->
     <footer id="contacto">
-        <h2 class="reveal reveal-up lang-text" data-es="Insúltanos aquí" data-en="Insult us here">Insúltanos aquí</h2>
+        <h2 class="reveal reveal-up">Insúltanos aquí</h2>
         <div class="magnetic-btn reveal reveal-up" style="margin-top:1rem;">
             <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
         </div>
@@ -334,7 +346,7 @@
             card.addEventListener('mouseleave', () => card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`);
         });
 
-        // 3. MENU / MODO OSCURO / TRADUCTOR PERFECTO
+        // 3. MENU / MODO OSCURO
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('active');
@@ -344,43 +356,33 @@
             document.body.classList.toggle('dark-mode');
             document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
         }
-        
-        let currentLang = 'es';
-        function toggleLang() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.getElementById('langBtn').innerText = currentLang.toUpperCase();
-            document.querySelectorAll('.lang-text').forEach(el => {
-                // Actualiza solo el texto interior manteniendo seguro el HTML estructural
-                if(el.hasAttribute(`data-${currentLang}`)) {
-                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
-                }
-            });
-        }
 
-        // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK
-        // Audio muy corto y fiable alojado en servidores CDN públicos
+        // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK (SIN RESTRICCIONES)
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
         document.addEventListener('click', function(e) {
-            // Reproducción forzada
+            // Reproducir el sonido en cada click
             try {
                 let sfx = sheepAudio.cloneNode();
                 sfx.volume = 0.5;
                 sfx.play();
-            } catch(e) { console.log('El navegador bloqueó el audio.'); }
+            } catch(err) { console.log('Audio bloqueado por el navegador.'); }
 
-            // Solo hacemos el efecto de letras si no es en un botón vital (para no molestar la navegación)
-            if(e.target.closest('button') || e.target.closest('.glass-overlay')) return;
-            
+            // Crear el BEEEEEE visual SIEMPRE
             const beeeText = document.createElement('div');
             beeeText.textContent = 'BEEEEEE!';
             beeeText.className = 'beee-text';
-            beeeText.style.left = (e.clientX - 40) + 'px';
-            beeeText.style.top = (e.clientY - 20) + 'px';
+            
+            // Centrado exactamente en el cursor
+            beeeText.style.left = e.clientX + 'px';
+            beeeText.style.top = e.clientY + 'px';
+            
             const colors = ['#ff2a5f', '#00e5ff', 'var(--yellow)', 'var(--text-dark)'];
             beeeText.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
             document.body.appendChild(beeeText);
             
+            // Eliminar después de 1 segundo
             setTimeout(() => beeeText.remove(), 1000);
         });
 
