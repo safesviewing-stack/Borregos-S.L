@@ -8,158 +8,215 @@
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#f4f4f4;--text:#111;--glass:rgba(255,255,255,.65)
+--bg:#f5f6f7;--text:#111;--muted:#5f6368;--glass:rgba(255,255,255,.72);--border:rgba(255,255,255,.5);--card:#fff;
 }
-.dark{
---bg:#0e0e0e;--text:#f4f4f4;--glass:rgba(0,0,0,.6)
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter}
-body{background:var(--bg);color:var(--text);transition:.4s;overflow-x:hidden}
+.dark{--bg:#0f1115;--text:#f3f3f3;--muted:#a7b0ba;--glass:rgba(17,20,26,.75);--border:rgba(255,255,255,.08);--card:#171b22;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif}
+body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
+a{color:inherit}
 
-header{position:fixed;top:20px;right:20px;display:flex;gap:12px;z-index:100}
-button{background:none;border:none;color:var(--text);cursor:pointer;font-size:18px}
+header{position:fixed;top:20px;right:20px;display:flex;gap:10px;z-index:120;align-items:center}
+.header-btn{border:1px solid var(--border);background:var(--glass);color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer;backdrop-filter:blur(14px)}
+.hamburger{width:46px;height:42px;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:8px;border:1px solid var(--border);background:var(--glass);border-radius:10px;cursor:pointer;backdrop-filter:blur(14px)}
+.hamburger span{display:block;height:2px;background:currentColor}
 
-.hamburger{width:28px;cursor:pointer}
-.hamburger span{display:block;height:3px;background:currentColor;margin:6px 0}
+.menu{position:fixed;top:0;right:0;width:min(300px,90vw);height:100vh;padding:90px 28px;background:var(--glass);backdrop-filter:blur(20px);border-left:1px solid var(--border);z-index:140}
+.menu a{display:block;margin-bottom:18px;font-weight:700;text-decoration:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(9px);z-index:130}
 
-.menu{position:fixed;top:0;right:0;width:280px;height:100vh;
-padding:80px 30px;background:var(--glass);backdrop-filter:blur(20px)}
-.menu a{display:block;margin-bottom:18px;font-weight:700;color:var(--text);text-decoration:none}
+section{padding:100px 8%;scroll-margin-top:80px}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:clamp(3rem,9vw,8rem);line-height:.95;font-weight:900}
+.hero h2{font-size:clamp(1.3rem,2.7vw,2rem);color:var(--muted);margin-top:8px}
 
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
+h2{font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:18px}
+.justified{line-height:1.8;text-align:justify;max-width:1000px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.card,.donate{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+.card img,.media img{width:100%;height:190px;object-fit:cover;border-radius:12px;margin-bottom:10px}
+.member-link{text-decoration:none}
+.member-line{color:var(--muted);font-size:.95rem}
 
-section{min-height:100vh;padding:120px 10%}
-.hero h1{font-size:clamp(4rem,10vw,8rem);font-weight:900}
-.hero h2{opacity:.6}
+.service{font-weight:700;line-height:1.45}
+.inventory-item span{display:block;color:var(--muted);font-size:.9rem;margin-top:8px}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
-.card,.donate{padding:20px;border-radius:18px;background:var(--glass);backdrop-filter:blur(14px)}
+.media{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px}
+.media video{width:100%;border-radius:12px}
 
-.progress{height:12px;background:#ccc;border-radius:6px;overflow:hidden;margin-top:20px}
-.progress span{display:block;height:100%;background:var(--text);width:30%}
+.donate-wrap{max-width:760px}
+.donate{cursor:pointer;text-align:center;font-weight:700;transition:.2s}
+.donate:hover{transform:translateY(-3px)}
+.progress{height:14px;background:#8892a033;border-radius:8px;overflow:hidden;margin-top:20px}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#5a67d8,#7f9cf5)}
+.paypal-note{margin-top:10px;color:var(--muted)}
 
-footer{text-align:center;padding:40px;opacity:.6}
+footer{text-align:center;padding:38px 16px;color:var(--muted)}
+
+@media (max-width:680px){section{padding:88px 6%}}
 </style>
 </head>
-
 <body>
 <div id="root"></div>
-
 <script>
 const { motion, AnimatePresence } = window.FramerMotion;
 const { useState } = React;
 
-const fadeUp={
-hidden:{opacity:0,y:80},
-visible:{opacity:1,y:0,transition:{duration:.8,ease:"easeOut"}}
+const copy = {
+  es: {
+    nav:["Inicio","Sobre nosotros","Rebaño","Qué hacemos","Inventario","Blog","Donaciones","Contacto"],
+    heroSubtitle:"K de queso",
+    aboutTitle:"Sobre nosotros",
+    aboutText:"Somos seis borregos descerebrados unidos por la improvisación y por una increíble capacidad de aparecer en cualquier plan sin necesidad real. Nos especializamos en hacer piña, estorbar con estilo y convertir cualquier noche normal en una historia absurda para el recuerdo.",
+    flockTitle:"Rebaño",
+    servicesTitle:"Qué hacemos",
+    inventoryTitle:"Inventario callejero",
+    blogTitle:"Blog borreguil",
+    blogText:"Recopilación de fotos y vídeos de nuestras experiencias borreguiles.",
+    donateTitle:"Donaciones para el rebaño",
+    donateText:"Donación simulada y acceso directo a PayPal.",
+    contactTitle:"Contacto",
+    footer:"Borregos S.L. · Desde siempre haciendo poco"
+  },
+  en: {
+    nav:["Home","About us","Flock","What we do","Inventory","Blog","Donations","Contact"],
+    heroSubtitle:"K means cheese",
+    aboutTitle:"About us",
+    aboutText:"We are six chaotic sheep held together by improvisation and an outstanding skill to show up to plans with no practical purpose. Our expertise includes random support, pointless presence, and turning regular nights into legendary nonsense.",
+    flockTitle:"Flock",
+    servicesTitle:"What we do",
+    inventoryTitle:"Street inventory",
+    blogTitle:"Sheep blog",
+    blogText:"A collection of photos and videos from all of our sheep experiences.",
+    donateTitle:"Donations for the flock",
+    donateText:"Simulated donation progress plus direct PayPal access.",
+    contactTitle:"Contact",
+    footer:"Borregos S.L. · Doing little since forever"
+  }
 };
 
+const members = [
+  {name:"Luis",line:"Llega tarde pero trae chispa.",img:"luis.jpg",link:"members/luis.html"},
+  {name:"Pablo",line:"Siempre dice que ahora va.",img:"pablo.jpg",link:"members/pablo.html"},
+  {name:"Dani",line:"Especialista en ideas que no llevan a nada.",img:"https://placehold.co/600x400?text=Dani",link:"members/dani.html"},
+  {name:"Javi",line:"Capitán de planes que nunca arrancan.",img:"https://placehold.co/600x400?text=Javi",link:"members/javi.html"},
+  {name:"Álvaro",line:"Aparece con objetos random de regalo.",img:"https://placehold.co/600x400?text=Alvaro",link:"members/alvaro.html"},
+  {name:"Mario",line:"Motivación máxima, criterio mínimo.",img:"https://placehold.co/600x400?text=Mario",link:"members/mario.html"}
+];
+
+const inventory = [
+  {title:"Cono mini de obra",date:"2025-01-13",img:"https://placehold.co/600x400?text=Cono"},
+  {title:"Mando sin tele",date:"2025-01-22",img:"https://placehold.co/600x400?text=Mando"},
+  {title:"Patito de plástico",date:"2025-02-01",img:"https://placehold.co/600x400?text=Patito"}
+];
+
 function App(){
-const [menu,setMenu]=useState(false);
-const [dark,setDark]=useState(false);
-const [donation,setDonation]=useState(30);
+  const [menu,setMenu] = useState(false);
+  const [dark,setDark] = useState(false);
+  const [lang,setLang] = useState("es");
+  const [donation,setDonation] = useState(0);
+  const t = copy[lang];
+  const ids = ["inicio","sobre","rebano","servicios","inventario","blog","donaciones","contacto"];
 
-return React.createElement("div",{className:dark?"dark":""},
+  const donate = (value)=>{
+    setDonation(d=>Math.min(d + value * 4,100));
+    window.open(`https://www.paypal.com/donate/?business=Borregoasqueroso@gmail.com&amount=${value}&currency_code=EUR`,`_blank`);
+  };
 
-/* HEADER */
-React.createElement("header",null,
-React.createElement("button",{onClick:()=>setDark(!dark)},"🌙"),
-React.createElement("button",null,"ES / EN"),
-React.createElement("div",{className:"hamburger",onClick:()=>setMenu(true)},
-React.createElement("span"),React.createElement("span"),React.createElement("span"))
-),
+  return React.createElement("div",{className:dark?"dark":""},
+    React.createElement("header",null,
+      React.createElement("button",{className:"header-btn",onClick:()=>setDark(d=>!d)},dark?"☀️":"🌙"),
+      React.createElement("button",{className:"header-btn",onClick:()=>setLang(l=>l==="es"?"en":"es")},lang==="es"?"ES / EN":"EN / ES"),
+      React.createElement("div",{className:"hamburger",onClick:()=>setMenu(true)},
+        React.createElement("span"),React.createElement("span"),React.createElement("span"))
+    ),
 
-/* MENU */
-React.createElement(AnimatePresence,null,
-menu&&React.createElement(React.Fragment,null,
-React.createElement(motion.nav,{
-className:"menu",initial:{x:300},animate:{x:0},exit:{x:300}},
-["inicio","sobre","rebaño","servicios","inventario","blog","donaciones","contacto"]
-.map(i=>React.createElement("a",{key:i,href:"#"+i,onClick:()=>setMenu(false)},i.toUpperCase()))
-),
-React.createElement(motion.div,{
-className:"overlay",onClick:()=>setMenu(false),
-initial:{opacity:0},animate:{opacity:1},exit:{opacity:0}})
-)),
+    React.createElement(AnimatePresence,null,
+      menu && React.createElement(React.Fragment,null,
+        React.createElement(motion.nav,{className:"menu",initial:{x:320},animate:{x:0},exit:{x:320}},
+          t.nav.map((item,i)=>React.createElement("a",{key:item,href:`#${ids[i]}`,onClick:()=>setMenu(false)},item))
+        ),
+        React.createElement(motion.div,{className:"overlay",onClick:()=>setMenu(false),initial:{opacity:0},animate:{opacity:1},exit:{opacity:0}})
+      )
+    ),
 
-/* HERO */
-React.createElement(motion.section,{id:"inicio",className:"hero",variants:fadeUp,initial:"hidden",animate:"visible"},
-React.createElement("h1",null,"Borregos S.L."),
-React.createElement("h2",null,"K de queso")
-),
+    React.createElement("section",{id:"inicio",className:"hero"},
+      React.createElement("h1",null,"Borregos S.L"),
+      React.createElement("h2",null,t.heroSubtitle)
+    ),
 
-/* SOBRE */
-React.createElement(motion.section,{id:"sobre",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Sobre nosotros"),
-React.createElement("p",null,
-"Borregos S.L. es una entidad colectiva nacida de la coincidencia prolongada. "
-+"Seis individuos operando mediante improvisación, presencia innecesaria y "
-+"una confianza injustificada en que estar ya es hacer.")
-),
+    React.createElement("section",{id:"sobre"},
+      React.createElement("h2",null,t.aboutTitle),
+      React.createElement("p",{className:"justified"},t.aboutText)
+    ),
 
-/* REBAÑO */
-React.createElement(motion.section,{id:"rebaño",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"El rebaño"),
-React.createElement("div",{className:"grid"},
-["Llega tarde","Ahora va","No sabe por qué","Finge liderazgo","Trae algo raro","Molesta"]
-.map((t,i)=>React.createElement(motion.div,{
-key:i,className:"card",whileHover:{scale:1.05}},
-"Borrego "+(i+1),React.createElement("br"),React.createElement("small",null,t)))
-)),
+    React.createElement("section",{id:"rebano"},
+      React.createElement("h2",null,t.flockTitle),
+      React.createElement("div",{className:"grid"},
+        members.map((m)=>React.createElement("a",{key:m.name,className:"member-link",href:m.link},
+          React.createElement("div",{className:"card"},
+            React.createElement("img",{src:m.img,alt:m.name}),
+            React.createElement("h3",null,m.name),
+            React.createElement("p",{className:"member-line"},m.line)
+          )
+        ))
+      )
+    ),
 
-/* SERVICIOS */
-React.createElement(motion.section,{id:"servicios",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Qué hacemos"),
-React.createElement("div",{className:"grid"},
-["Ir a sitios para no hacer nada",
-"Ir 8 gilipollas para que ligue uno",
-"Acompañamiento innecesario",
-"Presencia sin aportar valor"]
-.map((s,i)=>React.createElement("div",{key:i,className:"card"},s)))
-),
+    React.createElement("section",{id:"servicios"},
+      React.createElement("h2",null,t.servicesTitle),
+      React.createElement("div",{className:"grid"},
+        ["Ir a sitios para no hacer nada","Ir 8 fuera de una discoteca para que ligue uno","Acompañamiento absurdo de alta calidad","Comité de decisiones sin decisiones"]
+          .map((s,i)=>React.createElement("div",{key:i,className:"card service"},s))
+      )
+    ),
 
-/* INVENTARIO */
-React.createElement(motion.section,{id:"inventario",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Inventario"),
-React.createElement("div",{className:"grid"},
-["Llave inútil · 12/03/24","Cable misterioso · 27/04/24","Objeto indefinido · 09/06/24"]
-.map((o,i)=>React.createElement("div",{key:i,className:"card"},o)))
-),
+    React.createElement("section",{id:"inventario"},
+      React.createElement("h2",null,t.inventoryTitle),
+      React.createElement("div",{className:"grid"},
+        inventory.map((item)=>React.createElement("div",{key:item.title,className:"card inventory-item"},
+          React.createElement("img",{src:item.img,alt:item.title}),
+          React.createElement("strong",null,item.title),
+          React.createElement("span",null,item.date)
+        ))
+      )
+    ),
 
-/* BLOG */
-React.createElement(motion.section,{id:"blog",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Blog borreguil"),
-React.createElement("p",null,"Fotos borrosas, vídeos mal grabados y recuerdos que no deberían documentarse.")
-),
+    React.createElement("section",{id:"blog"},
+      React.createElement("h2",null,t.blogTitle),
+      React.createElement("p",{className:"justified",style:{marginBottom:"16px"}},t.blogText),
+      React.createElement("div",{className:"grid"},
+        React.createElement("div",{className:"media"},React.createElement("img",{src:"https://placehold.co/700x400?text=Foto+borreguil+1",alt:"Foto borreguil"})),
+        React.createElement("div",{className:"media"},React.createElement("img",{src:"https://placehold.co/700x400?text=Foto+borreguil+2",alt:"Foto borreguil"})),
+        React.createElement("div",{className:"media"},React.createElement("video",{controls:true,src:"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"}))
+      )
+    ),
 
-/* DONACIONES */
-React.createElement(motion.section,{id:"donaciones",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Apoya al rebaño"),
-React.createElement("div",{className:"grid"},
-[1,2,5].map(v=>React.createElement("div",{key:v,className:"donate",
-onClick:()=>setDonation(d=>Math.min(d+v*5,100))},v+" €"))),
-React.createElement("div",{className:"progress"},
-React.createElement("span",{style:{width:donation+"%"}}))
-),
+    React.createElement("section",{id:"donaciones"},
+      React.createElement("h2",null,t.donateTitle),
+      React.createElement("p",null,t.donateText),
+      React.createElement("div",{className:"donate-wrap"},
+        React.createElement("div",{className:"grid",style:{marginTop:"16px"}},
+          [1,2,5].map((v)=>React.createElement("button",{key:v,className:"donate",onClick:()=>donate(v)},`${v} €`))
+        ),
+        React.createElement("div",{className:"progress"},React.createElement("span",{style:{width:`${donation}%`}})),
+        React.createElement("p",{className:"paypal-note"},`Progreso objetivo: ${donation}%`)
+      )
+    ),
 
-/* CONTACTO */
-React.createElement(motion.section,{id:"contacto",variants:fadeUp,initial:"hidden",whileInView:"visible"},
-React.createElement("h2",null,"Contacto"),
-React.createElement("p",null,"📩 Borregoasqueroso@gmail.com")
-),
+    React.createElement("section",{id:"contacto"},
+      React.createElement("h2",null,t.contactTitle),
+      React.createElement("p",null,"📩 ",React.createElement("a",{href:"mailto:Borregoasqueroso@gmail.com"},"Borregoasqueroso@gmail.com"))
+    ),
 
-/* FOOTER */
-React.createElement("footer",null,"Borregos S.L. · Desde siempre haciendo poco")
-);
+    React.createElement("footer",null,t.footer)
+  );
 }
 
-ReactDOM.createRoot(document.getElementById("root"))
-.render(React.createElement(App));
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
 </script>
 </body>
 </html>
