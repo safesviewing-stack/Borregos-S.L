@@ -1,272 +1,465 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Borregos S.L</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borregos S.L. | Expertos en el Caos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
 
-  <style>
-    :root {
-      --bg: #0b0b0b;
-      --text: #f5f5f5;
-      --text-muted: #8f8f8f;
-      --accent: #6fff95;
-    }
+        :root {
+            --bg-color: #0f0f13;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent: #00ffcc;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
 
-    /* ===== SCROLLBAR OFF ===== */
-    html, body {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    html::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-      display: none;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            /* Fondo con un degradado sutil para darle profundidad */
+            background: radial-gradient(circle at 15% 50%, rgba(0, 255, 204, 0.05), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(153, 0, 255, 0.05), transparent 25%),
+                        #0f0f13;
+        }
 
-    /* ===== HEADER ===== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 2.2rem 2rem 1.6rem;
-      display: flex;
-      justify-content: center;
-      background: linear-gradient(
-        180deg,
-        rgba(11,11,11,0.85),
-        rgba(11,11,11,0.6)
-      );
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
+        /* Utilidad Glassmorphism */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
 
-    .header-inner {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      justify-content: center;
-      position: relative;
-    }
+        /* HEADER Y MENÚ HAMBURGUESA */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
+        header.scrolled {
+            background: rgba(15, 15, 19, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      transition: opacity 0.4s ease;
-      cursor: default;
-    }
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
 
-    nav a:hover {
-      opacity: 1;
-    }
+        .hamburger {
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
 
-    #themeToggle {
-      position: absolute;
-      right: 0;
-      width: 44px;
-      height: 24px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.12);
-      cursor: pointer;
-      font-size: 0.75rem;
-    }
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
 
-    body.dark .sun { opacity: 0.2; }
-    body:not(.dark) .moon { opacity: 0.2; }
+        .hamburger.active div:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background-color: var(--accent);
+        }
 
-    /* ===== SECTIONS ===== */
-    section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 8.5rem 1.5rem 11rem;
-      scroll-margin-top: 95px;
-    }
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
 
-    /* ⬇ AJUSTE FINAL FINO */
-    #inicio {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 1.1rem;
-    }
+        .hamburger.active div:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+            background-color: var(--accent);
+        }
 
-    .section-title-big {
-      font-size: clamp(2.8rem, 5vw, 4rem);
-      margin: 0 0 3rem 0.4rem;
-      letter-spacing: -0.02em;
-    }
+        /* NAVEGACIÓN DESPLEGABLE (OVERLAY) */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 999;
+        }
 
-    /* ===== CARDS ===== */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.8rem;
-      margin-left: 0.4rem;
-    }
+        nav.active {
+            transform: translateY(0);
+        }
 
-    .card {
-      position: relative;
-      height: 300px;
-      overflow: hidden;
-      cursor: pointer;
-    }
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 15px 0;
+            transition: color 0.3s, transform 0.3s;
+        }
 
-    .card img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
+        nav a:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
 
-    .card:hover img {
-      transform: scale(1.05);
-    }
+        /* SECCIONES */
+        section {
+            min-height: 100vh;
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-    .card-content {
-      position: absolute;
-      inset: auto 0 0 0;
-      padding: 1.4rem;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0),
-        rgba(0,0,0,0.8)
-      );
-    }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
 
-    .card h3 {
-      margin: 0;
-      font-size: 1.15rem;
-    }
+        h2 {
+            font-size: 3rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
 
-    .card p {
-      margin: 0.3rem 0 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-    footer {
-      padding: 3.5rem 2rem;
-      text-align: center;
-      color: var(--text-muted);
-    }
-  </style>
+        /* GRID PARA CARTAS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 40px;
+        }
+
+        .card {
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* BOTONES / INPUTS */
+        .btn {
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+        }
+
+        input, textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* ANIMACIONES AL HACER SCROLL (JS INTERSECTION OBSERVER) */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* INICIO ESPECÍFICO */
+        #inicio {
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        /* ANIMACIÓN DE FLOTACIÓN (BORREGOS) */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+    </style>
 </head>
+<body>
 
-<body class="dark">
+    <!-- HEADER Y MENÚ -->
+    <header id="header">
+        <div class="logo">BORREGOS S.L. 🐑</div>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
 
-<header>
-  <div class="header-inner">
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#rebano">Rebaño</a>
-      <a href="#servicios">Qué hacemos</a>
-      <a href="#inventario">Inventario</a>
-      <a href="#blog">Blog</a>
-      <a href="#contacto">Contacto</a>
+    <nav id="nav-menu">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a>
+        <a href="#el-rebano" class="nav-link">El Rebaño</a>
+        <a href="#que-hacemos" class="nav-link">Qué Hacemos</a>
+        <a href="#blog" class="nav-link">Blog</a>
+        <a href="#inventario" class="nav-link">Inventario</a>
+        <a href="#donaciones" class="nav-link">Donaciones</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
     </nav>
 
-    <button id="themeToggle">
-      <span class="sun">☀</span>
-      <span class="moon">☾</span>
-    </button>
-  </div>
-</header>
+    <!-- INICIO -->
+    <section id="inicio">
+        <h1 class="hero-title floating hidden">CAOS,<br>RISAS Y<br>CERO NEURONAS</h1>
+        <p class="hidden">Bienvenidos a Borregos S.L., la élite de hacer cosas random, armar el caos y ser unos completos inútiles pero con estilo.</p>
+        <a href="#el-rebano" class="btn hidden">Únete al rebaño</a>
+    </section>
 
-<section id="inicio">
-  <div>
-    <h1 style="font-size:clamp(5.2rem,13vw,10.5rem);margin:0;line-height:0.95;">
-      Borregos S.L
-    </h1>
-    <h2 style="margin:0.6rem 0 0 0.4rem;font-size:clamp(1.8rem,4vw,3rem);color:var(--text-muted);font-weight:400;">
-      K de queso
-    </h2>
-  </div>
-</section>
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre-nosotros">
+        <div class="glass card hidden" style="max-width: 800px;">
+            <h2>Sobre Nosotros</h2>
+            <p>Somos un grupo de retrasados unidos por el destino (o por la falta de mejores opciones). En Borregos S.L. no tenemos objetivos, ni metas, ni futuro. Lo único que hacemos es generar anécdotas cuestionables y reírnos de nuestra propia desgracia.</p>
+            <p>Nuestra filosofía es simple: Si se puede hacer mal, lo haremos peor.</p>
+        </div>
+    </section>
 
-<section id="sobre">
-  <h2 class="section-title-big">Sobre nosotros</h2>
-  <p style="margin-left:0.5rem;max-width:100ch;text-align:justify;">
-    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos
-    gilipollas. No por descuido, sino por vocación.
-  </p>
-</section>
+    <!-- EL REBAÑO -->
+    <section id="el-rebano">
+        <h2 class="hidden">El Rebaño</h2>
+        <p class="hidden">Conoce a la junta directiva de este despropósito.</p>
+        <div class="grid">
+            <div class="glass card hidden">
+                <h3>🐑 Borrego Alfa</h3>
+                <p>El que toma las peores decisiones pero habla con mucha seguridad.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>🐑 Borrego Táctico</h3>
+                <p>Arma el caos, se ríe y luego desaparece misteriosamente cuando hay que limpiar.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>🐑 Borrego NPC</h3>
+                <p>Solo está ahí. Nadie sabe qué aporta, pero se le quiere igual.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="rebano">
-  <h2 class="section-title-big">El rebaño</h2>
-  <div class="cards">
-    <div class="card"><img><div class="card-content"><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div></div>
-    <div class="card"><img><div class="card-content"><h3>Borrego 2</h3><p>Logística absurda</p></div></div>
-    <div class="card"><img><div class="card-content"><h3>Borrego 3</h3><p>Relaciones públicas</p></div></div>
-    <div class="card"><img><div class="card-content"><h3>Borrego 4</h3><p>Ideas malas</p></div></div>
-    <div class="card"><img><div class="card-content"><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div></div>
-    <div class="card"><img><div class="card-content"><h3>Borrego 6</h3><p>Documentación gráfica</p></div></div>
-  </div>
-</section>
+    <!-- QUÉ HACEMOS -->
+    <section id="que-hacemos">
+        <h2 class="hidden">Qué Hacemos</h2>
+        <p class="hidden">Nuestro core business se centra en actividades de nula rentabilidad.</p>
+        <div class="grid">
+            <div class="glass card hidden">
+                <h3>Debates inútiles</h3>
+                <p>Discutimos durante horas sobre si las cebras son blancas con rayas negras o al revés.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>Romper cosas</h3>
+                <p>No es aposta, es que la física está en nuestra contra y somos un poco patosos.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>Planes que fracasan</h3>
+                <p>Organizamos cosas épicas que siempre terminan en un banco comiendo pipas.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="servicios">
-  <h2 class="section-title-big">Qué hacemos</h2>
-  <div class="cards">
-    <div class="card"><div class="card-content"><p>Ir a sitios random sin motivo</p></div></div>
-    <div class="card"><div class="card-content"><p>No hacer nada durante horas</p></div></div>
-    <div class="card"><div class="card-content"><p>Perdernos en grupo</p></div></div>
-    <div class="card"><div class="card-content"><p>Malinterpretar señales</p></div></div>
-  </div>
-</section>
+    <!-- BLOG -->
+    <section id="blog">
+        <h2 class="hidden">Blog del Caos</h2>
+        <div class="glass card hidden" style="width: 100%; max-width: 800px; text-align: left;">
+            <h3 style="color: var(--accent);">Última entrada: El Incidente del Microondas</h3>
+            <p style="font-size: 0.9rem; color: #777;">Publicado ayer por Borrego NPC</p>
+            <p>Resulta que meter papel de aluminio para calentar un kebab no es "ciencia avanzada" como dijo el Borrego Alfa. Ahora debemos un microondas y casi quemamos el piso. Seguiremos informando.</p>
+        </div>
+    </section>
 
-<section id="inventario">
-  <h2 class="section-title-big">Inventario callejero</h2>
-  <div class="cards">
-    <div class="card"><img><div class="card-content"><p>Objeto random<br><small>12/03/2025</small></p></div></div>
-    <div class="card"><img><div class="card-content"><p>Cosa rara<br><small>22/04/2025</small></p></div></div>
-  </div>
-</section>
+    <!-- INVENTARIO -->
+    <section id="inventario">
+        <h2 class="hidden">Inventario Colectivo</h2>
+        <p class="hidden">Patrimonio actual de Borregos S.L.</p>
+        <div class="grid">
+            <div class="glass card hidden">
+                <h3>🚦 1x Cono de Tráfico</h3>
+                <p>Nadie sabe de dónde salió, pero ahora es nuestra mascota oficial.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>🧠 2x Neuronas</h3>
+                <p>Y las compartimos entre todos. A veces hay lag al pensar.</p>
+            </div>
+            <div class="glass card hidden">
+                <h3>🍺 14x Litronas vacías</h3>
+                <p>Decoración minimalista y contemporánea en nuestro punto de reunión.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="blog">
-  <h2 class="section-title-big">Blog borreguil</h2>
-  <div class="cards">
-    <div class="card"><img><div class="card-content"><p>Noche absurda</p></div></div>
-    <div class="card"><img><div class="card-content"><p>Experiencia innecesaria</p></div></div>
-  </div>
-</section>
+    <!-- DONACIONES -->
+    <section id="donaciones">
+        <div class="glass card hidden" style="max-width: 800px;">
+            <h2>Donaciones</h2>
+            <p>Nuestra estupidez sale cara. Si te hace gracia vernos fracasar o simplemente te sobran los billetes, ayúdanos a financiar nuestro próximo error catastrófico (o para pagar la multa del microondas).</p>
+            <button class="btn">Danos tu dinero 💸</button>
+        </div>
+    </section>
 
-<section id="contacto">
-  <h2 class="section-title-big">Contacto</h2>
-  <p style="margin-left:0.4rem;">Borregoasqueroso@gmail.com</p>
-</section>
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <h2 class="hidden">Contacto</h2>
+        <p class="hidden">Déjanos un mensaje. Prometemos no leerlo.</p>
+        <form class="glass card hidden" style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 600px;">
+            <input type="text" placeholder="Tu nombre o apodo ridículo" required>
+            <textarea rows="5" placeholder="Cuéntanos tus penas o propón un plan absurdo" required></textarea>
+            <button type="submit" class="btn">Enviar al vacío</button>
+        </form>
+    </section>
 
-<footer>
-  © Borregos S.L · Todos los derechos balando
-</footer>
+    <footer style="text-align: center; padding: 20px; background: rgba(0,0,0,0.5); font-size: 0.9rem; color: #555;">
+        <p>&copy; 2024 Borregos S.L. - Ningún derecho reservado. Hacemos lo que queremos.</p>
+    </footer>
 
-<script>
-  document.getElementById("themeToggle").addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-  });
-</script>
+    <!-- SCRIPTS PARA ANIMACIONES Y MENÚ -->
+    <script>
+        // Lógica del menú Hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const header = document.getElementById('header');
 
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Cambiar fondo del header al hacer scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animaciones al hacer scroll usando Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); // Dejar de observar una vez que aparece
+                }
+            });
+        }, observerOptions);
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach(el => observer.observe(el));
+        
+        // Evitar que el form recargue la página (sólo para efecto visual)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensaje enviado al vacío con éxito. BEEEEH 🐑');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
