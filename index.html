@@ -99,7 +99,7 @@
     section {
       max-width: 1200px;
       margin: auto;
-      padding: 8rem 1.5rem 5rem;
+      padding: 9rem 1.5rem 9rem; /* ⬅ MÁS ESPACIO ARRIBA Y ABAJO */
       scroll-margin-top: 120px;
     }
 
@@ -107,12 +107,12 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 5.5rem;
+      padding-top: 6rem;
     }
 
     .section-title-big {
       font-size: clamp(2.8rem, 5vw, 4rem);
-      margin: 0 0 2.2rem 0.4rem;
+      margin: 0 0 2.5rem 0.4rem;
       letter-spacing: -0.02em;
     }
 
@@ -120,13 +120,13 @@
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      gap: 1.6rem;
       margin-left: 0.4rem;
     }
 
     .card {
       position: relative;
-      height: 260px;
+      height: 280px;
       overflow: hidden;
       cursor: pointer;
     }
@@ -147,11 +147,11 @@
     .card-content {
       position: absolute;
       inset: auto 0 0 0;
-      padding: 1rem;
+      padding: 1.2rem;
       background: linear-gradient(
         180deg,
         rgba(0,0,0,0),
-        rgba(0,0,0,0.7)
+        rgba(0,0,0,0.75)
       );
     }
 
@@ -161,13 +161,13 @@
     }
 
     .card p {
-      margin: 0.2rem 0 0;
+      margin: 0.25rem 0 0;
       font-size: 0.9rem;
       color: var(--text-muted);
     }
 
     footer {
-      padding: 2rem;
+      padding: 3rem 2rem;
       text-align: center;
       color: var(--text-muted);
     }
@@ -209,57 +209,21 @@
 <section id="sobre">
   <h2 class="section-title-big">Sobre nosotros</h2>
   <p style="margin-left:0.5rem;max-width:100ch;text-align:justify;">
-    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas.
-    No por descuido, sino por vocación. Avanzamos en grupo, balamos con criterio y celebramos el
-    absurdo como disciplina compartida.
+    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos
+    gilipollas. No por descuido, sino por vocación. Avanzamos en grupo, celebramos el
+    absurdo y llamamos experiencia a perdernos juntos.
   </p>
 </section>
 
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
   <div class="cards">
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 1</h3>
-        <p>Especialista en no hacer nada</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 2</h3>
-        <p>Logística absurda</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 3</h3>
-        <p>Relaciones públicas</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 4</h3>
-        <p>Ideas malas</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 5</h3>
-        <p>Seguimiento del grupo</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <h3>Borrego 6</h3>
-        <p>Documentación gráfica</p>
-      </div>
-    </div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div></div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 2</h3><p>Logística absurda</p></div></div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 3</h3><p>Relaciones públicas</p></div></div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 4</h3><p>Ideas malas</p></div></div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div></div>
+    <div class="card"><img><div class="card-content"><h3>Borrego 6</h3><p>Documentación gráfica</p></div></div>
   </div>
 </section>
 
@@ -276,32 +240,16 @@
 <section id="inventario">
   <h2 class="section-title-big">Inventario callejero</h2>
   <div class="cards">
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <p>Objeto random<br><small>12/03/2025</small></p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content">
-        <p>Cosa rara<br><small>22/04/2025</small></p>
-      </div>
-    </div>
+    <div class="card"><img><div class="card-content"><p>Objeto random<br><small>12/03/2025</small></p></div></div>
+    <div class="card"><img><div class="card-content"><p>Cosa rara<br><small>22/04/2025</small></p></div></div>
   </div>
 </section>
 
 <section id="blog">
   <h2 class="section-title-big">Blog borreguil</h2>
   <div class="cards">
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content"><p>Noche absurda</p></div>
-    </div>
-    <div class="card">
-      <img src="" alt="">
-      <div class="card-content"><p>Experiencia innecesaria</p></div>
-    </div>
+    <div class="card"><img><div class="card-content"><p>Noche absurda</p></div></div>
+    <div class="card"><img><div class="card-content"><p>Experiencia innecesaria</p></div></div>
   </div>
 </section>
 
