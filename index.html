@@ -20,6 +20,9 @@
   --card:#fff;
 }
 
+/* =====================
+   BASE
+===================== */
 body{
   margin:0;
   font-family:'Space Grotesk',sans-serif;
@@ -27,6 +30,8 @@ body{
   color:var(--dark);
   overflow-x:hidden;
 }
+
+a{ color:inherit }
 
 /* =====================
    HEADER
@@ -106,7 +111,6 @@ h1{
   font-size:1.6rem;
   font-weight:900;
   text-decoration:none;
-  color:var(--dark);
 }
 
 .side-menu.open{ right:0 }
@@ -155,10 +159,53 @@ section{
   font-size:1.05rem;
 }
 
+/* =====================
+   GRID
+===================== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:2rem;
+}
+
+/* =====================
+   REBAÑO
+===================== */
+.rebano-card{
+  cursor:pointer;
+  text-align:center;
+  font-weight:900;
+}
+
+/* =====================
+   MODAL
+===================== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.modal-content{
+  background:var(--card);
+  padding:3rem;
+  max-width:700px;
+  border:4px solid var(--dark);
+  box-shadow:10px 10px 0 var(--dark);
+}
+
+.modal button{
+  margin-top:2rem;
+  padding:.5rem 1rem;
+  border:4px solid var(--dark);
+  background:var(--yellow);
+  font-weight:900;
+  cursor:pointer;
 }
 
 /* =====================
@@ -268,71 +315,51 @@ footer a{
 <section id="nosotros">
   <h2 class="section-title">Sobre Nosotros</h2>
   <div class="card">
-    Desde los albores de la humanidad, la dicotomía entre el ser, la nada y el
-    aburrimiento crónico ha obsesionado a filósofos, sociólogos y personas con
-    demasiado tiempo libre. Nosotros decidimos ignorarlo todo porque una vez
-    vimos a una paloma intentar comerse un Cheeto y nos pareció un acontecimiento
-    mucho más revelador.
-
+    Desde los albores de la humanidad, la dicotomía entre el ser, la nada y el aburrimiento crónico
+    ha obsesionado a los pensadores más ilustres. Nosotros decidimos ignorarlo todo porque una vez
+    vimos a una paloma intentar comerse un Cheeto y nos pareció un evento culturalmente superior.
     <br><br>
-
-    Borregos S.L. nace en el entorno más valenciano posible: las Fallas. Entre
-    pólvora, ruido y decisiones manifiestamente erróneas se consolidó este grupo
-    de individuos funcionalmente inútiles, unidos más por la inercia social que
-    por cualquier tipo de talento destacable.
-
+    Borregos S.L. nace en Fallas. Entre pólvora, ruido y decisiones erróneas se consolidó este grupo
+    de individuos funcionalmente inútiles. Cada uno “hace algo”, pero nadie hace nada.
     <br><br>
-
-    Como todo grupo de hombres, presentamos una amplia variedad de edades y
-    personalidades. En teoría, cada uno cumple una función. En la práctica, nadie
-    hace nada de forma clara, salvo dos o tres que lo intentan con una mezcla
-    entrañable de voluntad y fracaso. El resto acompaña, opina sin datos y
-    mantiene viva la llama del caos organizado.
-
-    <br><br>
-
-    Nuestro objetivo vital es tan sencillo como ambicioso: obtener el carnet del
-    33% y acceder a zona Gemelos con legitimidad administrativa. No por necesidad,
-    sino por coherencia filosófica. El borreguismo no es una institución ni un
-    movimiento; es una manera de estar en el mundo y pensar ligeramente peor que
-    la media.
+    Nuestro objetivo vital es tan simple como ambicioso: obtener el carnet del 33% y acceder a zona
+    Gemelos con legitimidad administrativa.
   </div>
 </section>
 
 <section id="rebano">
   <h2 class="section-title">El Rebaño</h2>
   <div class="grid">
-    <div class="card">Borrego #1 — Liderazgo no solicitado</div>
-    <div class="card">Borrego #2 — Estratega del caos</div>
-    <div class="card">Borrego #3 — Bulto profesional</div>
-    <div class="card">Borrego #4 — Departamento de excusas</div>
-    <div class="card">Borrego #5 — Visionario incomprendido</div>
-    <div class="card">Borrego #6 — Control emocional nulo</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #1','Líder no solicitado')">Borrego #1</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #2','Estratega del caos')">Borrego #2</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #3','Bulto profesional')">Borrego #3</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #4','Departamento de excusas')">Borrego #4</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #5','Visionario incomprendido')">Borrego #5</div>
+    <div class="card rebano-card" onclick="openModal('Borrego #6','Control emocional nulo')">Borrego #6</div>
   </div>
 </section>
 
 <section id="servicios">
   <h2 class="section-title">Qué Hacemos</h2>
   <div class="grid">
-    <div class="card">Ir a sitios a no hacer absolutamente nada.</div>
+    <div class="card">Ir a sitios a no hacer nada.</div>
     <div class="card">Ir ocho a una discoteca para que ligue uno.</div>
-    <div class="card">Recoger objetos random de dudosa legalidad.</div>
-    <div class="card">Turismo urbano sin destino ni sentido.</div>
+    <div class="card">Turismo urbano sin destino.</div>
+    <div class="card">Recolección urbana de objetos random.</div>
   </div>
 </section>
 
 <section id="inventario">
   <h2 class="section-title">Inventario</h2>
   <div class="grid">
-    <div class="card">Borregueta (vehículo ceremonial)</div>
-    <div class="card">Carrito de supermercado</div>
-    <div class="card">Objeto ilegal no documentado</div>
+    <div class="card">Borregueta</div>
+    <div class="card">Carrito</div>
+    <div class="card">Objeto ilegal</div>
   </div>
 </section>
 
 <section id="blog">
   <h2 class="section-title">Blog</h2>
-  <p>Archivo visual de nuestras experiencias colectivas. El orden es cronológico solo en apariencia.</p>
   <div class="carousel">
     <div></div><div></div><div></div>
   </div>
@@ -340,7 +367,6 @@ footer a{
 
 <section id="donaciones">
   <h2 class="section-title">Donaciones</h2>
-  <p>Ayúdanos a financiar decisiones malas.</p>
   <div class="donaciones">
     <button>1€</button>
     <button>2€</button>
@@ -353,23 +379,38 @@ footer a{
   <a href="mailto:Borregoasqueroso@gmail.com">Borregoasqueroso@gmail.com</a>
 </footer>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <button onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
 <script>
 function toggleMenu(){
-  document.getElementById('menu').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('active');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('active');
 }
+
+/* MODAL */
+const modal=document.getElementById('modal');
+function openModal(t,txt){
+  modalTitle.innerText=t;
+  modalText.innerText=txt;
+  modal.style.display='flex';
+}
+function closeModal(){ modal.style.display='none'; }
 
 /* QUESO */
 let quesoInterval=null;
-const quesoBtn=document.getElementById('quesoBtn');
-
 quesoBtn.addEventListener('click',()=>{
   quesoBtn.classList.remove('queso-active');
   void quesoBtn.offsetWidth;
   quesoBtn.classList.add('queso-active');
 
   if(quesoInterval) return;
-
   quesoInterval=setInterval(()=>{
     const q=document.createElement('div');
     q.textContent='🧀';
@@ -379,10 +420,7 @@ quesoBtn.addEventListener('click',()=>{
     setTimeout(()=>q.remove(),3000);
   },120);
 
-  setTimeout(()=>{
-    clearInterval(quesoInterval);
-    quesoInterval=null;
-  },4000);
+  setTimeout(()=>{ clearInterval(quesoInterval); quesoInterval=null; },4000);
 });
 </script>
 
