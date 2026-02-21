@@ -524,11 +524,12 @@
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
         document.addEventListener('click', function(e) {
+            if (e.target.id === 'quesoBtn') return;
             // Reproducir el sonido en cada click
             try {
                 let sfx = sheepAudio.cloneNode();
                 sfx.volume = 0.5;
-                sfx.play();
+                sfx.play().catch(() => {});
             } catch(err) { console.log('Audio bloqueado por el navegador.'); }
 
             // Crear el BEEEEEE visual SIEMPRE
