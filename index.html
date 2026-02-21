@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borregos S.L. | Innovación en Pasto</title>
+    <title>Borregos S.L. | K de queso</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f4f4f0;
             --main-color: #ff2a5f;
             --accent-color: #00e5ff;
+            --yellow: #fffb00;
             --dark: #111;
         }
 
@@ -17,7 +18,6 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            /* Cursor personalizado en forma de oveja */
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important;
         }
 
@@ -26,9 +26,35 @@
             background-color: var(--bg-color);
             color: var(--dark);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Utilidades Neo-Brutalistas */
+        /* Menú de Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--dark);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 100;
+            border-bottom: 4px solid var(--main-color);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--accent-color); }
+
+        /* Utilidades Brutalistas */
         .brutal-border {
             border: 4px solid var(--dark);
             box-shadow: 8px 8px 0px var(--dark);
@@ -40,18 +66,50 @@
             box-shadow: 12px 12px 0px var(--dark);
         }
 
-        /* Animaciones */
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        section {
+            padding: 6rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(3deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-3deg); }
-            100% { transform: rotate(0deg); }
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            display: inline-block;
+            background: var(--yellow);
+            padding: 0 1rem;
+            border: 4px solid var(--dark);
+            transform: rotate(-1deg);
+        }
+
+        /* Inicio */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%);
+        }
+
+        h1 {
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 6px 6px 0px var(--main-color);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+            opacity: 0.4;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
         }
 
         @keyframes float {
@@ -60,278 +118,413 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Hero Section */
-        header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%);
+        /* Sobre Nosotros */
+        .about-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            text-align: justify;
+            background: white;
+            padding: 3rem;
         }
 
-        h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 1rem;
-            animation: float 4s ease-in-out infinite;
-            text-shadow: 4px 4px 0px var(--main-color);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            max-width: 600px;
-            background: var(--dark);
-            color: white;
-            padding: 1rem 2rem;
-            transform: rotate(-2deg);
-            margin-bottom: 3rem;
-        }
-
-        /* Marquee Caótico */
-        .marquee-container {
-            width: 100vw;
-            overflow: hidden;
-            background: var(--main-color);
-            color: white;
-            padding: 1rem 0;
-            border-top: 4px solid var(--dark);
-            border-bottom: 4px solid var(--dark);
-            white-space: nowrap;
-            display: flex;
-            transform: rotate(2deg) scale(1.05);
-            position: relative;
-            z-index: 10;
-        }
-
-        .marquee-content {
-            display: flex;
-            animation: marquee 10s linear infinite;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .marquee-content span {
-            padding: 0 2rem;
-        }
-
-        /* Equipo (Los 6 Borregos) */
-        .team-section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 4rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            text-decoration: underline;
-            text-decoration-color: var(--main-color);
-            text-decoration-thickness: 8px;
-        }
-
-        .grid {
+        /* Rebaño (Equipo) */
+        .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
-        .card {
+        .card-rebano {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
+            cursor: pointer !important;
+        }
+
+        .card-rebano:hover { background: var(--accent-color); }
+
+        .card-rebano img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 4px solid var(--dark);
+            margin-bottom: 1rem;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .card-rebano:hover img { filter: grayscale(0%); }
+
+        /* Modal Individual (Simulación de página nueva) */
+        .modal-perfil {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-color);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            padding: 4rem 2rem;
+        }
+
+        .modal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
             position: relative;
         }
 
-        .card:hover {
-            animation: shake 0.5s ease-in-out infinite;
+        .close-btn {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: var(--main-color);
+            color: white;
+            border: 4px solid var(--dark);
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            cursor: pointer !important;
+        }
+
+        /* Qué hacemos (Servicios) */
+        .service-card {
+            background: var(--yellow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .service-card h3 { font-size: 2rem; margin-bottom: 1rem; text-decoration: underline; }
+
+        /* Inventario */
+        .grid-inventario {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .item-inventario { background: white; padding: 1rem; }
+        .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); }
+        .item-inventario p { margin-top: 0.5rem; font-weight: bold; font-size: 0.9rem; }
+        .item-inventario span { display: block; color: gray; font-size: 0.8rem; }
+
+        /* Blog */
+        .grid-blog {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 768px) { .grid-blog { grid-template-columns: 1fr; } }
+        .blog-item { width: 100%; height: 300px; background: #ddd; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #555;}
+
+        /* Donaciones */
+        .donaciones-container {
+            background: var(--main-color);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+        }
+        .donaciones-cajas {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .btn-donar {
+            background: white;
+            color: var(--dark);
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1.5rem 3rem;
+            border: 4px solid var(--dark);
+            text-decoration: none;
+            box-shadow: 6px 6px 0px var(--dark);
+            transition: all 0.2s;
+        }
+        .btn-donar:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px var(--yellow);
             background: var(--accent-color);
         }
-
-        .card-img {
-            width: 150px;
-            height: 150px;
-            background: var(--bg-color);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border: 4px solid var(--dark);
+        
+        .progreso-wrapper {
+            width: 100%;
+            height: 40px;
+            background: var(--dark);
+            border: 4px solid white;
+            margin-top: 2rem;
+            position: relative;
         }
-
-        .card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+        .progreso-barra {
+            height: 100%;
+            width: 5%; /* Inicial */
+            background: var(--yellow);
+            transition: width 0.5s ease;
         }
-
-        .card p {
-            font-size: 1rem;
-            color: #555;
-            font-style: italic;
-        }
-
-        .card:hover p {
-            color: var(--dark);
+        .progreso-texto {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             font-weight: bold;
+            mix-blend-mode: difference;
+            color: white;
         }
 
-        /* Contacto */
-        .contact-section {
+        /* Footer / Contacto */
+        footer {
             background: var(--dark);
             color: white;
             padding: 6rem 2rem;
             text-align: center;
-            border-top: 4px solid var(--main-color);
+            border-top: 4px solid var(--yellow);
         }
-
-        .contact-section h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .contact-section p {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-        }
-
-        .email-btn {
-            display: inline-block;
-            background: var(--main-color);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 1.5rem 3rem;
-            border: 4px solid white;
-            box-shadow: 8px 8px 0px white;
-            transition: all 0.2s;
-        }
-
-        .email-btn:hover {
-            background: white;
+        footer h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 2rem; }
+        .email-huge {
+            font-size: clamp(1.5rem, 5vw, 4rem);
             color: var(--main-color);
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--accent-color);
+            text-decoration: underline;
+            word-break: break-all;
         }
+        .email-huge:hover { color: white; }
 
-        /* Partículas flotantes absurdas (JS) */
+        /* Efecto BEEE */
         .beee {
-            position: fixed;
-            pointer-events: none;
-            font-weight: bold;
-            color: var(--main-color);
-            animation: floatup 2s ease-out forwards;
-            z-index: 9999;
+            position: fixed; pointer-events: none; font-weight: bold; z-index: 9999;
+            animation: floatup 1.5s ease-out forwards;
         }
-
         @keyframes floatup {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(2); }
+            100% { opacity: 0; transform: translateY(-100px) scale(3); }
         }
     </style>
 </head>
 <body>
 
-    <!-- HERO -->
-    <header>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#rebano">Rebaño</a>
+        <a href="#servicios">Qué Hacemos</a>
+        <a href="#inventario">Inventario</a>
+        <a href="#blog">Blog</a>
+        <a href="#donaciones">Donaciones</a>
+    </nav>
+
+    <!-- INICIO -->
+    <header id="inicio">
         <h1>Borregos S.L.</h1>
-        <div class="hero-subtitle brutal-border">
-            No seguimos al rebaño. Somos el puto rebaño.
-        </div>
-        <p>Expertos en Sinergias Herbívoras y Balidos Disruptivos.</p>
+        <div class="subtitle">K de queso</div>
     </header>
 
-    <!-- MARQUEE CAÓTICO -->
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span>🐑 MASCANDO HIERBA DESDE 2024</span>
-            <span>🌿 LÍDERES EN PASTO</span>
-            <span>🐑 TU STARTUP NOS DA IGUAL</span>
-            <span>🌿 BALAMOS A HORAS INTEMPESTIVAS</span>
-            <!-- Repetimos para el bucle infinito -->
-            <span>🐑 MASCANDO HIERBA DESDE 2024</span>
-            <span>🌿 LÍDERES EN PASTO</span>
-            <span>🐑 TU STARTUP NOS DA IGUAL</span>
-            <span>🌿 BALAMOS A HORAS INTEMPESTIVAS</span>
+    <!-- SOBRE NOSOTROS -->
+    <section id="nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-text brutal-border">
+            <p>Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.</p><br>
+            <p>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos.</p>
+        </div>
+    </section>
+
+    <!-- REBAÑO -->
+    <section id="rebano">
+        <h2 class="section-title">El Rebaño</h2>
+        <div class="grid-3">
+            <!-- Borrego 1 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Alpha', 'El líder que nadie pidió.', 'Le gusta lamer farolas en invierno. Una vez se perdió en un Ikea y fundó una tribu urbana en la sección de baño.')">
+                <img src="https://picsum.photos/seed/borrego1/400" alt="Foto Borrego 1">
+                <h3>Borrego #1</h3>
+                <p>"Si no hay pasto, comemos plástico."</p>
+            </div>
+            <!-- Borrego 2 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Beta', 'Estratega del caos.', 'Calcula mal las distancias. Su récord de horas mirando una pared en blanco es de 14. Dice que estaba descargando una actualización.')">
+                <img src="https://picsum.photos/seed/borrego2/400" alt="Foto Borrego 2">
+                <h3>Borrego #2</h3>
+                <p>"La ironía es mi mecanismo de defensa."</p>
+            </div>
+            <!-- Borrego 3 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Gamma', 'Experto en bulto.', 'Su mayor logro vital es que le cobraron de menos en el kebab en 2018 y aún vive de esas rentas emocionales.')">
+                <img src="https://picsum.photos/seed/borrego3/400" alt="Foto Borrego 3">
+                <h3>Borrego #3</h3>
+                <p>"Yo solo vine porque me dijeron que había cervezas."</p>
+            </div>
+            <!-- Borrego 4 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Delta', 'Relaciones Públicas.', 'Tiene prohibida la entrada a 4 mercadonas distintos. No preguntes por qué. Involucra un melón y cinta americana.')">
+                <img src="https://picsum.photos/seed/borrego4/400" alt="Foto Borrego 4">
+                <h3>Borrego #4</h3>
+                <p>"Beee, pero con sarcasmo."</p>
+            </div>
+            <!-- Borrego 5 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Epsilon', 'Director de Absurdos.', 'Duerme con los calcetines puestos. A veces también en las manos. Cree firmemente que la Tierra tiene forma de croqueta.')">
+                <img src="https://picsum.photos/seed/borrego5/400" alt="Foto Borrego 5">
+                <h3>Borrego #5</h3>
+                <p>"Mi cerebro es un mono tocando platillos."</p>
+            </div>
+            <!-- Borrego 6 -->
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Zeta', 'El Becario eterno.', 'Le mandamos a comprar junta de la trócola hace tres meses y sigue buscando. Le queremos, pero poco.')">
+                <img src="https://picsum.photos/seed/borrego6/400" alt="Foto Borrego 6">
+                <h3>Borrego #6</h3>
+                <p>"Por favor, dejad de pegarme."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL PERFIL INDIVIDUAL -->
+    <div id="modalPerfil" class="modal-perfil">
+        <div class="modal-content brutal-border">
+            <button class="close-btn" onclick="cerrarPerfil()">X VOLVER AL CORRAL</button>
+            <h2 id="perfilNombre" style="font-size: 3rem; margin-bottom: 1rem;">Nombre</h2>
+            <h4 id="perfilSub" style="color: var(--main-color); margin-bottom: 2rem; font-size: 1.5rem;">Sub</h4>
+            <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto descriptivo brutal y sin sentido.</p>
         </div>
     </div>
 
-    <!-- EL EQUIPO DE LOS 6 -->
-    <section class="team-section">
-        <h2 class="section-title">El Rebaño Directivo</h2>
-        <div class="grid">
-            <div class="card brutal-border">
-                <div class="card-img">😎</div>
-                <h3>Borrego #1</h3>
-                <p>CEO de Comer Césped. Se cree el jefe porque bala más fuerte.</p>
+    <!-- QUÉ HACEMOS -->
+    <section id="servicios">
+        <h2 class="section-title">Qué Hacemos</h2>
+        <div class="service-card brutal-border">
+            <h3>Escolta de Engaño Táctico</h3>
+            <p>Ir 8 gilipollas a una discoteca o bar exclusivamente para hacer bulto, reírle las gracias y que uno de nosotros intente ligar. Tasa de éxito actual: -3%.</p>
+        </div>
+        <div class="service-card brutal-border" style="background: #fff;">
+            <h3>Presencia Cero</h3>
+            <p>¿Tienes un evento aburrido? Vamos a tu sitio, nos sentamos, miramos el móvil compulsivamente sin hablar con nadie, nos comemos tus canapés y nos vamos sin despedirnos. Elegancia pura.</p>
+        </div>
+        <div class="service-card brutal-border" style="background: var(--accent-color);">
+            <h3>Debates Estériles a Domicilio</h3>
+            <p>Contrátanos para discutir a gritos en tu salón sobre si el agua moja o sobre qué Power Ranger era estadísticamente mejor. Arruinamos cenas familiares garantizado.</p>
+        </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section id="inventario">
+        <h2 class="section-title">Inventario</h2>
+        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Objetos random que nos hemos encontrado por la calle y consideramos patrimonio de la humanidad.</p>
+        <div class="grid-inventario">
+            <div class="item-inventario brutal-border">
+                <img src="https://picsum.photos/seed/inv1/300" alt="Objeto">
+                <p>Cono de tráfico deprimido</p>
+                <span>12/10/2023 - Calle Larios</span>
             </div>
-            <div class="card brutal-border">
-                <div class="card-img">🤓</div>
-                <h3>Borrego #2</h3>
-                <p>CFO. Cuenta ovejas para dormir en la oficina.</p>
+            <div class="item-inventario brutal-border">
+                <img src="https://picsum.photos/seed/inv2/300" alt="Objeto">
+                <p>Zapato solitario talla 42</p>
+                <span>05/01/2024 - Al lado de un charco</span>
             </div>
-            <div class="card brutal-border">
-                <div class="card-img">🤡</div>
-                <h3>Borrego #3</h3>
-                <p>CTO (Chief Tragar Objetos). Se comió el router ayer.</p>
+            <div class="item-inventario brutal-border">
+                <img src="https://picsum.photos/seed/inv3/300" alt="Objeto">
+                <p>Muñeco diabólico sin un ojo</p>
+                <span>Ayer - En un descampado</span>
             </div>
-            <div class="card brutal-border">
-                <div class="card-img">👹</div>
-                <h3>Borrego #4</h3>
-                <p>RRHH. Te muerde si llegas tarde. No atiende a razones.</p>
-            </div>
-            <div class="card brutal-border">
-                <div class="card-img">🤠</div>
-                <h3>Borrego #5</h3>
-                <p>CMO. Hace ruido en LinkedIn hablando de "mindset rumiante".</p>
-            </div>
-            <div class="card brutal-border">
-                <div class="card-img">🫠</div>
-                <h3>Borrego #6</h3>
-                <p>El Becario. Literalmente el chivo expiatorio del grupo.</p>
+            <div class="item-inventario brutal-border">
+                <img src="https://picsum.photos/seed/inv4/300" alt="Objeto">
+                <p>Tapacubos de un Seat Panda</p>
+                <span>Desconocida - Nuestro tesoro</span>
             </div>
         </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section class="contact-section">
-        <h2>¿Quieres algo?</h2>
-        <p>Si quieres insultarnos, darnos millones de euros o invitarnos a pastar, escríbenos. <br>Respondemos cuando nos da la gana.</p>
-        <a href="mailto:Borregoasqueroso@gmail.com" class="email-btn">
-            Borregoasqueroso@gmail.com
-        </a>
+    <!-- BLOG -->
+    <section id="blog">
+        <h2 class="section-title">Blog / Archivo</h2>
+        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Evidencia audiovisual de nuestras negligencias (Imagina que aquí hay fotos y vídeos reales vuestros).</p>
+        <div class="grid-blog">
+            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog1/600/400') center/cover;"></div>
+            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog2/600/400') center/cover;"></div>
+            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog3/600/400') center/cover;"></div>
+            <div class="blog-item brutal-border">🎥 Insertar Vídeo 1</div>
+        </div>
     </section>
 
-    <!-- JAVASCRIPT para el efecto caótico de clics -->
+    <!-- DONACIONES -->
+    <section id="donaciones">
+        <h2 class="section-title">Fondos Reservados</h2>
+        <div class="donaciones-container brutal-border">
+            <h3>Ayúdanos a comprar cosas inútiles</h3>
+            <p style="margin-top: 1rem; font-size: 1.2rem;">El dinero irá destinado íntegramente a cerveza, kebabs y multas por alteración del orden público.</p>
+            
+            <div class="donaciones-cajas">
+                <!-- He puesto enlaces ficticios de paypal, cámbialos por los vuestros: https://paypal.me/tuusuario/1 -->
+                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(1)">1 €</a>
+                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(2)">2 €</a>
+                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(5)">5 €</a>
+            </div>
+
+            <div class="progreso-wrapper">
+                <div class="progreso-barra" id="barraProgreso"></div>
+                <div class="progreso-texto">Objetivo: Yate de lujo (<span id="dineroRecaudado">15</span>€ / 300€)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO / FOOTER -->
+    <footer id="contacto">
+        <h2>Insúltanos aquí</h2>
+        <p style="margin-bottom: 3rem; font-size: 1.5rem;">O propón colaboraciones indecentes.</p>
+        <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">
+            Borregoasqueroso@gmail.com
+        </a>
+        <p style="margin-top: 5rem; font-size: 0.9rem; color: #888;">
+            © 2026 Borregos S.L. - Ninguna oveja real fue lastimada en la creación de esta web. El becario sí.
+        </p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
     <script>
-        // Función para crear "BEEEs" donde el usuario haga clic
+        // 1. Efecto BEEEE al hacer clic (Gamberro)
         document.addEventListener('click', function(e) {
+            // Evitar que salgan "Beees" si clickeamos en botones de donar o links del menu
+            if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button') return;
+
             const beee = document.createElement('div');
-            beee.textContent = 'BEEEEEE!';
+            beee.textContent = 'BEEEE!';
             beee.className = 'beee';
             beee.style.left = (e.clientX - 20) + 'px';
             beee.style.top = (e.clientY - 20) + 'px';
             
-            // Variar el color aleatoriamente
-            const colors = ['#ff2a5f', '#00e5ff', '#111', '#fff'];
+            const colors = ['#ff2a5f', '#00e5ff', '#111', '#fffb00'];
             beee.style.color = colors[Math.floor(Math.random() * colors.length)];
             
             document.body.appendChild(beee);
 
-            // Eliminar el elemento después de la animación
-            setTimeout(() => {
-                beee.remove();
-            }, 2000);
+            setTimeout(() => beee.remove(), 1500);
         });
+
+        // 2. Lógica del Modal (Página individual simulada)
+        const modal = document.getElementById('modalPerfil');
+        
+        function abrirPerfil(nombre, sub, texto) {
+            document.getElementById('perfilNombre').innerText = nombre;
+            document.getElementById('perfilSub').innerText = sub;
+            document.getElementById('perfilTexto').innerText = texto;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+        }
+
+        function cerrarPerfil() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // 3. Lógica de la Barra de Donaciones
+        let dineroActual = 15; // Empezamos con 15 euritos de pena
+        const objetivo = 300; // Objetivo máximo para que se llene la barra
+        const barraProgreso = document.getElementById('barraProgreso');
+        const textoDinero = document.getElementById('dineroRecaudado');
+
+        function actualizarBarra() {
+            let porcentaje = (dineroActual / objetivo) * 100;
+            if (porcentaje > 100) porcentaje = 100;
+            barraProgreso.style.width = porcentaje + '%';
+            textoDinero.innerText = dineroActual;
+        }
+
+        function sumarDonacion(cantidad) {
+            // Simula visualmente que ha entrado la donación 
+            // (En la vida real esto se validaría cuando PayPal confirme el pago, 
+            // pero para hacer la gracia visual en la web, se suma al clickear)
+            dineroActual += cantidad;
+            actualizarBarra();
+        }
+
+        // Inicializar barra
+        actualizarBarra();
     </script>
 </body>
 </html>
