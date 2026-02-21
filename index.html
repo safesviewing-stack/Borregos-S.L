@@ -42,7 +42,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- EFECTOS REVEAL --- */
+        /* --- ANIMACIONES Y EFECTOS --- */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .reveal.active { opacity: 1; }
         .reveal-up { transform: translateY(50px); }
@@ -52,13 +52,15 @@
         .reveal-left { transform: translateX(-50px); }
         .reveal-left.active { transform: translateX(0); }
 
-        /* ANIMACIONES */
         @keyframes float-hero { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         @keyframes flicker { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px var(--yellow)); } 50% { opacity: 0.7; filter: drop-shadow(0 0 20px var(--yellow)); } }
-        @keyframes shake-hard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+        @keyframes shake-hard { 0% { transform: translate(2px, 1px) rotate(0deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
 
         body.caos-mode { animation: shake-hard 0.1s infinite !important; }
+
+        /* BOTONES MAGNETICOS */
+        .magnetic-btn { display: inline-block; transition: transform 0.2s ease-out; }
 
         /* --- CONTROLES SUPERIORES --- */
         .top-controls { position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 1rem; z-index: 1002; }
@@ -76,73 +78,86 @@
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-        /* MENU LATERAL */
-        .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 12rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
+        /* --- MENÚ LATERAL --- */
+        .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 10rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
         .side-panel.open { right: 0; }
-        .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
+        .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: transform 0.3s; }
         .side-panel a:hover { color: var(--accent-color); transform: translateX(10px); }
 
-        /* --- HEADER Y "K DE QUESO" EFECTO --- */
+        /* --- HEADER Y K DE QUESO --- */
         header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%); position: relative; overflow: hidden; }
         h1 { font-size: clamp(4rem, 12vw, 10rem); font-weight: 900; text-transform: uppercase; text-shadow: 6px 6px 0px var(--main-color); animation: float-hero 5s ease-in-out infinite; z-index: 2; }
         
         #quesoBtn { 
             font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 700; margin-top: 1rem; 
             text-transform: uppercase; letter-spacing: 5px; z-index: 2; cursor: pointer;
-            padding: 10px 20px; border: 4px dashed var(--dark); background: rgba(255, 251, 0, 0.1);
+            padding: 10px 25px; border: 4px dashed var(--dark); background: rgba(255, 251, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: flicker 2s infinite;
+            animation: flicker 2s infinite; border-radius: 15px;
         }
         #quesoBtn:hover { 
-            transform: scale(1.2) rotate(-3deg); background: var(--yellow); 
+            transform: scale(1.15) rotate(-2deg); background: var(--yellow); 
             border-style: solid; box-shadow: 0 0 40px var(--yellow); color: #000;
         }
 
         .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 120px; height: 120px; background: var(--yellow); color: #000; border-radius: 50%; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 900; animation: spin-slow 10s linear infinite; }
 
-        /* --- SECCIONES --- */
-        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 3.5rem; margin-bottom: 3rem; text-transform: uppercase; display: inline-block; background: var(--yellow); color: #000; padding: 0 1rem; border: 4px solid var(--dark); transform: rotate(-2deg); }
-        .brutal-border { border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: 0.3s; background: var(--card-bg); padding: 2rem; }
+        /* --- ESTILO BRUTALISTA SECCIONES --- */
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; }
+        .section-title { font-size: 3.5rem; margin-bottom: 3rem; text-transform: uppercase; display: inline-block; background: var(--yellow); color: #000; padding: 0 1rem; border: 4px solid var(--dark); transform: rotate(-2deg); transition: transform 0.3s ease; }
+        .section-title:hover { transform: rotate(2deg) scale(1.02); }
+        
+        .brutal-border { border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: transform 0.3s, box-shadow 0.3s; background: var(--card-bg); position: relative; }
         .brutal-border:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); }
 
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card-rebano { text-align: center; cursor: pointer; }
-        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); filter: grayscale(100%); transition: 0.3s; }
-        .card-rebano:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        /* --- EL REBAÑO --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; perspective: 1000px; }
+        .card-rebano { padding: 1.5rem; text-align: center; cursor: pointer; transform-style: preserve-3d; transition: background 0.3s; }
+        .card-rebano:hover { background: var(--accent-color); color: white; }
+        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 1rem; filter: grayscale(100%); transition: 0.3s; transform: translateZ(20px); }
+        .card-rebano:hover img { filter: grayscale(0%); transform: translateZ(50px) scale(1.05); }
 
-        /* --- MODAL --- */
-        .modal-perfil { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; padding: 4rem 2rem; }
-        .modal-content { max-width: 800px; margin: 0 auto; position: relative; }
-        .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); border: 3px solid var(--dark); padding: 0.5rem; font-weight: bold; cursor: pointer; }
+        /* MODAL */
+        .modal-perfil { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
+        .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); color: var(--text-dark); padding: 3rem; position: relative; }
+        .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); color: white; border: 4px solid var(--dark); padding: 0.5rem 1rem; font-weight: bold; cursor: pointer; }
 
-        /* --- DONACIONES --- */
-        .donaciones-container { background: var(--main-color); color: white; text-align: center; }
-        .btn-donar { background: white; color: black; font-size: 1.5rem; padding: 1rem 2rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 4px 4px 0px #000; display: inline-block; margin: 10px; font-weight: 900; }
-        .progreso-wrapper { width: 100%; height: 40px; background: #000; border: 3px solid #fff; margin-top: 2rem; position: relative; overflow: hidden; }
-        .progreso-barra { height: 100%; width: 0%; background: var(--yellow); transition: width 1s ease-out; }
-        .progreso-texto { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; mix-blend-mode: difference; color: white; }
+        /* SERVICIOS */
+        .service-card { padding: 3rem; margin-bottom: 2rem; overflow: hidden; }
+        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+        .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 0.5rem; transition: 0.4s; }
+        .item-inventario:hover img { transform: rotate(3deg) scale(1.05); }
 
-        /* --- EFECTOS DE LLUVIA (QUESO/DINERO) --- */
-        .drop-fx { position: fixed; font-size: 2.5rem; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { 
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 
-            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } 
-        }
+        /* BLOG */
+        .grid-blog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        @media (max-width: 768px) { .grid-blog { grid-template-columns: 1fr; } }
+        .blog-item { height: 250px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; border: 4px solid var(--dark); transition: 0.3s; background-size: cover; background-position: center; }
 
-        /* BEEEEEE CLICK */
-        .beee-text { position: fixed; pointer-events: none; font-weight: 900; z-index: 999999; animation: floatup 1s ease-out forwards; font-size: 3rem; text-shadow: 3px 3px 0px #000; transform: translate(-50%, -50%); }
-        @keyframes floatup { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -150px) scale(2); } }
+        /* DONACIONES */
+        .donaciones-container { background: var(--main-color); color: white; padding: 4rem; text-align: center; }
+        .btn-donar { background: white; color: black; font-size: 2rem; padding: 1.5rem 3rem; border: 4px solid #000; font-weight: 900; box-shadow: 6px 6px 0px #000; transition: 0.3s; display: inline-block; margin: 10px; text-decoration: none; }
+        .btn-donar:hover { background: var(--yellow); transform: translate(-4px, -4px); box-shadow: 10px 10px 0px #000; }
+        .progreso-wrapper { width: 100%; height: 50px; background: #000; border: 4px solid #fff; margin-top: 2rem; position: relative; overflow: hidden; }
+        .progreso-barra { height: 100%; width: 0%; background: var(--yellow); transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1); }
+        .progreso-texto { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white; mix-blend-mode: difference; font-size: 1.2rem; }
 
-        /* BOTÓN CAOS */
-        .chaos-btn-wrapper { text-align: center; padding: 4rem; background: var(--dark); }
-        .btn-chaos { background: #ff003c; color: white; font-size: 1.5rem; padding: 2rem; border: 4px solid white; cursor: pointer; font-weight: 900; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 50px red; } }
+        /* CAOS */
+        .chaos-btn-wrapper { text-align: center; padding: 5rem; background: var(--dark); }
+        .btn-chaos { background: #ff003c; color: white; font-size: 1.5rem; font-weight: 900; padding: 2rem 4rem; border: 4px solid white; animation: pulse 2s infinite; cursor: pointer; text-transform: uppercase; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 50px red; } 100% { transform: scale(1); } }
 
-        footer { background: var(--dark); color: white; padding: 4rem; text-align: center; }
-        .email-huge { font-size: clamp(1rem, 5vw, 3rem); color: var(--main-color); word-break: break-all; }
+        /* EFECTOS DINAMICOS */
+        .drop-fx { position: fixed; font-size: 3rem; z-index: 9999; animation: fall linear forwards; pointer-events: none; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 
-        .glass-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); display: none; z-index: 999; }
+        .beee-text { position: fixed; pointer-events: none; font-weight: 900; z-index: 999999; animation: floatup 1s ease-out forwards; font-size: 3.5rem; text-shadow: 3px 3px 0px #000; transform: translate(-50%, -50%); }
+        @keyframes floatup { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-10deg); } 100% { opacity: 0; transform: translate(-50%, -150px) scale(1.8) rotate(15deg); } }
+
+        footer { background: var(--dark); color: white; padding: 6rem 2rem; text-align: center; border-top: 10px solid var(--main-color); }
+        .email-huge { font-size: clamp(1.2rem, 5vw, 4rem); color: var(--main-color); word-break: break-all; text-decoration: underline; transition: 0.3s; }
+        .email-huge:hover { color: var(--accent-color); transform: scale(1.05); }
+
+        .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); display: none; z-index: 999; }
         .glass-overlay.active { display: block; }
     </style>
 </head>
@@ -151,18 +166,22 @@
     <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div class="top-controls">
-        <button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button>
-        <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="magnetic-btn"><button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button></div>
+        <div class="magnetic-btn">
+            <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </div>
 
     <nav class="side-panel" id="sideMenu">
         <a href="#inicio" onclick="toggleMenu()">Inicio</a>
-        <a href="#nosotros" onclick="toggleMenu()">Sobre Nosotros</a>
+        <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
         <a href="#rebano" onclick="toggleMenu()">El Rebaño</a>
-        <a href="#servicios" onclick="toggleMenu()">Servicios</a>
-        <a href="#donaciones" onclick="toggleMenu()">Donaciones</a>
+        <a href="#servicios" onclick="toggleMenu()">Qué Hacemos</a>
+        <a href="#inventario" onclick="toggleMenu()">Inventario</a>
+        <a href="#blog" onclick="toggleMenu()">Archivo</a>
+        <a href="#donaciones" onclick="toggleMenu()">Donar</a>
     </nav>
 
     <header id="inicio">
@@ -171,25 +190,32 @@
         <div class="reveal reveal-up" id="quesoBtn">K de queso</div>
     </header>
 
+    <!-- SOBRE NOSOTROS -->
     <section id="nosotros">
         <h2 class="section-title reveal reveal-left">Sobre Nosotros</h2>
-        <div class="about-text brutal-border reveal reveal-up">
-            Somos una amalgama indisoluble de intelecto diletante y una alarmante falta de instinto de supervivencia. Existimos porque el césped es gratis y las decisiones cuestionables son divertidas.
+        <div class="brutal-border reveal reveal-up" style="padding:3rem; font-size:1.4rem; line-height:1.8;">
+            Desde los albores de la humanidad, la dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores. Nosotros hemos decidido ignorar todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció más relevante. Ergo, somos una amalgama de intelecto diletante y una alarmante falta de instinto de supervivencia.
         </div>
     </section>
 
+    <!-- EL REBAÑO -->
     <section id="rebano">
         <h2 class="section-title reveal reveal-left">El Rebaño</h2>
         <div class="grid-3">
-            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #1', 'El CEO Autoproclamado', 'Se sentó en la silla más grande y empezó a balar fuerte hasta que todos aceptaron su autoridad.')">
-                <img src="https://picsum.photos/seed/borrego1/400" alt="B1">
+            <div class="card-rebano brutal-border 3d-card reveal reveal-scale" onclick="abrirPerfil('Borrego #1', 'El líder autoproclamado', 'Su mayor récord de no parpadear es de 14 minutos. Nadie le votó como CEO, simplemente se sentó en la silla más grande y empezó a balar fuerte hasta que todos cedieron.')">
+                <img src="https://picsum.photos/seed/borr1/400" alt="B1">
                 <h3>Borrego #1</h3>
                 <p>"Si no hay pasto, comemos plástico."</p>
             </div>
-            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #2', 'Estratega del Caos', 'Calcula la distancia a la luna usando un zapato. Nunca acierta, pero lo hace con mucha seguridad.')">
-                <img src="https://picsum.photos/seed/borrego2/400" alt="B2">
+            <div class="card-rebano brutal-border 3d-card reveal reveal-scale" onclick="abrirPerfil('Borrego #2', 'Estratega del caos', 'Intentó calcular la distancia a la luna usando un zapato y un chicle. Dice que la ironía es su mecanismo de defensa, pero en realidad no sabe conjugar los verbos.')">
+                <img src="https://picsum.photos/seed/borr2/400" alt="B2">
                 <h3>Borrego #2</h3>
                 <p>"La ironía es mi mecanismo de defensa."</p>
+            </div>
+            <div class="card-rebano brutal-border 3d-card reveal reveal-scale" onclick="abrirPerfil('Borrego #3', 'Experto en bulto', 'Se perdió en el Ikea en 2018 y desde entonces vive en la sección de baños. Indispensable para asentir en reuniones donde no tiene ni idea de lo que se habla.')">
+                <img src="https://picsum.photos/seed/borr3/400" alt="B3">
+                <h3>Borrego #3</h3>
+                <p>"Vine por las cervezas gratis."</p>
             </div>
         </div>
     </section>
@@ -197,45 +223,85 @@
     <div id="modalPerfil" class="modal-perfil">
         <div class="modal-content brutal-border">
             <button class="close-btn" onclick="cerrarPerfil()">CERRAR X</button>
-            <h2 id="perfilNombre" style="font-size: 3rem;"></h2>
-            <h4 id="perfilSub" style="color: var(--main-color); margin: 1rem 0;"></h4>
-            <p id="perfilTexto"></p>
+            <h2 id="pNom" style="font-size: 3rem;"></h2>
+            <h4 id="pSub" style="color: var(--main-color); margin: 1rem 0; font-size: 1.5rem;"></h4>
+            <p id="pTex" style="font-size: 1.2rem;"></p>
         </div>
     </div>
 
+    <!-- QUÉ HACEMOS -->
+    <section id="servicios">
+        <h2 class="section-title reveal reveal-left">Qué Hacemos</h2>
+        <div class="service-card brutal-border reveal reveal-up" style="background: var(--yellow);">
+            <h3>Escolta de Engaño Táctico</h3>
+            <p>Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias al cliente y que uno intente ligar sin éxito.</p>
+        </div>
+        <div class="service-card brutal-border reveal reveal-up">
+            <h3>Presencia Cero</h3>
+            <p>Vamos a tu evento, comemos tus canapés sin hablar con nadie, miramos el móvil y nos vamos en el momento más inoportuno.</p>
+        </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section id="inventario">
+        <h2 class="section-title reveal reveal-left">Inventario</h2>
+        <div class="grid-inventario reveal reveal-up">
+            <div class="brutal-border item-inventario" style="padding:1rem;">
+                <img src="https://picsum.photos/seed/it1/300" alt="I1">
+                <p>Cono de tráfico deprimido</p>
+            </div>
+            <div class="brutal-border item-inventario" style="padding:1rem;">
+                <img src="https://picsum.photos/seed/it2/300" alt="I2">
+                <p>Zapato solitario talla 42</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+        <h2 class="section-title reveal reveal-left">Archivo</h2>
+        <div class="grid-blog reveal reveal-up">
+            <div class="blog-item" style="background-image:url('https://picsum.photos/seed/b1/600/400')"></div>
+            <div class="blog-item" style="background-image:url('https://picsum.photos/seed/b2/600/400')"></div>
+            <div class="blog-item" style="background-color: var(--dark); color:white;">VIDEO AQUÍ</div>
+            <div class="blog-item" style="border-style: dashed;">SIN CONTENIDO</div>
+        </div>
+    </section>
+
+    <!-- DONACIONES -->
     <section id="donaciones">
-        <h2 class="section-title reveal reveal-left">Fondos Reservados</h2>
+        <h2 class="section-title reveal reveal-left">Fondos</h2>
         <div class="donaciones-container brutal-border reveal reveal-scale">
-            <h3>Objetivo: Comprar un Yate de cartón</h3>
-            <div style="margin: 2rem 0;">
-                <button class="btn-donar" onclick="sumarDonacion(1)">1 €</button>
-                <button class="btn-donar" onclick="sumarDonacion(5)">5 €</button>
-                <button class="btn-donar" onclick="sumarDonacion(10)">10 €</button>
+            <h3>Ayúdanos a no trabajar nunca</h3>
+            <div style="margin:2.5rem 0;">
+                <div class="magnetic-btn"><button class="btn-donar" onclick="sumarDonacion(1)">1 €</button></div>
+                <div class="magnetic-btn"><button class="btn-donar" onclick="sumarDonacion(5)">5 €</button></div>
+                <div class="magnetic-btn"><button class="btn-donar" onclick="sumarDonacion(10)">10 €</button></div>
             </div>
             <div class="progreso-wrapper">
-                <div class="progreso-barra" id="barraProgreso"></div>
-                <div class="progreso-texto"><span id="dineroRecaudado">0</span>€ / 500€</div>
+                <div class="progreso-barra" id="bar"></div>
+                <div class="progreso-texto">Objetivo Yate: <span id="val">0</span>€ / 500€</div>
             </div>
         </div>
     </section>
 
     <div class="chaos-btn-wrapper">
-        <button class="btn-chaos" onclick="iniciarDestruccion(this)">AUTODESTRUCCIÓN</button>
+        <button class="btn-chaos" onclick="iniciarDestruccion(this)">NO PULSAR (AUTODESTRUCCIÓN)</button>
     </div>
 
     <footer>
-        <h2 class="reveal reveal-up">Contacto</h2>
-        <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
+        <h2 class="reveal reveal-up">Insúltanos</h2>
+        <div class="magnetic-btn" style="margin-top:2rem;">
+            <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
+        </div>
     </footer>
 
     <script>
-        // REVEAL ON SCROLL
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // REVEAL
+        const obs = new IntersectionObserver((es) => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }), { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
-        // MENU Y TEMA
+        // MENU / THEME
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('active');
@@ -246,84 +312,83 @@
             document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
         }
 
-        // --- EFECTO K DE QUESO (LLUVIA MASIVA) ---
-        document.getElementById('quesoBtn').addEventListener('click', (e) => {
-            const btn = e.target;
-            btn.style.background = '#ff2a5f';
-            setTimeout(() => btn.style.background = '', 200);
+        // MAGNETIC & 3D
+        document.querySelectorAll('.magnetic-btn').forEach(m => {
+            m.addEventListener('mousemove', e => {
+                const r = m.getBoundingClientRect();
+                m.style.transform = `translate(${(e.clientX - r.left - r.width/2)*0.3}px, ${(e.clientY - r.top - r.height/2)*0.3}px)`;
+            });
+            m.addEventListener('mouseleave', () => m.style.transform = '');
+        });
 
-            for(let i = 0; i < 40; i++) {
+        document.querySelectorAll('.3d-card').forEach(c => {
+            c.addEventListener('mousemove', e => {
+                const r = c.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width/2) / 10;
+                const y = (e.clientY - r.top - r.height/2) / -10;
+                c.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            c.addEventListener('mouseleave', () => c.style.transform = '');
+        });
+
+        // LLUVIA QUESO POTENCIADA
+        document.getElementById('quesoBtn').addEventListener('click', (e) => {
+            for(let i=0; i<40; i++) {
                 setTimeout(() => {
                     const q = document.createElement('div');
-                    q.textContent = '🧀';
-                    q.className = 'drop-fx';
+                    q.textContent = '🧀'; q.className = 'drop-fx';
                     q.style.left = Math.random() * 100 + 'vw';
-                    const size = Math.random() * 3 + 1.5;
-                    q.style.fontSize = size + 'rem';
-                    const duration = Math.random() * 2 + 1;
-                    q.style.animationDuration = duration + 's';
-                    q.style.filter = `drop-shadow(0 0 10px yellow) hue-rotate(${Math.random() * 45}deg)`;
+                    q.style.fontSize = (Math.random() * 3 + 1.5) + 'rem';
+                    const dur = Math.random() * 2 + 1;
+                    q.style.animationDuration = dur + 's';
+                    q.style.filter = `drop-shadow(0 0 10px yellow) hue-rotate(${Math.random()*45}deg)`;
                     document.body.appendChild(q);
-                    setTimeout(() => q.remove(), duration * 1000);
-                }, i * 40);
+                    setTimeout(() => q.remove(), dur * 1000);
+                }, i * 50);
             }
         });
 
-        // CLICK BEEEEEE
-        const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
-        document.addEventListener('click', (e) => {
-            if(e.target.id === 'quesoBtn' || e.target.closest('.btn-donar')) return;
-            
-            try { let s = sheepAudio.cloneNode(); s.volume = 0.3; s.play(); } catch(e){}
-
-            const t = document.createElement('div');
-            t.textContent = 'BEEEEEE!';
-            t.className = 'beee-text';
-            t.style.left = e.clientX + 'px';
-            t.style.top = e.clientY + 'px';
-            t.style.color = ['#ff2a5f', '#00e5ff', '#fffb00'][Math.floor(Math.random()*3)];
-            document.body.appendChild(t);
-            setTimeout(() => t.remove(), 1000);
+        // BEE CLICK
+        const sfx = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
+        document.addEventListener('click', e => {
+            if(e.target.closest('.btn-control') || e.target.id === 'quesoBtn') return;
+            try { let a = sfx.cloneNode(); a.volume = 0.2; a.play(); } catch(i){}
+            const b = document.createElement('div');
+            b.textContent = 'BEEEEEE!'; b.className = 'beee-text';
+            b.style.left = e.clientX + 'px'; b.style.top = e.clientY + 'px';
+            b.style.color = ['#ff2a5f', '#00e5ff', '#fffb00'][Math.floor(Math.random()*3)];
+            document.body.appendChild(b);
+            setTimeout(() => b.remove(), 1000);
         });
-
-        // DONACIONES
-        let total = 0;
-        function sumarDonacion(n) {
-            total += n;
-            const p = Math.min((total / 500) * 100, 100);
-            document.getElementById('barraProgreso').style.width = p + '%';
-            document.getElementById('dineroRecaudado').innerText = total;
-            
-            for(let i=0; i<5; i++) {
-                const m = document.createElement('div');
-                m.textContent = '💸'; m.className = 'drop-fx';
-                m.style.left = (Math.random() * 80 + 10) + 'vw';
-                document.body.appendChild(m);
-                setTimeout(() => m.remove(), 2000);
-            }
-        }
 
         // MODAL
         function abrirPerfil(n, s, t) {
-            document.getElementById('perfilNombre').innerText = n;
-            document.getElementById('perfilSub').innerText = s;
-            document.getElementById('perfilTexto').innerText = t;
-            document.getElementById('modalPerfil').style.display = 'block';
+            document.getElementById('pNom').innerText = n; document.getElementById('pSub').innerText = s;
+            document.getElementById('pTex').innerText = t; document.getElementById('modalPerfil').style.display = 'block';
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // DESTRUCCIÓN
-        function iniciarDestruccion(btn) {
-            btn.innerText = "ADIÓS MUNDO CRUEL";
-            document.body.classList.add('caos-mode');
+        // DONAR
+        let cur = 0;
+        function sumarDonacion(v) {
+            cur += v; document.getElementById('val').innerText = cur;
+            document.getElementById('bar').style.width = Math.min((cur/500)*100, 100) + '%';
+            const f = document.createElement('div'); f.textContent = '💸'; f.className = 'drop-fx';
+            f.style.left = Math.random()*100 + 'vw'; document.body.appendChild(f);
+            setTimeout(() => f.remove(), 2000);
+        }
+
+        // DESTRUCCION
+        function iniciarDestruccion(b) {
+            b.innerText = "¡SISTEMA CRÍTICO!"; document.body.classList.add('caos-mode');
             setTimeout(() => {
-                document.querySelectorAll('section, header, footer, nav, .top-controls').forEach(el => {
-                    el.style.transition = '2s';
-                    el.style.transform = `translate(${(Math.random()-0.5)*3000}px, ${(Math.random()-0.5)*3000}px) rotate(720deg) scale(0)`;
+                document.querySelectorAll('section, header, footer, nav').forEach(el => {
+                    el.style.transition = '2s cubic-bezier(0.7, 0, 0.3, 1)';
+                    el.style.transform = `translate(${(Math.random()-0.5)*4000}px, ${(Math.random()-0.5)*4000}px) rotate(1000deg) scale(0)`;
                     el.style.opacity = '0';
                 });
                 setTimeout(() => {
-                    document.body.innerHTML = '<div style="background:black; color:red; height:100vh; display:flex; align-items:center; justify-content:center; font-size:3rem; text-align:center; flex-direction:column;"><h1>SISTEMA BORRADO</h1><p style="color:white; font-size:1rem; margin-top:2rem;">F5 para resucitar</p></div>';
+                    document.body.innerHTML = '<div style="background:black; color:red; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:sans-serif;"><h1>TODO DESTRUIDO</h1><button onclick="location.reload()" style="margin-top:2rem; padding:1rem; border:2px solid red; background:transparent; color:red; font-weight:bold; cursor:pointer;">REGENERAR BORREGO</button></div>';
                 }, 2000);
             }, 2000);
         }
