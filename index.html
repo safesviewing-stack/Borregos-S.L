@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borregos S.L. | K de queso</title>
+    <title>Borregos S.L. | Filosofía del 33%</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,7 +15,6 @@
             --dark: #111111;
             --card-bg: #ffffff;
             --text-dark: #111111;
-            --text-light: #ffffff;
             --brutal-shadow: 8px 8px 0px var(--dark);
         }
 
@@ -27,8 +26,6 @@
             --dark: #f4f4f0;
             --card-bg: #1a1a1a;
             --text-dark: #ffffff;
-            --text-light: #111111;
-            --brutal-shadow: 8px 8px 0px #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important; }
@@ -42,217 +39,276 @@
         }
 
         /* MARQUEE */
-        .marquee { background: var(--dark); color: var(--yellow); padding: 10px 0; font-weight: 900; text-transform: uppercase; overflow: hidden; white-space: nowrap; border-bottom: 4px solid var(--main-color); position: fixed; top: 0; width: 100%; z-index: 1001; }
-        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
+        .marquee { background: var(--dark); color: var(--yellow); padding: 12px 0; font-weight: 900; text-transform: uppercase; overflow: hidden; white-space: nowrap; border-bottom: 4px solid var(--main-color); position: fixed; top: 0; width: 100%; z-index: 1001; }
+        .marquee-content { display: inline-block; animation: marquee 25s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* HEADER */
-        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        h1 { font-size: clamp(3rem, 12vw, 8rem); line-height: 0.9; text-transform: uppercase; margin-bottom: 1rem; }
-        .subtitle { font-size: 1.5rem; background: var(--accent-color); color: white; padding: 5px 20px; border: 3px solid var(--dark); cursor: pointer; }
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        h1 { font-size: clamp(3rem, 15vw, 10rem); line-height: 0.8; text-transform: uppercase; margin-bottom: 1rem; filter: drop-shadow(6px 6px 0px var(--main-color)); }
+        
+        .btn-queso { 
+            font-size: 2rem; background: var(--yellow); color: var(--dark); 
+            padding: 10px 30px; border: 4px solid var(--dark); 
+            font-weight: 900; cursor: pointer; transition: 0.2s;
+            box-shadow: 6px 6px 0px var(--dark);
+        }
+        .btn-queso:hover { transform: scale(1.1) rotate(-3deg); background: var(--main-color); color: white; }
 
-        /* SECCIONES */
-        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 3rem; background: var(--yellow); padding: 0 1rem; border: 4px solid var(--dark); display: inline-block; transform: rotate(-1deg); margin-bottom: 3rem; text-transform: uppercase; }
-        .brutal-border { border: 4px solid var(--dark); box-shadow: var(--brutal-shadow); transition: all 0.3s; }
-        .brutal-border:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); }
+        section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: clamp(2rem, 8vw, 4rem); background: var(--yellow); padding: 5px 15px; border: 4px solid var(--dark); display: inline-block; transform: rotate(-1deg); margin-bottom: 3rem; text-transform: uppercase; box-shadow: 6px 6px 0px var(--dark); }
+
+        /* SOBRE NOSOTROS */
+        .about-box { background: var(--card-bg); padding: 3rem; border: 4px solid var(--dark); box-shadow: 12px 12px 0px var(--accent-color); font-size: 1.25rem; line-height: 1.6; text-align: justify; }
+        .about-box em { color: var(--main-color); font-weight: 900; font-style: normal; }
 
         /* GRIDS */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
-        
-        .card-rebano { background: var(--card-bg); padding: 1.5rem; text-align: center; cursor: pointer; }
-        .card-rebano img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 1rem; filter: grayscale(1); }
-        .card-rebano:hover img { filter: grayscale(0); }
+        .card-rebano { background: var(--card-bg); padding: 1.5rem; text-align: center; border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: 0.3s; }
+        .card-rebano:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--main-color); }
+        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 3px solid var(--dark); margin-bottom: 1rem; }
 
-        .service-card { padding: 2rem; margin-bottom: 2rem; background: var(--card-bg); border-left: 10px solid var(--main-color); }
-        .service-card h3 { font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--main-color); }
+        /* CARRUSEEL ARCHIVO */
+        .carousel-container { display: flex; overflow-x: auto; gap: 1.5rem; padding: 2rem 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-item { min-width: 300px; height: 400px; background: var(--dark); border: 4px solid var(--dark); scroll-snap-align: center; position: relative; flex-shrink: 0; box-shadow: 8px 8px 0px var(--accent-color); }
+        .carousel-item img, .carousel-item video { width: 100%; height: 100%; object-fit: cover; }
+        .video-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); color: white; font-size: 3rem; pointer-events: none; }
 
-        .item-inv { background: var(--card-bg); padding: 1rem; text-align: center; font-size: 0.9rem; font-weight: bold; }
-        .item-inv img { width: 100%; height: 150px; object-fit: cover; border: 2px solid var(--dark); margin-bottom: 0.5rem; }
+        /* SERVICIOS */
+        .service-list { display: grid; gap: 1.5rem; }
+        .service-item { background: var(--card-bg); padding: 2rem; border: 4px solid var(--dark); border-left: 15px solid var(--main-color); box-shadow: 8px 8px 0px var(--dark); }
+        .service-item h3 { margin-bottom: 10px; text-transform: uppercase; color: var(--main-color); }
 
-        /* CONTROLES */
-        .top-controls { position: fixed; top: 4rem; right: 1.5rem; display: flex; gap: 1rem; z-index: 1002; }
-        .btn-control { background: var(--card-bg); color: var(--dark); border: 3px solid var(--dark); padding: 0.5rem 1rem; font-weight: 900; box-shadow: 4px 4px 0px var(--dark); transition: 0.2s; }
-        .btn-control:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--main-color); }
+        /* INVENTARIO */
+        .grid-inv { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+        .item-inv { background: var(--card-bg); padding: 10px; border: 3px solid var(--dark); text-align: center; font-weight: bold; font-size: 0.8rem; }
+        .item-inv img { width: 100%; height: 120px; object-fit: cover; margin-bottom: 5px; border: 1px solid #eee; }
 
-        /* CLICK FX */
-        .beee-text { position: fixed; pointer-events: none; font-weight: 900; z-index: 9999; animation: floatup 0.8s ease-out forwards; font-size: 2.5rem; text-shadow: 2px 2px 0px #000; transform: translate(-50%, -50%); }
-        @keyframes floatup { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -100px) scale(1.5); } }
+        /* DONACIONES */
+        .donacion-bar { width: 100%; height: 60px; background: var(--dark); border: 4px solid var(--dark); margin-top: 2rem; position: relative; overflow: hidden; }
+        .donacion-progress { width: 33%; height: 100%; background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 10px, #e6e200 10px, #e6e200 20px); transition: 1s; }
+        .donacion-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; mix-blend-mode: difference; }
 
-        /* MODAL */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 2rem; }
-        .modal-content { background: var(--bg-color); max-width: 500px; padding: 2rem; border: 6px solid var(--dark); box-shadow: 15px 15px 0px var(--main-color); }
+        /* INTERACCION QUESO */
+        #queso-overlay { position: fixed; inset: 0; background: var(--yellow); z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .shake { animation: shake 0.5s infinite; }
+        @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
 
-        footer { background: var(--dark); color: white; padding: 4rem 2rem; text-align: center; margin-top: 4rem; }
+        footer { background: var(--dark); color: white; padding: 6rem 2rem; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="marquee">
         <div class="marquee-content">
-            +++ BORREGOS S.L. INFORMA: EL KEBAB DE AYER NO ESTABA MALO, ES TU ESTÓMAGO QUE ES UN FLOJO +++ GASTAR GASOLINA ES NUESTRA PASIÓN +++ SAMARITANAS DEL AMOR DISPONIBLES EN TU ZONA +++
+            +++ BORREGOS S.L. FILOSOFÍA DE VIDA +++ OBJETIVO: CARNET DEL 33% +++ ZONA GEMELOS NOS ESPERA +++ NO SOMOS UN EJEMPLO, SOMOS UN CASO +++ BEEEEEE! +++
         </div>
-    </div>
-
-    <div class="top-controls">
-        <button class="btn-control" onclick="document.body.classList.toggle('dark-mode')">🌓</button>
     </div>
 
     <header>
-        <h1 class="reveal">BORREGOS S.L.</h1>
-        <div class="subtitle brutal-border" id="quesoBtn">K DE QUESO</div>
+        <h1 class="reveal">BORREGOS<br>S.L.</h1>
+        <button class="btn-queso" id="kDeQueso">K DE QUESO</button>
     </header>
 
-    <!-- EL REBAÑO (6 INTEGRANTES) -->
+    <section id="nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-box reveal">
+            Somos un grupo de individuos profundamente cuestionables que decidieron unirse en el contexto más valenciano posible: <em>las Fallas</em>. Entre pólvora, ruido y una evidente falta de criterio, surgió esta agrupación de personas objetivamente inútiles, unidas más por la coincidencia que por cualquier tipo de plan previo o cualidad destacable.<br><br>
+            Como todo grupo masculino que se precie, presentamos una notable variedad de edades, personalidades y niveles de implicación. Cada uno, en teoría, “hace una cosa”. En la práctica, <em>nadie hace nada de forma consistente</em>, salvo dos o tres que, movidos por un exceso momentáneo de responsabilidad, lo intentan con resultados desiguales. El resto observa, opina y estorba con una eficacia digna de estudio.<br><br>
+            Nuestro objetivo vital es claro y sorprendentemente ambicioso: <em>obtener el carnet del 33 %</em> y acceder sin oposición a <em>zona Gemelos</em>. No como un fin en sí mismo, sino como símbolo de un reconocimiento institucional a años de decisiones erróneas, esfuerzos mal dirigidos y una constancia admirable en no mejorar.<br><br>
+            A lo largo del tiempo, juntos hemos acumulado numerosas experiencias y locuras, algunas memorables y otras directamente imposibles de relatar sin consecuencias legales. De hecho, ciertas anécdotas permanecerán en el ámbito de lo no contado, por el bien común y para evitar acabar con un currículum penitenciario comparable al de cierta prostituta televisiva que jamás logra salir de prisión.<br><br>
+            En definitiva, no somos un ejemplo, pero sí un caso. Y aunque nuestra utilidad social sea discutible, nuestra capacidad para permanecer unidos en el caos es, cuanto menos, digna de respeto académico, y es por ello que <em>ser borrego no es ningún tipo de institución, ser borrego es una filosofía.</em>
+        </div>
+    </section>
+
     <section id="rebano">
-        <h2 class="section-title reveal">El Rebaño (Los 6 Magníficos)</h2>
+        <h2 class="section-title">El Rebaño</h2>
         <div class="grid-3">
-            <!-- 1 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Alfa', 'Líder Supremo', 'No toma decisiones, solo elige el sitio del kebab. Su palabra es ley hasta que ve un objeto brillante en la carretera.')">
-                <img src="https://picsum.photos/seed/b1/400" alt="B1">
-                <h3>El Alfa</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s1/400" alt="B1">
+                <h3>Borrego 1</h3>
+                <p>Especialista en estorbar con elegancia.</p>
             </div>
-            <!-- 2 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Mecánico', 'Experto en Gasolina', 'Capaz de oler un radar a 5km de distancia. Su coche gasta más que un tanque, pero la música suena mejor.')">
-                <img src="https://picsum.photos/seed/b2/400" alt="B2">
-                <h3>El Gasolinas</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s2/400" alt="B2">
+                <h3>Borrego 2</h3>
+                <p>Responsable (momentáneo) de logística.</p>
             </div>
-            <!-- 3 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Gamer', 'Haciendo Bulto', 'Especialista en no hacer nada productivo en la Base Borreguil. Tiene el récord mundial de comer Durum mientras juega.')">
-                <img src="https://picsum.photos/seed/b3/400" alt="B3">
-                <h3>El Viciado</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s3/400" alt="B3">
+                <h3>Borrego 3</h3>
+                <p>Opinólogo profesional de barra de bar.</p>
             </div>
-            <!-- 4 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Samaritano', 'Buscador del Amor', 'Siempre en busca de su samaritana ideal. Necesita escolta técnica para no cagarla en la primera frase.')">
-                <img src="https://picsum.photos/seed/b4/400" alt="B4">
-                <h3>El Romántico</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s4/400" alt="B4">
+                <h3>Borrego 4</h3>
+                <p>Buscador de Samaritanas del Amor.</p>
             </div>
-            <!-- 5 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Recolector', 'Logística de Cuneta', 'Nadie sabe por qué, pero tiene una colección de conos y tapacubos encontrados en la A-42.')">
-                <img src="https://picsum.photos/seed/b5/400" alt="B5">
-                <h3>El Chatarrero</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s5/400" alt="B5">
+                <h3>Borrego 5</h3>
+                <p>Recolector de chatarra de la A-3.</p>
             </div>
-            <!-- 6 -->
-            <div class="card-rebano brutal-border reveal" onclick="abrir('Borrego Infiltrado', 'El que falta', 'Nadie sabe si realmente trabaja aquí o es un vecino que se metió en el coche un día y ya se quedó.')">
-                <img src="https://picsum.photos/seed/b6/400" alt="B6">
-                <h3>El Infiltrado</h3>
+            <div class="card-rebano reveal">
+                <img src="https://picsum.photos/seed/s6/400" alt="B6">
+                <h3>Borrego 6</h3>
+                <p>El que nadie sabe por qué vino.</p>
             </div>
         </div>
     </section>
 
-    <!-- QUÉ HACEMOS -->
     <section id="servicios">
-        <h2 class="section-title reveal">Servicios de Élite</h2>
-        
-        <div class="service-card brutal-border reveal">
-            <h3>Recogida de Basura Táctica</h3>
-            <p>Vemos un objeto random en la carretera. Frenazo. Nos bajamos. Lo cogemos (da igual lo que sea). Nos subimos. Seguimos. Logística 10/10.</p>
-        </div>
-
-        <div class="service-card brutal-border reveal">
-            <h3>Operación Base Borreguil</h3>
-            <p>Asistencia obligatoria a la base para: no hacer nada, comer kebab hasta sudar salsa blanca y jugar a la consola hasta que los ojos ardan.</p>
-        </div>
-
-        <div class="service-card brutal-border reveal">
-            <h3>Tour de Combustión Ridícula</h3>
-            <p>Recorrer la ciudad sin destino fijo. ¿Objetivo? Gastar gasolina y que la gente escuche nuestra música chorra a volúmenes ilegales.</p>
-        </div>
-
-        <div class="service-card brutal-border reveal">
-            <h3>Escolta de "Samaritanas del Amor"</h3>
-            <p>Asesoramiento y acompañamiento estratégico para que un compañero elija (o sea elegido) por las samaritanas del amor. Un ala-pívot emocional.</p>
+        <h2 class="section-title">Qué hacemos</h2>
+        <div class="service-list">
+            <div class="service-item reveal">
+                <h3>Logística de Cuneta</h3>
+                <p>Recogemos objetos random en mitad de la carretera. Frenazo, bajada rápida, recogida y huida. Si brilla o es de plástico, nos lo llevamos.</p>
+            </div>
+            <div class="service-item reveal">
+                <h3>Inactividad en Base Borreguil</h3>
+                <p>Retiro espiritual a nuestra base para comer kebab, jugar a la consola y conseguir que pasen 8 horas sin haber hecho absolutamente nada.</p>
+            </div>
+            <div class="service-item reveal">
+                <h3>Quema de Hidrocarburos</h3>
+                <p>Recorrer la ciudad con el único objetivo de gastar gasolina mientras suena música chorra a toda ostia. Si no vibra el maletero, no cuenta.</p>
+            </div>
+            <div class="service-item reveal">
+                <h3>Consultoría del Amor</h3>
+                <p>Asistencia técnica y moral a un compañero para la difícil elección y captación de "Samaritanas del Amor".</p>
+            </div>
         </div>
     </section>
 
-    <!-- INVENTARIO (9 OBJETOS) -->
+    <section id="archivo">
+        <h2 class="section-title">Archivo / Blog</h2>
+        <div class="carousel-container reveal">
+            <div class="carousel-item"><img src="https://picsum.photos/seed/fallas1/400/600" alt="Falla"></div>
+            <div class="carousel-item">
+                <div class="video-overlay">▶</div>
+                <img src="https://picsum.photos/seed/vid1/400/600" alt="Video">
+            </div>
+            <div class="carousel-item"><img src="https://picsum.photos/seed/kebab/400/600" alt="Kebab"></div>
+            <div class="carousel-item"><img src="https://picsum.photos/seed/coche/400/600" alt="Coche"></div>
+            <div class="carousel-item"><img src="https://picsum.photos/seed/fiesta/400/600" alt="Fiesta"></div>
+            <div class="carousel-item"><img src="https://picsum.photos/seed/borregada/400/600" alt="Reunion"></div>
+        </div>
+    </section>
+
     <section id="inventario">
-        <h2 class="section-title reveal">Inventario de la Cuneta</h2>
-        <div class="grid-inventario">
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i1/200">Cono de tráfico "prestado"</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i2/200">Tapacubos de un Seat León</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i3/200">Ticket de kebab con sangre</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i4/200">Mechero que no funciona</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i5/200">CD rayado de Camela</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i6/200">Lata de bebida energética rara</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i7/200">Guante de látex (usado)</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i8/200">Mando de TV de un hotel</div>
-            <div class="item-inv brutal-border reveal"><img src="https://picsum.photos/seed/i9/200">Caja de McNuggets vacía</div>
+        <h2 class="section-title">Inventario</h2>
+        <div class="grid-inv reveal">
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv1/200">Cono naranja</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv2/200">Tapacubos Renault</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv3/200">Durum mixto frio</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv4/200">Palo sospechoso</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv5/200">Garrafa de 5L vacía</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv6/200">Señal de Prohibido</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv7/200">CD de Gasolina 2004</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv8/200">Mechero sin gas</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv9/200">Guante de obra</div>
+            <div class="item-inv"><img src="https://picsum.photos/seed/inv10/200">La dignidad (perdida)</div>
+        </div>
+    </section>
+
+    <section id="donaciones">
+        <h2 class="section-title">Objetivo Vital</h2>
+        <div class="about-box reveal" style="text-align: center;">
+            <h3>FONDO PARA ALQUILAR UN TANQUE</h3>
+            <div class="donacion-bar">
+                <div class="donacion-progress"></div>
+                <div class="donacion-text">3.333 € / 10.000 € (33% completado)</div>
+            </div>
+            <p style="margin-top: 1rem;">Para entrar en zona Gemelos como Dios manda.</p>
         </div>
     </section>
 
     <footer>
-        <p>BORREGOASQUEROSO@GMAIL.COM</p>
-        <p>Si has leído hasta aquí, nos debes un Durum.</p>
+        <h2 style="font-size: 3rem;">BORREGOASQUEROSO@GMAIL.COM</h2>
+        <p style="margin-top: 2rem;">Si nos ves por la calle, no nos pidas explicaciones.</p>
     </footer>
 
-    <!-- MODAL -->
-    <div id="modal" class="modal" onclick="this.style.display='none'">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 id="mTit"></h2>
-            <p id="mSub" style="color:var(--main-color); font-weight:bold; margin: 1rem 0;"></p>
-            <p id="mTxt"></p>
-            <button class="btn-control" style="margin-top:1.5rem;" onclick="document.getElementById('modal').style.display='none'">OK, BALA</button>
-        </div>
+    <!-- INTERACCION QUESO -->
+    <div id="queso-overlay">
+        <h1 style="font-size: 10vw; color: var(--dark);">QUESO TOTAL</h1>
+        <div id="queso-rain" style="font-size: 5rem;">🧀🧀🧀🧀</div>
+        <p style="font-size: 2rem; font-weight: 900;">LA FILOSOFÍA SE INTENSIFICA</p>
     </div>
 
     <script>
-        // Reveal
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+        // Reveal Logic
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
         }, { threshold: 0.1 });
+
         document.querySelectorAll('.reveal').forEach(el => {
             el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
             el.style.transition = "all 0.6s ease-out";
-            obs.observe(el);
-        });
-        window.addEventListener('scroll', () => {
-            document.querySelectorAll('.active').forEach(el => el.style.opacity = "1");
+            observer.observe(el);
         });
 
-        // Beee en cada click
+        // Click Sound (Beeee)
         const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
         document.addEventListener('click', (e) => {
+            if(e.target.tagName === 'BUTTON') return;
             const b = document.createElement('div');
-            b.className = 'beee-text';
             b.innerText = 'BEEEEEE!';
+            b.style.position = 'fixed';
             b.style.left = e.clientX + 'px';
             b.style.top = e.clientY + 'px';
-            b.style.color = ['#ff2a5f', '#00e5ff', '#fffb00'][Math.floor(Math.random()*3)];
+            b.style.fontSize = '2rem';
+            b.style.fontWeight = '900';
+            b.style.color = 'var(--main-color)';
+            b.style.pointerEvents = 'none';
+            b.style.zIndex = '9999';
             document.body.appendChild(b);
-            setTimeout(() => b.remove(), 800);
             
-            const s = audio.cloneNode();
-            s.volume = 0.2;
-            s.play().catch(()=>{});
+            const a = audio.cloneNode();
+            a.volume = 0.2;
+            a.play();
+
+            setTimeout(() => {
+                b.style.transition = 'all 0.5s';
+                b.style.transform = 'translateY(-50px)';
+                b.style.opacity = '0';
+                setTimeout(() => b.remove(), 500);
+            }, 10);
         });
 
-        // Queso
-        document.getElementById('quesoBtn').onclick = () => {
-            for(let i=0; i<15; i++) {
-                setTimeout(() => {
-                    const q = document.createElement('div');
-                    q.innerText = '🧀';
-                    q.style.position = 'fixed';
-                    q.style.left = Math.random()*100+'vw';
-                    q.style.top = '-50px';
-                    q.style.fontSize = '3rem';
-                    q.style.transition = '2s linear';
-                    q.style.zIndex = '9999';
-                    document.body.appendChild(q);
-                    setTimeout(() => q.style.transform = 'translateY(110vh) rotate(360deg)', 50);
-                    setTimeout(() => q.remove(), 2500);
-                }, i*150);
-            }
-        };
+        // K DE QUESO INTERACTION
+        const btnQueso = document.getElementById('kDeQueso');
+        const overlay = document.getElementById('queso-overlay');
 
-        function abrir(t, s, txt) {
-            document.getElementById('mTit').innerText = t;
-            document.getElementById('mSub').innerText = s;
-            document.getElementById('mTxt').innerText = txt;
-            document.getElementById('modal').style.display = 'flex';
-        }
+        btnQueso.onclick = () => {
+            overlay.style.display = 'flex';
+            document.body.classList.add('shake');
+            
+            // Lluvia de queso
+            const interval = setInterval(() => {
+                const q = document.createElement('div');
+                q.innerText = '🧀';
+                q.style.position = 'fixed';
+                q.style.left = Math.random() * 100 + 'vw';
+                q.style.top = '-50px';
+                q.style.fontSize = (Math.random() * 4 + 2) + 'rem';
+                q.style.zIndex = '6000';
+                q.style.transition = 'transform 2s linear';
+                document.body.appendChild(q);
+                setTimeout(() => q.style.transform = `translateY(110vh) rotate(${Math.random()*360}deg)`, 10);
+                setTimeout(() => q.remove(), 2000);
+            }, 50);
+
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.classList.remove('shake');
+                clearInterval(interval);
+            }, 3000);
+        };
     </script>
 </body>
 </html>
