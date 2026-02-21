@@ -6,7 +6,7 @@
     <title>Borregos S.L. | K de queso</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Variables de Tema (Light Mode por defecto) */
+        /* VARIABLES Y TEMA */
         :root {
             --bg-color: #f4f4f0;
             --main-color: #ff2a5f;
@@ -17,316 +17,216 @@
             --text-dark: #111;
         }
 
-        /* Variables de Tema (Dark Mode) */
         body.dark-mode {
             --bg-color: #111;
-            --dark: #f4f4f0; /* Los bordes y textos oscuros ahora son claros */
+            --dark: #f4f4f0;
             --card-bg: #222;
         }
 
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            box-sizing: border-box; margin: 0; padding: 0;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important;
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--dark);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark);
+            overflow-x: hidden; scroll-behavior: smooth; transition: background-color 0.4s ease, color 0.4s ease;
+            perspective: 1000px;
         }
 
-        /* CONTROLES SUPERIORES (Header) */
-        .top-controls {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            z-index: 1002;
-        }
+        /* --- FRAMER MOTION EFFECTS (CSS) --- */
+        .reveal { opacity: 0; transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .reveal.active { opacity: 1; }
+        
+        .reveal-up { transform: translateY(80px); }
+        .reveal-up.active { transform: translateY(0); }
+        
+        .reveal-scale { transform: scale(0.8); }
+        .reveal-scale.active { transform: scale(1); }
 
+        .reveal-left { transform: translateX(-80px); }
+        .reveal-left.active { transform: translateX(0); }
+
+        /* CONSTANT ANIMATIONS */
+        @keyframes float-hero { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        @keyframes rainbow { 0%{filter: hue-rotate(0deg);} 100%{filter: hue-rotate(360deg);} }
+
+        /* RAVE MODE EASTER EGG */
+        body.rave-mode { animation: rainbow 2s linear infinite; }
+
+        /* CONTROLES TOP & GLASSMORPHISM */
+        .top-controls { position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 1rem; z-index: 1002; }
+        .magnetic-btn { display: inline-block; transition: transform 0.1s linear; }
+        
         .btn-control {
-            background: var(--card-bg);
-            color: var(--dark);
-            border: 3px solid var(--dark);
-            padding: 0.5rem 1rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 900;
-            font-size: 1.2rem;
-            cursor: pointer !important;
-            box-shadow: 4px 4px 0px var(--dark);
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--card-bg); color: var(--dark); border: 3px solid var(--dark); padding: 0.5rem 1rem;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.2rem;
+            box-shadow: 4px 4px 0px var(--dark); transition: box-shadow 0.2s ease, background 0.2s;
+            display: flex; align-items: center; justify-content: center;
         }
+        .btn-control:hover { box-shadow: 8px 8px 0px var(--main-color); background: var(--yellow); }
 
-        .btn-control:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--main-color);
-        }
-
-        /* Botón Hamburguesa */
-        .hamburger {
-            width: 50px;
-            height: 46px;
-            padding: 0;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 4px;
-            background: var(--dark);
-            transition: all 0.3s ease;
-        }
-
-        /* Animación X del Menú */
+        .hamburger { width: 50px; height: 46px; padding: 0; flex-direction: column; gap: 6px; }
+        .hamburger span { display: block; width: 25px; height: 4px; background: var(--dark); transition: all 0.3s ease; }
         .hamburger.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
-        /* OVERLAY GLASSMORPHISM */
-        .glass-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            z-index: 999;
-        }
+        .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
+        .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .glass-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* PANEL LATERAL (Menú) */
-        .side-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: min(400px, 100vw);
-            height: 100vh;
-            background: var(--bg-color);
-            border-left: 6px solid var(--dark);
-            padding: 8rem 3rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            z-index: 1000;
-            box-shadow: -15px 0px 0px var(--main-color);
-        }
-
+        .side-panel { position: fixed; top: 0; right: -100%; width: min(400px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 8rem 3rem 3rem; display: flex; flex-direction: column; gap: 2rem; transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -15px 0px 0px var(--main-color); }
         .side-panel.open { right: 0; }
+        .side-panel a { color: var(--dark); font-size: 2.5rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; }
+        .side-panel a:hover { color: var(--accent-color); transform: translateX(20px) scale(1.1); }
 
-        .side-panel a {
-            color: var(--dark);
-            font-size: 2.5rem;
-            text-decoration: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            border-bottom: 4px solid transparent;
-            width: fit-content;
-            transition: all 0.2s;
-        }
+        /* BRUTAL BORDER EFECTOS VIVOS */
+        .brutal-border { border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .brutal-border:hover { transform: translate(-6px, -6px); box-shadow: 14px 14px 0px var(--dark); }
 
-        .side-panel a:hover {
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-            transform: translateX(10px);
-        }
+        section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; }
+        .section-title { font-size: 3.5rem; margin-bottom: 3rem; text-transform: uppercase; display: inline-block; background: var(--yellow); color: var(--text-dark); padding: 0 1rem; border: 4px solid var(--dark); transform: rotate(-2deg); transition: transform 0.3s ease; }
+        .section-title:hover { transform: rotate(2deg) scale(1.05); }
 
-        /* Utilidades Brutalistas */
-        .brutal-border {
-            border: 4px solid var(--dark);
-            box-shadow: 8px 8px 0px var(--dark);
-            transition: all 0.2s ease;
-        }
+        /* HEADER ANIMADO */
+        header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%); position: relative; overflow: hidden; }
+        h1 { font-size: clamp(4rem, 12vw, 10rem); font-weight: 900; text-transform: uppercase; line-height: 1; text-shadow: 6px 6px 0px var(--main-color); animation: float-hero 5s ease-in-out infinite; z-index: 2; position: relative; }
+        .subtitle { font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 700; opacity: 0.5; margin-top: 1rem; text-transform: uppercase; letter-spacing: 5px; transition: all 0.3s ease; z-index: 2; position: relative; }
+        .subtitle:hover { opacity: 1; color: var(--main-color); transform: scale(1.1); }
 
-        .brutal-border:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--dark);
-        }
+        .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 150px; height: 150px; background: var(--yellow); border-radius: 50%; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; text-align: center; animation: spin-slow 10s linear infinite; z-index: 1; }
 
-        section { padding: 6rem 2rem 4rem; max-width: 1200px; margin: 0 auto; }
-
-        .section-title {
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            display: inline-block;
-            background: var(--yellow);
-            color: var(--text-dark); /* Siempre negro para que se lea en amarillo */
-            padding: 0 1rem;
-            border: 4px solid var(--dark);
-            transform: rotate(-1deg);
-        }
-
-        /* Inicio */
-        header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%);
-        }
-
-        h1 {
-            font-size: clamp(4rem, 12vw, 10rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            text-shadow: 6px 6px 0px var(--main-color);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .subtitle {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 700;
-            opacity: 0.4;
-            margin-top: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Textos y Cartas */
+        /* SECCIONES */
         .about-text { font-size: 1.4rem; line-height: 1.8; text-align: justify; background: var(--card-bg); padding: 3rem; }
         
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-        .card-rebano { background: var(--card-bg); padding: 1.5rem; text-align: center; cursor: pointer !important; }
+        /* 3D CARDS REBAÑO */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; perspective: 1000px; }
+        .card-rebano { background: var(--card-bg); padding: 1.5rem; text-align: center; transform-style: preserve-3d; transition: transform 0.1s, box-shadow 0.3s; will-change: transform; }
         .card-rebano:hover { background: var(--accent-color); color: var(--text-dark); }
-        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 1rem; filter: grayscale(100%); transition: filter 0.3s; }
-        .card-rebano:hover img { filter: grayscale(0%); }
+        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 1rem; filter: grayscale(100%); transition: filter 0.3s, transform 0.3s; transform: translateZ(30px); }
+        .card-rebano:hover img { filter: grayscale(0%); transform: translateZ(50px) scale(1.05); }
+        .card-rebano h3 { transform: translateZ(20px); }
 
-        /* Modal Individual */
-        .modal-perfil {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-            z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem;
-        }
-        .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 3rem; position: relative; }
-        .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); color: white; border: 4px solid var(--dark); padding: 0.5rem 1rem; font-weight: bold; cursor: pointer !important; }
+        /* MODAL */
+        .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
+        .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 3rem; position: relative; animation: modal-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes modal-pop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-        /* Qué hacemos */
-        .service-card { padding: 2rem; margin-bottom: 2rem; color: var(--text-dark); }
-        .service-card h3 { font-size: 2rem; margin-bottom: 1rem; text-decoration: underline; }
+        /* OTROS */
+        .service-card { padding: 3rem; margin-bottom: 2rem; color: var(--text-dark); position: relative; overflow: hidden; }
+        .service-card::before { content:''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255,255,255,0.2); transition: all 0.4s ease; transform: skewX(-20deg); }
+        .service-card:hover::before { left: 100%; }
 
-        /* Inventario */
-        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-        .item-inventario { background: var(--card-bg); padding: 1rem; }
-        .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); }
-        .item-inventario p { margin-top: 0.5rem; font-weight: bold; font-size: 1rem; }
-        .item-inventario span { display: block; color: gray; font-size: 0.8rem; }
+        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; }
+        .item-inventario { background: var(--card-bg); padding: 1rem; transition: transform 0.3s; }
+        .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); transition: transform 0.5s ease; }
+        .item-inventario:hover img { transform: scale(1.1) rotate(2deg); }
 
-        /* Blog */
-        .grid-blog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        @media (max-width: 768px) { .grid-blog { grid-template-columns: 1fr; } }
-        .blog-item { width: 100%; height: 300px; background: #ddd; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #555;}
+        .donaciones-container { background: var(--main-color); color: white; padding: 4rem; text-align: center; }
+        .donaciones-cajas { display: flex; justify-content: center; gap: 2rem; margin: 3rem 0; flex-wrap: wrap; }
+        .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: all 0.2s; display: inline-block; }
+        .btn-donar:hover { background: var(--accent-color); color: var(--text-dark); }
+        .progreso-wrapper { width: 100%; height: 50px; background: var(--dark); border: 4px solid white; margin-top: 2rem; position: relative; overflow: hidden; }
+        .progreso-barra { height: 100%; width: 5%; background: var(--yellow); transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .progreso-texto { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; font-size: 1.2rem; mix-blend-mode: difference; color: white; width: 100%; }
 
-        /* Donaciones */
-        .donaciones-container { background: var(--main-color); color: white; padding: 3rem; text-align: center; }
-        .donaciones-cajas { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
-        .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: all 0.2s; }
-        .btn-donar:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--yellow); background: var(--accent-color); }
-        .progreso-wrapper { width: 100%; height: 40px; background: var(--dark); border: 4px solid white; margin-top: 2rem; position: relative; }
-        .progreso-barra { height: 100%; width: 5%; background: var(--yellow); transition: width 0.5s ease; }
-        .progreso-texto { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; mix-blend-mode: difference; color: white; width: 100%; }
+        /* BOTÓN CAOS */
+        .chaos-btn-wrapper { text-align: center; padding: 4rem 2rem; background: var(--dark); border-top: 4px solid var(--main-color); }
+        .btn-chaos { background: red; color: white; font-size: 1.5rem; font-weight: 900; padding: 2rem 4rem; border: 4px solid white; box-shadow: 10px 10px 0px var(--yellow); text-transform: uppercase; transition: all 0.1s; animation: pulse 2s infinite; }
+        .btn-chaos:hover { transform: scale(1.1) rotate(getRandomDeg()); background: #ff0055; box-shadow: 0px 0px 50px red; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* Footer */
-        footer { background: var(--dark); color: var(--bg-color); padding: 6rem 2rem; text-align: center; border-top: 4px solid var(--yellow); }
-        footer h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 2rem; }
-        .email-huge { font-size: clamp(1.5rem, 5vw, 4rem); color: var(--main-color); text-decoration: underline; word-break: break-all; }
-        .email-huge:hover { color: var(--accent-color); }
+        footer { background: var(--dark); color: var(--bg-color); padding: 6rem 2rem; text-align: center; }
+        .email-huge { font-size: clamp(1.5rem, 5vw, 4rem); color: var(--main-color); text-decoration: underline; word-break: break-all; transition: all 0.3s; display: inline-block; }
+        .email-huge:hover { color: var(--accent-color); transform: scale(1.1) rotate(-2deg); }
 
-        /* Efecto BEEE */
-        .beee { position: fixed; pointer-events: none; font-weight: bold; z-index: 9999; animation: floatup 1.5s ease-out forwards; }
-        @keyframes floatup { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-100px) scale(3); } }
+        /* QUESO FALLING */
+        .queso-drop { position: fixed; font-size: 2rem; z-index: 9999; animation: fall 3s linear forwards; pointer-events: none; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- OVERLAY (Fondo Borroso) -->
     <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- CONTROLES SUPERIORES -->
+    <!-- CONTROLES -->
     <div class="top-controls">
-        <button class="btn-control" id="langBtn" onclick="toggleLang()">ES</button>
-        <button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button>
-        <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <div class="magnetic-btn"><button class="btn-control" id="langBtn" onclick="toggleLang()">ES</button></div>
+        <div class="magnetic-btn"><button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button></div>
+        <div class="magnetic-btn">
+            <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </div>
 
-    <!-- PANEL LATERAL (MENÚ) -->
+    <!-- MENÚ -->
     <nav class="side-panel" id="sideMenu">
         <a href="#inicio" onclick="toggleMenu()" class="lang-text" data-es="Inicio" data-en="Home">Inicio</a>
         <a href="#nosotros" onclick="toggleMenu()" class="lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
         <a href="#rebano" onclick="toggleMenu()" class="lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</a>
         <a href="#servicios" onclick="toggleMenu()" class="lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</a>
-        <a href="#inventario" onclick="toggleMenu()" class="lang-text" data-es="Inventario" data-en="Inventory">Inventario</a>
-        <a href="#blog" onclick="toggleMenu()" class="lang-text" data-es="Blog" data-en="Blog">Blog</a>
         <a href="#donaciones" onclick="toggleMenu()" class="lang-text" data-es="Donaciones" data-en="Donations">Donaciones</a>
     </nav>
 
     <!-- INICIO -->
     <header id="inicio">
-        <h1>Borregos S.L.</h1>
-        <div class="subtitle lang-text" data-es="K de queso" data-en="K for Kheese">K de queso</div>
+        <div class="spinning-badge lang-text" data-es="100% OVEJA REAL" data-en="100% REAL SHEEP">100% OVEJA REAL</div>
+        <h1 class="reveal reveal-up">Borregos S.L.</h1>
+        <div class="subtitle lang-text reveal reveal-up" style="transition-delay: 0.2s;" data-es="K de queso" data-en="K for Kheese" id="quesoBtn">K de queso</div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
     <section id="nosotros">
-        <h2 class="section-title lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</h2>
-        <div class="about-text brutal-border lang-text" data-es="Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos." data-en="Since the dawn of humanity, the intrinsic dichotomy between being, nothingness, and chronic boredom has perplexed the most distinguished thinkers of our era. We, in an unusual display of transcendental epiphany, have decided to absolutely ignore all that because the other day we saw a pigeon trying to eat a Cheeto and it seemed much more relevant.<br><br>Our corporate synergy is based on empirical procrastination and the stoic contemplation of public works. Ergo, we are an indissoluble amalgam of dilettante intellect, supine stupidity, and an alarming lack of survival instinct. Do not look for meaning where there are only bleats.">
-            Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos.
+        <h2 class="section-title reveal reveal-left lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</h2>
+        <div class="about-text brutal-border reveal reveal-up lang-text" data-es="Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia." data-en="Since the dawn of humanity, the intrinsic dichotomy between being, nothingness, and chronic boredom has perplexed the most distinguished thinkers... We ignore all that because a pigeon eating a Cheeto is cooler.">
+            Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia.
         </div>
     </section>
 
     <!-- REBAÑO -->
     <section id="rebano">
-        <h2 class="section-title lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</h2>
+        <h2 class="section-title reveal reveal-left lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</h2>
         <div class="grid-3">
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Alpha', 'El líder que nadie pidió.', 'Le gusta lamer farolas en invierno.')">
+            <!-- Borregos con efecto 3D Hover via JS -->
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" onclick="abrirPerfil('Borrego #1', 'El líder que nadie pidió.', 'Le gusta lamer farolas en invierno.')">
                 <img src="https://picsum.photos/seed/borrego1/400" alt="Borrego 1">
                 <h3>Borrego #1</h3>
-                <p class="lang-text" data-es='"Si no hay pasto, comemos plástico."' data-en='"If there is no grass, we eat plastic."'>"Si no hay pasto, comemos plástico."</p>
+                <p>"Si no hay pasto, comemos plástico."</p>
             </div>
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Beta', 'Estratega del caos.', 'Calcula mal las distancias.')">
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" style="transition-delay: 0.1s;" onclick="abrirPerfil('Borrego #2', 'Estratega del caos.', 'Calcula mal las distancias.')">
                 <img src="https://picsum.photos/seed/borrego2/400" alt="Borrego 2">
                 <h3>Borrego #2</h3>
-                <p class="lang-text" data-es='"La ironía es mi defensa."' data-en='"Irony is my defense."'>"La ironía es mi defensa."</p>
+                <p>"La ironía es mi mecanismo de defensa."</p>
             </div>
-            <!-- He dejado 2 borregos como ejemplo para no saturar, puedes añadir los otros 4 igual -->
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" style="transition-delay: 0.2s;" onclick="abrirPerfil('Borrego #3', 'Experto en bulto.', 'Se perdió en Ikea en 2018.')">
+                <img src="https://picsum.photos/seed/borrego3/400" alt="Borrego 3">
+                <h3>Borrego #3</h3>
+                <p>"Vine por las cervezas gratis."</p>
+            </div>
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" onclick="abrirPerfil('Borrego #4', 'RRPP de dudosa moral.', 'Tiene prohibida la entrada al Mercadona.')">
+                <img src="https://picsum.photos/seed/borrego4/400" alt="Borrego 4">
+                <h3>Borrego #4</h3>
+                <p>"Beee, pero con sarcasmo."</p>
+            </div>
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" style="transition-delay: 0.1s;" onclick="abrirPerfil('Borrego #5', 'Director de Absurdos.', 'Duerme con calcetines en las manos.')">
+                <img src="https://picsum.photos/seed/borrego5/400" alt="Borrego 5">
+                <h3>Borrego #5</h3>
+                <p>"Mi cerebro es un mono tocando platillos."</p>
+            </div>
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card" style="transition-delay: 0.2s;" onclick="abrirPerfil('Borrego #6', 'El Becario eterno.', 'Le queremos, pero poco.')">
+                <img src="https://picsum.photos/seed/borrego6/400" alt="Borrego 6">
+                <h3>Borrego #6</h3>
+                <p>"Por favor, dejad de pegarme."</p>
+            </div>
         </div>
     </section>
 
     <!-- MODAL PERFIL -->
     <div id="modalPerfil" class="modal-perfil">
         <div class="modal-content brutal-border">
-            <button class="close-btn lang-text" data-es="X VOLVER AL CORRAL" data-en="X BACK TO THE PEN" onclick="cerrarPerfil()">X VOLVER AL CORRAL</button>
+            <button class="close-btn" onclick="cerrarPerfil()">X CERRAR</button>
             <h2 id="perfilNombre" style="font-size: 3rem; margin-bottom: 1rem;">Nombre</h2>
             <h4 id="perfilSub" style="color: var(--main-color); margin-bottom: 2rem; font-size: 1.5rem;">Sub</h4>
             <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto</p>
@@ -335,43 +235,30 @@
 
     <!-- QUÉ HACEMOS -->
     <section id="servicios">
-        <h2 class="section-title lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</h2>
-        <div class="service-card brutal-border" style="background: var(--yellow);">
-            <h3 class="lang-text" data-es="Escolta de Engaño Táctico" data-en="Tactical Deception Escort">Escolta de Engaño Táctico</h3>
-            <p class="lang-text" data-es="Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar." data-en="Going as 8 idiots to a club exclusively to take up space, laugh at jokes, and let one try to flirt.">Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar.</p>
+        <h2 class="section-title reveal reveal-left lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</h2>
+        <div class="service-card brutal-border reveal reveal-up" style="background: var(--yellow);">
+            <h3>Escolta de Engaño Táctico</h3>
+            <p>Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar. Éxito: -3%.</p>
         </div>
-        <div class="service-card brutal-border" style="background: var(--card-bg);">
-            <h3 class="lang-text" data-es="Presencia Cero" data-en="Zero Presence">Presencia Cero</h3>
-            <p class="lang-text" data-es="Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos." data-en="We go to your event, compulsively look at our phones without talking to anyone, eat your canapés, and leave.">Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos.</p>
+        <div class="service-card brutal-border reveal reveal-up" style="background: var(--card-bg);">
+            <h3>Presencia Cero</h3>
+            <p>Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos.</p>
         </div>
-    </section>
-
-    <!-- INVENTARIO -->
-    <section id="inventario">
-        <h2 class="section-title lang-text" data-es="Inventario" data-en="Inventory">Inventario</h2>
-        <div class="grid-inventario">
-            <div class="item-inventario brutal-border">
-                <img src="https://picsum.photos/seed/inv1/300" alt="Objeto">
-                <p class="lang-text" data-es="Cono de tráfico deprimido" data-en="Depressed Traffic Cone">Cono de tráfico deprimido</p>
-                <span>12/10/2023 - Calle Larios</span>
-            </div>
-            <div class="item-inventario brutal-border">
-                <img src="https://picsum.photos/seed/inv2/300" alt="Objeto">
-                <p class="lang-text" data-es="Zapato solitario talla 42" data-en="Lonely Shoe Size 42">Zapato solitario talla 42</p>
-                <span>05/01/2024 - Charco</span>
-            </div>
+        <div class="service-card brutal-border reveal reveal-up" style="background: var(--accent-color);">
+            <h3>Debates Estériles a Domicilio</h3>
+            <p>Discutimos a gritos en tu salón sobre qué Power Ranger era estadísticamente mejor. Arruinamos cenas garantizado.</p>
         </div>
     </section>
 
     <!-- DONACIONES -->
     <section id="donaciones">
-        <h2 class="section-title lang-text" data-es="Fondos Reservados" data-en="Slush Fund">Fondos Reservados</h2>
-        <div class="donaciones-container brutal-border">
-            <h3 class="lang-text" data-es="Ayúdanos a comprar cosas inútiles" data-en="Help us buy useless stuff">Ayúdanos a comprar cosas inútiles</h3>
+        <div class="donaciones-container brutal-border reveal reveal-scale">
+            <h2 class="lang-text" data-es="Fondos Reservados" data-en="Slush Fund" style="font-size: 3rem;">Fondos Reservados</h2>
+            <h3 class="lang-text" style="margin-top: 1rem;" data-es="Ayúdanos a comprar cosas inútiles" data-en="Help us buy useless stuff">Ayúdanos a comprar cosas inútiles</h3>
             <div class="donaciones-cajas">
-                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(1)">1 €</a>
-                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(2)">2 €</a>
-                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(5)">5 €</a>
+                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(1)">1 €</a></div>
+                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(2)">2 €</a></div>
+                <div class="magnetic-btn"><a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(5)">5 €</a></div>
             </div>
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
@@ -380,42 +267,79 @@
         </div>
     </section>
 
+    <!-- BOTÓN CAOS -->
+    <div class="chaos-btn-wrapper">
+        <button class="btn-chaos" id="btnCaos">NO PULSAR (AUTODESTRUCCIÓN)</button>
+    </div>
+
     <!-- FOOTER -->
     <footer id="contacto">
-        <h2 class="lang-text" data-es="Insúltanos aquí" data-en="Insult us here">Insúltanos aquí</h2>
-        <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
+        <h2 class="reveal reveal-up lang-text" data-es="Insúltanos aquí" data-en="Insult us here">Insúltanos aquí</h2>
+        <div class="magnetic-btn reveal reveal-up" style="margin-top:2rem;">
+            <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
+        </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT: MAGIA Y CAOS -->
     <script>
-        // --- 1. MENU LATERAL & OVERLAY GLASSMORPHISM ---
+        // 1. SCROLL REVEAL (FRAMER MOTION FEEL)
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 2. MAGNETIC BUTTONS
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const h = rect.width / 2;
+                const v = rect.height / 2;
+                const x = e.clientX - rect.left - h;
+                const y = e.clientY - rect.top - v;
+                this.children[0].style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.children[0].style.transform = `translate(0px, 0px)`;
+            });
+        });
+
+        // 3. 3D CARD TILT EFFECT
+        document.querySelectorAll('.3d-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -15;
+                const rotateY = ((x - centerX) / centerX) * 15;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // 4. MENU & THEME & LANG (Igual que antes pero integrados con animaciones)
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('active');
             document.getElementById('hamburgerBtn').classList.toggle('active');
         }
-
-        // --- 2. MODO OSCURO / CLARO ---
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
-            const themeBtn = document.getElementById('themeBtn');
-            // Cambiamos el icono según el modo
-            if(document.body.classList.contains('dark-mode')) {
-                themeBtn.innerText = '🌞'; 
-            } else {
-                themeBtn.innerText = '🌚';
-            }
+            document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
         }
-
-        // --- 3. CAMBIO DE IDIOMA (ES/EN) ---
         let currentLang = 'es';
         function toggleLang() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
             document.getElementById('langBtn').innerText = currentLang.toUpperCase();
-            
-            // Busca todos los elementos con la clase 'lang-text' y reemplaza su texto
             document.querySelectorAll('.lang-text').forEach(el => {
-                // Si el elemento es la barra de progreso, mantenemos la lógica del dinero
                 if(el.classList.contains('progreso-texto')) {
                     el.innerHTML = el.getAttribute(`data-${currentLang}`) + ` (<span id="dineroRecaudado">${dineroActual}</span>€ / 300€)`;
                 } else {
@@ -424,50 +348,104 @@
             });
         }
 
-        // --- 4. EFECTO BEEEE ---
-        document.addEventListener('click', function(e) {
-            if(e.target.tagName.toLowerCase() === 'a' || e.target.closest('button') || e.target.classList.contains('glass-overlay')) return;
-            const beee = document.createElement('div');
-            beee.textContent = 'BEEEE!';
-            beee.className = 'beee';
-            beee.style.left = (e.clientX - 20) + 'px';
-            beee.style.top = (e.clientY - 20) + 'px';
-            const colors = ['#ff2a5f', '#00e5ff', 'var(--dark)', '#fffb00'];
-            beee.style.color = colors[Math.floor(Math.random() * colors.length)];
-            document.body.appendChild(beee);
-            setTimeout(() => beee.remove(), 1500);
+        // 5. DONACIONES
+        let dineroActual = 15;
+        function sumarDonacion(qty) {
+            dineroActual += qty;
+            let p = (dineroActual / 300) * 100;
+            document.getElementById('barraProgreso').style.width = Math.min(p, 100) + '%';
+            document.getElementById('dineroRecaudado').innerText = dineroActual;
+            
+            // Recompensa visual al donar
+            const queso = document.createElement('div');
+            queso.textContent = '💸';
+            queso.className = 'queso-drop';
+            queso.style.left = Math.random() * 90 + 'vw';
+            document.body.appendChild(queso);
+            setTimeout(() => queso.remove(), 3000);
+        }
+        sumarDonacion(0); // init
+
+        // 6. EASTER EGGS
+        // Huevo 1: K de Queso Lluvia
+        document.getElementById('quesoBtn').addEventListener('click', () => {
+            for(let i=0; i<10; i++) {
+                setTimeout(() => {
+                    const q = document.createElement('div');
+                    q.textContent = '🧀';
+                    q.className = 'queso-drop';
+                    q.style.left = Math.random() * 90 + 'vw';
+                    q.style.fontSize = (Math.random() * 3 + 2) + 'rem';
+                    document.body.appendChild(q);
+                    setTimeout(() => q.remove(), 3000);
+                }, i * 200);
+            }
         });
 
-        // --- 5. MODAL INDIVIDUAL ---
-        const modal = document.getElementById('modalPerfil');
+        // Huevo 2: Teclado "beee" (Rave Mode)
+        let typed = '';
+        window.addEventListener('keydown', (e) => {
+            typed += e.key.toLowerCase();
+            if(typed.includes('beee')) {
+                document.body.classList.toggle('rave-mode');
+                typed = ''; // reset
+            }
+            if(typed.length > 10) typed = typed.slice(-4);
+        });
+
+        // 7. EL BOTÓN DEL CAOS (Anti-gravedad visual)
+        document.getElementById('btnCaos').addEventListener('click', function() {
+            if(this.innerText === '¡ERROR CRÍTICO!') return;
+            this.innerText = '¡ERROR CRÍTICO!';
+            this.style.background = 'black';
+            document.body.style.overflow = 'hidden'; // Evitar scroll
+            
+            // Seleccionamos todo lo rompible
+            const elements = document.querySelectorAll('.brutal-border, h1, h2, h3, p, img, a, button');
+            
+            elements.forEach(el => {
+                if(el.id === 'btnCaos') return; // Que no vuele el botón
+                
+                // Le damos una transición muy larga y suave para efecto gravedad cero
+                el.style.transition = 'transform 15s cubic-bezier(0.1, 0.8, 0.1, 1), opacity 5s';
+                el.style.pointerEvents = 'none'; // Ya no se puede interactuar
+                
+                // Cálculos locos al azar
+                const randomX = (Math.random() - 0.5) * 3000;
+                const randomY = (Math.random() - 0.5) * 3000;
+                const randomRotate = (Math.random() - 0.5) * 1080; // 3 vueltas completas
+                
+                // Boom.
+                setTimeout(() => {
+                    el.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(${Math.random() + 0.5})`;
+                    el.style.opacity = '0.2';
+                }, 100);
+            });
+
+            // Mensaje final en pantalla
+            setTimeout(() => {
+                const msj = document.createElement('h1');
+                msj.innerText = '¿CONTENTO? HAS ROTO LA PUTA WEB.\nRecarga la página, borrego.';
+                msj.style.position = 'fixed';
+                msj.style.top = '50%'; msj.style.left = '50%';
+                msj.style.transform = 'translate(-50%, -50%)';
+                msj.style.color = 'var(--main-color)';
+                msj.style.textAlign = 'center';
+                msj.style.zIndex = '99999';
+                msj.style.background = 'var(--dark)';
+                msj.style.padding = '2rem';
+                document.body.appendChild(msj);
+            }, 3000);
+        });
+
+        // Funciones del Modal Perfil
         function abrirPerfil(nombre, sub, texto) {
             document.getElementById('perfilNombre').innerText = nombre;
             document.getElementById('perfilSub').innerText = sub;
             document.getElementById('perfilTexto').innerText = texto;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            document.getElementById('modalPerfil').style.display = 'block';
         }
-        function cerrarPerfil() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // --- 6. BARRA DE DONACIONES ---
-        let dineroActual = 15;
-        const objetivo = 300;
-        function actualizarBarra() {
-            let porcentaje = (dineroActual / objetivo) * 100;
-            if (porcentaje > 100) porcentaje = 100;
-            document.getElementById('barraProgreso').style.width = porcentaje + '%';
-            if(document.getElementById('dineroRecaudado')) {
-                document.getElementById('dineroRecaudado').innerText = dineroActual;
-            }
-        }
-        function sumarDonacion(cantidad) {
-            dineroActual += cantidad;
-            actualizarBarra();
-        }
-        actualizarBarra();
+        function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
     </script>
 </body>
 </html>
