@@ -576,12 +576,39 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // EASTER EGG (Queso PRO que SÍ funciona)
+        // 🧀 K DE QUESO — LLUVIA CONTROLADA
+let quesoInterval = null;
+
 document.getElementById('quesoBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
 
-    e.stopPropagation(); // 👈 MUY IMPORTANTE
+  const btn = e.currentTarget;
 
-    const btn = e.currentTarget;
+  // animación del texto
+  btn.classList.remove('queso-active');
+  void btn.offsetWidth;
+  btn.classList.add('queso-active');
+
+  // evita spam
+  if (quesoInterval) return;
+
+  // empieza a caer queso
+  quesoInterval = setInterval(() => {
+    const q = document.createElement('div');
+    q.textContent = '🧀';
+    q.className = 'drop-fx';
+    q.style.left = Math.random() * 100 + 'vw';
+    q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
+    document.body.appendChild(q);
+    setTimeout(() => q.remove(), 3500);
+  }, 120);
+
+  // se detiene solo
+  setTimeout(() => {
+    clearInterval(quesoInterval);
+    quesoInterval = null;
+  }, 4000); // ⬅️ duración del queso
+});
 
     // Reset animación (por si se pulsa rápido)
     btn.classList.remove('queso-active');
