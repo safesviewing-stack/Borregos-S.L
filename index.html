@@ -28,7 +28,6 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     /* ===== HEADER ===== */
@@ -120,33 +119,45 @@
     }
 
     .card {
-      padding: 1.4rem;
-      border: 1px solid rgba(255,255,255,.08);
-      transition: transform .3s ease, background-color .3s ease, border-color .3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,.02);
-      border-color: rgba(255,255,255,.25);
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      cursor: pointer;
     }
 
     .card img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 260px;
+      height: 100%;
       object-fit: cover;
-      background: #222;
+      transition: transform .5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 1rem;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0),
+        rgba(0,0,0,.7)
+      );
     }
 
     .card h3 {
-      margin: .4rem 0;
+      margin: 0;
       font-size: 1.15rem;
     }
 
     .card p {
-      margin: 0;
+      margin: .2rem 0 0;
+      font-size: .9rem;
       color: var(--text-muted);
-      line-height: 1.45;
     }
 
     footer {
@@ -188,40 +199,32 @@
   </div>
 </section>
 
-<section id="sobre">
-  <h2 class="section-title-big">Sobre nosotros</h2>
-  <p style="margin-left:.5rem;max-width:100ch;text-align:justify;">
-    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas...
-  </p>
-</section>
-
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
   <div class="cards">
-    <div class="card"><img><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div>
-    <div class="card"><img><h3>Borrego 2</h3><p>Logística absurda</p></div>
-    <div class="card"><img><h3>Borrego 3</h3><p>Relaciones públicas</p></div>
-    <div class="card"><img><h3>Borrego 4</h3><p>Ideas malas</p></div>
-    <div class="card"><img><h3>Borrego 5</h3><p>Seguimiento del grupo</p></div>
-    <div class="card"><img><h3>Borrego 6</h3><p>Documentación gráfica</p></div>
-  </div>
-</section>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 1</h3>
+        <p>Especialista en no hacer nada</p>
+      </div>
+    </div>
 
-<section id="servicios">
-  <h2 class="section-title-big">Qué hacemos</h2>
-  <div class="cards">
-    <div class="card"><p>No hacer nada durante horas</p></div>
-    <div class="card"><p>Perdernos en grupo</p></div>
-    <div class="card"><p>Malinterpretar señales</p></div>
-    <div class="card"><p>Apropiarnos de bancos</p></div>
-  </div>
-</section>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 2</h3>
+        <p>Logística absurda</p>
+      </div>
+    </div>
 
-<section id="blog">
-  <h2 class="section-title-big">Blog borreguil</h2>
-  <div class="cards">
-    <div class="card"><img><p>Noche absurda</p></div>
-    <div class="card"><img><p>Experiencia innecesaria</p></div>
+    <div class="card">
+      <img src="" alt="">
+      <div class="card-content">
+        <h3>Borrego 3</h3>
+        <p>Relaciones públicas</p>
+      </div>
+    </div>
   </div>
 </section>
 
