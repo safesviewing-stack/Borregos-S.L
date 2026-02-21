@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Borregos S.L</title>
+
   <style>
     :root {
       --bg: #0b0b0b;
@@ -20,6 +21,8 @@
       transition: background-color 0.6s ease, color 0.6s ease;
     }
 
+    /* ================= HEADER ================= */
+
     header {
       position: fixed;
       top: 0;
@@ -29,10 +32,48 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(180deg, rgba(11,11,11,0.85), rgba(11,11,11,0.6));
+      background: linear-gradient(
+        180deg,
+        rgba(11,11,11,0.85),
+        rgba(11,11,11,0.6)
+      );
       backdrop-filter: blur(10px);
       z-index: 1100;
     }
+
+    .header-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    header nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      cursor: default;
+      user-select: none;
+      transition: opacity 0.6s ease;
+    }
+
+    header nav a:hover {
+      opacity: 1;
+    }
+
+    /* ================= THEME TOGGLE ================= */
 
     #themeToggle {
       position: absolute;
@@ -51,8 +92,8 @@
     }
 
     #themeToggle span {
-      transition: opacity 0.3s ease;
       line-height: 1;
+      transition: opacity 0.3s ease;
     }
 
     body.dark #themeToggle {
@@ -68,69 +109,15 @@
       opacity: 0.2;
     }
 
-    
-
-    .header-inner {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .header-inner {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    
-    }
-
-    
-
-    
-
-    header nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.2rem 0.1rem;
-      opacity: 0.75;
-      cursor: default;
-      user-select: none;
-      transition: opacity 0.6s ease;
-    }
-
-    header nav a:hover {
-      opacity: 0.95;
-      transition-delay: 0.35s;
-    }
-
-    header nav a:hover {
-      opacity: 1;
-    }
-
-    
-
-    
-
-    
-
-    
-
-    
+    /* ================= SECTIONS ================= */
 
     section {
       max-width: 1200px;
       margin: auto;
       padding: 8rem 1.5rem 5rem calc(1.5rem + 0.4rem);
+
+      /* 🔑 CLAVE: corrige el scroll con header fijo */
+      scroll-margin-top: 120px;
     }
 
     .section-title-big {
@@ -139,6 +126,8 @@
       margin-left: 0.4rem;
       letter-spacing: -0.02em;
     }
+
+    /* ================= CARDS ================= */
 
     .cards {
       display: grid;
@@ -152,7 +141,10 @@
       text-align: left;
       padding: 1.4rem 1.4rem 1.6rem;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+      transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.3s ease;
     }
 
     .card:hover {
@@ -160,29 +152,27 @@
       background-color: rgba(255,255,255,0.02);
       transform: translateY(-2px);
     }
-    }
 
     .card img {
       display: block;
       width: 100%;
       height: 260px;
       object-fit: cover;
-      border: 1px solid rgba(255,255,255,0);
       background: #222;
     }
 
     .card h3 {
-      margin: 0.4rem 0 0.4rem 0;
+      margin: 0.4rem 0;
       font-size: 1.15rem;
-      line-height: 1.3;
     }
 
     .card p {
       margin: 0;
       color: var(--text-muted);
       line-height: 1.45;
-      max-width: 55ch;
     }
+
+    /* ================= FOOTER ================= */
 
     footer {
       padding: 2rem;
@@ -190,62 +180,13 @@
       color: var(--text-muted);
     }
   </style>
-<style>
-  #menuOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
-    z-index: 900;
-  }
-  }
-
-  #sideMenu {
-    position: fixed;
-    top: 0;
-    right: -320px;
-    width: 320px;
-    height: 100vh;
-    background: #111;
-    padding: 4rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    visibility: hidden;
-    transition: right 0.4s ease, visibility 0s linear 0.4s;
-    z-index: 1000;
-  }
-  }
-
-  #sideMenu a {
-    color: var(--text);
-    text-decoration: none;
-    font-size: 1.4rem;
-  }
-
-  #sideMenu.open {
-    right: 0;
-    visibility: visible;
-    transition: right 0.4s ease, visibility 0s;
-  }
-
-  #menuOverlay.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 0.4s ease;
-  }
-</style>
 </head>
-<body>
+
+<body class="dark">
 
 <header>
   <div class="header-inner">
-    <nav class="main-nav" style="display:flex; gap:2rem; align-items:center;">
+    <nav>
       <a href="#inicio">Inicio</a>
       <a href="#sobre">Sobre</a>
       <a href="#rebano">Rebaño</a>
@@ -254,160 +195,78 @@
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <button id="themeToggle" aria-label="Cambiar modo" title="Modo borrego nocturno">
+    <button id="themeToggle" aria-label="Cambiar modo">
       <span class="sun">☀</span>
       <span class="moon">☾</span>
     </button>
-
-    
-  </div>
   </div>
 </header>
 
-
-
 <section id="inicio" style="min-height:100vh; display:flex; align-items:center;">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem); line-height:0.95; letter-spacing:-0.04em; margin:0;">Borregos S.L</h1>
-    <h2 style="margin:0.6rem 0 0 0.4rem; font-size:clamp(1.8rem,4vw,3rem); color:var(--text-muted); font-weight:400;">K de queso</h2>
-
-    </div>
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem); line-height:0.95; margin:0;">
+      Borregos S.L
+    </h1>
+    <h2 style="margin:0.6rem 0 0 0.4rem; font-size:clamp(1.8rem,4vw,3rem); color:var(--text-muted); font-weight:400;">
+      K de queso
+    </h2>
+  </div>
 </section>
 
 <section id="sobre">
   <h2 class="section-title-big">Sobre nosotros</h2>
   <p style="margin-left:0.5rem; max-width:100ch; text-align:justify;">
-    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas. No por descuido, sino por vocación. Nacimos en las Fallas, ese laboratorio sociocultural donde la pólvora sustituye al argumento y la tradición se impone por aclamación popular, y desde entonces todo fue a peor. O mejor, según se mire. Lo que empezó como una deriva festiva acabó cristalizando en una cosmovisión: la del borrego consciente de su condición, lúcido en su extravío y elegante en su desorientación.<br><br>
-    Creemos firmemente que ser borrego es una filosofía. Una forma de estar en el mundo sin la pesada carga del heroísmo intelectual, pero con la suficiente malicia como para saber exactamente lo que se está haciendo. Avanzamos en grupo, sí, pero con criterio; balamos, pero con retórica; seguimos, pero solo aquello que merece ser seguido, o al menos celebrado con una copa en la mano y cierta distancia crítica. Practicamos el absurdo como disciplina, la camaradería como método y la cultura como coartada estética.<br><br>
-    No prometemos redención ni sentido, pero sí una elegante caída cuesta abajo, en compañía, riéndonos de nosotros mismos mientras citamos cosas que nadie ha pedido. Porque al final, entre tanto caos y solemnidad impostada, alguien tiene que atreverse a decirlo claro: somos borregos, y qué.
+    Somos, con todo el orgullo que permite la ironía ilustrada, un grupo de borregos gilipollas...
   </p>
 </section>
 
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
-  <div class="cards" style="margin-left:0.6rem">
-    <div class="card">
-      <img />
-      <h3>Borrego 1</h3>
-      <p>Especialista en no hacer nada</p>
-    </div>
-    <div class="card">
-      <img />
-      <h3>Borrego 2</h3>
-      <p>Logística absurda</p>
-    </div>
-    <div class="card">
-      <img />
-      <h3>Borrego 3</h3>
-      <p>Relaciones públicas</p>
-    </div>
-    <div class="card">
-      <img />
-      <h3>Borrego 4</h3>
-      <p>Ideas malas</p>
-    </div>
-    <div class="card">
-      <img />
-      <h3>Borrego 5</h3>
-      <p>Seguimiento del grupo</p>
-    </div>
-    <div class="card">
-      <img />
-      <h3>Borrego 6</h3>
-      <p>Documentación gráfica</p>
-    </div>
+  <div class="cards">
+    <div class="card"><h3>Borrego 1</h3><p>Especialista en no hacer nada</p></div>
+    <div class="card"><h3>Borrego 2</h3><p>Logística absurda</p></div>
+    <div class="card"><h3>Borrego 3</h3><p>Relaciones públicas</p></div>
   </div>
 </section>
 
 <section id="servicios">
   <h2 class="section-title-big">Qué hacemos</h2>
   <div class="cards">
-    <div class="card"><p>Ir a sitios random sin motivo aparente</p></div>
-    <div class="card"><p>No hacer nada durante horas con total convicción</p></div>
-    <div class="card"><p>Buscar samaritanas del amor con apoyo logístico del rebaño</p></div>
-    <div class="card"><p>Recoger objetos de la calle y otorgarles valor simbólico</p></div>
-    <div class="card"><p>Apropiarnos emocionalmente de bancos, esquinas y bordillos</p></div>
-    <div class="card"><p>Perdernos en grupo y llamarlo experiencia</p></div>
-    <div class="card"><p>Malinterpretar señales inexistentes con rigor científico</p></div>
-    <div class="card"><p>Escoltar mensajes importantes y arrepentirse colectivamente</p></div>
-    <div class="card"><p>Sentarnos en el suelo aunque haya sillas</p></div>
-    <div class="card"><p>Guardar cosas “por si acaso” durante años</p></div>
-  </div>
-</section>
-
-<section id="inventario">
-  <h2 class="section-title-big">Inventario callejero</h2>
-  <div class="cards">
-    <div class="card"><img /><p>Objeto random<br><small>12/03/2025</small></p></div>
-    <div class="card"><img /><p>Cosa rara<br><small>22/04/2025</small></p></div>
+    <div class="card"><p>No hacer nada durante horas</p></div>
+    <div class="card"><p>Perdernos en grupo</p></div>
   </div>
 </section>
 
 <section id="blog">
-  <h2 class="section-title-big">Blog borreguil</h2>
-  <div class="cards">
-    <div class="card"><img /><p>Noche absurda</p></div>
-    <div class="card"><img /><p>Experiencia innecesaria</p></div>
-  </div>
-</section>
-
-<section id="donar">
-  <h2 class="section-title-big">Donaciones</h2>
-  <p style="margin-left:0.4rem; max-width:60ch; color:var(--text-muted)">Apoya al rebaño para seguir no haciendo nada en sitios cada vez más lejanos.</p>
-  <div class="cards">
-    <div class="card" onclick="donar(1)">1€</div>
-    <div class="card" onclick="donar(2)">2€</div>
-    <div class="card" onclick="donar(5)">5€</div>
-  </div>
-  <div style="margin-left:0.4rem; margin-top:2rem; max-width:400px;">
-    <div style="height:10px; background:rgba(255,255,255,0.1); border-radius:6px; overflow:hidden;">
-      <div id="donationBar" style="height:100%; width:0%; background:var(--accent); transition:width 0.4s ease;"></div>
-    </div>
-    <small style="display:block; margin-top:0.6rem; color:var(--text-muted)">Objetivo simbólico: 100€</small>
-  </div>
+  <h2 class="section-title-big">Blog</h2>
 </section>
 
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
-  <p style="margin-left:0.4rem">Borregoasqueroso@gmail.com</p>
+  <p style="margin-left:0.4rem;">borregoasqueroso@gmail.com</p>
 </section>
 
 <footer>
-  <p>© Borregos S.L · Todos los derechos balando</p>
+  © Borregos S.L · Todos los derechos balando
 </footer>
 
 <script>
-  // 🌙 Modo oscuro / claro estético
-  const toggle = document.getElementById('themeToggle');
+  const toggle = document.getElementById("themeToggle");
   const body = document.body;
 
-  // estado inicial
-  body.classList.add('dark');
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
 
-  toggle.addEventListener('click', () => {
-    body.classList.toggle('dark');
-
-    if (body.classList.contains('dark')) {
-      document.documentElement.style.setProperty('--bg', '#0b0b0b');
-      document.documentElement.style.setProperty('--text', '#f5f5f5');
-      document.documentElement.style.setProperty('--text-muted', '#8f8f8f');
+    if (body.classList.contains("dark")) {
+      document.documentElement.style.setProperty("--bg", "#0b0b0b");
+      document.documentElement.style.setProperty("--text", "#f5f5f5");
+      document.documentElement.style.setProperty("--text-muted", "#8f8f8f");
     } else {
-      document.documentElement.style.setProperty('--bg', '#ffffff');
-      document.documentElement.style.setProperty('--text', '#111111');
-      document.documentElement.style.setProperty('--text-muted', '#555555');
+      document.documentElement.style.setProperty("--bg", "#ffffff");
+      document.documentElement.style.setProperty("--text", "#111111");
+      document.documentElement.style.setProperty("--text-muted", "#555555");
     }
   });
-
-  // 💸 Donaciones
-  let totalDonations = 0;
-  const donationGoal = 100;
-
-  function donar(amount) {
-    totalDonations += amount;
-    const percent = Math.min((totalDonations / donationGoal) * 100, 100);
-    document.getElementById('donationBar').style.width = percent + '%';
-    window.open('https://www.paypal.com/donate', '_blank');
-  }
 </script>
 
 </body>
