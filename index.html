@@ -1,130 +1,336 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Borregos S.L.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Borregos S.L.</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f4f4f4;
+  --text: #111;
+  --accent: #888;
+  --glass: rgba(255,255,255,0.6);
+}
+
+body.dark {
+  --bg: #0e0e0e;
+  --text: #f4f4f4;
+  --accent: #777;
+  --glass: rgba(0,0,0,0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 1000;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 18px;
+}
+
+/* HAMBURGER */
+.hamburger {
+  width: 30px;
+  height: 22px;
+  position: relative;
+}
+
+.hamburger span {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: var(--text);
+  transition: 0.4s;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 9px;
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 9px;
+}
+
+/* MENU */
+.menu {
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  padding: 80px 30px;
+  transition: right 0.6s ease;
+  z-index: 900;
+}
+
+.menu.open {
+  right: 0;
+}
+
+.menu a {
+  display: block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* SECTIONS */
+section {
+  min-height: 100vh;
+  padding: 120px 10%;
+  animation: fadeUp 1s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HERO */
+.hero h1 {
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-top: 10px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  transition: transform 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-10px) rotate(-1deg);
+}
+
+/* DONATIONS */
+.donations {
+  display: flex;
+  gap: 20px;
+}
+
+.donate {
+  flex: 1;
+  padding: 20px;
+  border: 2px dashed var(--accent);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.donate:hover {
+  background: var(--glass);
+}
+
+/* PROGRESS */
+.progress {
+  width: 100%;
+  height: 12px;
+  background: #ccc;
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: 30%;
+  background: var(--text);
+  transition: width 0.5s;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px;
+  text-align: center;
+  opacity: 0.6;
+}
+</style>
 </head>
 
-<body class="light">
+<body>
 
-<!-- HEADER -->
 <header>
-  <div class="controls">
-    <button id="themeToggle">🌙</button>
-    <button id="langToggle">ES / EN</button>
-    <div id="burger" class="burger">
-      <span></span><span></span><span></span>
-    </div>
+  <button onclick="toggleTheme()">🌙</button>
+  <button onclick="toggleLang()">ES / EN</button>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
   </div>
 </header>
 
-<!-- OVERLAY -->
-<div id="overlay"></div>
-
-<!-- SIDE MENU -->
-<nav id="sideMenu">
+<div class="menu" id="menu">
   <a href="#inicio">Inicio</a>
   <a href="#sobre">Sobre nosotros</a>
   <a href="#rebano">Rebaño</a>
-  <a href="#servicios">Qué hacemos</a>
+  <a href="#quehacemos">Qué hacemos</a>
   <a href="#inventario">Inventario</a>
   <a href="#blog">Blog</a>
   <a href="#donaciones">Donaciones</a>
   <a href="#contacto">Contacto</a>
-</nav>
+</div>
 
-<main>
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-<!-- INICIO -->
-<section id="inicio" class="section hero">
+<section id="inicio" class="hero">
   <h1>Borregos S.L.</h1>
   <h2>K de queso</h2>
 </section>
 
-<!-- SOBRE -->
-<section id="sobre" class="section">
-  <h3>Sobre nosotros</h3>
+<section id="sobre">
+  <h2>Sobre nosotros</h2>
   <p>
-    Borregos S.L. es una entidad colectiva cuya razón de ser no responde a una
-    necesidad concreta, sino a una suma de coincidencias prolongadas en el tiempo.
-    Seis individuos avanzando con determinación injustificada, guiados por la
-    intuición, la inercia y una confianza sorprendente en que moverse es mejor
-    que pensar.
+    Borregos S.L. es una entidad colectiva cuya razón de ser no responde a una necesidad concreta,
+    sino a una suma de coincidencias prolongadas en el tiempo. Seis individuos avanzando sin rumbo
+    claro, pero con firmeza.
   </p>
 </section>
 
-<!-- REBAÑO -->
-<section id="rebano" class="section">
-  <h3>El rebaño</h3>
+<section id="rebano">
+  <h2>El rebaño</h2>
   <div class="grid">
-    <div class="card">Borrego 1<br><small>No lidera, pero opina</small></div>
-    <div class="card">Borrego 2<br><small>Llega tarde</small></div>
-    <div class="card">Borrego 3<br><small>Se queda</small></div>
-    <div class="card">Borrego 4<br><small>Improvisa</small></div>
-    <div class="card">Borrego 5<br><small>Trae cosas</small></div>
-    <div class="card">Borrego 6<br><small>Está</small></div>
+    <div class="card">Borrego 1<br><small>Llega tarde con seguridad</small></div>
+    <div class="card">Borrego 2<br><small>Ahora va</small></div>
+    <div class="card">Borrego 3<br><small>No sabe por qué</small></div>
+    <div class="card">Borrego 4<br><small>Finge liderazgo</small></div>
+    <div class="card">Borrego 5<br><small>Trae algo raro</small></div>
+    <div class="card">Borrego 6<br><small>Está pero molesta</small></div>
   </div>
 </section>
 
-<!-- SERVICIOS -->
-<section id="servicios" class="section">
-  <h3>Qué hacemos</h3>
+<section id="quehacemos">
+  <h2>Qué hacemos</h2>
   <div class="grid">
     <div class="card">Ir a sitios para no hacer nada</div>
     <div class="card">Aparecer en grupo sin motivo</div>
-    <div class="card">Ir 8 a la puerta para que ligue uno</div>
+    <div class="card">Acompañamiento innecesario</div>
   </div>
 </section>
 
-<!-- INVENTARIO -->
-<section id="inventario" class="section">
-  <h3>Inventario</h3>
+<section id="inventario">
+  <h2>Inventario</h2>
   <div class="grid">
-    <div class="card">Cable misterioso<br><small>12/03/2024</small></div>
-    <div class="card">Llave inútil<br><small>27/04/2024</small></div>
-    <div class="card">Objeto indefinido<br><small>09/06/2024</small></div>
+    <div class="card">Llave inútil<br><small>12/03/24</small></div>
+    <div class="card">Cable misterioso<br><small>27/04/24</small></div>
+    <div class="card">Objeto indefinido<br><small>09/06/24</small></div>
   </div>
 </section>
 
-<!-- BLOG -->
-<section id="blog" class="section">
-  <h3>Blog borreguil</h3>
-  <div class="grid">
-    <div class="card">Foto borrosa</div>
-    <div class="card">Vídeo mal grabado</div>
-    <div class="card">Momento cuestionable</div>
-  </div>
+<section id="blog">
+  <h2>Blog borreguil</h2>
+  <p>Fotos borrosas, vídeos mal grabados y recuerdos dudosos.</p>
 </section>
 
-<!-- DONACIONES -->
-<section id="donaciones" class="section">
-  <h3>Apoya al rebaño</h3>
+<section id="donaciones">
+  <h2>Apoya al rebaño</h2>
   <div class="donations">
-    <div class="donation-options">
-      <button data-amount="1">1 €</button>
-      <button data-amount="2">2 €</button>
-      <button data-amount="5">5 €</button>
-    </div>
-    <div class="progress">
-      <div id="donationBar"></div>
-    </div>
+    <div class="donate">1 €</div>
+    <div class="donate">2 €</div>
+    <div class="donate">5 €</div>
   </div>
+  <div class="progress"><span></span></div>
 </section>
 
-<!-- CONTACTO -->
-<section id="contacto" class="section">
-  <h3>Contacto</h3>
-  <p>Borregoasqueroso@gmail.com</p>
+<section id="contacto">
+  <h2>Contacto</h2>
+  <p>📩 Borregoasqueroso@gmail.com</p>
 </section>
-
-</main>
 
 <footer>
-  Borregos S.L. — haciendo poco desde siempre
+  Borregos S.L. · Desde siempre haciendo poco
 </footer>
 
-<script src="script.js"></script>
+<script>
+const menu = document.getElementById('menu');
+const overlay = document.getElementById('overlay');
+
+function toggleMenu(el) {
+  el.classList.toggle('active');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('active');
+}
+
+function closeMenu() {
+  document.querySelector('.hamburger').classList.remove('active');
+  menu.classList.remove('open');
+  overlay.classList.remove('active');
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+}
+
+function toggleLang() {
+  alert('Traducción al inglés pendiente por falta de ganas.');
+}
+</script>
+
 </body>
 </html>
