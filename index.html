@@ -1,336 +1,165 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
 <title>Borregos S.L.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #f4f4f4;
-  --text: #111;
-  --accent: #888;
-  --glass: rgba(255,255,255,0.6);
+:root{
+--bg:#f4f4f4;--text:#111;--glass:rgba(255,255,255,.65)
 }
+.dark{
+--bg:#0e0e0e;--text:#f4f4f4;--glass:rgba(0,0,0,.6)
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter}
+body{background:var(--bg);color:var(--text);transition:.4s;overflow-x:hidden}
 
-body.dark {
-  --bg: #0e0e0e;
-  --text: #f4f4f4;
-  --accent: #777;
-  --glass: rgba(0,0,0,0.6);
-}
+header{position:fixed;top:20px;right:20px;display:flex;gap:12px;z-index:100}
+button{background:none;border:none;color:var(--text);cursor:pointer;font-size:18px}
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
+.hamburger{width:28px;cursor:pointer}
+.hamburger span{display:block;height:3px;background:currentColor;margin:6px 0}
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  transition: background 0.5s, color 0.5s;
-}
+.menu{position:fixed;top:0;right:0;width:280px;height:100vh;
+padding:80px 30px;background:var(--glass);backdrop-filter:blur(20px)}
+.menu a{display:block;margin-bottom:18px;font-weight:700;color:var(--text);text-decoration:none}
 
-/* HEADER */
-header {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  gap: 12px;
-  z-index: 1000;
-}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(8px)}
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text);
-  font-size: 18px;
-}
+section{min-height:100vh;padding:120px 10%}
+.hero h1{font-size:clamp(4rem,10vw,8rem);font-weight:900}
+.hero h2{opacity:.6}
 
-/* HAMBURGER */
-.hamburger {
-  width: 30px;
-  height: 22px;
-  position: relative;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
+.card,.donate{padding:20px;border-radius:18px;background:var(--glass);backdrop-filter:blur(14px)}
 
-.hamburger span {
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background: var(--text);
-  transition: 0.4s;
-}
+.progress{height:12px;background:#ccc;border-radius:6px;overflow:hidden;margin-top:20px}
+.progress span{display:block;height:100%;background:var(--text);width:30%}
 
-.hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 9px; }
-.hamburger span:nth-child(3) { top: 18px; }
-
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 9px;
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 9px;
-}
-
-/* MENU */
-.menu {
-  position: fixed;
-  right: -300px;
-  top: 0;
-  width: 300px;
-  height: 100vh;
-  background: var(--glass);
-  backdrop-filter: blur(15px);
-  padding: 80px 30px;
-  transition: right 0.6s ease;
-  z-index: 900;
-}
-
-.menu.open {
-  right: 0;
-}
-
-.menu a {
-  display: block;
-  margin-bottom: 20px;
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 700;
-}
-
-/* OVERLAY */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.4s;
-}
-
-.overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* SECTIONS */
-section {
-  min-height: 100vh;
-  padding: 120px 10%;
-  animation: fadeUp 1s ease both;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(60px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* HERO */
-.hero h1 {
-  font-size: clamp(4rem, 10vw, 8rem);
-  font-weight: 900;
-}
-
-.hero h2 {
-  font-size: 2rem;
-  color: var(--accent);
-  margin-top: 10px;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 30px;
-}
-
-.card {
-  background: var(--glass);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 16px;
-  transition: transform 0.4s;
-}
-
-.card:hover {
-  transform: translateY(-10px) rotate(-1deg);
-}
-
-/* DONATIONS */
-.donations {
-  display: flex;
-  gap: 20px;
-}
-
-.donate {
-  flex: 1;
-  padding: 20px;
-  border: 2px dashed var(--accent);
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.donate:hover {
-  background: var(--glass);
-}
-
-/* PROGRESS */
-.progress {
-  width: 100%;
-  height: 12px;
-  background: #ccc;
-  margin-top: 20px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.progress span {
-  display: block;
-  height: 100%;
-  width: 30%;
-  background: var(--text);
-  transition: width 0.5s;
-}
-
-/* FOOTER */
-footer {
-  padding: 40px;
-  text-align: center;
-  opacity: 0.6;
-}
+footer{text-align:center;padding:40px;opacity:.6}
 </style>
 </head>
 
 <body>
-
-<header>
-  <button onclick="toggleTheme()">🌙</button>
-  <button onclick="toggleLang()">ES / EN</button>
-  <div class="hamburger" onclick="toggleMenu(this)">
-    <span></span><span></span><span></span>
-  </div>
-</header>
-
-<div class="menu" id="menu">
-  <a href="#inicio">Inicio</a>
-  <a href="#sobre">Sobre nosotros</a>
-  <a href="#rebano">Rebaño</a>
-  <a href="#quehacemos">Qué hacemos</a>
-  <a href="#inventario">Inventario</a>
-  <a href="#blog">Blog</a>
-  <a href="#donaciones">Donaciones</a>
-  <a href="#contacto">Contacto</a>
-</div>
-
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
-
-<section id="inicio" class="hero">
-  <h1>Borregos S.L.</h1>
-  <h2>K de queso</h2>
-</section>
-
-<section id="sobre">
-  <h2>Sobre nosotros</h2>
-  <p>
-    Borregos S.L. es una entidad colectiva cuya razón de ser no responde a una necesidad concreta,
-    sino a una suma de coincidencias prolongadas en el tiempo. Seis individuos avanzando sin rumbo
-    claro, pero con firmeza.
-  </p>
-</section>
-
-<section id="rebano">
-  <h2>El rebaño</h2>
-  <div class="grid">
-    <div class="card">Borrego 1<br><small>Llega tarde con seguridad</small></div>
-    <div class="card">Borrego 2<br><small>Ahora va</small></div>
-    <div class="card">Borrego 3<br><small>No sabe por qué</small></div>
-    <div class="card">Borrego 4<br><small>Finge liderazgo</small></div>
-    <div class="card">Borrego 5<br><small>Trae algo raro</small></div>
-    <div class="card">Borrego 6<br><small>Está pero molesta</small></div>
-  </div>
-</section>
-
-<section id="quehacemos">
-  <h2>Qué hacemos</h2>
-  <div class="grid">
-    <div class="card">Ir a sitios para no hacer nada</div>
-    <div class="card">Aparecer en grupo sin motivo</div>
-    <div class="card">Acompañamiento innecesario</div>
-  </div>
-</section>
-
-<section id="inventario">
-  <h2>Inventario</h2>
-  <div class="grid">
-    <div class="card">Llave inútil<br><small>12/03/24</small></div>
-    <div class="card">Cable misterioso<br><small>27/04/24</small></div>
-    <div class="card">Objeto indefinido<br><small>09/06/24</small></div>
-  </div>
-</section>
-
-<section id="blog">
-  <h2>Blog borreguil</h2>
-  <p>Fotos borrosas, vídeos mal grabados y recuerdos dudosos.</p>
-</section>
-
-<section id="donaciones">
-  <h2>Apoya al rebaño</h2>
-  <div class="donations">
-    <div class="donate">1 €</div>
-    <div class="donate">2 €</div>
-    <div class="donate">5 €</div>
-  </div>
-  <div class="progress"><span></span></div>
-</section>
-
-<section id="contacto">
-  <h2>Contacto</h2>
-  <p>📩 Borregoasqueroso@gmail.com</p>
-</section>
-
-<footer>
-  Borregos S.L. · Desde siempre haciendo poco
-</footer>
+<div id="root"></div>
 
 <script>
-const menu = document.getElementById('menu');
-const overlay = document.getElementById('overlay');
+const { motion, AnimatePresence } = window.FramerMotion;
+const { useState } = React;
 
-function toggleMenu(el) {
-  el.classList.toggle('active');
-  menu.classList.toggle('open');
-  overlay.classList.toggle('active');
+const fadeUp={
+hidden:{opacity:0,y:80},
+visible:{opacity:1,y:0,transition:{duration:.8,ease:"easeOut"}}
+};
+
+function App(){
+const [menu,setMenu]=useState(false);
+const [dark,setDark]=useState(false);
+const [donation,setDonation]=useState(30);
+
+return React.createElement("div",{className:dark?"dark":""},
+
+/* HEADER */
+React.createElement("header",null,
+React.createElement("button",{onClick:()=>setDark(!dark)},"🌙"),
+React.createElement("button",null,"ES / EN"),
+React.createElement("div",{className:"hamburger",onClick:()=>setMenu(true)},
+React.createElement("span"),React.createElement("span"),React.createElement("span"))
+),
+
+/* MENU */
+React.createElement(AnimatePresence,null,
+menu&&React.createElement(React.Fragment,null,
+React.createElement(motion.nav,{
+className:"menu",initial:{x:300},animate:{x:0},exit:{x:300}},
+["inicio","sobre","rebaño","servicios","inventario","blog","donaciones","contacto"]
+.map(i=>React.createElement("a",{key:i,href:"#"+i,onClick:()=>setMenu(false)},i.toUpperCase()))
+),
+React.createElement(motion.div,{
+className:"overlay",onClick:()=>setMenu(false),
+initial:{opacity:0},animate:{opacity:1},exit:{opacity:0}})
+)),
+
+/* HERO */
+React.createElement(motion.section,{id:"inicio",className:"hero",variants:fadeUp,initial:"hidden",animate:"visible"},
+React.createElement("h1",null,"Borregos S.L."),
+React.createElement("h2",null,"K de queso")
+),
+
+/* SOBRE */
+React.createElement(motion.section,{id:"sobre",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Sobre nosotros"),
+React.createElement("p",null,
+"Borregos S.L. es una entidad colectiva nacida de la coincidencia prolongada. "
++"Seis individuos operando mediante improvisación, presencia innecesaria y "
++"una confianza injustificada en que estar ya es hacer.")
+),
+
+/* REBAÑO */
+React.createElement(motion.section,{id:"rebaño",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"El rebaño"),
+React.createElement("div",{className:"grid"},
+["Llega tarde","Ahora va","No sabe por qué","Finge liderazgo","Trae algo raro","Molesta"]
+.map((t,i)=>React.createElement(motion.div,{
+key:i,className:"card",whileHover:{scale:1.05}},
+"Borrego "+(i+1),React.createElement("br"),React.createElement("small",null,t)))
+)),
+
+/* SERVICIOS */
+React.createElement(motion.section,{id:"servicios",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Qué hacemos"),
+React.createElement("div",{className:"grid"},
+["Ir a sitios para no hacer nada",
+"Ir 8 gilipollas para que ligue uno",
+"Acompañamiento innecesario",
+"Presencia sin aportar valor"]
+.map((s,i)=>React.createElement("div",{key:i,className:"card"},s)))
+),
+
+/* INVENTARIO */
+React.createElement(motion.section,{id:"inventario",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Inventario"),
+React.createElement("div",{className:"grid"},
+["Llave inútil · 12/03/24","Cable misterioso · 27/04/24","Objeto indefinido · 09/06/24"]
+.map((o,i)=>React.createElement("div",{key:i,className:"card"},o)))
+),
+
+/* BLOG */
+React.createElement(motion.section,{id:"blog",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Blog borreguil"),
+React.createElement("p",null,"Fotos borrosas, vídeos mal grabados y recuerdos que no deberían documentarse.")
+),
+
+/* DONACIONES */
+React.createElement(motion.section,{id:"donaciones",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Apoya al rebaño"),
+React.createElement("div",{className:"grid"},
+[1,2,5].map(v=>React.createElement("div",{key:v,className:"donate",
+onClick:()=>setDonation(d=>Math.min(d+v*5,100))},v+" €"))),
+React.createElement("div",{className:"progress"},
+React.createElement("span",{style:{width:donation+"%"}}))
+),
+
+/* CONTACTO */
+React.createElement(motion.section,{id:"contacto",variants:fadeUp,initial:"hidden",whileInView:"visible"},
+React.createElement("h2",null,"Contacto"),
+React.createElement("p",null,"📩 Borregoasqueroso@gmail.com")
+),
+
+/* FOOTER */
+React.createElement("footer",null,"Borregos S.L. · Desde siempre haciendo poco")
+);
 }
 
-function closeMenu() {
-  document.querySelector('.hamburger').classList.remove('active');
-  menu.classList.remove('open');
-  overlay.classList.remove('active');
-}
-
-function toggleTheme() {
-  document.body.classList.toggle('dark');
-}
-
-function toggleLang() {
-  alert('Traducción al inglés pendiente por falta de ganas.');
-}
+ReactDOM.createRoot(document.getElementById("root"))
+.render(React.createElement(App));
 </script>
-
 </body>
 </html>
