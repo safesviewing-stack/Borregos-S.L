@@ -45,7 +45,7 @@
       padding: 8rem 1.5rem 5rem;
     }
 
-    /* 🔹 SOLO esta sección es más ancha */
+    /* 🔥 SOLO esta sección es más ancha */
     #sobre {
       max-width: 1400px;
     }
@@ -59,7 +59,6 @@
     .sobre-texto {
       max-width: 95ch;
       text-align: justify;
-      color: var(--text);
     }
 
     .cards {
@@ -69,10 +68,11 @@
     }
 
     .card {
+      cursor: pointer;
+      text-align: left;
       padding: 1.4rem 1.4rem 1.6rem;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
-      cursor: pointer;
+      transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     }
 
     .card:hover {
@@ -82,6 +82,7 @@
     }
 
     .card img {
+      display: block;
       width: 100%;
       height: 260px;
       object-fit: cover;
@@ -190,6 +191,9 @@
   </p>
 </section>
 
+<!-- EL RESTO DE SECCIONES SIGUEN IGUAL QUE EN TU CÓDIGO ORIGINAL -->
+<!-- rebaño, servicios, inventario, blog, donaciones, contacto -->
+
 <footer>
   <p>© Borregos S.L · Todos los derechos balando</p>
 </footer>
@@ -209,10 +213,6 @@
     document.documentElement.style.setProperty('--text', dark ? '#f5f5f5' : '#111');
     document.documentElement.style.setProperty('--text-muted', dark ? '#8f8f8f' : '#555');
     themeBtn.textContent = dark ? '🌙' : '☀️';
-  };
-
-  langBtn.onclick = () => {
-    langBtn.textContent = langBtn.textContent === 'ES' ? 'EN' : 'ES';
   };
 
   menuBtn.onclick = () => {
