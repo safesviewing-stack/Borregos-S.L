@@ -25,18 +25,11 @@
 
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
       padding: 2.2rem 2rem 1.6rem;
       display: flex;
       justify-content: center;
-      align-items: center;
-      background: linear-gradient(
-        180deg,
-        rgba(11,11,11,0.85),
-        rgba(11,11,11,0.6)
-      );
+      background: linear-gradient(180deg, rgba(11,11,11,0.85), rgba(11,11,11,0.6));
       backdrop-filter: blur(10px);
       z-index: 1100;
     }
@@ -53,25 +46,20 @@
     nav {
       display: flex;
       gap: 2rem;
-      align-items: center;
     }
 
     nav a {
-      color: #ffffff;
+      color: white;
       text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       opacity: 0.75;
-      transition: opacity 0.3s ease;
     }
 
-    nav a:hover {
-      opacity: 1;
-    }
+    nav a:hover { opacity: 1; }
 
-    /* ================= THEME TOGGLE ================= */
+    /* ================= TOGGLES ================= */
 
     #themeToggle {
       position: absolute;
@@ -79,46 +67,36 @@
       width: 44px;
       height: 24px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: rgba(0,0,0,0.04);
-      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.1);
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 0 6px;
+      cursor: pointer;
       font-size: 0.75rem;
     }
 
-    #themeToggle span {
-      transition: opacity 0.3s ease;
-    }
-
-    body.dark #themeToggle {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.25);
-    }
-
-    body.dark .sun { opacity: 0.2; }
-    body:not(.dark) .moon { opacity: 0.2; }
+    body.dark .sun { opacity: .2; }
+    body:not(.dark) .moon { opacity: .2; }
 
     /* ================= HAMBURGER ================= */
 
     #hamburger {
-      display: none;
       position: absolute;
       left: 0;
       width: 28px;
       height: 20px;
-      cursor: pointer;
+      display: none;
       flex-direction: column;
       justify-content: space-between;
+      cursor: pointer;
     }
 
     #hamburger span {
       height: 2px;
       background: white;
       width: 100%;
-      display: block;
     }
 
     /* ================= MOBILE MENU ================= */
@@ -130,7 +108,7 @@
       backdrop-filter: blur(6px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s ease;
+      transition: .4s;
       z-index: 900;
     }
 
@@ -150,18 +128,16 @@
       display: flex;
       flex-direction: column;
       gap: 1.4rem;
-      transition: right 0.4s ease;
+      transition: right .4s ease;
       z-index: 1000;
     }
 
-    #sideMenu.open {
-      right: 0;
-    }
+    #sideMenu.open { right: 0; }
 
     #sideMenu a {
       color: var(--text);
-      text-decoration: none;
       font-size: 1.4rem;
+      text-decoration: none;
     }
 
     /* ================= SECTIONS ================= */
@@ -169,30 +145,33 @@
     section {
       max-width: 1200px;
       margin: auto;
-      padding: 8rem 1.5rem 5rem calc(1.5rem + 0.4rem);
+      padding: 8rem 1.5rem 5rem;
       scroll-margin-top: 120px;
     }
 
-    #inicio {
-      padding-top: 5.5rem;
-    }
+    #inicio { padding-top: 5.5rem; }
 
     .section-title-big {
-      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-size: clamp(2.8rem,5vw,4rem);
       margin-bottom: 2.2rem;
-      margin-left: 0.4rem;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
       gap: 1.2rem;
-      margin-left: 0.4rem;
     }
 
     .card {
       padding: 1.4rem;
       border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .card img {
+      width: 100%;
+      height: 260px;
+      background: #222;
+      object-fit: cover;
     }
 
     footer {
@@ -204,13 +183,8 @@
     /* ================= RESPONSIVE ================= */
 
     @media (max-width: 900px) {
-      nav {
-        display: none;
-      }
-
-      #hamburger {
-        display: flex;
-      }
+      nav { display: none; }
+      #hamburger { display: flex; }
     }
   </style>
 </head>
@@ -219,18 +193,14 @@
 
 <header>
   <div class="header-inner">
-
-    <div id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <div id="hamburger"><span></span><span></span><span></span></div>
 
     <nav>
       <a href="#inicio">Inicio</a>
       <a href="#sobre">Sobre</a>
       <a href="#rebano">Rebaño</a>
       <a href="#servicios">Qué hacemos</a>
+      <a href="#inventario">Inventario</a>
       <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -239,7 +209,6 @@
       <span class="sun">☀</span>
       <span class="moon">☾</span>
     </button>
-
   </div>
 </header>
 
@@ -250,37 +219,55 @@
   <a href="#sobre">Sobre</a>
   <a href="#rebano">Rebaño</a>
   <a href="#servicios">Qué hacemos</a>
+  <a href="#inventario">Inventario</a>
   <a href="#blog">Blog</a>
   <a href="#contacto">Contacto</a>
 </aside>
 
-<section id="inicio" style="min-height:100vh; display:flex; align-items:center;">
+<section id="inicio" style="min-height:100vh;display:flex;align-items:center;">
   <div>
-    <h1 style="font-size:clamp(4.5rem,12vw,9rem); margin:0;">Borregos S.L</h1>
-    <h2 style="margin:0.6rem 0 0 0.4rem; color:var(--text-muted); font-weight:400;">
-      K de queso
-    </h2>
+    <h1 style="font-size:clamp(4.5rem,12vw,9rem);margin:0;">Borregos S.L</h1>
+    <h2 style="color:var(--text-muted);font-weight:400;">K de queso</h2>
   </div>
 </section>
 
 <section id="sobre">
   <h2 class="section-title-big">Sobre nosotros</h2>
+  <p>Somos, con orgullo irónico, un grupo de borregos conscientes...</p>
 </section>
 
 <section id="rebano">
   <h2 class="section-title-big">El rebaño</h2>
+  <div class="cards">
+    <div class="card"><h3>Borrego 1</h3><p>No hacer nada</p></div>
+    <div class="card"><h3>Borrego 2</h3><p>Logística absurda</p></div>
+    <div class="card"><h3>Borrego 3</h3><p>Ideas malas</p></div>
+  </div>
 </section>
 
 <section id="servicios">
   <h2 class="section-title-big">Qué hacemos</h2>
+  <div class="cards">
+    <div class="card"><p>Perdernos en grupo</p></div>
+    <div class="card"><p>No hacer nada con convicción</p></div>
+  </div>
+</section>
+
+<section id="inventario">
+  <h2 class="section-title-big">Inventario callejero</h2>
+  <div class="cards">
+    <div class="card"><img /><p>Objeto random</p></div>
+    <div class="card"><img /><p>Cosa rara</p></div>
+  </div>
 </section>
 
 <section id="blog">
-  <h2 class="section-title-big">Blog</h2>
+  <h2 class="section-title-big">Blog borreguil</h2>
 </section>
 
 <section id="contacto">
   <h2 class="section-title-big">Contacto</h2>
+  <p>Borregoasqueroso@gmail.com</p>
 </section>
 
 <footer>
@@ -290,41 +277,24 @@
 <script>
   const toggle = document.getElementById("themeToggle");
   const body = document.body;
+  toggle.onclick = () => body.classList.toggle("dark");
 
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-    document.documentElement.style.setProperty(
-      "--bg",
-      body.classList.contains("dark") ? "#0b0b0b" : "#ffffff"
-    );
-    document.documentElement.style.setProperty(
-      "--text",
-      body.classList.contains("dark") ? "#f5f5f5" : "#111111"
-    );
-    document.documentElement.style.setProperty(
-      "--text-muted",
-      body.classList.contains("dark") ? "#8f8f8f" : "#555555"
-    );
-  });
-
-  const hamburger = document.getElementById("hamburger");
-  const sideMenu = document.getElementById("sideMenu");
+  const burger = document.getElementById("hamburger");
+  const menu = document.getElementById("sideMenu");
   const overlay = document.getElementById("menuOverlay");
 
-  function closeMenu() {
-    sideMenu.classList.remove("open");
+  const closeMenu = () => {
+    menu.classList.remove("open");
     overlay.classList.remove("show");
-  }
+  };
 
-  hamburger.addEventListener("click", () => {
-    sideMenu.classList.add("open");
+  burger.onclick = () => {
+    menu.classList.add("open");
     overlay.classList.add("show");
-  });
+  };
 
-  overlay.addEventListener("click", closeMenu);
-  sideMenu.querySelectorAll("a").forEach(a =>
-    a.addEventListener("click", closeMenu)
-  );
+  overlay.onclick = closeMenu;
+  menu.querySelectorAll("a").forEach(a => a.onclick = closeMenu);
 </script>
 
 </body>
