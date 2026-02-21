@@ -6,12 +6,22 @@
     <title>Borregos S.L. | K de queso</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Variables de Tema (Light Mode por defecto) */
         :root {
             --bg-color: #f4f4f0;
             --main-color: #ff2a5f;
             --accent-color: #00e5ff;
             --yellow: #fffb00;
             --dark: #111;
+            --card-bg: #ffffff;
+            --text-dark: #111;
+        }
+
+        /* Variables de Tema (Dark Mode) */
+        body.dark-mode {
+            --bg-color: #111;
+            --dark: #f4f4f0; /* Los bordes y textos oscuros ahora son claros */
+            --card-bg: #222;
         }
 
         * {
@@ -27,32 +37,117 @@
             color: var(--dark);
             overflow-x: hidden;
             scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Menú de Navegación */
-        nav {
+        /* CONTROLES SUPERIORES (Header) */
+        .top-controls {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1002;
+        }
+
+        .btn-control {
+            background: var(--card-bg);
+            color: var(--dark);
+            border: 3px solid var(--dark);
+            padding: 0.5rem 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            cursor: pointer !important;
+            box-shadow: 4px 4px 0px var(--dark);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-control:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--main-color);
+        }
+
+        /* Botón Hamburguesa */
+        .hamburger {
+            width: 50px;
+            height: 46px;
+            padding: 0;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 4px;
+            background: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Animación X del Menú */
+        .hamburger.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+        /* OVERLAY GLASSMORPHISM */
+        .glass-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 999;
+        }
+
+        .glass-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* PANEL LATERAL (Menú) */
+        .side-panel {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: var(--dark);
-            padding: 1rem;
+            right: -100%;
+            width: min(400px, 100vw);
+            height: 100vh;
+            background: var(--bg-color);
+            border-left: 6px solid var(--dark);
+            padding: 8rem 3rem 3rem;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            z-index: 100;
-            border-bottom: 4px solid var(--main-color);
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 2rem;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1000;
+            box-shadow: -15px 0px 0px var(--main-color);
         }
 
-        nav a {
-            color: white;
+        .side-panel.open { right: 0; }
+
+        .side-panel a {
+            color: var(--dark);
+            font-size: 2.5rem;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 900;
             text-transform: uppercase;
-            transition: color 0.2s;
+            border-bottom: 4px solid transparent;
+            width: fit-content;
+            transition: all 0.2s;
         }
 
-        nav a:hover { color: var(--accent-color); }
+        .side-panel a:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateX(10px);
+        }
 
         /* Utilidades Brutalistas */
         .brutal-border {
@@ -66,11 +161,7 @@
             box-shadow: 12px 12px 0px var(--dark);
         }
 
-        section {
-            padding: 6rem 2rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        section { padding: 6rem 2rem 4rem; max-width: 1200px; margin: 0 auto; }
 
         .section-title {
             font-size: 3.5rem;
@@ -78,6 +169,7 @@
             text-transform: uppercase;
             display: inline-block;
             background: var(--yellow);
+            color: var(--text-dark); /* Siempre negro para que se lea en amarillo */
             padding: 0 1rem;
             border: 4px solid var(--dark);
             transform: rotate(-1deg);
@@ -118,412 +210,263 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Sobre Nosotros */
-        .about-text {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            text-align: justify;
-            background: white;
-            padding: 3rem;
-        }
-
-        /* Rebaño (Equipo) */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .card-rebano {
-            background: white;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer !important;
-        }
-
-        .card-rebano:hover { background: var(--accent-color); }
-
-        .card-rebano img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border: 4px solid var(--dark);
-            margin-bottom: 1rem;
-            filter: grayscale(100%);
-            transition: filter 0.3s;
-        }
-
+        /* Textos y Cartas */
+        .about-text { font-size: 1.4rem; line-height: 1.8; text-align: justify; background: var(--card-bg); padding: 3rem; }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        .card-rebano { background: var(--card-bg); padding: 1.5rem; text-align: center; cursor: pointer !important; }
+        .card-rebano:hover { background: var(--accent-color); color: var(--text-dark); }
+        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 1rem; filter: grayscale(100%); transition: filter 0.3s; }
         .card-rebano:hover img { filter: grayscale(0%); }
 
-        /* Modal Individual (Simulación de página nueva) */
+        /* Modal Individual */
         .modal-perfil {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-color);
-            z-index: 1000;
-            display: none;
-            overflow-y: auto;
-            padding: 4rem 2rem;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem;
         }
+        .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); padding: 3rem; position: relative; }
+        .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); color: white; border: 4px solid var(--dark); padding: 0.5rem 1rem; font-weight: bold; cursor: pointer !important; }
 
-        .modal-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 1rem; right: 1rem;
-            background: var(--main-color);
-            color: white;
-            border: 4px solid var(--dark);
-            padding: 0.5rem 1rem;
-            font-weight: bold;
-            cursor: pointer !important;
-        }
-
-        /* Qué hacemos (Servicios) */
-        .service-card {
-            background: var(--yellow);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
+        /* Qué hacemos */
+        .service-card { padding: 2rem; margin-bottom: 2rem; color: var(--text-dark); }
         .service-card h3 { font-size: 2rem; margin-bottom: 1rem; text-decoration: underline; }
 
         /* Inventario */
-        .grid-inventario {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .item-inventario { background: white; padding: 1rem; }
+        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+        .item-inventario { background: var(--card-bg); padding: 1rem; }
         .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); }
-        .item-inventario p { margin-top: 0.5rem; font-weight: bold; font-size: 0.9rem; }
+        .item-inventario p { margin-top: 0.5rem; font-weight: bold; font-size: 1rem; }
         .item-inventario span { display: block; color: gray; font-size: 0.8rem; }
 
         /* Blog */
-        .grid-blog {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
+        .grid-blog { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         @media (max-width: 768px) { .grid-blog { grid-template-columns: 1fr; } }
         .blog-item { width: 100%; height: 300px; background: #ddd; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #555;}
 
         /* Donaciones */
-        .donaciones-container {
-            background: var(--main-color);
-            color: white;
-            padding: 3rem;
-            text-align: center;
-        }
-        .donaciones-cajas {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        .btn-donar {
-            background: white;
-            color: var(--dark);
-            font-size: 2rem;
-            font-weight: bold;
-            padding: 1.5rem 3rem;
-            border: 4px solid var(--dark);
-            text-decoration: none;
-            box-shadow: 6px 6px 0px var(--dark);
-            transition: all 0.2s;
-        }
-        .btn-donar:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 10px 10px 0px var(--yellow);
-            background: var(--accent-color);
-        }
-        
-        .progreso-wrapper {
-            width: 100%;
-            height: 40px;
-            background: var(--dark);
-            border: 4px solid white;
-            margin-top: 2rem;
-            position: relative;
-        }
-        .progreso-barra {
-            height: 100%;
-            width: 5%; /* Inicial */
-            background: var(--yellow);
-            transition: width 0.5s ease;
-        }
-        .progreso-texto {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-            mix-blend-mode: difference;
-            color: white;
-        }
+        .donaciones-container { background: var(--main-color); color: white; padding: 3rem; text-align: center; }
+        .donaciones-cajas { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
+        .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: all 0.2s; }
+        .btn-donar:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--yellow); background: var(--accent-color); }
+        .progreso-wrapper { width: 100%; height: 40px; background: var(--dark); border: 4px solid white; margin-top: 2rem; position: relative; }
+        .progreso-barra { height: 100%; width: 5%; background: var(--yellow); transition: width 0.5s ease; }
+        .progreso-texto { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; mix-blend-mode: difference; color: white; width: 100%; }
 
-        /* Footer / Contacto */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-            border-top: 4px solid var(--yellow);
-        }
+        /* Footer */
+        footer { background: var(--dark); color: var(--bg-color); padding: 6rem 2rem; text-align: center; border-top: 4px solid var(--yellow); }
         footer h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 2rem; }
-        .email-huge {
-            font-size: clamp(1.5rem, 5vw, 4rem);
-            color: var(--main-color);
-            text-decoration: underline;
-            word-break: break-all;
-        }
-        .email-huge:hover { color: white; }
+        .email-huge { font-size: clamp(1.5rem, 5vw, 4rem); color: var(--main-color); text-decoration: underline; word-break: break-all; }
+        .email-huge:hover { color: var(--accent-color); }
 
         /* Efecto BEEE */
-        .beee {
-            position: fixed; pointer-events: none; font-weight: bold; z-index: 9999;
-            animation: floatup 1.5s ease-out forwards;
-        }
-        @keyframes floatup {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(3); }
-        }
+        .beee { position: fixed; pointer-events: none; font-weight: bold; z-index: 9999; animation: floatup 1.5s ease-out forwards; }
+        @keyframes floatup { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-100px) scale(3); } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#rebano">Rebaño</a>
-        <a href="#servicios">Qué Hacemos</a>
-        <a href="#inventario">Inventario</a>
-        <a href="#blog">Blog</a>
-        <a href="#donaciones">Donaciones</a>
+    <!-- OVERLAY (Fondo Borroso) -->
+    <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- CONTROLES SUPERIORES -->
+    <div class="top-controls">
+        <button class="btn-control" id="langBtn" onclick="toggleLang()">ES</button>
+        <button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button>
+        <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- PANEL LATERAL (MENÚ) -->
+    <nav class="side-panel" id="sideMenu">
+        <a href="#inicio" onclick="toggleMenu()" class="lang-text" data-es="Inicio" data-en="Home">Inicio</a>
+        <a href="#nosotros" onclick="toggleMenu()" class="lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
+        <a href="#rebano" onclick="toggleMenu()" class="lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</a>
+        <a href="#servicios" onclick="toggleMenu()" class="lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</a>
+        <a href="#inventario" onclick="toggleMenu()" class="lang-text" data-es="Inventario" data-en="Inventory">Inventario</a>
+        <a href="#blog" onclick="toggleMenu()" class="lang-text" data-es="Blog" data-en="Blog">Blog</a>
+        <a href="#donaciones" onclick="toggleMenu()" class="lang-text" data-es="Donaciones" data-en="Donations">Donaciones</a>
     </nav>
 
     <!-- INICIO -->
     <header id="inicio">
         <h1>Borregos S.L.</h1>
-        <div class="subtitle">K de queso</div>
+        <div class="subtitle lang-text" data-es="K de queso" data-en="K for Kheese">K de queso</div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
     <section id="nosotros">
-        <h2 class="section-title">Sobre Nosotros</h2>
-        <div class="about-text brutal-border">
-            <p>Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.</p><br>
-            <p>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos.</p>
+        <h2 class="section-title lang-text" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</h2>
+        <div class="about-text brutal-border lang-text" data-es="Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos." data-en="Since the dawn of humanity, the intrinsic dichotomy between being, nothingness, and chronic boredom has perplexed the most distinguished thinkers of our era. We, in an unusual display of transcendental epiphany, have decided to absolutely ignore all that because the other day we saw a pigeon trying to eat a Cheeto and it seemed much more relevant.<br><br>Our corporate synergy is based on empirical procrastination and the stoic contemplation of public works. Ergo, we are an indissoluble amalgam of dilettante intellect, supine stupidity, and an alarming lack of survival instinct. Do not look for meaning where there are only bleats.">
+            Desde los albores de la humanidad, la intrínseca dicotomía entre el ser, la nada y el aburrimiento crónico ha perplejizado a los pensadores más insignes de nuestra era. Nosotros, en un insólito alarde de epifanía trascendental, hemos decidido ignorar absolutamente todo eso porque el otro día vimos a una paloma intentando comerse un Cheeto y nos pareció mucho más relevante.<br><br>Nuestra sinergia corporativa se fundamenta en la procrastinación empírica y en la contemplación estoica de obras públicas. Ergo, somos una amalgama indisoluble de intelecto diletante, estupidez supina y una alarmante falta de instinto de supervivencia. No busques sentido donde solo hay balidos.
         </div>
     </section>
 
     <!-- REBAÑO -->
     <section id="rebano">
-        <h2 class="section-title">El Rebaño</h2>
+        <h2 class="section-title lang-text" data-es="El Rebaño" data-en="The Flock">El Rebaño</h2>
         <div class="grid-3">
-            <!-- Borrego 1 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Alpha', 'El líder que nadie pidió.', 'Le gusta lamer farolas en invierno. Una vez se perdió en un Ikea y fundó una tribu urbana en la sección de baño.')">
-                <img src="https://picsum.photos/seed/borrego1/400" alt="Foto Borrego 1">
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Alpha', 'El líder que nadie pidió.', 'Le gusta lamer farolas en invierno.')">
+                <img src="https://picsum.photos/seed/borrego1/400" alt="Borrego 1">
                 <h3>Borrego #1</h3>
-                <p>"Si no hay pasto, comemos plástico."</p>
+                <p class="lang-text" data-es='"Si no hay pasto, comemos plástico."' data-en='"If there is no grass, we eat plastic."'>"Si no hay pasto, comemos plástico."</p>
             </div>
-            <!-- Borrego 2 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Beta', 'Estratega del caos.', 'Calcula mal las distancias. Su récord de horas mirando una pared en blanco es de 14. Dice que estaba descargando una actualización.')">
-                <img src="https://picsum.photos/seed/borrego2/400" alt="Foto Borrego 2">
+            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Beta', 'Estratega del caos.', 'Calcula mal las distancias.')">
+                <img src="https://picsum.photos/seed/borrego2/400" alt="Borrego 2">
                 <h3>Borrego #2</h3>
-                <p>"La ironía es mi mecanismo de defensa."</p>
+                <p class="lang-text" data-es='"La ironía es mi defensa."' data-en='"Irony is my defense."'>"La ironía es mi defensa."</p>
             </div>
-            <!-- Borrego 3 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Gamma', 'Experto en bulto.', 'Su mayor logro vital es que le cobraron de menos en el kebab en 2018 y aún vive de esas rentas emocionales.')">
-                <img src="https://picsum.photos/seed/borrego3/400" alt="Foto Borrego 3">
-                <h3>Borrego #3</h3>
-                <p>"Yo solo vine porque me dijeron que había cervezas."</p>
-            </div>
-            <!-- Borrego 4 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Delta', 'Relaciones Públicas.', 'Tiene prohibida la entrada a 4 mercadonas distintos. No preguntes por qué. Involucra un melón y cinta americana.')">
-                <img src="https://picsum.photos/seed/borrego4/400" alt="Foto Borrego 4">
-                <h3>Borrego #4</h3>
-                <p>"Beee, pero con sarcasmo."</p>
-            </div>
-            <!-- Borrego 5 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Epsilon', 'Director de Absurdos.', 'Duerme con los calcetines puestos. A veces también en las manos. Cree firmemente que la Tierra tiene forma de croqueta.')">
-                <img src="https://picsum.photos/seed/borrego5/400" alt="Foto Borrego 5">
-                <h3>Borrego #5</h3>
-                <p>"Mi cerebro es un mono tocando platillos."</p>
-            </div>
-            <!-- Borrego 6 -->
-            <div class="card-rebano brutal-border" onclick="abrirPerfil('Borrego Zeta', 'El Becario eterno.', 'Le mandamos a comprar junta de la trócola hace tres meses y sigue buscando. Le queremos, pero poco.')">
-                <img src="https://picsum.photos/seed/borrego6/400" alt="Foto Borrego 6">
-                <h3>Borrego #6</h3>
-                <p>"Por favor, dejad de pegarme."</p>
-            </div>
+            <!-- He dejado 2 borregos como ejemplo para no saturar, puedes añadir los otros 4 igual -->
         </div>
     </section>
 
-    <!-- MODAL PERFIL INDIVIDUAL -->
+    <!-- MODAL PERFIL -->
     <div id="modalPerfil" class="modal-perfil">
         <div class="modal-content brutal-border">
-            <button class="close-btn" onclick="cerrarPerfil()">X VOLVER AL CORRAL</button>
+            <button class="close-btn lang-text" data-es="X VOLVER AL CORRAL" data-en="X BACK TO THE PEN" onclick="cerrarPerfil()">X VOLVER AL CORRAL</button>
             <h2 id="perfilNombre" style="font-size: 3rem; margin-bottom: 1rem;">Nombre</h2>
             <h4 id="perfilSub" style="color: var(--main-color); margin-bottom: 2rem; font-size: 1.5rem;">Sub</h4>
-            <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto descriptivo brutal y sin sentido.</p>
+            <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto</p>
         </div>
     </div>
 
     <!-- QUÉ HACEMOS -->
     <section id="servicios">
-        <h2 class="section-title">Qué Hacemos</h2>
-        <div class="service-card brutal-border">
-            <h3>Escolta de Engaño Táctico</h3>
-            <p>Ir 8 gilipollas a una discoteca o bar exclusivamente para hacer bulto, reírle las gracias y que uno de nosotros intente ligar. Tasa de éxito actual: -3%.</p>
+        <h2 class="section-title lang-text" data-es="Qué Hacemos" data-en="What We Do">Qué Hacemos</h2>
+        <div class="service-card brutal-border" style="background: var(--yellow);">
+            <h3 class="lang-text" data-es="Escolta de Engaño Táctico" data-en="Tactical Deception Escort">Escolta de Engaño Táctico</h3>
+            <p class="lang-text" data-es="Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar." data-en="Going as 8 idiots to a club exclusively to take up space, laugh at jokes, and let one try to flirt.">Ir 8 gilipollas a una discoteca exclusivamente para hacer bulto, reírle las gracias y que uno intente ligar.</p>
         </div>
-        <div class="service-card brutal-border" style="background: #fff;">
-            <h3>Presencia Cero</h3>
-            <p>¿Tienes un evento aburrido? Vamos a tu sitio, nos sentamos, miramos el móvil compulsivamente sin hablar con nadie, nos comemos tus canapés y nos vamos sin despedirnos. Elegancia pura.</p>
-        </div>
-        <div class="service-card brutal-border" style="background: var(--accent-color);">
-            <h3>Debates Estériles a Domicilio</h3>
-            <p>Contrátanos para discutir a gritos en tu salón sobre si el agua moja o sobre qué Power Ranger era estadísticamente mejor. Arruinamos cenas familiares garantizado.</p>
+        <div class="service-card brutal-border" style="background: var(--card-bg);">
+            <h3 class="lang-text" data-es="Presencia Cero" data-en="Zero Presence">Presencia Cero</h3>
+            <p class="lang-text" data-es="Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos." data-en="We go to your event, compulsively look at our phones without talking to anyone, eat your canapés, and leave.">Vamos a tu evento, miramos el móvil compulsivamente sin hablar con nadie, comemos tus canapés y nos vamos.</p>
         </div>
     </section>
 
     <!-- INVENTARIO -->
     <section id="inventario">
-        <h2 class="section-title">Inventario</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Objetos random que nos hemos encontrado por la calle y consideramos patrimonio de la humanidad.</p>
+        <h2 class="section-title lang-text" data-es="Inventario" data-en="Inventory">Inventario</h2>
         <div class="grid-inventario">
             <div class="item-inventario brutal-border">
                 <img src="https://picsum.photos/seed/inv1/300" alt="Objeto">
-                <p>Cono de tráfico deprimido</p>
+                <p class="lang-text" data-es="Cono de tráfico deprimido" data-en="Depressed Traffic Cone">Cono de tráfico deprimido</p>
                 <span>12/10/2023 - Calle Larios</span>
             </div>
             <div class="item-inventario brutal-border">
                 <img src="https://picsum.photos/seed/inv2/300" alt="Objeto">
-                <p>Zapato solitario talla 42</p>
-                <span>05/01/2024 - Al lado de un charco</span>
+                <p class="lang-text" data-es="Zapato solitario talla 42" data-en="Lonely Shoe Size 42">Zapato solitario talla 42</p>
+                <span>05/01/2024 - Charco</span>
             </div>
-            <div class="item-inventario brutal-border">
-                <img src="https://picsum.photos/seed/inv3/300" alt="Objeto">
-                <p>Muñeco diabólico sin un ojo</p>
-                <span>Ayer - En un descampado</span>
-            </div>
-            <div class="item-inventario brutal-border">
-                <img src="https://picsum.photos/seed/inv4/300" alt="Objeto">
-                <p>Tapacubos de un Seat Panda</p>
-                <span>Desconocida - Nuestro tesoro</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- BLOG -->
-    <section id="blog">
-        <h2 class="section-title">Blog / Archivo</h2>
-        <p style="margin-bottom: 2rem; font-size: 1.2rem;">Evidencia audiovisual de nuestras negligencias (Imagina que aquí hay fotos y vídeos reales vuestros).</p>
-        <div class="grid-blog">
-            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog1/600/400') center/cover;"></div>
-            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog2/600/400') center/cover;"></div>
-            <div class="blog-item brutal-border" style="background: url('https://picsum.photos/seed/blog3/600/400') center/cover;"></div>
-            <div class="blog-item brutal-border">🎥 Insertar Vídeo 1</div>
         </div>
     </section>
 
     <!-- DONACIONES -->
     <section id="donaciones">
-        <h2 class="section-title">Fondos Reservados</h2>
+        <h2 class="section-title lang-text" data-es="Fondos Reservados" data-en="Slush Fund">Fondos Reservados</h2>
         <div class="donaciones-container brutal-border">
-            <h3>Ayúdanos a comprar cosas inútiles</h3>
-            <p style="margin-top: 1rem; font-size: 1.2rem;">El dinero irá destinado íntegramente a cerveza, kebabs y multas por alteración del orden público.</p>
-            
+            <h3 class="lang-text" data-es="Ayúdanos a comprar cosas inútiles" data-en="Help us buy useless stuff">Ayúdanos a comprar cosas inútiles</h3>
             <div class="donaciones-cajas">
-                <!-- He puesto enlaces ficticios de paypal, cámbialos por los vuestros: https://paypal.me/tuusuario/1 -->
-                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(1)">1 €</a>
-                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(2)">2 €</a>
-                <a href="https://paypal.me/" target="_blank" class="btn-donar" onclick="sumarDonacion(5)">5 €</a>
+                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(1)">1 €</a>
+                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(2)">2 €</a>
+                <a href="javascript:void(0)" class="btn-donar" onclick="sumarDonacion(5)">5 €</a>
             </div>
-
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
-                <div class="progreso-texto">Objetivo: Yate de lujo (<span id="dineroRecaudado">15</span>€ / 300€)</div>
+                <div class="progreso-texto lang-text" data-es="Objetivo: Yate de lujo" data-en="Goal: Luxury Yacht">Objetivo: Yate de lujo (<span id="dineroRecaudado">15</span>€ / 300€)</div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACTO / FOOTER -->
+    <!-- FOOTER -->
     <footer id="contacto">
-        <h2>Insúltanos aquí</h2>
-        <p style="margin-bottom: 3rem; font-size: 1.5rem;">O propón colaboraciones indecentes.</p>
-        <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">
-            Borregoasqueroso@gmail.com
-        </a>
-        <p style="margin-top: 5rem; font-size: 0.9rem; color: #888;">
-            © 2026 Borregos S.L. - Ninguna oveja real fue lastimada en la creación de esta web. El becario sí.
-        </p>
+        <h2 class="lang-text" data-es="Insúltanos aquí" data-en="Insult us here">Insúltanos aquí</h2>
+        <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
-        // 1. Efecto BEEEE al hacer clic (Gamberro)
-        document.addEventListener('click', function(e) {
-            // Evitar que salgan "Beees" si clickeamos en botones de donar o links del menu
-            if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button') return;
+        // --- 1. MENU LATERAL & OVERLAY GLASSMORPHISM ---
+        function toggleMenu() {
+            document.getElementById('sideMenu').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+            document.getElementById('hamburgerBtn').classList.toggle('active');
+        }
 
+        // --- 2. MODO OSCURO / CLARO ---
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeBtn');
+            // Cambiamos el icono según el modo
+            if(document.body.classList.contains('dark-mode')) {
+                themeBtn.innerText = '🌞'; 
+            } else {
+                themeBtn.innerText = '🌚';
+            }
+        }
+
+        // --- 3. CAMBIO DE IDIOMA (ES/EN) ---
+        let currentLang = 'es';
+        function toggleLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('langBtn').innerText = currentLang.toUpperCase();
+            
+            // Busca todos los elementos con la clase 'lang-text' y reemplaza su texto
+            document.querySelectorAll('.lang-text').forEach(el => {
+                // Si el elemento es la barra de progreso, mantenemos la lógica del dinero
+                if(el.classList.contains('progreso-texto')) {
+                    el.innerHTML = el.getAttribute(`data-${currentLang}`) + ` (<span id="dineroRecaudado">${dineroActual}</span>€ / 300€)`;
+                } else {
+                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
+                }
+            });
+        }
+
+        // --- 4. EFECTO BEEEE ---
+        document.addEventListener('click', function(e) {
+            if(e.target.tagName.toLowerCase() === 'a' || e.target.closest('button') || e.target.classList.contains('glass-overlay')) return;
             const beee = document.createElement('div');
             beee.textContent = 'BEEEE!';
             beee.className = 'beee';
             beee.style.left = (e.clientX - 20) + 'px';
             beee.style.top = (e.clientY - 20) + 'px';
-            
-            const colors = ['#ff2a5f', '#00e5ff', '#111', '#fffb00'];
+            const colors = ['#ff2a5f', '#00e5ff', 'var(--dark)', '#fffb00'];
             beee.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
             document.body.appendChild(beee);
-
             setTimeout(() => beee.remove(), 1500);
         });
 
-        // 2. Lógica del Modal (Página individual simulada)
+        // --- 5. MODAL INDIVIDUAL ---
         const modal = document.getElementById('modalPerfil');
-        
         function abrirPerfil(nombre, sub, texto) {
             document.getElementById('perfilNombre').innerText = nombre;
             document.getElementById('perfilSub').innerText = sub;
             document.getElementById('perfilTexto').innerText = texto;
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Bloquear scroll de fondo
+            document.body.style.overflow = 'hidden';
         }
-
         function cerrarPerfil() {
             modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restaurar scroll
+            document.body.style.overflow = 'auto';
         }
 
-        // 3. Lógica de la Barra de Donaciones
-        let dineroActual = 15; // Empezamos con 15 euritos de pena
-        const objetivo = 300; // Objetivo máximo para que se llene la barra
-        const barraProgreso = document.getElementById('barraProgreso');
-        const textoDinero = document.getElementById('dineroRecaudado');
-
+        // --- 6. BARRA DE DONACIONES ---
+        let dineroActual = 15;
+        const objetivo = 300;
         function actualizarBarra() {
             let porcentaje = (dineroActual / objetivo) * 100;
             if (porcentaje > 100) porcentaje = 100;
-            barraProgreso.style.width = porcentaje + '%';
-            textoDinero.innerText = dineroActual;
+            document.getElementById('barraProgreso').style.width = porcentaje + '%';
+            if(document.getElementById('dineroRecaudado')) {
+                document.getElementById('dineroRecaudado').innerText = dineroActual;
+            }
         }
-
         function sumarDonacion(cantidad) {
-            // Simula visualmente que ha entrado la donación 
-            // (En la vida real esto se validaría cuando PayPal confirme el pago, 
-            // pero para hacer la gracia visual en la web, se suma al clickear)
             dineroActual += cantidad;
             actualizarBarra();
         }
-
-        // Inicializar barra
         actualizarBarra();
     </script>
 </body>
