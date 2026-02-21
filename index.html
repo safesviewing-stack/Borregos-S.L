@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
+/* =====================
+   VARIABLES
+===================== */
 :root{
   --bg:#f4f4f0;
   --dark:#111;
@@ -25,7 +28,9 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== HEADER ===== */
+/* =====================
+   HEADER
+===================== */
 header{
   min-height:100vh;
   display:flex;
@@ -59,7 +64,9 @@ h1{
   color:var(--main);
 }
 
-/* ===== MENU ===== */
+/* =====================
+   MENU
+===================== */
 .top-controls{
   position:fixed;
   top:1.5rem;
@@ -85,7 +92,7 @@ h1{
   position:fixed;
   top:0;
   right:-100%;
-  width:300px;
+  width:320px;
   height:100vh;
   background:var(--bg);
   padding:6rem 2rem;
@@ -96,7 +103,7 @@ h1{
 .side-menu a{
   display:block;
   margin-bottom:1.5rem;
-  font-size:1.5rem;
+  font-size:1.6rem;
   font-weight:900;
   text-decoration:none;
   color:var(--dark);
@@ -120,7 +127,9 @@ h1{
   pointer-events:auto;
 }
 
-/* ===== SECCIONES ===== */
+/* =====================
+   SECCIONES
+===================== */
 section{
   max-width:1200px;
   margin:auto;
@@ -134,24 +143,27 @@ section{
   padding:.3rem 1rem;
   border:4px solid var(--dark);
   transform:rotate(-2deg);
-  margin-bottom:2rem;
+  margin-bottom:3rem;
 }
 
 .card{
   background:var(--card);
-  padding:2.5rem;
+  padding:3rem;
   border:4px solid var(--dark);
   box-shadow:8px 8px 0 var(--dark);
+  line-height:1.65;
+  font-size:1.05rem;
 }
 
-/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:2rem;
 }
 
-/* ===== BLOG ===== */
+/* =====================
+   BLOG
+===================== */
 .carousel{
   display:flex;
   gap:1.5rem;
@@ -159,23 +171,28 @@ section{
 }
 
 .carousel div{
-  min-width:300px;
-  height:200px;
+  min-width:320px;
+  height:220px;
   background:#ddd;
   border:4px solid var(--dark);
 }
 
-/* ===== DONACIONES ===== */
+/* =====================
+   DONACIONES
+===================== */
 .donaciones button{
-  font-size:1.5rem;
-  padding:1rem 2rem;
+  font-size:1.6rem;
+  padding:1rem 2.5rem;
   margin:.5rem;
   border:4px solid var(--dark);
   background:var(--yellow);
+  font-weight:900;
   cursor:pointer;
 }
 
-/* ===== FOOTER ===== */
+/* =====================
+   FOOTER
+===================== */
 footer{
   background:var(--dark);
   color:var(--bg);
@@ -189,7 +206,9 @@ footer a{
   text-decoration:underline;
 }
 
-/* ===== QUESO ===== */
+/* =====================
+   QUESO
+===================== */
 .drop-fx{
   position:fixed;
   top:-10vh;
@@ -249,44 +268,71 @@ footer a{
 <section id="nosotros">
   <h2 class="section-title">Sobre Nosotros</h2>
   <div class="card">
-    Somos un grupo de gilipollas organizados en Fallas. Cada uno hace algo,
-    pero nadie hace nada. Nuestro objetivo vital es el 33% y zona Gemelos.
-    El borreguismo no se explica, se sufre.
+    Desde los albores de la humanidad, la dicotomía entre el ser, la nada y el
+    aburrimiento crónico ha obsesionado a filósofos, sociólogos y personas con
+    demasiado tiempo libre. Nosotros decidimos ignorarlo todo porque una vez
+    vimos a una paloma intentar comerse un Cheeto y nos pareció un acontecimiento
+    mucho más revelador.
+
+    <br><br>
+
+    Borregos S.L. nace en el entorno más valenciano posible: las Fallas. Entre
+    pólvora, ruido y decisiones manifiestamente erróneas se consolidó este grupo
+    de individuos funcionalmente inútiles, unidos más por la inercia social que
+    por cualquier tipo de talento destacable.
+
+    <br><br>
+
+    Como todo grupo de hombres, presentamos una amplia variedad de edades y
+    personalidades. En teoría, cada uno cumple una función. En la práctica, nadie
+    hace nada de forma clara, salvo dos o tres que lo intentan con una mezcla
+    entrañable de voluntad y fracaso. El resto acompaña, opina sin datos y
+    mantiene viva la llama del caos organizado.
+
+    <br><br>
+
+    Nuestro objetivo vital es tan sencillo como ambicioso: obtener el carnet del
+    33% y acceder a zona Gemelos con legitimidad administrativa. No por necesidad,
+    sino por coherencia filosófica. El borreguismo no es una institución ni un
+    movimiento; es una manera de estar en el mundo y pensar ligeramente peor que
+    la media.
   </div>
 </section>
 
 <section id="rebano">
   <h2 class="section-title">El Rebaño</h2>
   <div class="grid">
-    <div class="card">Borrego 1</div>
-    <div class="card">Borrego 2</div>
-    <div class="card">Borrego 3</div>
-    <div class="card">Borrego 4</div>
-    <div class="card">Borrego 5</div>
-    <div class="card">Borrego 6</div>
+    <div class="card">Borrego #1 — Liderazgo no solicitado</div>
+    <div class="card">Borrego #2 — Estratega del caos</div>
+    <div class="card">Borrego #3 — Bulto profesional</div>
+    <div class="card">Borrego #4 — Departamento de excusas</div>
+    <div class="card">Borrego #5 — Visionario incomprendido</div>
+    <div class="card">Borrego #6 — Control emocional nulo</div>
   </div>
 </section>
 
 <section id="servicios">
   <h2 class="section-title">Qué Hacemos</h2>
   <div class="grid">
-    <div class="card">Ir a sitios a no hacer nada</div>
-    <div class="card">Ir 8 a una disco para que ligue uno</div>
-    <div class="card">Recoger objetos random</div>
+    <div class="card">Ir a sitios a no hacer absolutamente nada.</div>
+    <div class="card">Ir ocho a una discoteca para que ligue uno.</div>
+    <div class="card">Recoger objetos random de dudosa legalidad.</div>
+    <div class="card">Turismo urbano sin destino ni sentido.</div>
   </div>
 </section>
 
 <section id="inventario">
   <h2 class="section-title">Inventario</h2>
   <div class="grid">
-    <div class="card">Cono robado</div>
-    <div class="card">Carrito</div>
-    <div class="card">Objeto ilegal</div>
+    <div class="card">Borregueta (vehículo ceremonial)</div>
+    <div class="card">Carrito de supermercado</div>
+    <div class="card">Objeto ilegal no documentado</div>
   </div>
 </section>
 
 <section id="blog">
   <h2 class="section-title">Blog</h2>
+  <p>Archivo visual de nuestras experiencias colectivas. El orden es cronológico solo en apariencia.</p>
   <div class="carousel">
     <div></div><div></div><div></div>
   </div>
@@ -294,6 +340,7 @@ footer a{
 
 <section id="donaciones">
   <h2 class="section-title">Donaciones</h2>
+  <p>Ayúdanos a financiar decisiones malas.</p>
   <div class="donaciones">
     <button>1€</button>
     <button>2€</button>
@@ -312,7 +359,7 @@ function toggleMenu(){
   document.getElementById('overlay').classList.toggle('active');
 }
 
-/* 🧀 QUESO */
+/* QUESO */
 let quesoInterval=null;
 const quesoBtn=document.getElementById('quesoBtn');
 
