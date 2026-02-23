@@ -383,8 +383,7 @@ header {
     <header id="inicio">
         <div class="spinning-badge">100% OVEJA REAL</div>
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
-        <!-- HE CAMBIADO ESTO: EL ANTIGUO "SUBTITLE" ES AHORA UN BOTÓN UTIL, LLAMATIVO Y BRUTALISTA -->
-        <button class="brutal-border reveal reveal-up" id="quesoBtn" style="margin-top: 2rem; background: var(--yellow); color: var(--text-dark); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 900; padding: 1rem 2rem; font-family: 'Space Grotesk', sans-serif; cursor: pointer; text-transform: uppercase;">🧀 K DE QUESO 🧀</button>
+        <div class="subtitle reveal reveal-up" id="quesoBtn" title="¡Púlsame para soltar queso!">K de queso 🧀</div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
@@ -626,31 +625,30 @@ header {
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
         // EASTER EGG (Queso PRO que SÍ funciona)
-document.getElementById('quesoBtn').addEventListener('click', (e) => {
+        document.getElementById('quesoBtn').addEventListener('click', (e) => {
+            e.stopPropagation(); // 👈 MUY IMPORTANTE
 
-    e.stopPropagation(); // 👈 MUY IMPORTANTE
+            const btn = e.currentTarget;
 
-    const btn = e.currentTarget;
+            // Reset animación (por si se pulsa rápido)
+            btn.classList.remove('queso-active');
+            void btn.offsetWidth; // fuerza reflow
+            btn.classList.add('queso-active');
 
-    // Reset animación (por si se pulsa rápido)
-    btn.classList.remove('queso-active');
-    void btn.offsetWidth; // fuerza reflow
-    btn.classList.add('queso-active');
-
-    // Lluvia de queso clara y visible
-    for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-            const q = document.createElement('div');
-            q.textContent = '🧀';
-            q.className = 'drop-fx';
-            q.style.left = Math.random() * 100 + 'vw';
-            q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
-            document.body.appendChild(q);
-            setTimeout(() => q.remove(), 3500);
-        }, i * 60);
-    }
-
-});
+            // Lluvia de queso clara y visible
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const q = document.createElement('div');
+                    q.textContent = '🧀';
+                    q.className = 'drop-fx';
+                    q.style.left = Math.random() * 100 + 'vw';
+                    q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
+                    document.body.appendChild(q);
+                    setTimeout(() => q.remove(), 3500);
+                }, i * 60);
+            }
+        });
+        
         // 7. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
             if(btn.classList.contains('exploded')) return; 
@@ -696,16 +694,18 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
             }, 2000);
         }
 
-
-
         function scrollCarousel(direction) {
-  const carousel = document.getElementById('blogCarousel');
-  const scrollAmount = carousel.offsetWidth * 0.9;
-  carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-}
+          const carousel = document.getElementById('blogCarousel');
+          const scrollAmount = carousel.offsetWidth * 0.9;
+          carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
 
-
-window.addEventListener('pointerdown', function (e) {
+        window.addEventListener('pointerdown', function (e) {
+            
+            // ¡Se añade el sonido que solicitaste clonando el original para poder hacer varios clicks rápidos!
+            const sound = sheepAudio.cloneNode();
+            sound.volume = 1.0;
+            sound.play().catch(() => {});
 
             const beee = document.createElement('div');
             beee.className = 'beee';
