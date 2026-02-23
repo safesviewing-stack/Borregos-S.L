@@ -668,13 +668,13 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
 }
 
 
-        document.addEventListener('click', function (e) {
+window.addEventListener('pointerdown', function (e) {
 
     const beeeText = document.createElement('div');
     beeeText.textContent = 'BEEEEEE!';
     beeeText.className = 'beee-text';
 
-    // POSICIÓN EXACTA DEL CURSOR
+    // posición EXACTA del puntero
     beeeText.style.left = e.clientX + 'px';
     beeeText.style.top  = e.clientY + 'px';
 
@@ -684,7 +684,8 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
     document.body.appendChild(beeeText);
 
     setTimeout(() => beeeText.remove(), 1000);
-});
+
+}, true); // ← CAPTURA GLOBAL (CLAVE)
     </script>
 </body>
 </html>
