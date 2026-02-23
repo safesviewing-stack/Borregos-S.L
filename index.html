@@ -317,6 +317,41 @@ header {
         .pablo-card img {
     object-position: center 0%; /* ajusta: 0%–15% */
 }
+
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f4f4f4;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* BEEEEEE */
+        .beee {
+            position: fixed;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 999999;
+            text-shadow: 3px 3px 0 #000;
+            animation: beeeAnim 1s ease-out forwards;
+        }
+
+        @keyframes beeeAnim {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -120px) scale(1.4);
+            }
     </style>
 </head>
 <body>
@@ -673,22 +708,23 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
 
 window.addEventListener('pointerdown', function (e) {
 
-    const beeeText = document.createElement('div');
-    beeeText.textContent = 'BEEEEEE!';
-    beeeText.className = 'beee-text';
+            const beee = document.createElement('div');
+            beee.className = 'beee';
+            beee.textContent = 'BEEEEEE';
 
-    // posición EXACTA del puntero
-    beeeText.style.left = e.clientX + 'px';
-    beeeText.style.top  = e.clientY + 'px';
+            beee.style.left = e.clientX + 'px';
+            beee.style.top  = e.clientY + 'px';
 
-    const colors = ['#ff2a5f', '#00e5ff', '#fffb00', '#111'];
-    beeeText.style.color = colors[Math.floor(Math.random() * colors.length)];
+            const colors = ['#ff2a5f', '#00e5ff', '#fffb00', '#000'];
+            beee.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-    document.body.appendChild(beeeText);
+            document.body.appendChild(beee);
 
-    setTimeout(() => beeeText.remove(), 1000);
+            setTimeout(function () {
+                beee.remove();
+            }, 1000);
 
-}, true); // ← CAPTURA GLOBAL (CLAVE)
+        }, true); // captura global
     </script>
 </body>
 </html>
