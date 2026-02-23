@@ -318,40 +318,20 @@ header {
     object-position: center 0%; /* ajusta: 0%–15% */
 }
 
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            min-height: 100vh;
-            background: #f4f4f4;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        .queso-clone {
+  position: fixed;
+  font-size: 3rem;
+  font-weight: 900;
+  pointer-events: none;
+  animation: queso-pop 0.8s ease forwards;
+  z-index: 99999;
+}
 
-        /* BEEEEEE */
-        .beee {
-            position: fixed;
-            transform: translate(-50%, -50%);
-            font-size: 3.5rem;
-            font-weight: 900;
-            pointer-events: none;
-            z-index: 999999;
-            text-shadow: 3px 3px 0 #000;
-            animation: beeeAnim 1s ease-out forwards;
-        }
-
-        @keyframes beeeAnim {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -120px) scale(1.4);
-            }
+@keyframes queso-pop {
+  0% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: scale(2) rotate(20deg) translateY(-80px); }
+}
     </style>
 </head>
 <body>
@@ -704,25 +684,17 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
 }
 
 
-window.addEventListener('pointerdown', function (e) {
+const clone = document.createElement('div');
+clone.className = 'queso-clone';
+clone.textContent = 'K DE QUESO';
 
-            const beee = document.createElement('div');
-            beee.className = 'beee';
-            beee.textContent = 'BEEEEEE';
+const rect = btn.getBoundingClientRect();
+clone.style.left = rect.left + rect.width / 2 + 'px';
+clone.style.top  = rect.top + 'px';
+clone.style.color = 'var(--yellow)';
 
-            beee.style.left = e.clientX + 'px';
-            beee.style.top  = e.clientY + 'px';
-
-            const colors = ['#ff2a5f', '#00e5ff', '#fffb00', '#000'];
-            beee.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-            document.body.appendChild(beee);
-
-            setTimeout(function () {
-                beee.remove();
-            }, 1000);
-
-        }, true); // captura global
+document.body.appendChild(clone);
+setTimeout(() => clone.remove(), 800);
     </script>
 </body>
 </html>
