@@ -559,31 +559,7 @@
         // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK (SIN RESTRICCIONES)
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
-        document.addEventListener('click', function(e) {
-            // Reproducir el sonido en cada click
-            try {
-                let sfx = sheepAudio.cloneNode();
-                sfx.volume = 0.5;
-                sfx.play();
-            } catch(err) { console.log('Audio bloqueado por el navegador.'); }
 
-            // Crear el BEEEEEE visual SIEMPRE
-            const beeeText = document.createElement('div');
-            beeeText.textContent = 'BEEEEEE!';
-            beeeText.className = 'beee-text';
-            
-            // Centrado exactamente en el cursor
-            beeeText.style.left = e.clientX + 'px';
-            beeeText.style.top = e.clientY + 'px';
-            
-            const colors = ['#ff2a5f', '#00e5ff', 'var(--yellow)', 'var(--text-dark)'];
-            beeeText.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
-            document.body.appendChild(beeeText);
-            
-            // Eliminar después de 1 segundo
-            setTimeout(() => beeeText.remove(), 1000);
-        });
 
         // 5. DONACIONES DESDE 0
         let dineroActual = 0;
@@ -688,6 +664,25 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
   const scrollAmount = carousel.offsetWidth * 0.9;
   carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
 }
+
+
+        document.addEventListener('click', function (e) {
+
+    const beeeText = document.createElement('div');
+    beeeText.textContent = 'BEEEEEE!';
+    beeeText.className = 'beee-text';
+
+    // POSICIÓN EXACTA DEL CURSOR
+    beeeText.style.left = e.clientX + 'px';
+    beeeText.style.top  = e.clientY + 'px';
+
+    const colors = ['#ff2a5f', '#00e5ff', '#fffb00', '#111'];
+    beeeText.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(beeeText);
+
+    setTimeout(() => beeeText.remove(), 1000);
+});
     </script>
 </body>
 </html>
