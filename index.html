@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== VARIABLES ===== */
+/* ================= VARIABLES ================= */
 :root{
   --bg:#f4f4f0;
   --dark:#111;
@@ -22,16 +22,18 @@ body.dark-mode{
   --dark:#f4f4f0;
   --card:#1a1a1a;
 }
+
+/* ================= BASE ================= */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Space Grotesk',sans-serif;
   background:var(--bg);
   color:var(--dark);
-  transition:.4s;
   overflow-x:hidden;
+  transition:.4s;
 }
 
-/* ===== REVEAL ===== */
+/* ================= REVEAL ================= */
 .reveal{
   opacity:0;
   transform:translateY(50px);
@@ -39,14 +41,14 @@ body{
 }
 .reveal.active{opacity:1;transform:none;}
 
-/* ===== BRUTAL ===== */
+/* ================= BRUTAL ================= */
 .brutal{
   border:4px solid var(--dark);
   box-shadow:8px 8px 0 var(--dark);
   background:var(--card);
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 header{
   min-height:100vh;
   display:flex;
@@ -68,7 +70,7 @@ h1{
   cursor:pointer;
 }
 
-/* ===== CONTROLES ===== */
+/* ================= CONTROLES ================= */
 .top-controls{
   position:fixed;
   top:1rem;
@@ -84,7 +86,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== SECTIONS ===== */
+/* ================= SECTIONS ================= */
 section{
   padding:6rem 2rem;
   max-width:1200px;
@@ -93,30 +95,47 @@ section{
 .section-title{
   font-size:3rem;
   background:var(--yellow);
-  display:inline-block;
   padding:.5rem 1rem;
   margin-bottom:3rem;
+  display:inline-block;
   border:4px solid var(--dark);
 }
 
-/* ===== GRID ===== */
+/* ================= GRID REBAÑO ================= */
 .grid-3{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:2rem;
 }
-.card{
+.card-rebano{
   padding:1.5rem;
   text-align:center;
   cursor:pointer;
   transition:.3s;
 }
-.card:hover{
+.card-rebano:hover{
   transform:translate(-4px,-4px);
   box-shadow:12px 12px 0 var(--dark);
 }
+.card-rebano img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border:4px solid var(--dark);
+  margin-bottom:1rem;
+  filter:grayscale(100%);
+  transition:.3s;
+}
+.card-rebano:hover img{
+  filter:grayscale(0%);
+  transform:scale(1.03);
+}
+.card-rebano h3{
+  font-weight:900;
+  font-size:1.2rem;
+}
 
-/* ===== MODAL ===== */
+/* ================= MODAL ================= */
 .modal{
   position:fixed;
   inset:0;
@@ -130,7 +149,7 @@ section{
   padding:3rem;
 }
 
-/* ===== QUESO ===== */
+/* ================= QUESO ================= */
 @keyframes queso{
   0%{transform:scale(1)}
   50%{transform:scale(1.3) rotate(-3deg)}
@@ -151,7 +170,7 @@ section{
   to{transform:translateY(120vh) rotate(720deg);opacity:0}
 }
 
-/* ===== BEEEE ===== */
+/* ================= BEEEE ================= */
 .beee{
   position:fixed;
   font-size:3rem;
@@ -163,7 +182,7 @@ section{
   to{opacity:0;transform:translateY(-120px) scale(1.4)}
 }
 
-/* ===== CAOS ===== */
+/* ================= CAOS ================= */
 @keyframes shake{
   0%{transform:translate(0)}
   50%{transform:translate(5px,-5px)}
@@ -186,13 +205,10 @@ body.caos{
   <div id="quesoBtn" class="reveal">K de queso</div>
 </header>
 
-<!-- SOBRE NOSOTROS -->
 <section>
   <h2 class="section-title reveal">Sobre Nosotros</h2>
   <div class="brutal reveal">
-Somos un grupo de individuos objetivamente inútiles que decidió unirse en el contexto más valenciano posible: las Fallas. Entre pólvora, ruido y decisiones mal pensadas, se consolidó esta agrupación de gilipollas funcionales, unidos más por la costumbre que por cualquier talento destacable.  
-<br><br>
-Como todo grupo de hombres, contamos con una amplia variedad de edades y personalidades. En teoría, cada uno “se encarga de algo”. En la práctica, nadie hace nada de forma clara, salvo dos o tres que lo intentan con una mezcla de buena voluntad y fracaso moderado. El resto acompaña, opina sin base y contribuye al desorden general.
+Somos un grupo de individuos objetivamente inútiles que decidió unirse en el contexto más valenciano posible: las Fallas. Entre pólvora, ruido y decisiones mal pensadas, se consolidó esta agrupación de gilipollas funcionales, unidos más por la costumbre que por cualquier talento destacable.
 <br><br>
 Nuestro objetivo común es tan sencillo como ambicioso: obtener el carnet del 33% y acceder con dignidad administrativa a zona Gemelos. No por necesidad, sino por coherencia vital.
 <br><br>
@@ -200,23 +216,43 @@ El borreguismo no es ninguna institución. Ser borrego es una filosofía.
   </div>
 </section>
 
-<!-- REBAÑO -->
 <section>
-  <h2 class="section-title reveal">El Rebaño</h2>
-  <div class="grid-3">
-    <div class="card brutal reveal" onclick="openModal('Samuel Alfonso Duart Villanueva', texto1)">
-      Samuel Alfonso Duart Villanueva
-    </div>
-    <div class="card brutal reveal" onclick="openModal('David Monfort Ortiz', texto2)">
-      David Monfort Ortiz
-    </div>
-    <div class="card brutal reveal" onclick="openModal('Ignacio Piqueras Casas', texto3)">
-      Ignacio Piqueras Casas
-    </div>
-  </div>
+<h2 class="section-title reveal">El Rebaño</h2>
+<div class="grid-3">
+
+<div class="card-rebano brutal reveal" onclick="openModal('Samuel Alfonso Duart Villanueva', BORREGO_1)">
+<img src="Samu.jpg"><h3>Samuel Alfonso Duart Villanueva</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('David Monfort Ortiz', BORREGO_2)">
+<img src="David.jpg"><h3>David Monfort Ortiz</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Ignacio Piqueras Casas', BORREGO_3)">
+<img src="Ignacio.jpg"><h3>Ignacio Piqueras Casas</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Frank Cordoba Garcia', BORREGO_4)">
+<img src="Frank.jpg"><h3>Frank Cordoba Garcia</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Jose Gil Dimas', BORREGO_5)">
+<img src="Jos.jpg"><h3>Jose Gil Dimas</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Miguel Madrid Gasco', BORREGO_6)">
+<img src="Miguel.jpg"><h3>Miguel Madrid Gasco</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Luis Blasco-Ibáñez Berbel', BORREGO_7)">
+<img src="Luis.jpg"><h3>Luis Blasco-Ibáñez Berbel</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Pablo Gozalbo Chorro', BORREGO_8)">
+<img src="Pablo.jpg"><h3>Pablo Gozalbo Chorro</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Leandro Fontana', BORREGO_9)">
+<img src="Leandro.jpg"><h3>Leandro Fontana</h3></div>
+
+<div class="card-rebano brutal reveal" onclick="openModal('Adrian', BORREGO_10)">
+<img src="Adrian.jpg"><h3>Adrian</h3></div>
+
+</div>
 </section>
 
-<!-- MODAL -->
 <div id="modal" class="modal" onclick="closeModal()">
   <div class="modal-content brutal" onclick="event.stopPropagation()">
     <h2 id="modalTitle"></h2>
@@ -225,86 +261,54 @@ El borreguismo no es ninguna institución. Ser borrego es una filosofía.
   </div>
 </div>
 
-<!-- DONACIONES -->
-<section>
-  <h2 class="section-title reveal">Donativos</h2>
-  <div class="brutal reveal">
-    <button onclick="donar(1)">1€</button>
-    <button onclick="donar(5)">5€</button>
-    <p id="totalEl">0€</p>
-  </div>
-</section>
-
 <section style="text-align:center">
   <button onclick="caos()">NO PULSAR</button>
 </section>
 
 <script>
-/* TEXTOS REBAÑO */
-const texto1 = `El líder que nadie pidió... (texto completo original aquí)`;
-const texto2 = `Estratega del caos... (texto completo original aquí)`;
-const texto3 = `Experto en bulto... (texto completo original aquí)`;
+/* ================= TEXTOS ================= */
+const BORREGO_1=`El líder que nadie pidió. ...`;
+const BORREGO_2=`Estratega del caos. ...`;
+const BORREGO_3=`Experto en bulto. ...`;
+const BORREGO_4=`Departamento de excusas. ...`;
+const BORREGO_5=`Visionario incomprendido. ...`;
+const BORREGO_6=`Control de calidad emocional. ...`;
+const BORREGO_7=`El del sí perpetuo. ...`;
+const BORREGO_8=`El origen silencioso. ...`;
+const BORREGO_9=`El DLC. ...`;
+const BORREGO_10=`NPC definitivo. ...`;
 
-/* REVEAL */
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add('active'))
-});
+/* ================= LOGICA ================= */
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('active')));
 document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
 
-function toggleTheme(){
-  document.body.classList.toggle('dark-mode');
-}
+function toggleTheme(){document.body.classList.toggle('dark-mode');}
+function openModal(t,txt){modal.style.display='block';modalTitle.textContent=t;modalText.textContent=txt;}
+function closeModal(){modal.style.display='none';}
 
-function openModal(t,txt){
-  modal.style.display='block';
-  modalTitle.textContent=t;
-  modalText.textContent=txt;
-}
-function closeModal(){
-  modal.style.display='none';
-}
-
-/* QUESO */
-quesoBtn.addEventListener('click',()=>{
-  quesoBtn.classList.remove('queso-active');
-  void quesoBtn.offsetWidth;
-  quesoBtn.classList.add('queso-active');
+quesoBtn.onclick=()=>{
+  quesoBtn.classList.remove('queso-active');void quesoBtn.offsetWidth;quesoBtn.classList.add('queso-active');
   for(let i=0;i<25;i++){
     setTimeout(()=>{
       const d=document.createElement('div');
-      d.className='drop';
-      d.textContent='🧀';
+      d.className='drop';d.textContent='🧀';
       d.style.left=Math.random()*100+'vw';
       document.body.appendChild(d);
       setTimeout(()=>d.remove(),3000);
     },i*50);
   }
-});
+};
 
-/* BEEEE */
 window.addEventListener('pointerdown',e=>{
   const b=document.createElement('div');
-  b.className='beee';
-  b.textContent='BEEEE';
-  b.style.left=e.clientX+'px';
-  b.style.top=e.clientY+'px';
-  document.body.appendChild(b);
-  setTimeout(()=>b.remove(),1000);
+  b.className='beee';b.textContent='BEEEE';
+  b.style.left=e.clientX+'px';b.style.top=e.clientY+'px';
+  document.body.appendChild(b);setTimeout(()=>b.remove(),1000);
 });
 
-/* DONAR */
-let total=0;
-function donar(n){
-  total+=n;
-  totalEl.textContent=total+'€';
-}
-
-/* CAOS */
 function caos(){
   document.body.classList.add('caos');
-  setTimeout(()=>{
-    document.body.innerHTML='<h1 style="color:red;text-align:center">SISTEMA DESTRUIDO</h1>';
-  },1500);
+  setTimeout(()=>document.body.innerHTML='<h1 style="color:red;text-align:center">SISTEMA DESTRUIDO</h1>',1500);
 }
 </script>
 
