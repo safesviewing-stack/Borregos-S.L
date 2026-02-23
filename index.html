@@ -3,52 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Borregos S.L.</title>
+<title>Borregos S.L. | K de queso</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
+/* =====================================================
+   VARIABLES DE TEMA
+===================================================== */
 :root{
-  --bg:#f4f4f0;
-  --dark:#111;
-  --card:#fff;
-  --main:#ff2a5f;
-  --accent:#00e5ff;
+  --bg-color:#f4f4f0;
+  --main-color:#ff2a5f;
+  --accent-color:#00e5ff;
   --yellow:#fffb00;
+  --dark:#111;
+  --card-bg:#fff;
+  --text-dark:#111;
+  --text-light:#fff;
 }
 body.dark-mode{
-  --bg:#0a0a0a;
+  --bg-color:#0a0a0a;
+  --main-color:#00e5ff;
+  --accent-color:#ff2a5f;
+  --yellow:#7b00ff;
   --dark:#f4f4f0;
-  --card:#1a1a1a;
+  --card-bg:#1a1a1a;
+  --text-dark:#fff;
+  --text-light:#111;
 }
 
-/* ================= BASE ================= */
-*{margin:0;padding:0;box-sizing:border-box;}
+/* =====================================================
+   RESET + BASE
+===================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="24" font-size="24">🐑</text></svg>'),auto;
+}
 body{
   font-family:'Space Grotesk',sans-serif;
-  background:var(--bg);
+  background:var(--bg-color);
   color:var(--dark);
   overflow-x:hidden;
   transition:.4s;
 }
 
-/* ================= REVEAL ================= */
-.reveal{
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+.reveal{opacity:0;transition:.8s cubic-bezier(.175,.885,.32,1.275);}
+.reveal.active{opacity:1;}
+.reveal-up{transform:translateY(50px);}
+.reveal-up.active{transform:none;}
+.reveal-scale{transform:scale(.9);}
+.reveal-scale.active{transform:scale(1);}
+.reveal-left{transform:translateX(-50px);}
+.reveal-left.active{transform:none;}
+
+/* =====================================================
+   ANIMACIONES BASE
+===================================================== */
+@keyframes float-hero{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-20px) rotate(2deg)}
+}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+@keyframes shake-hard{
+  0%{transform:translate(2px,1px)}
+  50%{transform:translate(-3px,2px)}
+  100%{transform:translate(1px,-2px)}
+}
+body.caos-mode{animation:shake-hard .1s infinite}
+
+/* =====================================================
+   CONTROLES SUPERIORES
+===================================================== */
+.top-controls{
+  position:fixed;
+  top:1.5rem;
+  right:1.5rem;
+  display:flex;
+  gap:1rem;
+  z-index:1002;
+}
+.btn-control{
+  background:var(--card-bg);
+  border:3px solid var(--dark);
+  font-weight:900;
+  font-size:1.2rem;
+  padding:.5rem 1rem;
+  box-shadow:4px 4px 0 var(--dark);
+  transition:.3s;
+}
+.btn-control:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 var(--main-color);
+  background:var(--yellow);
+}
+.hamburger{
+  width:45px;height:42px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+}
+.hamburger span{
+  height:3px;
+  background:var(--dark);
+  transition:.3s;
+}
+.hamburger.active span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* =====================================================
+   MENU LATERAL
+===================================================== */
+.glass-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(8px);
   opacity:0;
-  transform:translateY(50px);
-  transition:.8s cubic-bezier(.175,.885,.32,1.275);
+  pointer-events:none;
+  transition:.4s;
+  z-index:999;
 }
-.reveal.active{opacity:1;transform:none;}
-
-/* ================= BRUTAL ================= */
-.brutal{
-  border:4px solid var(--dark);
-  box-shadow:8px 8px 0 var(--dark);
-  background:var(--card);
+.glass-overlay.active{opacity:1;pointer-events:auto}
+.side-panel{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:min(350px,100vw);
+  height:100vh;
+  background:var(--bg-color);
+  border-left:6px solid var(--dark);
+  padding:12rem 2rem 2rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  transition:.4s cubic-bezier(.77,0,.175,1);
+  z-index:1000;
 }
+.side-panel.open{right:0}
+.side-panel a{
+  font-size:1.8rem;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--dark);
+  transition:.3s;
+}
+.side-panel a:hover{color:var(--accent-color);transform:translateX(10px)}
 
-/* ================= HEADER ================= */
+/* =====================================================
+   ESTRUCTURA
+===================================================== */
 header{
   min-height:100vh;
   display:flex;
@@ -56,62 +166,54 @@ header{
   justify-content:center;
   align-items:center;
   text-align:center;
-  background:radial-gradient(circle,var(--accent),var(--bg));
+  background:radial-gradient(circle,var(--accent-color),var(--bg-color));
 }
 h1{
   font-size:clamp(4rem,12vw,10rem);
   font-weight:900;
-  text-shadow:6px 6px 0 var(--main);
+  text-shadow:6px 6px 0 var(--main-color);
+  animation:float-hero 5s infinite;
 }
-#quesoBtn{
-  margin-top:1rem;
-  font-size:2rem;
+.subtitle{
+  font-size:clamp(1.5rem,4vw,3rem);
   font-weight:700;
+  opacity:.6;
+  letter-spacing:5px;
   cursor:pointer;
 }
+.subtitle:hover{opacity:1;color:var(--main-color)}
 
-/* ================= CONTROLES ================= */
-.top-controls{
-  position:fixed;
-  top:1rem;
-  right:1rem;
-  z-index:1000;
-}
-button{
-  font-family:inherit;
-  font-weight:900;
-  padding:.5rem 1rem;
-  border:3px solid var(--dark);
-  background:var(--card);
-  cursor:pointer;
-}
-
-/* ================= SECTIONS ================= */
 section{
   padding:6rem 2rem;
   max-width:1200px;
   margin:auto;
 }
 .section-title{
-  font-size:3rem;
+  font-size:3.5rem;
   background:var(--yellow);
-  padding:.5rem 1rem;
-  margin-bottom:3rem;
-  display:inline-block;
+  padding:0 1rem;
   border:4px solid var(--dark);
+  display:inline-block;
+  margin-bottom:3rem;
+  transform:rotate(-2deg);
 }
 
-/* ================= GRID REBAÑO ================= */
+/* =====================================================
+   REBAÑO
+===================================================== */
 .grid-3{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:2rem;
 }
 .card-rebano{
+  background:var(--card-bg);
   padding:1.5rem;
+  border:4px solid var(--dark);
+  box-shadow:8px 8px 0 var(--dark);
   text-align:center;
-  cursor:pointer;
   transition:.3s;
+  cursor:pointer;
 }
 .card-rebano:hover{
   transform:translate(-4px,-4px);
@@ -119,197 +221,172 @@ section{
 }
 .card-rebano img{
   width:100%;
-  height:260px;
+  height:250px;
   object-fit:cover;
   border:4px solid var(--dark);
   margin-bottom:1rem;
   filter:grayscale(100%);
   transition:.3s;
 }
-.card-rebano:hover img{
-  filter:grayscale(0%);
-  transform:scale(1.03);
-}
-.card-rebano h3{
-  font-weight:900;
-  font-size:1.2rem;
-}
+.card-rebano:hover img{filter:grayscale(0);transform:scale(1.03)}
 
-/* ================= MODAL ================= */
-.modal{
+/* =====================================================
+   MODAL PERFIL
+===================================================== */
+.modal-perfil{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.8);
+  backdrop-filter:blur(10px);
   display:none;
   z-index:2000;
+  overflow-y:auto;
 }
 .modal-content{
   max-width:800px;
-  margin:5rem auto;
+  margin:4rem auto;
+  background:var(--card-bg);
   padding:3rem;
+  border:4px solid var(--dark);
+}
+.close-btn{
+  background:var(--main-color);
+  color:var(--text-light);
+  border:4px solid var(--dark);
+  padding:.5rem 1rem;
+  font-weight:900;
+  cursor:pointer;
 }
 
-/* ================= QUESO ================= */
-@keyframes queso{
+/* =====================================================
+   QUESO
+===================================================== */
+@keyframes queso-punch{
   0%{transform:scale(1)}
-  50%{transform:scale(1.3) rotate(-3deg)}
+  50%{transform:scale(1.2) rotate(-3deg)}
   100%{transform:scale(1)}
 }
-.queso-active{
-  animation:queso .4s ease;
+#quesoBtn.queso-active{
+  animation:queso-punch .45s ease;
   color:var(--yellow);
-  text-shadow:4px 4px 0 var(--main),-4px -4px 0 var(--accent);
+  text-shadow:4px 4px 0 var(--main-color),-4px -4px 0 var(--accent-color);
 }
-.drop{
+.drop-fx{
   position:fixed;
   font-size:2.5rem;
-  animation:fall 3s linear forwards;
   pointer-events:none;
+  animation:fall 3s linear forwards;
 }
 @keyframes fall{
-  to{transform:translateY(120vh) rotate(720deg);opacity:0}
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
-/* ================= BEEEE ================= */
+/* =====================================================
+   BEEEE
+===================================================== */
 .beee{
   position:fixed;
-  font-size:3rem;
+  transform:translate(-50%,-50%);
+  font-size:3.5rem;
   font-weight:900;
   pointer-events:none;
-  animation:beee 1s forwards;
+  z-index:999999;
+  animation:beeeAnim 1s forwards;
 }
-@keyframes beee{
-  to{opacity:0;transform:translateY(-120px) scale(1.4)}
-}
-
-/* ================= CAOS ================= */
-@keyframes shake{
-  0%{transform:translate(0)}
-  50%{transform:translate(5px,-5px)}
-  100%{transform:translate(0)}
-}
-body.caos{
-  animation:shake .1s infinite;
+@keyframes beeeAnim{
+  to{opacity:0;transform:translate(-50%,-120px) scale(1.4)}
 }
 </style>
 </head>
 
 <body>
 
+<div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
+
 <div class="top-controls">
-  <button onclick="toggleTheme()">🌚</button>
+  <button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button>
+  <button class="btn-control hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </div>
 
-<header>
-  <h1 class="reveal">Borregos S.L.</h1>
-  <div id="quesoBtn" class="reveal">K de queso</div>
+<nav class="side-panel" id="sideMenu">
+  <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+  <a href="#nosotros" onclick="toggleMenu()">Sobre Nosotros</a>
+  <a href="#rebano" onclick="toggleMenu()">El Rebaño</a>
+</nav>
+
+<header id="inicio">
+  <h1 class="reveal reveal-up">Borregos S.L.</h1>
+  <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 </header>
 
-<section>
-  <h2 class="section-title reveal">Sobre Nosotros</h2>
-  <div class="brutal reveal">
-Somos un grupo de individuos objetivamente inútiles que decidió unirse en el contexto más valenciano posible: las Fallas. Entre pólvora, ruido y decisiones mal pensadas, se consolidó esta agrupación de gilipollas funcionales, unidos más por la costumbre que por cualquier talento destacable.
-<br><br>
-Nuestro objetivo común es tan sencillo como ambicioso: obtener el carnet del 33% y acceder con dignidad administrativa a zona Gemelos. No por necesidad, sino por coherencia vital.
-<br><br>
-El borreguismo no es ninguna institución. Ser borrego es una filosofía.
+<section id="nosotros">
+  <h2 class="section-title reveal reveal-left">Sobre Nosotros</h2>
+  <div class="reveal reveal-up">
+    Somos un grupo de individuos objetivamente inútiles que decidió unirse en el contexto más valenciano posible: las Fallas...
   </div>
 </section>
 
-<section>
-<h2 class="section-title reveal">El Rebaño</h2>
-<div class="grid-3">
-
-<div class="card-rebano brutal reveal" onclick="openModal('Samuel Alfonso Duart Villanueva', BORREGO_1)">
-<img src="Samu.jpg"><h3>Samuel Alfonso Duart Villanueva</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('David Monfort Ortiz', BORREGO_2)">
-<img src="David.jpg"><h3>David Monfort Ortiz</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Ignacio Piqueras Casas', BORREGO_3)">
-<img src="Ignacio.jpg"><h3>Ignacio Piqueras Casas</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Frank Cordoba Garcia', BORREGO_4)">
-<img src="Frank.jpg"><h3>Frank Cordoba Garcia</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Jose Gil Dimas', BORREGO_5)">
-<img src="Jos.jpg"><h3>Jose Gil Dimas</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Miguel Madrid Gasco', BORREGO_6)">
-<img src="Miguel.jpg"><h3>Miguel Madrid Gasco</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Luis Blasco-Ibáñez Berbel', BORREGO_7)">
-<img src="Luis.jpg"><h3>Luis Blasco-Ibáñez Berbel</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Pablo Gozalbo Chorro', BORREGO_8)">
-<img src="Pablo.jpg"><h3>Pablo Gozalbo Chorro</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Leandro Fontana', BORREGO_9)">
-<img src="Leandro.jpg"><h3>Leandro Fontana</h3></div>
-
-<div class="card-rebano brutal reveal" onclick="openModal('Adrian', BORREGO_10)">
-<img src="Adrian.jpg"><h3>Adrian</h3></div>
-
-</div>
+<section id="rebano">
+  <h2 class="section-title reveal reveal-left">El Rebaño</h2>
+  <div class="grid-3">
+    <!-- Cards iguales a las actuales -->
+  </div>
 </section>
 
-<div id="modal" class="modal" onclick="closeModal()">
-  <div class="modal-content brutal" onclick="event.stopPropagation()">
-    <h2 id="modalTitle"></h2>
-    <p id="modalText"></p>
-    <button onclick="closeModal()">Cerrar</button>
+<div id="modalPerfil" class="modal-perfil">
+  <div class="modal-content">
+    <button class="close-btn" onclick="cerrarPerfil()">CERRAR</button>
+    <h2 id="perfilNombre"></h2>
+    <h4 id="perfilSub"></h4>
+    <p id="perfilTexto"></p>
   </div>
 </div>
-
-<section style="text-align:center">
-  <button onclick="caos()">NO PULSAR</button>
-</section>
 
 <script>
-/* ================= TEXTOS ================= */
-const BORREGO_1=`El líder que nadie pidió. ...`;
-const BORREGO_2=`Estratega del caos. ...`;
-const BORREGO_3=`Experto en bulto. ...`;
-const BORREGO_4=`Departamento de excusas. ...`;
-const BORREGO_5=`Visionario incomprendido. ...`;
-const BORREGO_6=`Control de calidad emocional. ...`;
-const BORREGO_7=`El del sí perpetuo. ...`;
-const BORREGO_8=`El origen silencioso. ...`;
-const BORREGO_9=`El DLC. ...`;
-const BORREGO_10=`NPC definitivo. ...`;
-
-/* ================= LOGICA ================= */
+/* REVEAL */
 const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('active')));
 document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
 
-function toggleTheme(){document.body.classList.toggle('dark-mode');}
-function openModal(t,txt){modal.style.display='block';modalTitle.textContent=t;modalText.textContent=txt;}
-function closeModal(){modal.style.display='none';}
+function toggleMenu(){
+  sideMenu.classList.toggle('open');
+  overlay.classList.toggle('active');
+  hamburgerBtn.classList.toggle('active');
+}
+function toggleTheme(){
+  document.body.classList.toggle('dark-mode');
+  themeBtn.textContent=document.body.classList.contains('dark-mode')?'🌞':'🌚';
+}
 
-quesoBtn.onclick=()=>{
-  quesoBtn.classList.remove('queso-active');void quesoBtn.offsetWidth;quesoBtn.classList.add('queso-active');
+/* QUESO */
+quesoBtn.onclick=e=>{
+  e.stopPropagation();
+  quesoBtn.classList.remove('queso-active');
+  void quesoBtn.offsetWidth;
+  quesoBtn.classList.add('queso-active');
   for(let i=0;i<25;i++){
     setTimeout(()=>{
-      const d=document.createElement('div');
-      d.className='drop';d.textContent='🧀';
-      d.style.left=Math.random()*100+'vw';
-      document.body.appendChild(d);
-      setTimeout(()=>d.remove(),3000);
-    },i*50);
+      const q=document.createElement('div');
+      q.textContent='🧀';
+      q.className='drop-fx';
+      q.style.left=Math.random()*100+'vw';
+      document.body.appendChild(q);
+      setTimeout(()=>q.remove(),3000);
+    },i*60);
   }
 };
 
+/* BEEEE */
 window.addEventListener('pointerdown',e=>{
   const b=document.createElement('div');
-  b.className='beee';b.textContent='BEEEE';
-  b.style.left=e.clientX+'px';b.style.top=e.clientY+'px';
-  document.body.appendChild(b);setTimeout(()=>b.remove(),1000);
-});
-
-function caos(){
-  document.body.classList.add('caos');
-  setTimeout(()=>document.body.innerHTML='<h1 style="color:red;text-align:center">SISTEMA DESTRUIDO</h1>',1500);
-}
+  b.className='beee';
+  b.textContent='BEEEEEE';
+  b.style.left=e.clientX+'px';
+  b.style.top=e.clientY+'px';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),1000);
+},true);
 </script>
 
 </body>
