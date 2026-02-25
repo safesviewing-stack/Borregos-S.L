@@ -125,7 +125,7 @@
         .service-card::before { content:''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255,255,255,0.2); transition: left 0.4s ease; transform: skewX(-20deg); }
         .service-card:hover::before { left: 100%; }
 
-        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
         .item-inventario { background: var(--card-bg); color: var(--text-dark); padding: 1rem; transition: transform 0.3s; }
         .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); transition: transform 0.4s ease; height: 300px;  }
         .item-inventario:hover img { transform: scale(1.05) rotate(2deg); }
@@ -353,9 +353,6 @@ header {
                 transform: translate(-50%, -120px) scale(1.4);
             }
 
-        .semaforo {
-           object-position: center 65%;
-            }
     </style>
 </head>
 <body>
@@ -495,7 +492,7 @@ header {
         <div class="grid-inventario reveal reveal-up">
            
             <div class="item-inventario brutal-border">
-                <img src="inventario/11.jpg" class="semaforo" alt="Semáforo">
+               <img src="11.jpg" alt="Semáforo">
                 <p>Semáforo</p>
                 <span>23/02/2026</span>
             </div>
