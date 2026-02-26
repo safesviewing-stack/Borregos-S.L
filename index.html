@@ -110,6 +110,12 @@
         
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; perspective: 1000px; }
         .card-rebano { background: var(--card-bg); color: var(--text-dark); padding: 1.5rem; text-align: center; transform-style: preserve-3d; transition: transform 0.2s ease-out, background 0.3s, color 0.3s; will-change: transform; cursor: pointer; }
+        
+        .adrian-card:hover img,
+        .cobarde1-card:hover img,
+        .cobarde2-card:hover img {
+          transform: translateY(-12px) translateZ(40px) scale(1.02);
+}
         .card-rebano:hover { background: var(--accent-color); color: var(--text-light); }
        .card-rebano img {
     width: 100%;
@@ -124,8 +130,9 @@
 }
 .card-rebano:hover img {
     filter: grayscale(0%);
-    transform: translateY(-12px) translateZ(40px) scale(1.02);
+     transform: translateY(0) translateZ(20px);
 }
+
         /* MODAL INSTANTÁNEO */
         .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
         .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); color: var(--text-dark); padding: 3rem; position: relative; }
