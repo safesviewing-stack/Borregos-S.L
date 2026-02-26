@@ -384,7 +384,91 @@ header {
 }
 
 
+@media (max-width: 768px) {
 
+  /* GENERAL */
+  section {
+    padding: 4rem 1.2rem;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 12vw, 5rem);
+    text-shadow: 4px 4px 0 var(--main-color);
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* DESACTIVAR EFECTOS MOLESTOS EN TOUCH */
+  .magnetic-btn *,
+  .3d-card {
+    transform: none !important;
+  }
+
+  .card-rebano:hover {
+    background: var(--card-bg);
+    color: var(--text-dark);
+  }
+
+  /* REBAÑO */
+  .card-rebano img {
+    height: 200px;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* TEXTO */
+  .about-text {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  /* MENÚ LATERAL */
+  .side-panel {
+    padding-top: 8rem;
+  }
+
+  .side-panel a {
+    font-size: 1.4rem;
+  }
+
+  /* BLOG */
+  .carousel-item {
+    min-width: 90%;
+    height: 320px;
+  }
+
+  .carousel-btn {
+    font-size: 2rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* DONACIONES */
+  .donaciones-container {
+    padding: 2rem 1rem;
+  }
+
+  .btn-donar {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+
+  /* FOOTER */
+  .email-huge {
+    font-size: 1.6rem;
+  }
+
+}
     </style>
 </head>
 <body>
