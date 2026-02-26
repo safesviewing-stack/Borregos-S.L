@@ -115,18 +115,17 @@
     width: 100%;
     height: 250px;
     object-fit: cover;
+    object-position: center 18%;
     border: 4px solid var(--dark);
     margin-bottom: 1rem;
     filter: grayscale(100%);
     transition: filter 0.3s, transform 0.3s;
-    transform: translateY(0) translateZ(20px);
+    transform: translateZ(20px);
 }
-
 .card-rebano:hover img {
     filter: grayscale(0%);
-    transform: translateY(-12px) translateZ(40px) scale(1.02);
+    transform: translateZ(40px) scale(1.02);
 }
-
         /* MODAL INSTANTÁNEO */
         .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
         .modal-content { max-width: 800px; margin: 0 auto; background: var(--card-bg); color: var(--text-dark); padding: 3rem; position: relative; }
