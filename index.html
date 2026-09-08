@@ -227,7 +227,7 @@
         .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; display: inline-block; }
         .btn-donar:hover { background: var(--yellow); color: var(--text-dark); transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--dark); }
         
-        /* ESTILO DEL TEXTO DEL OBJETIVO (Exterior de la barra) */
+        /* ESTILO DEL TEXTO DEL OBJETIVO (Alineación para doble línea adaptativa) */
         .progreso-texto { 
             font-weight: bold; 
             font-size: 1.4rem; 
@@ -235,6 +235,7 @@
             margin-top: 2rem; 
             margin-bottom: 0.5rem; 
             text-align: center;
+            line-height: 1.4; /* Interlineado aumentado para que no colisionen las dos líneas */
         }
 
         /* ESTILO DEL CONTENEDOR DE LA BARRA */
@@ -843,9 +844,9 @@
                 <div class="magnetic-btn"><a href="https://buy.stripe.com/00weVcex3gpA6EJ5pFdZ602" target="_blank" class="btn-donar">2€</a></div>
                 <div class="magnetic-btn"><a href="https://buy.stripe.com/dRmfZg3Sp6P0gfj3hxdZ603" target="_blank" class="btn-donar">5€</a></div>
             </div>
-            <!-- TEXTO DE PROGRESO REDISEÑADO (FUERA DE LA BARRA) -->
+            <!-- TEXTO DE PROGRESO REDISEÑADO (FUERA DE LA BARRA CON SALTO DE LÍNEA) -->
             <div class="progreso-texto" id="progresoTexto">
-                Objetivo: Dildo gigante (<span id="dineroRecaudado">1</span>€ / 100€)
+                Objetivo: Dildo gigante<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">1</span>€ / 100€)</span>
             </div>
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
@@ -958,7 +959,7 @@
         function actualizarUI() {
             const objetivoActual = objetivos[objetivoIndex];
             document.getElementById('barraProgreso').style.width = dineroActual + '%';
-            document.getElementById('progresoTexto').innerHTML = `Objetivo: ${objetivoActual} (<span id="dineroRecaudado">${dineroActual}</span>€ / 100€)`;
+            document.getElementById('progresoTexto').innerHTML = `Objetivo: ${objetivoActual}<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">${dineroActual}</span>€ / 100€)</span>`;
         }
 
         // Lector inteligente de redirecciones exitosas de Stripe [1]
