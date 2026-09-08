@@ -43,7 +43,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- EFECTOS FRAMER MOTION (Suaves y fluidos) --- */
+        /* --- EFECTOS FRAMER MOTION --- */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .reveal.active { opacity: 1; }
         .reveal-up { transform: translateY(50px); }
@@ -83,7 +83,7 @@
         .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
         .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* MENU LATERAL (MÁS BAJO Y COMPACTO) */
+        /* MENU LATERAL */
         .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 12rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
         .side-panel.open { right: 0; }
         .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: transform 0.3s ease, color 0.3s ease; display: block; }
@@ -169,7 +169,7 @@
         .drop-fx { position: fixed; font-size: 2.5rem; z-index: 9999; animation: fall 3s linear forwards; pointer-events: none; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
 
-        /* EL BEEEEEE GIGANTE (Centrado en el ratón) */
+        /* EL BEEEEEE GIGANTE */
         .beee-text { 
             position: fixed; 
             pointer-events: none; 
@@ -361,7 +361,6 @@
             }
         }
 
-
         .cobarde1-card img {
             object-position: center -20%;
         }
@@ -376,7 +375,6 @@
         .ruben-card img {
             transform-origin: center top;
         }
-
 
         @media (max-width: 768px) {
 
@@ -469,7 +467,7 @@
 
     <div class="glass-overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- CONTROLES (Sin el botón de idioma) -->
+    <!-- CONTROLES -->
     <div class="top-controls">
         <div class="magnetic-btn"><button class="btn-control" id="themeBtn" onclick="toggleTheme()">🌚</button></div>
         <div class="magnetic-btn">
@@ -525,7 +523,7 @@
                 <h3>Frank Moreno Bueno</h3>
             </div>
 
-            <div class="card-rebano brutal-border reveal reveal-scale 3d-card jos-card" onclick="abrirPerfil('Borrego #5','Visionario incomprendido.','Este borrego es el pesao oficial, el que no calla jamás, pero con matices. Juzga y analiza absolutamente todo desde una perspectiva matemática, lógica y despiadadamente analítica. La vida no le pasa: la descompone en variables. Hay otro pesao en el grupo, sí, pero a ese le dio vergüenza salir aquí: habla mucho y no dice nada. Este, al menos, dice cosas, aunque nadie las haya pedido. Es el típico vecino al que nunca quieres encontrarte, y mucho menos en el ascensor. Porque lo que empieza como un “buenas” acaba derivando en sus experiencias en el boxeo, luego pasa por una reflexión existencial sobre la entropía social y termina explicándote por qué no quiere tener hijas por su salud mental. Cuando acaba, tú ya deberías estar cenando y él aún está calentando motores. Es el MacGyver de los borregos. No puedes pedirle algo y que no lo tenga. Su coche es el bolsillo de Doraemon: cables, bridas, herramientas, objetos que no sabías que existían pero que ahora resultan imprescindibles. Su casa no es una casa, es el taller de Mani Manitas en versión permanente. Odia a la gente, profundamente, pero busca no tener conflictos, lo cual lo convierte en una contradicción funcional. Es polifacético hasta el absurdo: te escala una montaña, te vuelca un pedaló sin pedir perdón, y al mes siguiente aparece trabajando tranquilamente en el sector de calidad de una multinacional tipo Stadler, como si fuera lo más normal del mundo. Tiene aura. Aura densa. Aura que llena habitaciones. Y por si fuera poco, es el dueño del medio de transporte oficial de los borregos: la mítica borregueta. No habla bajo, no pasa desapercibido y no descansa nunca… pero, por alguna razón inexplicable, siempre acaba siendo útil. Y eso le salva.')">
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card jos-card" onclick="abrirPerfil('Borrego #5','Visionario incomprendido.','Este borrego es el pesao oficial, el que no calla jamás, pero con matices. Juzga y analiza absolutamente todo desde una perspectiva matemática, lógica y despiadadamente analítica. La vida no le pasa: la descompone en variables. Hay otro pesao en el grupo, sí, pero a ese le dio vergüenza salir aquí: habla mucho y no dice nada. Este, al menos, dice cosas, aunque nadie las haya pedido. Es el típico vecino al que nunca quieres encontrarte, y mucho menos en el ascensor. Porque lo que empieza como un “buenas” acaba derivando en sus experiencias en el boxeo, luego pasa por una reflexión existencial sobre la entropía social y termina explicándote por qué no quiere tener hijas por su salud mental. Cuando acaba, tú ya deberías estar cenando y él aún está calentando motores. Es el MacGyver de los borregos. No puedes pedirle algo y que no lo tenga. Su coche es el bolsillo de Doraemon: cables, bridas, herramientas, objetos que no sabías que existían pero que ahora resultan indispensables. Su casa no es una casa, es el taller de Mani Manitas en versión permanente. Odia a la gente, profundamente, pero busca no tener conflictos, lo cual lo convierte en una contradicción funcional. Es polifacético hasta el absurdo: te escala una montaña, te vuelca un pedaló sin pedir perdón, y al mes siguiente aparece trabajando tranquilamente en el sector de calidad de una multinacional tipo Stadler, como si fuera lo más normal del mundo. Tiene aura. Aura densa. Aura que llena habitaciones. Y por si fuera poco, es el dueño del medio de transporte oficial de los borregos: la mítica borregueta. No habla bajo, no pasa desapercibido y no descansa nunca… pero, por alguna razón inexplicable, siempre acaba siendo útil. Y eso le salva.')">
                 <img src="Jos.jpg" alt="Jos">
                 <h3>Jose Gil Dimas</h3>
             </div>
@@ -555,7 +553,7 @@
                 <h3>Adrian Fernandez Núñez</h3>
             </div>
             
-            <div class="card-rebano brutal-border reveal reveal-scale 3d-card cobarde1-card"onclick="abrirPerfil('Borrego #11','Experto en todo, profesional en nada.','Experto en todo, profesional en nada. Existente entre nosotros una figura casi mitológica, tan discreta que ha decidido no aparecer en la web. No por modestia, sino por una valentía selectiva que solo se activa cuando nadie mira. Un espíritu libre del esfuerzo, un nini vocacional, orgulloso defensor del noble arte de no hacer absolutamente nada… y hacerlo con convicción. Heredero natural del todo resuelto, es el clásico niño de papi y mami, aunque él prefiere verse como un pensador independiente. Una especie de Xokas, pero sin streaming, sin comunidad y, sobre todo, sin haber farmeado nada en la vida real. Mucha opinión, mucha seguridad… y cero currículum. Especialista en todo sin haber profundizado en nada, destaca especialmente en el mundo del automóvil: cuida el coche —que curiosamente no es suyo, aunque él lo sienta así— con una devoción casi religiosa. Lo lava cada semana como si el dinero le cayera del cielo, y lo protege con el celo de quien ha confundido posesión con préstamo indefinido. No sería raro que, en una conversación relajada, afirmara con total naturalidad que es suyo. Y se quedara tan ancho. No estudia ni trabaja, aunque lo intentó. Brevemente. El tiempo justo para explicar durante años lo extremadamente duro que fue aquello que estudió (not lo era) y lo exigente que fue aquel trabajo del que no llegó a cumplir ni medio año. Pero cuidado: la épica no se mide en duración, sino en la intensidad con la que se exagera. Fantasma por definición, también es de los que se apuntan al gimnasio, se hacen la foto el primer día —no se sabe muy bien de qué presume— y desaparecen para siempre, dejando tras de sí solo una story borrosa y una autoestima intacta. En resumen: un perfil tan etéreo, tan opinador y tan poco tangible, que entendemos perfectamente su decisión de no salir en la web. Hay ausencias que también comunican.')">
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card cobarde1-card"onclick="abrirPerfil('Borrego #11','Experto en todo, profesional en nada.','Experto en todo, profesional en nada. Existe entre nosotros una figura casi mitológica, tan discreta que ha decidido no aparecer en la web. No por modestia, sino por una valentía selectiva que solo se activa cuando nadie mira. Un espíritu libre del esfuerzo, un nini vocacional, orgulloso defensor del noble arte de no hacer absolutamente nada… y hacerlo con convicción. Heredero natural del todo resuelto, es el clásico niño de papi y mami, aunque él prefiere verse como un pensador independiente. Una especie de Xokas, pero sin streaming, sin comunidad y, sobre todo, sin haber farmeado nada en la vida real. Mucha opinión, mucha seguridad… y cero currículum. Especialista en todo sin haber profundizado en nada, destaca especialmente en el mundo del automóvil: cuida el coche —que curiosamente no es suyo, aunque él lo sienta así— con una devoción casi religiosa. Lo lava cada semana como si el dinero le cayera del cielo, y lo protege con el celo de quien ha confundido posesión con préstamo indefinido. No sería raro que, en una conversación relajada, afirmara con total naturalidad que es suyo. Y se quedara tan ancho. No estudia ni trabaja, aunque lo intentó. Brevemente. El tiempo justo para explicar durante años lo extremadamente duro que fue aquello que estudió (no lo era) y lo exigente que fue aquel trabajo del que no llegó a cumplir ni medio año. Pero cuidado: la épica no se mide en duración, sino en la intensidad con la que se exagera. Fantasma por definición, también es de los que se apuntan al gimnasio, se hacen la foto el primer día —no se sabe muy bien de qué presume— y desaparecen para siempre, dejando tras de sí solo una story borrosa y una autoestima intacta. En resumen: un perfil tan etéreo, tan opinador y tan poco tangible, que entendemos perfectamente su decisión de no salir en la web. Hay ausencias que también comunican.')">
                 <img src="Cobarde1.jpg" alt="Cobarde.1">
                 <h3>Cobarde.1</h3>
             </div>
@@ -565,7 +563,7 @@
                 <h3>Cobarde.2</h3>
             </div>
 
-            <!-- NUEVO INTEGRANTE: RUBÉN HERRANZ -->
+            <!-- INTEGRANTE: RUBÉN HERRANZ -->
             <div class="card-rebano brutal-border reveal reveal-scale 3d-card ruben-card" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justificar exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y ampliando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
                 <img src="Ruben.jpg" alt="Rubén Herranz">
                 <h3>Rubén Herranz</h3>
@@ -599,8 +597,8 @@
             <p>Recorremos la ciudad sin rumbo fijo con la borregueta, consumiendo gasolina de forma consciente y deliberada. No hay destino, no hay objetivo, solo rotondas, semáforos y decisiones cuestionables, y todo ello con un pene de goma pegado al capo.</p>
         </div>
         <div class="service-card brutal-border reveal reveal-up" style="background: var(--yellow);">
-            <h3>Asistencia Emocional para Samaritanas del Amor  (Plan Especial)</h3>
-            <p>Apoyo grupal y personalizado para ayudar a un borrego ligeramente viciosillo a elegir correctamente a la samaritana del amor ideal para la ocasión. Incluye consejos inútiles, opiniones  no solicitadas y validación colectiva de malas decisiones.</p>
+            <h3>Asistencia Emocional para Samaritanas del Amor (Plan Especial)</h3>
+            <p>Apoyo grupal y personalizado para ayudar a un borrego ligeramente viciosillo a elegir correctamente a la samaritana del amor ideal para la ocasión. Incluye consejos inútiles, opiniones no solicitadas y validación colectiva de malas decisiones.</p>
         </div>
         <div class="service-card brutal-border reveal reveal-up" style="background: var(--card-bg);">
             <h3>Retiro Espiritual en la Borregocueva</h3>
@@ -616,13 +614,11 @@
     <section id="inventario">
         <h2 class="section-title reveal reveal-left">Inventario</h2>
         <div class="grid-inventario reveal reveal-up">
-           
             <div class="item-inventario brutal-border">
                <img src="11.jpg" alt="Semáforo">
                 <p>Semáforo</p>
                 <span>23/02/2026</span>
             </div>
-           
         </div>
     </section>
 
@@ -661,14 +657,15 @@
         <div class="donaciones-container brutal-border reveal reveal-scale">
             <h3>Ayúdanos a comprar cosas inútiles</h3>
             <div class="donaciones-cajas">
-                <div class="magnetic-btn"><a href="https://www.paypal.com/paypalme/tuusuario/1" target="_blank" class="btn-donar" onclick="sumarDonacion(1)">1€</a></div>
-                <div class="magnetic-btn"><a href="https://www.paypal.com/paypalme/tuusuario/2" target="_blank" class="btn-donar" onclick="sumarDonacion(2)">2€</a></div>
-                <div class="magnetic-btn"><a href="https://www.paypal.com/paypalme/tuusuario/5" target="_blank" class="btn-donar" onclick="sumarDonacion(5)">5€</a></div>
+                <!-- REEMPLAZA ESTOS TRES ENLACES DE ABAJO POR TUS ENLACES REALES DE STRIPE -->
+                <div class="magnetic-btn"><a href="https://buy.stripe.com/14A9ASfB7flwe7b05ldZ601" target="_blank" class="btn-donar" onclick="sumarDonacion(1)">1€</a></div>
+                <div class="magnetic-btn"><a href="https://buy.stripe.com/00weVcex3gpA6EJ5pFdZ602" target="_blank" class="btn-donar" onclick="sumarDonacion(2)">2€</a></div>
+                <div class="magnetic-btn"><a href="https://buy.stripe.com/dRmfZg3Sp6P0gfj3hxdZ603" target="_blank" class="btn-donar" onclick="sumarDonacion(5)">5€</a></div>
             </div>
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
                 <div class="progreso-texto">
-                    Objetivo: Dildo (<span id="dineroRecaudado">0</span>€ / 300€)
+                    Objetivo: Tanque (<span id="dineroRecaudado">0</span>€ / 300€)
                 </div>
             </div>
         </div>
@@ -723,10 +720,10 @@
             document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
         }
 
-        // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK (SIN RESTRICCIONES)
+        // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
-        // 5. DONACIONES DESDE 0
+        // 5. DONACIONES
         let dineroActual = 0;
         function sumarDonacion(qty) {
             dineroActual += qty;
@@ -751,17 +748,15 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // EASTER EGG (Queso PRO que SÍ funciona)
+        // EASTER EGG
         document.getElementById('quesoBtn').addEventListener('click', (e) => {
-            e.stopPropagation(); // 👈 MUY IMPORTANTE
+            e.stopPropagation(); 
             const btn = e.currentTarget;
 
-            // Reset animación (por si se pulsa rápido)
             btn.classList.remove('queso-active');
-            void btn.offsetWidth; // fuerza reflow
+            void btn.offsetWidth; 
             btn.classList.add('queso-active');
 
-            // Lluvia de queso clara y visible
             for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     const q = document.createElement('div');
@@ -842,7 +837,7 @@
             setTimeout(function () {
                 beee.remove();
             }, 1000);
-        }, true); // captura global
+        }, true);
     </script>
 </body>
 </html>
