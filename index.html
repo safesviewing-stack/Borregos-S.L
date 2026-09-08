@@ -215,15 +215,26 @@
             100% { opacity: 0; transform: translate(-50%, -120px) scale(1.5) rotate(15deg); } 
         }
 
+        /* CONTACTO Y EMAIL (Ajustes para evitar recortes en móviles) */
+        .email-huge { 
+            font-size: clamp(1.2rem, 4.5vw, 3.5rem); 
+            color: var(--main-color); 
+            text-decoration: underline; 
+            transition: transform 0.3s, color 0.3s; 
+            display: inline-block; 
+            word-break: keep-all;
+            white-space: nowrap; 
+            max-width: 100%;
+        }
+        .email-huge:hover { color: var(--accent-color); transform: scale(1.02) rotate(-1deg); }
+
         /* FOOTER / CAOS */
         .chaos-btn-wrapper { text-align: center; padding: 4rem 2rem; background: var(--dark); border-top: 4px solid var(--main-color); width: 100%; }
         .btn-chaos { background: #ff003c; color: white; font-size: 1.5rem; font-weight: 900; padding: 2rem 4rem; border: 4px solid var(--bg-color); box-shadow: 10px 10px 0px var(--yellow); text-transform: uppercase; transition: transform 0.2s, background 0.2s; animation: pulse 2s infinite; cursor: pointer; max-width: 100%; }
         .btn-chaos:hover { transform: scale(1.05); background: #ff0055; box-shadow: 0px 0px 50px red; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        footer { background: var(--dark); color: var(--bg-color); padding: 6rem 2rem; text-align: center; width: 100%; }
-        .email-huge { font-size: clamp(1.5rem, 5vw, 4rem); color: var(--main-color); text-decoration: underline; word-break: break-all; transition: transform 0.3s, color 0.3s; display: inline-block; }
-        .email-huge:hover { color: var(--accent-color); transform: scale(1.05) rotate(-2deg); }
+        footer { background: var(--dark); color: var(--bg-color); padding: 3rem 2rem; text-align: center; width: 100%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
 
 
         /* EFECTO QUESO GLITCH */
@@ -555,9 +566,12 @@
             padding: 2rem 1.5rem;
           }
 
-          /* FOOTER */
+          /* CORREO EN MÓVIL (Escala estricta para forzar una única línea) */
           .email-huge {
-            font-size: 1.5rem;
+              font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important;
+              white-space: nowrap !important;
+              display: inline-block;
+              max-width: 100%;
           }
 
         }
@@ -586,6 +600,7 @@
         <a href="#inventario" onclick="toggleMenu()">Inventario</a>
         <a href="#blog" onclick="toggleMenu()">Blog</a>
         <a href="#donaciones" onclick="toggleMenu()">Donaciones</a>
+        <a href="#contacto" onclick="toggleMenu()">Contacto</a>
     </nav>
 
     <!-- INICIO -->
@@ -638,7 +653,7 @@
                 <h3>Luis Blasco-Ibáñez Berbel</h3>
             </div>
 
-            <div class="card-rebano brutal-border reveal reveal-scale 3d-card pablo-card"onclick="abrirPerfil('Borrego #8','La lió sin querer.','Este borrego es tranquilo, sencillo y de perfil bajo. No quiere jaleo, no busca ruido ni protagonismo… y sin embargo, por una ironía cruel del destino, fue indirectamente el creador de esta santa mierda de grupo. Todo empezó en su falla. Nadie lo planeó, nadie lo pidió, pero ahí se abrió el portal y ya no hubo vuelta atrás. Es fallero y amante del Valencia a más no poder, con todo lo que eso implica: pólvora en el alma, paciencia selectiva y una resistencia al alcohol claramente sobreestimada. Mucho cuidado si lo pillas borracho, porque no mide, no frena y no avisa: ambulancia directa, sin cinemáticas intermedias. Es el más humilde y amable del grupo, el que no levanta la voz, el que escucha, el que no busca conflicto. Pero no nos engañemos: hay algo ahí dentro. Una chispa. Un pequeño tirón hacia la maldad discreta, como quien no quiere la cosa. No lidera el caos, pero lo permite. Y a veces lo disfruta. El colmo ha sido la aparición de la novia. Desde entonces lleva correa. Rosita. Visible. Funcional. Sigue siendo él, pero ahora con horarios, responsabilidad emocional y mensajes de “avisa cuando llegues”. Aun así, no ha perdido su esencia, aunque lo estamos perdiendo, hay que hacer algo. Un borrego calmado, noble, peligrosamente fundamental. El origen silencioso del desastre. El que no quería nada… y lo empezó todo.')">
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card pablo-card"onclick="abrirPerfil('Borrego #8','La lió sin querer.','Este borrego es tranquilo, sencillo and de perfil bajo. No quiere jaleo, no busca ruido ni protagonismo… y sin embargo, por una ironía cruel del destino, fue indirectamente el creador de esta santa mierda de grupo. Todo empezó en su falla. Nadie lo planeó, nadie lo pidió, pero ahí se abrió el portal y ya no hubo vuelta atrás. Es fallero y amante del Valencia a más no poder, con todo lo que eso implica: pólvora en el alma, paciencia selectiva y una resistencia al alcohol claramente sobreestimada. Mucho cuidado si lo pillas borracho, porque no mide, no frena y no avisa: ambulancia directa, sin cinemáticas intermedias. Es el más humilde y amable del grupo, el que no levanta la voz, el que escucha, el que no busca conflicto. Pero no nos engañemos: hay algo ahí dentro. Una chispa. Un pequeño tirón hacia la maldad discreta, como quien no quiere la cosa. No lidera el caos, pero lo permite. Y a veces lo disfruta. El colmo ha sido la aparición de la novia. Desde entonces lleva correa. Rosita. Visible. Funcional. Sigue siendo él, pero ahora con horarios, responsabilidad emocional y mensajes de “avisa cuando llegues”. Aun así, no ha perdido su esencia, aunque lo estamos perdiendo, hay que hacer algo. Un borrego calmado, noble, peligrosamente fundamental. El origen silencioso del desastre. El que no quería nada… y lo empezó todo.')">
                 <img src="Pablo.jpg" alt="Pablo">
                 <h3>Pablo Gozalbo Chorro</h3>
             </div>
@@ -648,7 +663,7 @@
                 <h3>Leandro Fontana</h3>
             </div>
 
-            <div class="card-rebano brutal-border reveal reveal-scale 3d-card"onclick="abrirPerfil('Borrego #10','Está ahí.','Es el más pequeño del grupo, y se nota. No porque haga ruido ni intente demostrar nada —para nada, no es de esos—, sino porque carga con esa mezcla rara de estar todavía descifrando el manual de instrucciones de la vida y, al mismo tiempo, mirarte como si ya hubiera leído todos los spoilers y se estuviera riendo por dentro. Esa dualidad de “estoy aprendiendo” con mirada de “tranquilos, ya lo vi venir y va a ser divertido”. Siempre va vestido de negro y camina con ese aire de pensador atormentado, como si arrastrara el peso del universo… o quizá solo una mala decisión estética de 2017 que todavía no ha logrado desinstalar. Él cree que desprende estilo y flow natural; en su cabeza suena una banda sonora alternativa de fondo. En la realidad, proyecta un "confía en el proceso" tan intenso que no sabes si te está vendiendo café artesanal o preparándote para una crisis existencial express. Quiere imponer presencia, pero lo que despierta es ternura y ganas de arroparlo con una manta. Dan ganas de darle un bocadillo y preguntarle ha dormido bien. Tiene cara de pan. Pan artesano, del bueno: corteza crujiente, miga tierna. De ese que, aunque se empeñe, no intimida a nadie. Es alto y con ojos azules, detalle que lo ha salvado socialmente más veces de las que admitiría sin tartamudear. Porque el pelo… ese pelo es otro rollo. Lleva el corte estándar de "misterioso contemporáneo": ni acierto ni desastre, simplemente flota allí, como diciendo "déjame en paz, pero obsérvame". Como una pestaña abierta desde hace meses que nadie se atreve a cerrar por si acaso "es importante". No molesta, no genera debate. Está. Cumple horario. Punto. Es callado, tranquilo y —dato clave— siempre está atento. Aunque parezca distraído, no se le escapa nada. Mientras los demás hablan, él archiva. Mientras los demás reaccionan, él ya hizo tres análisis y medio. Tiene un radar silencioso que capta todo: gestos, cambios de ambiente, intenciones ocultas… sin levantar la voz, sin reclamar foco, sin hacer aspavientos. Está presente como el WiFi bueno: invisible hasta que falla, y entonces maldita sea, lo notas de inmediato. Y aunque parezca discreto, tiene más conocidas de las que cualquier ingenuo pensaría. Se mueve entre conversaciones como si nada, escucha más de lo que habla y genera confianza sin esfuerzo. No necesita brillar; simplemente cae bien. Es ese tipo de persona que cuando se va, alguien pregunta: "Oye, ¿y él?"… y nadie recuerda en qué momento se volvió indispensable. No lidera, no estorba, no marca el rumbo… pero siempre está ahí. Como ese personaje secundario que no parece clave hasta que te das cuenta de que sin él, la trama simplemente se cae a pedazos.')">
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card"onclick="abrirPerfil('Borrego #10','Está ahí.','Es el más pequeño del grupo, y se nota. No porque haga ruido ni intente demostrar nada —para nada, no es de esos—, sino porque carga con esa mezcla rara de estar todavía descifrando el manual de instrucciones de la vida y, al mismo tiempo, mirarte como si ya hubiera leído todos los spoilers y se estuviera riendo por dentro. Esa dualidad de “estoy aprendiendo” con mirada de “tranquilos, ya lo vi venir y va a ser divertido”. Siempre va vestido de negro y camina con ese aire de pensador atormentado, como si arrastrara el peso del universo… o quizá solo una mala decisión estética de 2017 que todavía no ha logrado desinstalar. Él cree que desprende estilo y flow natural; en su cabeza suena una banda sonora alternativa de fondo. En la realidad, proyecta un "confía en el proceso" tan intenso que no sabes si te está vendiendo café artesanal o preparándote para una crisis existencial express. Quiere imponer presencia, pero lo que despierta es ternura y ganas de arroparlo con una manta. Dan ganas de darle un bocadillo y preguntarle ha dormido bien. Tiene cara de pan. Pan artesano, del bueno: corteza crujiente, miga tierna. De ese que, aunque se empeñe, no intimida a nadie. Es alto y con ojos azules, detalle que lo ha salvado socialmente más veces de las que admitiría sin tartamudear. Porque el pelo… ese pelo es otro rollo. Lleva el corte estándar de "misterioso contemporáneo": ni acierto ni desastre, simplemente flota allí, como diciendo "déjame en paz, pero obsérvame". Como una pestaña abierta desde hace meses que nadie se atreve a cerrar por si acaso "es importante". No molesta, no genera debate. Está. Cumple horario. Punto. Es callado, tranquilo y —dato clave— siempre está atento. Aunque parezca de distraído, no se le escapa nada. Mientras los demás hablan, él archiva. Mientras los demás reaccionan, él ya hizo tres análisis y medio. Tiene un radar silencioso que capta todo: gestos, cambios de ambiente, intenciones ocultas… sin levantar la voz, sin reclamar foco, sin hacer aspavientos. Está presente como el WiFi bueno: invisible hasta que falla, y entonces maldita sea, lo notas de inmediato. Y aunque parezca discreto, tiene más conocidas de las que cualquier ingenuo pensaría. Se mueve entre conversaciones como si nada, escucha más de lo que habla y genera confianza sin esfuerzo. No necesita brillar; simplemente cae bien. Es ese tipo de persona que cuando se va, alguien pregunta: "Oye, ¿y él?"… y nadie recuerda en qué momento se volvió indispensable. No lidera, no estorba, no marca el rumbo… pero siempre está ahí. Como ese personaje secundario que no parece clave hasta que te das cuenta de que sin él, la trama simplemente se cae a pedazos.')">
                 <img src="Adrian.jpg" alt="Adrian">
                 <h3>Adrian Fernandez Núñez</h3>
             </div>
@@ -771,17 +786,26 @@
         </div>
     </section>
 
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <h2 class="section-title reveal reveal-left">Contacto</h2>
+        <div class="about-text brutal-border reveal reveal-up" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">¿Tienes algo que decirnos?</p>
+            <p style="margin-bottom: 2rem; opacity: 0.8;">Insúltanos, proponnos un negocio inútil o simplemente dinos algo. Respondemos (a veces).</p>
+            <div class="magnetic-btn reveal reveal-up">
+                <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
     <!-- BOTÓN CAOS -->
     <div class="chaos-btn-wrapper">
         <button class="btn-chaos" onclick="iniciarDestruccion(this)">NO PULSAR (AUTODESTRUCCIÓN)</button>
     </div>
 
     <!-- FOOTER -->
-    <footer id="contacto">
-        <h2 class="reveal reveal-up">Insúltanos aquí</h2>
-        <div class="magnetic-btn reveal reveal-up" style="margin-top:1rem;">
-            <a href="mailto:Borregoasqueroso@gmail.com" class="email-huge">Borregoasqueroso@gmail.com</a>
-        </div>
+    <footer>
+        <p>&copy; 2026 Borregos S.L. Todos los derechos borreguiles reservados.</p>
     </footer>
 
     <!-- JAVASCRIPT: MAGIA Y CAOS -->
@@ -904,13 +928,17 @@
                     document.body.innerHTML = ''; 
                     const msj = document.createElement('div');
                     msj.innerHTML = `
-                        <h1 style="font-size: clamp(3rem, 15vw, 10rem); color: red; text-align: center; line-height: 0.9; margin-bottom: 2rem;">SISTEMA<br>DESTRUIDO</h1>
-                        <p style="color: white; font-size: 2rem; text-align: center;">Pulsa F5 (Actualizar página) para reiniciar, borrego.</p>
+                        <h1 style="font-size: clamp(2.5rem, 10vw, 6rem); color: red; text-align: center; line-height: 1.1; margin-bottom: 2rem; font-family: 'Space Grotesk', sans-serif; font-weight: 900;">SISTEMA<br>DESTRUIDO</h1>
+                        <p style="color: white; font-size: 1.5rem; text-align: center; font-family: 'Space Grotesk', sans-serif; margin-bottom: 2rem;">Refresca para reiniciar, borrego.</p>
+                        <button onclick="location.reload()" style="background: #fffb00; color: #111111; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.5rem; padding: 1.5rem 3rem; border: 4px solid #ffffff; box-shadow: 8px 8px 0px red; text-transform: uppercase; cursor: pointer; transition: transform 0.2s;">REFRESCAR PÁGINA</button>
                     `;
                     msj.style.position = 'fixed'; msj.style.top = '0'; msj.style.left = '0';
                     msj.style.width = '100vw'; msj.style.height = '100vh';
                     msj.style.display = 'flex'; msj.style.flexDirection = 'column';
                     msj.style.justifyContent = 'center'; msj.style.alignItems = 'center';
+                    msj.style.backgroundColor = 'black';
+                    msj.style.padding = '2rem';
+                    msj.style.boxSizing = 'border-box';
                     document.body.appendChild(msj);
                 }, 1500);
 
