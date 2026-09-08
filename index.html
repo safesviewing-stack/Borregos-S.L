@@ -211,7 +211,7 @@
         .service-card:hover::before { left: 100%; }
 
         .grid-inventario { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; width: 100%; }
-        .item-inventario { background: var(--card-bg); color: var(--text-dark); padding: 1rem; transition: transform 0.3s; text-align: center; width: 100%; }
+        .item-inventario { background: var(--card-bg); color: var(--text-dark); padding: 1rem; transition: transform 0.3; text-align: center; width: 100%; }
         .item-inventario img { width: 100%; height: 200px; object-fit: cover; border: 4px solid var(--dark); transition: transform 0.4s ease; height: 300px;  }
         .item-inventario:hover img { transform: scale(1.05) rotate(2deg); }
 
@@ -230,26 +230,6 @@
         .progreso-wrapper { width: 100%; height: 50px; background: var(--dark); border: 4px solid var(--bg-color); margin-top: 2rem; position: relative; overflow: hidden; }
         .progreso-barra { height: 100%; width: 0%; background: var(--yellow); transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
         .progreso-texto { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; font-size: 1.2rem; color: var(--bg-color); width: 100%; z-index: 2;}
-
-        /* EFECTOS VISUALES CLICK Y QUESO */
-        .drop-fx { position: fixed; font-size: 2.5rem; z-index: 9999; animation: fall 3s linear forwards; pointer-events: none; }
-        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-
-        /* EL BEEEEEE GIGANTE */
-        .beee-text { 
-            position: fixed; 
-            pointer-events: none; 
-            font-weight: 900; 
-            z-index: 999999; 
-            animation: floatup 1s ease-out forwards; 
-            font-size: 3.5rem; 
-            text-shadow: 3px 3px 0 #000;
-            transform: translate(-50%, -50%); 
-        }
-        @keyframes floatup { 
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-10deg); } 
-            100% { opacity: 0; transform: translate(-50%, -120px) scale(1.5) rotate(15deg); } 
-        }
 
         /* CONTACTO Y EMAIL (Ajustes para evitar recortes en móviles, negrita y sin subrayar) */
         .email-huge { 
@@ -717,7 +697,7 @@
                 <h3>Luis Blasco-Ibáñez Berbel</h3>
             </div>
 
-            <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #8','La lió sin querer.','Este borrego es tranquilo, sencillo and de perfil bajo. No quiere jaleo, no busca ruido ni protagonismo… y sin embargo, por una ironía cruel del destino, fue indirectamente el creador de esta santa mierda de grupo. Todo empezó en su falla. Nadie lo planeó, nadie lo pidió, pero ahí se abrió el portal y ya no hubo vuelta atrás. Es fallero y amante del Valencia a más no poder, con todo lo que eso implica: pólvora en el alma, paciencia selectiva y una resistencia al alcohol claramente sobreestimada. Mucho cuidado si lo pillas borracho, porque no mide, no frena und no avisa: ambulancia directa, sin cinemáticas intermedias. Es el más humilde y amable del grupo, el que no levanta la voz, el que escucha, el que no busca conflicto. Pero no nos engañemos: hay algo ahí dentro. Una chispa. Un pequeño tirón hacia la maldad discreta, como quien no quiere la cosa. No lidera el caos, pero lo permite. Y a veces lo disfruta. El colmo ha sido la aparición de la novia. Desde entonces lleva correa. Rosita. Visible. Funcional. Sigue siendo él, pero ahora con horarios, responsibility emocional y mensajes de “avisa cuando llegues”. Aun así, no ha perdido su esencia, aunque lo estamos perdiendo, hay que hacer algo. Un borrego calmado, noble, peligrosamente fundamental. El origen silencioso del desastre. El que no quería nada… y lo empezó todo.')">
+            <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #8','La lió sin querer.','Este borrego es tranquilo, sencillo and de perfil bajo. No quiere jaleo, no busca ruido ni protagonismo… y sin embargo, por una ironía cruel del destino, fue indirectamente el creador de esta santa mierda de grupo. Todo empezó en su falla. Nadie lo planeó, nadie lo pidió, pero ahí se abrió el portal y ya no hubo vuelta atrás. Es fallero y amante del Valencia a más no poder, con todo lo que eso implica: pólvora en el alma, paciencia selectiva y una resistencia al alcohol claramente sobreestimada. Mucho cuidado si lo pillas borracho, porque no mide, no frena und no avisa: ambulancia directa, sin cinemáticas intermedias. Es el más humilde y amable del grupo, el que no levanta la voz, el que escucha, el que no busca conflicto. Pero no nos engañemos: hay algo ahí dentro. Una chispa. Un pequeño tirón hacia la maldad discreta, como quien no quiere la cosa. No lidera el caos, pero lo permite. Y a veces lo disfruta. El colmo ha sido la aparición de la novia. Desde entonces lleva correa. Rosita. Visible. Funcional. Sigue siendo él, pero ahora con horarios, responsabilidad emocional y mensajes de “avisa cuando llegues”. Aun así, no ha perdido su esencia, aunque lo estamos perdiendo, hay que hacer algo. Un borrego calmado, noble, peligrosamente fundamental. El origen silencioso del desastre. El que no quería nada… y lo empezó todo.')">
                 <img src="Pablo.jpg" alt="Pablo" class="pablo-img">
                 <h3>Pablo Gozalbo Chorro</h3>
             </div>
@@ -742,7 +722,7 @@
                 <h3>Cobarde.2</h3>
             </div>
 
-            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justificar exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y ampliando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
+            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justificar exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y ambiando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
                 <img src="Ruben.jpg" alt="Rubén Herranz" class="ruben-img">
                 <h3>Rubén Herranz</h3>
             </div>
@@ -842,8 +822,8 @@
             </div>
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
-                <div class="progreso-texto">
-                    Objetivo: Tanque (<span id="dineroRecaudado">0</span>€ / 100€)
+                <div class="progreso-texto" id="progresoTexto">
+                    Objetivo: Dildo gigante (<span id="dineroRecaudado">0</span>€ / 100€)
                 </div>
             </div>
         </div>
@@ -905,21 +885,51 @@
         // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
-        // 5. DONACIONES
-        let dineroActual = 0;
+        // 5. DONACIONES PERSISTENTES CON ROTACIÓN DE OBJETIVOS [Cargadas y guardadas vía localStorage]
+        const objetivos = [
+            "Dildo gigante [99% completado]",
+            "Alquilar un tanque",
+            "Kebab gigante para el rebaño",
+            "Carnet del 33%",
+            "Pene de goma para la borregueta",
+            "Fianza judicial preventiva"
+        ];
+
+        let dineroActual = parseFloat(localStorage.getItem('borregos_dinero')) || 0;
+        let objetivoIndex = parseInt(localStorage.getItem('borregos_objetivo_index')) || 0;
+
         function sumarDonacion(qty) {
             dineroActual += qty;
-            document.getElementById('barraProgreso').style.width = Math.min((dineroActual / 300) * 100, 100) + '%';
-            document.getElementById('dineroRecaudado').innerText = dineroActual;
             
-            const billet = document.createElement('div');
-            billet.textContent = '💸';
-            billet.className = 'drop-fx';
-            billet.style.left = Math.random() * 90 + 'vw';
-            document.body.appendChild(billet);
-            setTimeout(() => billet.remove(), 3000);
+            // Lógica de rotación de objetivos con traspaso de sobrante
+            while (dineroActual >= 100) {
+                dineroActual -= 100;
+                objetivoIndex = (objetivoIndex + 1) % objetivos.length;
+            }
+
+            localStorage.setItem('borregos_dinero', dineroActual);
+            localStorage.setItem('borregos_objetivo_index', objetivoIndex);
+
+            actualizarUI();
+            
+            if (qty > 0) {
+                const billet = document.createElement('div');
+                billet.textContent = '💸';
+                billet.className = 'drop-fx';
+                billet.style.left = Math.random() * 90 + 'vw';
+                document.body.appendChild(billet);
+                setTimeout(() => billet.remove(), 3000);
+            }
         }
-        sumarDonacion(0); 
+
+        function actualizarUI() {
+            const objetivoActual = objetivos[objetivoIndex];
+            document.getElementById('barraProgreso').style.width = dineroActual + '%';
+            document.getElementById('progresoTexto').innerHTML = `Objetivo: ${objetivoActual} (<span id="dineroRecaudado">${dineroActual}</span>€ / 100€)`;
+        }
+
+        // Inicializar UI al cargar con los datos persistidos
+        actualizarUI();
 
         // 6. PERFIL INSTANTÁNEO
         function abrirPerfil(nombre, sub, texto) {
