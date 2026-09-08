@@ -84,7 +84,6 @@
         .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
         /* MENU LATERAL (MÁS BAJO Y COMPACTO) */
-        /* padding-top ha subido de 6rem a 12rem para bajar los títulos */
         .side-panel { position: fixed; top: 0; right: -100%; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 12rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
         .side-panel.open { right: 0; }
         .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: transform 0.3s ease, color 0.3s ease; display: block; }
@@ -113,25 +112,26 @@
         
         .adrian-card:hover img,
         .cobarde1-card:hover img,
-        .cobarde2-card:hover img {
+        .cobarde2-card:hover img,
+        .ruben-card:hover img {
           transform: translateY(-12px) translateZ(40px) scale(1.02);
-}
+        }
         .card-rebano:hover { background: var(--accent-color); color: var(--text-light); }
-       .card-rebano img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    object-position: center 18%;
-    border: 4px solid var(--dark);
-    margin-bottom: 1rem;
-    filter: grayscale(100%);
-    transition: filter 0.3s, transform 0.3s;
-    transform: translateZ(20px);
-}
-.card-rebano:hover img {
-    filter: grayscale(0%);
-     transform: translateY(0) translateZ(20px);
-}
+        .card-rebano img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center 18%;
+            border: 4px solid var(--dark);
+            margin-bottom: 1rem;
+            filter: grayscale(100%);
+            transition: filter 0.3s, transform 0.3s;
+            transform: translateZ(20px);
+        }
+        .card-rebano:hover img {
+            filter: grayscale(0%);
+            transform: translateY(0) translateZ(20px);
+        }
 
         /* MODAL INSTANTÁNEO */
         .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; }
@@ -196,146 +196,134 @@
         .email-huge:hover { color: var(--accent-color); transform: scale(1.05) rotate(-2deg); }
 
 
-/* EFECTO QUESO GLITCH */
-@keyframes queso-glitch {
-    0% { transform: scale(1) rotate(0deg); }
-    20% { transform: scale(1.1) rotate(-2deg); }
-    40% { transform: scale(0.95) rotate(2deg); }
-    60% { transform: scale(1.15) rotate(-1deg); }
-    80% { transform: scale(1.05) rotate(1deg); }
-    100% { transform: scale(1) rotate(0deg); }
-}
+        /* EFECTO QUESO GLITCH */
+        @keyframes queso-glitch {
+            0% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.1) rotate(-2deg); }
+            40% { transform: scale(0.95) rotate(2deg); }
+            60% { transform: scale(1.15) rotate(-1deg); }
+            80% { transform: scale(1.05) rotate(1deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
 
-.queso-active {
-    animation: queso-glitch 0.4s ease-in-out;
-    color: var(--yellow);
-    text-shadow:
-        3px 3px 0 var(--main-color),
-        -3px -3px 0 var(--accent-color);
-}
+        .queso-active {
+            animation: queso-glitch 0.4s ease-in-out;
+            color: var(--yellow);
+            text-shadow:
+                3px 3px 0 var(--main-color),
+                -3px -3px 0 var(--accent-color);
+        }
 
-/* EFECTO QUESO BOOST */
-@keyframes queso-punch {
-    0%   { transform: scale(1) rotate(0deg); }
-    25%  { transform: scale(1.2) rotate(-3deg); }
-    50%  { transform: scale(0.9) rotate(3deg); }
-    75%  { transform: scale(1.1) rotate(-2deg); }
-    100% { transform: scale(1) rotate(0deg); }
-}
+        /* EFECTO QUESO BOOST */
+        @keyframes queso-punch {
+            0%   { transform: scale(1) rotate(0deg); }
+            25%  { transform: scale(1.2) rotate(-3deg); }
+            50%  { transform: scale(0.9) rotate(3deg); }
+            75%  { transform: scale(1.1) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
 
-#quesoBtn.queso-active {
-    animation: queso-punch 0.45s ease;
-    color: var(--yellow);
-    text-shadow:
-        4px 4px 0 var(--main-color),
-        -4px -4px 0 var(--accent-color);
-}
-
+        #quesoBtn.queso-active {
+            animation: queso-punch 0.45s ease;
+            color: var(--yellow);
+            text-shadow:
+                4px 4px 0 var(--main-color),
+                -4px -4px 0 var(--accent-color);
+        }
 
         #quesoBtn {
-    cursor: pointer;
-    pointer-events: auto;
-    position: relative;
-    z-index: 10;
-}
+            cursor: pointer;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
+        }
 
+        header {
+            pointer-events: auto;
+        }
 
+        /* --- BLOG CAROUSEL --- */
+        .carousel-wrapper {
+          position: relative;
+          padding: 2rem;
+          background: var(--card-bg);
+          overflow: hidden;
+        }
 
-header {
-    pointer-events: auto;
-}
+        .carousel {
+          display: flex;
+          gap: 1.5rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+        }
+        .carousel::-webkit-scrollbar {
+          display: none;
+        }
 
-#quesoBtn {
-    pointer-events: auto;
-}
+        .carousel-item {
+          min-width: 80%;
+          height: 750px;
+          background-size: cover;
+          background-position: center;
+          border: 4px solid var(--dark);
+          flex-shrink: 0;
+          transition: transform 0.3s ease;
+        }
+        .carousel-item:hover {
+          transform: scale(1.02);
+        }
 
+        .carousel-item.video {
+          background: var(--dark);
+          color: var(--text-light);
+          font-size: 3rem;
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-/* --- BLOG CAROUSEL --- */
-.carousel-wrapper {
-  position: relative;
-  padding: 2rem;
-  background: var(--card-bg);
-  overflow: hidden;
-}
+        /* BOTONES */
+        .carousel-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: var(--yellow);
+          border: 4px solid var(--dark);
+          font-size: 3rem;
+          font-weight: 900;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          z-index: 5;
+          box-shadow: 6px 6px 0 var(--dark);
+        }
+        .carousel-btn.left { left: 1rem; }
+        .carousel-btn.right { right: 1rem; }
 
-.carousel {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-.carousel::-webkit-scrollbar {
-  display: none;
-}
+        .carousel-btn:hover {
+          transform: translateY(-50%) scale(1.05);
+        }
 
-.carousel-item {
-  min-width: 80%;
-  height: 750px;
-  background-size: cover;
-  background-position: center;
-  border: 4px solid var(--dark);
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-.carousel-item:hover {
-  transform: scale(1.02);
-}
+        .david-card img {
+            object-position: center 50%; 
+        }
 
-.carousel-item.video {
-  background: var(--dark);
-  color: var(--text-light);
-  font-size: 3rem;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* BOTONES */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--yellow);
-  border: 4px solid var(--dark);
-  font-size: 3rem;
-  font-weight: 900;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  z-index: 5;
-  box-shadow: 6px 6px 0 var(--dark);
-}
-.carousel-btn.left { left: 1rem; }
-.carousel-btn.right { right: 1rem; }
-
-.carousel-btn:hover {
-  transform: translateY(-50%) scale(1.05);
-}
-
-.david-card img {
-    object-position: center 50%; /* prueba 0%, 5%, 10% */
-}
-
-
-
-.jos-card img {
-    object-position: center 20%; /* ajusta: 0%–15% */
-}
-
+        .jos-card img {
+            object-position: center 20%; 
+        }
 
         .leandro-card img {
-    object-position: center 0%; /* más porcentaje = más abajo */
-}
+            object-position: center 0%; 
+        }
 
         .luis-card img {
-    object-position: center 16%; /* prueba 15%–40% */
-}
-
+            object-position: center 16%; 
+        }
 
         .pablo-card img {
-    object-position: center 0%; /* ajusta: 0%–15% */
-}
+            object-position: center 0%; 
+        }
 
         /* RESET */
         * {
@@ -371,104 +359,110 @@ header {
                 opacity: 0;
                 transform: translate(-50%, -120px) scale(1.4);
             }
+        }
 
 
-            .cobarde1-card img {
-    object-position: center -20%;
-}
+        .cobarde1-card img {
+            object-position: center -20%;
+        }
+
+        .ruben-card img {
+            object-position: center 15%;
+        }
 
         .adrian-card img,
-.cobarde1-card img,
-.cobarde2-card img {
-    transform-origin: center top;
-}
+        .cobarde1-card img,
+        .cobarde2-card img,
+        .ruben-card img {
+            transform-origin: center top;
+        }
 
 
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
 
-  /* GENERAL */
-  section {
-    padding: 4rem 1.2rem;
-  }
+          /* GENERAL */
+          section {
+            padding: 4rem 1.2rem;
+          }
 
-  h1 {
-    font-size: clamp(3rem, 12vw, 5rem);
-    text-shadow: 4px 4px 0 var(--main-color);
-  }
+          h1 {
+            font-size: clamp(3rem, 12vw, 5rem);
+            text-shadow: 4px 4px 0 var(--main-color);
+          }
 
-  .subtitle {
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-  }
+          .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+          }
 
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
+          .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+          }
 
-  /* DESACTIVAR EFECTOS MOLESTOS EN TOUCH */
-  .magnetic-btn *,
-  .3d-card {
-    transform: none !important;
-  }
+          /* DESACTIVAR EFECTOS MOLESTOS EN TOUCH */
+          .magnetic-btn *,
+          .3d-card {
+            transform: none !important;
+          }
 
-  .card-rebano:hover {
-    background: var(--card-bg);
-    color: var(--text-dark);
-  }
+          .card-rebano:hover {
+            background: var(--card-bg);
+            color: var(--text-dark);
+          }
 
-  /* REBAÑO */
-  .card-rebano img {
-    height: 200px;
-  }
+          /* REBAÑO */
+          .card-rebano img {
+            height: 200px;
+          }
 
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
+          .grid-3 {
+            grid-template-columns: 1fr;
+          }
 
-  /* TEXTO */
-  .about-text {
-    padding: 1.5rem;
-    font-size: 0.95rem;
-    text-align: left;
-  }
+          /* TEXTO */
+          .about-text {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            text-align: left;
+          }
 
-  /* MENÚ LATERAL */
-  .side-panel {
-    padding-top: 8rem;
-  }
+          /* MENÚ LATERAL */
+          .side-panel {
+            padding-top: 8rem;
+          }
 
-  .side-panel a {
-    font-size: 1.4rem;
-  }
+          .side-panel a {
+            font-size: 1.4rem;
+          }
 
-  /* BLOG */
-  .carousel-item {
-    min-width: 90%;
-    height: 320px;
-  }
+          /* BLOG */
+          .carousel-item {
+            min-width: 90%;
+            height: 320px;
+          }
 
-  .carousel-btn {
-    font-size: 2rem;
-    padding: 0.3rem 0.6rem;
-  }
+          .carousel-btn {
+            font-size: 2rem;
+            padding: 0.3rem 0.6rem;
+          }
 
-  /* DONACIONES */
-  .donaciones-container {
-    padding: 2rem 1rem;
-  }
+          /* DONACIONES */
+          .donaciones-container {
+            padding: 2rem 1rem;
+          }
 
-  .btn-donar {
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-  }
+          .btn-donar {
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+          }
 
-  /* FOOTER */
-  .email-huge {
-    font-size: 1.6rem;
-  }
+          /* FOOTER */
+          .email-huge {
+            font-size: 1.6rem;
+          }
 
-}
+        }
     </style>
 </head>
 <body>
@@ -560,7 +554,8 @@ header {
                 <img src="Adrian.jpg" alt="Adrian">
                 <h3>Adrian Fernandez Núñez</h3>
             </div>
-            <div class="card-rebano brutal-border reveal reveal-scale 3d-card cobarde1-card"onclick="abrirPerfil('Borrego #11','Experto en todo, profesional en nada.','Existe entre nosotros una figura casi mitológica, tan discreta que ha decidido no aparecer en la web. No por modestia, sino por una valentía selectiva que solo se activa cuando nadie mira. Un espíritu libre del esfuerzo, un nini vocacional, orgulloso defensor del noble arte de no hacer absolutamente nada… y hacerlo con convicción. Heredero natural del todo resuelto, es el clásico niño de papi y mami, aunque él prefiere verse como un pensador independiente. Una especie de Xokas, pero sin streaming, sin comunidad y, sobre todo, sin haber farmeado nada en la vida real. Mucha opinión, mucha seguridad… y cero currículum. Especialista en todo sin haber profundizado en nada, destaca especialmente en el mundo del automóvil: cuida el coche —que curiosamente no es suyo, aunque él lo sienta así— con una devoción casi religiosa. Lo lava cada semana como si el dinero le cayera del cielo, y lo protege con el celo de quien ha confundido posesión con préstamo indefinido. No sería raro que, en una conversación relajada, afirmara con total naturalidad que es suyo. Y se quedara tan ancho. No estudia ni trabaja, aunque lo intentó. Brevemente. El tiempo justo para explicar durante años lo extremadamente duro que fue aquello que estudió (no lo era) y lo exigente que fue aquel trabajo del que no llegó a cumplir ni medio año. Pero cuidado: la épica no se mide en duración, sino en la intensidad con la que se exagera. Fantasma por definición, también es de los que se apuntan al gimnasio, se hacen la foto el primer día —no se sabe muy bien de qué presume— y desaparecen para siempre, dejando tras de sí solo una story borrosa y una autoestima intacta. En resumen: un perfil tan etéreo, tan opinador y tan poco tangible, que entendemos perfectamente su decisión de no salir en la web. Hay ausencias que también comunican.')">
+            
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card cobarde1-card"onclick="abrirPerfil('Borrego #11','Experto en todo, profesional en nada.','Experto en todo, profesional en nada. Existente entre nosotros una figura casi mitológica, tan discreta que ha decidido no aparecer en la web. No por modestia, sino por una valentía selectiva que solo se activa cuando nadie mira. Un espíritu libre del esfuerzo, un nini vocacional, orgulloso defensor del noble arte de no hacer absolutamente nada… y hacerlo con convicción. Heredero natural del todo resuelto, es el clásico niño de papi y mami, aunque él prefiere verse como un pensador independiente. Una especie de Xokas, pero sin streaming, sin comunidad y, sobre todo, sin haber farmeado nada en la vida real. Mucha opinión, mucha seguridad… y cero currículum. Especialista en todo sin haber profundizado en nada, destaca especialmente en el mundo del automóvil: cuida el coche —que curiosamente no es suyo, aunque él lo sienta así— con una devoción casi religiosa. Lo lava cada semana como si el dinero le cayera del cielo, y lo protege con el celo de quien ha confundido posesión con préstamo indefinido. No sería raro que, en una conversación relajada, afirmara con total naturalidad que es suyo. Y se quedara tan ancho. No estudia ni trabaja, aunque lo intentó. Brevemente. El tiempo justo para explicar durante años lo extremadamente duro que fue aquello que estudió (not lo era) y lo exigente que fue aquel trabajo del que no llegó a cumplir ni medio año. Pero cuidado: la épica no se mide en duración, sino en la intensidad con la que se exagera. Fantasma por definición, también es de los que se apuntan al gimnasio, se hacen la foto el primer día —no se sabe muy bien de qué presume— y desaparecen para siempre, dejando tras de sí solo una story borrosa y una autoestima intacta. En resumen: un perfil tan etéreo, tan opinador y tan poco tangible, que entendemos perfectamente su decisión de no salir en la web. Hay ausencias que también comunican.')">
                 <img src="Cobarde1.jpg" alt="Cobarde.1">
                 <h3>Cobarde.1</h3>
             </div>
@@ -568,6 +563,12 @@ header {
             <div class="card-rebano brutal-border reveal reveal-scale 3d-card"onclick="abrirPerfil('Borrego #12','Habla por hablar','El segundo integrante ausente es un personaje de presencia intensa, con un rostro severo y mirada de juicio permanente, como si estuviera siempre a punto de proclamar alguna norma incomprensible. No sale en la web, quizá porque su carisma necesita contexto… o porque intimida más en persona con la cara de terrorista que me lleva. A diferencia del anterior, este sí trabaja y estudia. O al menos lo intenta. Estudia el carné de conducir, que ya se le está atravesando como si fuera ingeniería aeroespacial. Tampoco queda muy claro para qué lo quiere, porque no hace más que hablar —insistentemente— de su patinete. El patinete es su religión, su identidad y, en ocasiones, su forma de vida. Le gusta tanto que incluso disfruta cuando le ponen multas, como si fueran medallas al mérito urbano. Cuando va subido a él, adopta skin de piloto de Fórmula 1: casco imaginario, postura agresiva y actitud de clasificación oficial, aunque esté recorriendo la misma acera de siempre. Cada trayecto es una carrera. Cada semáforo, un rival. Es un pesado en potencia. Ya había uno en el grupo, pero al menos ese decía cosas. Este no. Este habla sin motivo aparente, y cuando termina no sabes muy bien para qué ha empezado, pero ahí queda, flotando en el ambiente. Lleva no se sabe cuántos años yendo al gimnasio, fiel, constante y absolutamente inmóvil en el progreso. Repite el mismo ejercicio desde tiempos inmemoriales, con resultados idénticos: brazo igual, espalda igual… y de las piernas, mejor no abrir ese melón. Digamos que no entrenan porque no quieren destacar. En definitiva, otro perfil que entendemos que prefiera no aparecer en la web. No por falta de presencia, sino porque hay personalidades que se disfrutan mejor… en pequeñas dosis.')">
                 <img src="Cobarde2.jpg" alt="Cobarde.2">
                 <h3>Cobarde.2</h3>
+            </div>
+
+            <!-- NUEVO INTEGRANTE: RUBÉN HERRANZ -->
+            <div class="card-rebano brutal-border reveal reveal-scale 3d-card ruben-card" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justificar exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y ampliando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
+                <img src="Ruben.jpg" alt="Rubén Herranz">
+                <h3>Rubén Herranz</h3>
             </div>
         </div>
     </section>
@@ -578,7 +579,7 @@ header {
             <button class="close-btn" onclick="cerrarPerfil()">X CERRAR</button>
             <h2 id="perfilNombre" style="font-size: 3rem; margin-bottom: 0.5rem;">Nombre</h2>
             <h4 id="perfilSub" style="color: var(--main-color); margin-bottom: 1.5rem; font-size: 1.5rem;">Sub</h4>
-            <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6;">Texto</p>
+            <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6; white-space: pre-wrap;">Texto</p>
         </div>
     </div>
 
@@ -627,32 +628,32 @@ header {
 
     <!-- BLOG -->
     <section id="blog">
-  <h2 class="section-title reveal reveal-left">Blog / Archivos</h2>
+      <h2 class="section-title reveal reveal-left">Blog / Archivos</h2>
 
-  <div class="carousel-wrapper brutal-border reveal reveal-up">
-    <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
+      <div class="carousel-wrapper brutal-border reveal reveal-up">
+        <button class="carousel-btn left" onclick="scrollCarousel(-1)">‹</button>
 
-    <div class="carousel" id="blogCarousel">
-      <div class="carousel-item" style="background-image:url('1.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('2.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('3.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('4.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('5.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('6.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('8.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('9.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('10.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('12.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('13.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('14.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('15.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('16.jpg')"></div>
-      <div class="carousel-item" style="background-image:url('17.jpg')"></div>
-    </div>
+        <div class="carousel" id="blogCarousel">
+          <div class="carousel-item" style="background-image:url('1.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('2.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('3.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('4.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('5.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('6.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('8.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('9.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('10.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('12.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('13.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('14.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('15.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('16.jpg')"></div>
+          <div class="carousel-item" style="background-image:url('17.jpg')"></div>
+        </div>
 
-    <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
-  </div>
-</section>
+        <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
+      </div>
+    </section>
 
     <!-- DONACIONES -->
     <section id="donaciones">
@@ -725,8 +726,6 @@ header {
         // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK (SIN RESTRICCIONES)
         const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
 
-
-
         // 5. DONACIONES DESDE 0
         let dineroActual = 0;
         function sumarDonacion(qty) {
@@ -753,31 +752,29 @@ header {
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
         // EASTER EGG (Queso PRO que SÍ funciona)
-document.getElementById('quesoBtn').addEventListener('click', (e) => {
+        document.getElementById('quesoBtn').addEventListener('click', (e) => {
+            e.stopPropagation(); // 👈 MUY IMPORTANTE
+            const btn = e.currentTarget;
 
-    e.stopPropagation(); // 👈 MUY IMPORTANTE
+            // Reset animación (por si se pulsa rápido)
+            btn.classList.remove('queso-active');
+            void btn.offsetWidth; // fuerza reflow
+            btn.classList.add('queso-active');
 
-    const btn = e.currentTarget;
+            // Lluvia de queso clara y visible
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const q = document.createElement('div');
+                    q.textContent = '🧀';
+                    q.className = 'drop-fx';
+                    q.style.left = Math.random() * 100 + 'vw';
+                    q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
+                    document.body.appendChild(q);
+                    setTimeout(() => q.remove(), 3500);
+                }, i * 60);
+            }
+        });
 
-    // Reset animación (por si se pulsa rápido)
-    btn.classList.remove('queso-active');
-    void btn.offsetWidth; // fuerza reflow
-    btn.classList.add('queso-active');
-
-    // Lluvia de queso clara y visible
-    for (let i = 0; i < 25; i++) {
-        setTimeout(() => {
-            const q = document.createElement('div');
-            q.textContent = '🧀';
-            q.className = 'drop-fx';
-            q.style.left = Math.random() * 100 + 'vw';
-            q.style.fontSize = (Math.random() * 2.5 + 2) + 'rem';
-            document.body.appendChild(q);
-            setTimeout(() => q.remove(), 3500);
-        }, i * 60);
-    }
-
-});
         // 7. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
             if(btn.classList.contains('exploded')) return; 
@@ -823,17 +820,13 @@ document.getElementById('quesoBtn').addEventListener('click', (e) => {
             }, 2000);
         }
 
-
-
         function scrollCarousel(direction) {
-  const carousel = document.getElementById('blogCarousel');
-  const scrollAmount = carousel.offsetWidth * 0.9;
-  carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-}
+          const carousel = document.getElementById('blogCarousel');
+          const scrollAmount = carousel.offsetWidth * 0.9;
+          carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
 
-
-window.addEventListener('pointerdown', function (e) {
-
+        window.addEventListener('pointerdown', function (e) {
             const beee = document.createElement('div');
             beee.className = 'beee';
             beee.textContent = 'BEEEEEE';
@@ -849,7 +842,6 @@ window.addEventListener('pointerdown', function (e) {
             setTimeout(function () {
                 beee.remove();
             }, 1000);
-
         }, true); // captura global
     </script>
 </body>
