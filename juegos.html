@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Borregos S.L. | Juegos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #f4f4f0; --main-color: #ff2a5f; --dark: #111111; --yellow: #fffb00;}
+        body { margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); overflow: hidden; touch-action: none; }
+        
+        /* Botón volver */
+        .back-btn { position: fixed; top: 1rem; left: 1rem; background: var(--dark); color: #fff; padding: 0.5rem 1rem; text-decoration: none; font-weight: bold; border: 3px solid var(--main-color); z-index: 100; box-shadow: 4px 4px 0px var(--main-color); }
+        
+        #gameCanvas { display: block; width: 100vw; height: 100vh; background: #87CEEB; }
+        
+        .game-ui { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; z-index: 10; }
+        h1 { font-size: 3rem; margin: 0; text-shadow: 4px 4px 0px var(--yellow); border: 4px solid var(--dark); background: #fff; padding: 1rem; transform: rotate(-2deg); }
+        p { font-size: 1.5rem; background: var(--dark); color: #fff; padding: 0.5rem; display: inline-block; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← VOLVER AL CAOS</a>
+    
+    <div class="game-ui" id="startScreen">
+        <h1>FLAPPY BORREGO</h1>
+        <p>Toca la pantalla para saltar</p>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startScreen = document.getElementById('startScreen');
+        
+        // Ajustar canvas a la pantalla
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Lista de caras de los borregos
+        const caras = ['Samu.jpg', 'David.jpg', 'Ignacio.jpg', 'Frank.jpg', 'Jos.jpg', 'Miguel.jpg', 'Luis.jpg', 'Pablo.jpg', 'Leandro.jpg', 'Adrian.jpg', 'Cobarde1.jpg', 'Cobarde2.jpg', 'Ruben.jpg'];
+        
+        let borregoImg = new Image();
+        function setRandomFace() {
+            const randomFace = caras[Math.floor(Math.random() * caras.length)];
+            borregoImg.src = randomFace;
+        }
+        setRandomFace();
+
+        // Variables del juego
+        let frames = 0;
+        let gameActive = false;
+        let score = 0;
+
+        const bird = {
+            x: 50, y: canvas.height/2, width: 40, height: 40,
+            gravity: 0.6, lift: -10, velocity: 0,
+            draw: function() {
+                // Dibujar cuerpo oveja (emoji)
+                ctx.font = "40px Arial";
+                ctx.fillText("🐑", this.x - 10, this.y + 35);
+                // Dibujar cara del borrego encima
+                if(borregoImg.complete) {
+                    ctx.drawImage(borregoImg, this.x, this.y, 30, 30);
+                }
+            },
+            update: function() {
+                this.velocity += this.gravity;
+                this.y += this.velocity;
+                if(this.y + this.height >= canvas.height) { this.y = canvas.height - this.height; gameActive = false; }
+                if(this.y <= 0) { this.y = 0; this.velocity = 0; }
+            },
+            jump: function() { this.velocity = this.lift; }
+        };
+
+        const pipes = {
+            array: [], width: 60, gap: 150, dx: 4,
+            draw: function() {
+                for(let i=0; i<this.array.length; i++) {
+                    let p = this.array[i];
+                    ctx.fillStyle = "#228B22"; // Vallas verdes
+                    ctx.fillRect(p.x, 0, this.width, p.top);
+                    ctx.fillRect(p.x, canvas.height - p.bottom, this.width, p.bottom);
+                    
+                    // Bordes brutales
+                    ctx.strokeStyle = "#111"; ctx.lineWidth = 4;
+                    ctx.strokeRect(p.x, 0, this.width, p.top);
+                    ctx.strokeRect(p.x, canvas.height - p.bottom, this.width, p.bottom);
+                }
+            },
+            update: function() {
+                if(frames % 90 === 0) { // Añadir tubo nuevo
+                    let top = Math.random() * (canvas.height/2) + 50;
+                    let bottom = canvas.height - (top + this.gap);
+                    this.array.push({x: canvas.width, top: top, bottom: bottom});
+                }
+                for(let i=0; i<this.array.length; i++) {
+                    let p = this.array[i];
+                    p.x -= this.dx;
+                    // Colisiones
+                    if(bird.x < p.x + this.width && bird.x + bird.width > p.x && 
+                      (bird.y < p.top || bird.y + bird.height > canvas.height - p.bottom)) {
+                        gameActive = false; // Muere
+                    }
+                    if(p.x === bird.x) { score++; }
+                    if(p.x + this.width < 0) { this.array.shift(); i--; }
+                }
+            },
+            reset: function() { this.array = []; }
+        };
+
+        function drawScore() {
+            ctx.fillStyle = "#111";
+            ctx.font = "900 40px 'Space Grotesk'";
+            ctx.fillText("Puntos: " + score, 20, 60);
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if(gameActive) {
+                bird.update();
+                pipes.update();
+                frames++;
+            }
+            bird.draw();
+            pipes.draw();
+            drawScore();
+            
+            if(!gameActive && frames > 0) {
+                startScreen.style.display = 'block';
+                startScreen.querySelector('h1').innerText = "¡TE HAS ESTAMPADO!";
+                startScreen.querySelector('p').innerText = "Toca para reiniciar";
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Controles Táctiles y Ratón
+        function action() {
+            if(!gameActive) {
+                gameActive = true;
+                startScreen.style.display = 'none';
+                bird.y = canvas.height/2;
+                bird.velocity = 0;
+                pipes.reset();
+                score = 0;
+                frames = 0;
+                setRandomFace(); // Cambia de cara al reiniciar
+            }
+            bird.jump();
+        }
+
+        window.addEventListener('touchstart', action);
+        window.addEventListener('mousedown', action);
+
+        gameLoop();
+    </script>
+</body>
+</html>
