@@ -126,7 +126,6 @@
         .brutal-border:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); }
 
         section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        /* Desplazamiento fijo desde Sobre Nosotros hacia abajo */
         .desplazada-5px { top: 5px; }
         .section-title { font-size: 3.5rem; margin-bottom: 3rem; text-transform: uppercase; display: inline-block; background: var(--yellow); color: var(--text-dark); padding: 0 1rem; border: 4px solid var(--dark); transform: rotate(-2deg); transition: transform 0.3s ease; max-width: 100%; word-wrap: break-word; }
         .section-title:hover { transform: rotate(2deg) scale(1.02); }
@@ -143,50 +142,17 @@
         
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; width: 100%; }
         
-        /* TARJETA REBAÑO UNIFICADA */
         .card-rebano { 
-            background: var(--card-bg); 
-            color: var(--text-dark); 
-            padding: 1.5rem; 
-            text-align: center; 
-            border: 4px solid var(--dark);
-            box-shadow: 8px 8px 0px var(--dark);
+            background: var(--card-bg); color: var(--text-dark); padding: 1.5rem; text-align: center; 
+            border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark);
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; 
-            will-change: transform; 
-            cursor: pointer; 
-            width: 100%; 
-            max-width: 100%; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            will-change: transform; cursor: pointer; width: 100%; max-width: 100%; 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
-        .card-rebano:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--dark);
-            background: var(--accent-color);
-            color: var(--text-light);
-        }
-        .card-rebano img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border: 4px solid var(--dark);
-            margin-bottom: 0; 
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
-        }
-        .card-rebano:hover img {
-            filter: grayscale(0%);
-        }
-        .card-rebano h3 {
-            font-size: 1.25rem;
-            margin-top: 1rem; 
-            width: 100%;
-            display: block;
-            line-height: 1.2;
-            font-weight: 900;
-        }
+        .card-rebano:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); background: var(--accent-color); color: var(--text-light); }
+        .card-rebano img { width: 100%; height: 250px; object-fit: cover; border: 4px solid var(--dark); margin-bottom: 0; filter: grayscale(100%); transition: filter 0.3s ease; }
+        .card-rebano:hover img { filter: grayscale(0%); }
+        .card-rebano h3 { font-size: 1.25rem; margin-top: 1rem; width: 100%; display: block; line-height: 1.2; font-weight: 900; }
 
         /* AJUSTES DE ENCUADRE DE FOTOS PERSONALIZADOS */
         .samu-img { object-position: center 10% !important; }
@@ -209,225 +175,136 @@
         .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); color: var(--text-light); border: 4px solid var(--dark); padding: 0.5rem 1rem; font-weight: bold; transition: transform 0.2s; cursor: pointer; }
         .close-btn:hover { transform: scale(1.05); }
 
-
         /* DONACIONES */
         .donaciones-container { background: var(--main-color); color: var(--text-light); padding: 4rem; text-align: center; width: 100%; }
         .donaciones-cajas { display: flex; justify-content: center; gap: 2rem; margin: 3rem 0; flex-wrap: wrap; width: 100%; }
         .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; display: inline-block; }
         .btn-donar:hover { background: var(--yellow); color: var(--text-dark); transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--dark); }
         
-        /* ESTILO DEL TEXTO DEL OBJETIVO */
-        .progreso-texto { 
-            font-weight: bold; 
-            font-size: 1.4rem; 
-            color: var(--text-light); 
-            margin-top: 2rem; 
-            margin-bottom: 0.5rem; 
-            text-align: center;
-            line-height: 1.4; 
-        }
-
-        /* ESTILO DEL CONTENEDOR DE LA BARRA */
-        .progreso-wrapper { 
-            width: 100%; 
-            height: 40px; 
-            background: var(--dark); 
-            border: 4px solid var(--bg-color); 
-            position: relative; 
-            overflow: hidden; 
-        }
-        .progreso-barra { 
-            height: 100%; 
-            width: 0%; 
-            background: var(--yellow); 
-            transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            position: relative; 
-        }
+        .progreso-texto { font-weight: bold; font-size: 1.4rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 0.5rem; text-align: center; line-height: 1.4; }
+        .progreso-wrapper { width: 100%; height: 40px; background: var(--dark); border: 4px solid var(--bg-color); position: relative; overflow: hidden; }
+        .progreso-barra { height: 100%; width: 0%; background: var(--yellow); transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
 
         /* CONTACTO Y EMAIL */
-        .email-huge { 
-            font-size: clamp(1.2rem, 4.5vw, 3.5rem); 
-            color: var(--main-color); 
-            text-decoration: none; 
-            font-weight: 900; 
-            transition: transform 0.3s, color 0.3s; 
-            display: inline-block; 
-            word-break: keep-all;
-            white-space: nowrap; 
-            max-width: 100%;
-        }
+        .email-huge { font-size: clamp(1.2rem, 4.5vw, 3.5rem); color: var(--main-color); text-decoration: none; font-weight: 900; transition: transform 0.3s, color 0.3s; display: inline-block; word-break: keep-all; white-space: nowrap; max-width: 100%; }
         .email-huge:hover { color: var(--accent-color); transform: scale(1.02) rotate(-1deg); }
 
-        /* ANIMACIÓN Y DISEÑO DEL BOTÓN DE REINICIO DE CAOS */
-        @keyframes btn-mover {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.03); }
-            100% { transform: translateY(0) scale(1); }
-        }
-        .btn-refresh-caos {
-            background: var(--yellow) !important;
-            color: #111111 !important;
-            font-family: 'Space Grotesk', sans-serif !important;
-            font-weight: 900 !important;
-            font-size: 1.5rem !important;
-            padding: 1.5rem 3rem !important;
-            border: 4px solid #ffffff !important;
-            box-shadow: 8px 8px 0px red !important;
-            text-transform: uppercase !important;
-            cursor: pointer !important;
-            animation: btn-mover 2s ease-in-out infinite !important;
-            transition: transform 0.2s, box-shadow 0.2s !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-        }
-        .btn-refresh-caos:hover {
-            transform: scale(1.05) translateY(-3px) !important;
-            box-shadow: 12px 12px 0px red !important;
-        }
+        /* BOTONES Y CAOS */
+        @keyframes btn-mover { 0% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.03); } 100% { transform: translateY(0) scale(1); } }
+        .btn-refresh-caos { background: var(--yellow) !important; color: #111111 !important; font-family: 'Space Grotesk', sans-serif !important; font-weight: 900 !important; font-size: 1.5rem !important; padding: 1.5rem 3rem !important; border: 4px solid #ffffff !important; box-shadow: 8px 8px 0px red !important; text-transform: uppercase !important; cursor: pointer !important; animation: btn-mover 2s ease-in-out infinite !important; transition: transform 0.2s, box-shadow 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; text-align: center !important; }
+        .btn-refresh-caos:hover { transform: scale(1.05) translateY(-3px) !important; box-shadow: 12px 12px 0px red !important; }
 
-        /* FOOTER / CAOS */
         .chaos-btn-wrapper { text-align: center; padding: 4rem 2rem; background: var(--dark); border-top: 4px solid var(--main-color); width: 100%; }
-        .btn-chaos { 
-            background: #ff003c; 
-            color: white; 
-            font-size: 1.5rem; 
-            font-weight: 900; 
-            padding: 2rem 4rem; 
-            border: 4px solid var(--bg-color); 
-            box-shadow: 10px 10px 0px var(--yellow); 
-            text-transform: uppercase; 
-            transition: transform 0.2s, background 0.2s; 
-            animation: pulse 2s infinite; 
-            cursor: pointer; 
-            max-width: 100%; 
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center; 
-        }
+        .btn-chaos { background: #ff003c; color: white; font-size: 1.5rem; font-weight: 900; padding: 2rem 4rem; border: 4px solid var(--bg-color); box-shadow: 10px 10px 0px var(--yellow); text-transform: uppercase; transition: transform 0.2s, background 0.2s; animation: pulse 2s infinite; cursor: pointer; max-width: 100%; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
         .btn-chaos:hover { transform: scale(1.05); background: #ff0055; box-shadow: 0px 0px 50px red; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         footer { background: var(--dark); color: var(--bg-color); padding: 3rem 2rem; text-align: center; width: 100%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        /* EFECTO QUESO GLITCH */
-        @keyframes queso-glitch {
-            0% { transform: scale(1) rotate(0deg); }
-            20% { transform: scale(1.1) rotate(-2deg); }
-            40% { transform: scale(0.95) rotate(2deg); }
-            60% { transform: scale(1.15) rotate(-1deg); }
-            80% { transform: scale(1.05) rotate(1deg); }
-            100% { transform: scale(1) rotate(0deg); }
+        /* EFECTOS Y BEEE */
+        @keyframes queso-glitch { 0% { transform: scale(1) rotate(0deg); } 20% { transform: scale(1.1) rotate(-2deg); } 40% { transform: scale(0.95) rotate(2deg); } 60% { transform: scale(1.15) rotate(-1deg); } 80% { transform: scale(1.05) rotate(1deg); } 100% { transform: scale(1) rotate(0deg); } }
+        .queso-active { animation: queso-glitch 0.4s ease-in-out; color: var(--yellow); text-shadow: 3px 3px 0 var(--main-color), -3px -3px 0 var(--accent-color); }
+        @keyframes queso-punch { 0% { transform: scale(1) rotate(0deg); } 25% { transform: scale(1.2) rotate(-3deg); } 50% { transform: scale(0.9) rotate(3deg); } 75% { transform: scale(1.1) rotate(-2deg); } 100% { transform: scale(1) rotate(0deg); } }
+        #quesoBtn.queso-active { animation: queso-punch 0.45s ease; color: var(--yellow); text-shadow: 4px 4px 0 var(--main-color), -4px -4px 0 var(--accent-color); }
+        #quesoBtn { cursor: pointer; pointer-events: auto; position: relative; z-index: 10; }
+        header { pointer-events: auto; }
+        .beee { position: fixed; transform: translate(-50%, -50%); font-size: 3.5rem; font-weight: 900; pointer-events: none; z-index: 999999; text-shadow: 3px 3px 0 #000; animation: beeeAnim 1s ease-out forwards; }
+        @keyframes beeeAnim { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -120px) scale(1.4); } }
+
+        /* =========================================
+           🐑 NUEVA ANIMACIÓN: PASTO Y OVEJA EN PNG 🐑
+           ========================================= */
+
+        /* 1. La franja de pasto verde al final de la cabecera */
+        .pasto-verde {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35px; /* Altura de la hierba */
+            background: #4ade80; /* Color verde césped */
+            border-top: 4px solid var(--dark); /* Borde brutalista */
+            z-index: 2;
         }
 
-        .queso-active {
-            animation: queso-glitch 0.4s ease-in-out;
-            color: var(--yellow);
-            text-shadow:
-                3px 3px 0 var(--main-color),
-                -3px -3px 0 var(--accent-color);
-        }
-
-        /* EFECTO QUESO BOOST */
-        @keyframes queso-punch {
-            0%   { transform: scale(1) rotate(0deg); }
-            25%  { transform: scale(1.2) rotate(-3deg); }
-            50%  { transform: scale(0.9) rotate(3deg); }
-            75%  { transform: scale(1.1) rotate(-2deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        #quesoBtn.queso-active {
-            animation: queso-punch 0.45s ease;
-            color: var(--yellow);
-            text-shadow:
-                4px 4px 0 var(--main-color),
-                -4px -4px 0 var(--accent-color);
-        }
-
-        #quesoBtn {
-            cursor: pointer;
-            pointer-events: auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        header {
-            pointer-events: auto;
-        }
-
-
-        /* BEEEEEE */
-        .beee {
-            position: fixed;
-            transform: translate(-50%, -50%);
-            font-size: 3.5rem;
-            font-weight: 900;
-            pointer-events: none;
-            z-index: 999999;
-            text-shadow: 3px 3px 0 #000;
-            animation: beeeAnim 1s ease-out forwards;
-        }
-
-        @keyframes beeeAnim {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -120px) scale(1.4); }
-        }
-
-        /* --- ANIMACIÓN OVEJITA (SOLO EN EL HEADER) --- */
+        /* 2. El contenedor que la desplaza de izquierda a derecha */
         .ovejita-container {
             position: absolute;
-            bottom: 5%;
+            bottom: 35px; /* Para que sus pies toquen exactamente el pasto */
             left: 0;
-            width: 160px;
+            width: 140px;
             z-index: 3;
-            animation: mover-oveja-x 22s linear infinite;
+            animation: mover-oveja-x 24s linear infinite; /* 24s por viaje completo */
             pointer-events: none;
         }
 
+        /* 3. La imagen PNG de la oveja: animada para simular pasos y comer */
         .ovejita-img {
             width: 100%;
             height: auto;
-            border-radius: 20px;
-            animation: oveja-acciones-y 22s linear infinite;
+            transform-origin: bottom center; /* Para que rote desde sus patas */
+            animation: oveja-acciones 24s linear infinite; /* Sincronizada con el contenedor */
         }
 
+        /* NOTA PARA LA DIRECCIÓN: 
+           Asumo que la foto de tu oveja mira hacia la DERECHA originalmente.
+           - Si la oveja está caminando de espaldas, simplemente cambia abajo 
+             los scaleX(1) por scaleX(-1) y los scaleX(-1) por scaleX(1). */
+             
         @keyframes mover-oveja-x {
+            /* Viaje hacia la derecha */
             0%   { transform: translateX(-200px) scaleX(1); }
-            25%  { transform: translateX(30vw) scaleX(1); }
-            35%  { transform: translateX(30vw) scaleX(1); }
-            50%  { transform: translateX(110vw) scaleX(1); }
-            51%  { transform: translateX(110vw) scaleX(-1); }
-            70%  { transform: translateX(60vw) scaleX(-1); }
-            80%  { transform: translateX(60vw) scaleX(-1); }
-            100% { transform: translateX(-200px) scaleX(-1); }
+            20%  { transform: translateX(35vw) scaleX(1); } /* Se para a comer */
+            30%  { transform: translateX(35vw) scaleX(1); } /* Termina de comer */
+            45%  { transform: translateX(110vw) scaleX(1); } /* Desaparece por la derecha */
+            
+            /* Gira escondida fuera de la pantalla */
+            46%  { transform: translateX(110vw) scaleX(-1); } 
+            
+            /* Viaje de vuelta hacia la izquierda */
+            60%  { transform: translateX(60vw) scaleX(-1); } /* Se para a comer */
+            70%  { transform: translateX(60vw) scaleX(-1); } /* Termina de comer */
+            100% { transform: translateX(-200px) scaleX(-1); } /* Desaparece por la izquierda */
         }
 
-        @keyframes oveja-acciones-y {
-            0%, 4%, 8%, 12%, 16%, 20%, 24% { transform: translateY(0) rotate(0deg); }
-            2%, 6%, 10%, 14%, 18%, 22% { transform: translateY(-15px) rotate(5deg); }
+        /* Simulación de caminar (Squash & Stretch) y comer hierba */
+        @keyframes oveja-acciones {
+            /* Caminando normal (0% - 20%) */
+            0%, 4%, 8%, 12%, 16%, 20% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+            /* Los saltitos al andar: sube un poco, rota levemente y se estira */
+            2%, 6%, 10%, 14%, 18%     { transform: translateY(-12px) rotate(4deg) scale(1.05, 0.95); }
             
-            26% { transform: translateY(0) rotate(0deg); }
-            28% { transform: translateY(10px) rotate(-15deg); }
-            30% { transform: translateY(15px) rotate(-10deg); }
-            32% { transform: translateY(10px) rotate(-15deg); }
-            34% { transform: translateY(0) rotate(0deg); }
+            /* SE PARA Y COME PASTO (20% - 30%) */
+            21% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+            /* Agacha la cabeza y mastica rebotando un poquito */
+            23% { transform: translateY(10px) rotate(25deg) scale(1.1, 0.85); }
+            25% { transform: translateY(5px) rotate(20deg) scale(1.05, 0.9); }  
+            27% { transform: translateY(10px) rotate(25deg) scale(1.1, 0.85); } 
+            29% { transform: translateY(5px) rotate(20deg) scale(1.05, 0.9); }  
+            30% { transform: translateY(0) rotate(0deg) scale(1, 1); } /* Levanta la cabeza */
 
-            37%, 41%, 45%, 49% { transform: translateY(-15px) rotate(5deg); }
-            39%, 43%, 47%, 50% { transform: translateY(0) rotate(0deg); }
+            /* Continúa caminando (30% - 45%) */
+            32%, 36%, 40%, 44% { transform: translateY(-12px) rotate(4deg) scale(1.05, 0.95); }
+            34%, 38%, 42%, 45% { transform: translateY(0) rotate(0deg) scale(1, 1); }
 
-            53%, 57%, 61%, 65%, 69% { transform: translateY(-15px) rotate(5deg); }
-            55%, 59%, 63%, 67%, 70% { transform: translateY(0) rotate(0deg); }
+            /* Rotación rápida fuera de pantalla */
+            46% { transform: translateY(0) rotate(0deg) scale(1, 1); }
 
-            71% { transform: translateY(0) rotate(0deg); }
-            73% { transform: translateY(-5px) rotate(15deg); }
-            76% { transform: translateY(-5px) rotate(15deg); }
-            79% { transform: translateY(0) rotate(0deg); }
+            /* Caminando de vuelta (46% - 60%) */
+            48%, 52%, 56%, 60% { transform: translateY(-12px) rotate(4deg) scale(1.05, 0.95); }
+            50%, 54%, 58%      { transform: translateY(0) rotate(0deg) scale(1, 1); }
 
-            82%, 86%, 90%, 94%, 98% { transform: translateY(-15px) rotate(5deg); }
-            84%, 88%, 92%, 96%, 100% { transform: translateY(0) rotate(0deg); }
+            /* SE PARA Y COME PASTO (Vuelta) (60% - 70%) */
+            61% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+            63% { transform: translateY(10px) rotate(25deg) scale(1.1, 0.85); } 
+            65% { transform: translateY(5px) rotate(20deg) scale(1.05, 0.9); }  
+            67% { transform: translateY(10px) rotate(25deg) scale(1.1, 0.85); } 
+            69% { transform: translateY(5px) rotate(20deg) scale(1.05, 0.9); }  
+            70% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+
+            /* Continúa caminando hasta salir por la izquierda (70% - 100%) */
+            72%, 76%, 80%, 84%, 88%, 92%, 96% { transform: translateY(-12px) rotate(4deg) scale(1.05, 0.95); }
+            74%, 78%, 82%, 86%, 90%, 94%, 98%, 100% { transform: translateY(0) rotate(0deg) scale(1, 1); }
         }
 
         /* --- MEDIA QUERIES PARA ADAPTACIÓN MÓVIL --- */
@@ -473,13 +350,13 @@
           .service-card { padding: 2rem 1.5rem; }
 
           .email-huge { font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important; white-space: nowrap !important; display: inline-block; max-width: 100%; }
-
           .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
 
-          /* Adaptación de la Ovejita para móvil */
+          /* Adaptación de la Ovejita y el Pasto para móvil */
+          .pasto-verde { height: 25px; } /* Pasto un poco más bajo */
           .ovejita-container {
               width: 100px;
-              bottom: 8%;
+              bottom: 25px; /* Se ajusta exactamente al nuevo tamaño del pasto */
           }
         }
     </style>
@@ -519,7 +396,8 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🐑 AQUÍ AÑADIMOS LA OVEJITA ANIMADA 🐑 -->
+        <!-- 🐑 PASTO VERDE Y OVEJITA EN FORMATO PNG 🐑 -->
+        <div class="pasto-verde"></div>
         <div class="ovejita-container">
             <img src="ovejita.png" alt="Ovejita paseando" class="ovejita-img">
         </div>
@@ -600,7 +478,8 @@
             <p id="perfilTexto" style="font-size: 1.2rem; line-height: 1.6; white-space: pre-wrap;">Texto</p>
         </div>
     </div>
-<!-- SORTEO MENSUAL AUTOMÁTICO -->
+
+    <!-- SORTEO MENSUAL AUTOMÁTICO -->
     <section id="sorteo" class="desplazada-5px">
         <h2 class="section-title reveal reveal-left" style="background: var(--accent-color);">Sorteo Mensual</h2>
         <div class="donaciones-container brutal-border reveal reveal-scale" style="background: var(--card-bg); color: var(--text-dark);">
@@ -624,13 +503,11 @@
             </p>
             
             <div class="magnetic-btn" style="margin-bottom: 2rem;">
-                <!-- ⚠️ ATENCIÓN: PEGA TU NUEVO ENLACE EN EL href DE ABAJO ⚠️ -->
                 <a href="https://buy.stripe.com/3cIaEW4Wtc9k8MR5pFdZ605" target="_blank" class="btn-donar" style="background: var(--accent-color); font-size: clamp(1.5rem, 4vw, 2.5rem);">PARTICIPAR (1€)</a>
             </div>
 
             <p style="font-size: 1.5rem; font-weight: 900; margin-top: 1rem; padding: 1rem; border: 4px dashed var(--dark); display: inline-block; background: var(--yellow);">
                 📢 Síguenos y entérate de todo en IG: <br>
-                <!-- Recuerda cambiar la URL por tu cuenta real de Instagram -->
                 <a href="https://www.instagram.com/losborregoss?stkn=ZWRzNzFxc29zZW14" target="_blank" style="color: var(--main-color); text-decoration: none; font-size: 2rem; transition: transform 0.2s; display: inline-block;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">@BorregosSL</a>
             </p>
         </div>
@@ -826,7 +703,6 @@
         function actualizarSorteo() {
             const now = new Date();
             // Calcula los meses totales pasados desde el año 0. 
-            // Con esta fórmula, el índice cambiará SIEMPRE de forma natural y exacta el día 1 de cada mes
             const totalMeses = (now.getFullYear() * 12) + now.getMonth();
             const indexPremio = totalMeses % listaSorteos.length;
 
@@ -836,34 +712,29 @@
             // Calcular cuándo es el final exacto de este mes
             const finalDeMes = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).getTime();
 
-            // Limpiamos intervalos viejos por si acaso
             if(sorteoTimer) clearInterval(sorteoTimer);
 
             sorteoTimer = setInterval(() => {
                 const ahora = new Date().getTime();
                 const distancia = finalDeMes - ahora;
 
-                // Si se acaba el mes, recargamos el sorteo
                 if (distancia < 0) {
                     clearInterval(sorteoTimer);
                     actualizarSorteo(); 
                     return;
                 }
 
-                // Cálculos de días, horas, minutos y segundos
                 const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
                 const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
                 const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-                // Mostramos el resultado
                 document.getElementById('sorteoCountdown').innerText = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
             }, 1000);
         }
 
         // Iniciar el sistema de sorteos al cargar la página
         actualizarSorteo();
-
 
         // 9. CAOS TOTAL ESPECTACULAR
         function iniciarDestruccion(btn) {
@@ -912,12 +783,6 @@
                 }, 1500);
 
             }, 2000);
-        }
-
-        function scrollCarousel(direction) {
-          const carousel = document.getElementById('blogCarousel');
-          const scrollAmount = carousel.offsetWidth * 0.9;
-          carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
         window.addEventListener('click', function (e) {
