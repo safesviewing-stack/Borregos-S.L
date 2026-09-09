@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borregos S.L. | Tienda 🛒</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reutilizamos variables y estética Brutalista */
+        :root { --bg-color: #f4f4f0; --main-color: #ff2a5f; --accent-color: #00e5ff; --yellow: #fffb00; --dark: #111111; --card-bg: #ffffff; }
+        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); margin: 0; padding: 2rem; }
+        
+        .header-tienda { text-align: center; margin-bottom: 4rem; }
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); text-transform: uppercase; display: inline-block; background: var(--yellow); border: 4px solid var(--dark); padding: 0.5rem 2rem; transform: rotate(-2deg); box-shadow: 8px 8px 0px var(--dark); }
+        .back-btn { display: inline-block; margin-bottom: 2rem; background: var(--dark); color: #fff; padding: 0.8rem 1.5rem; text-decoration: none; font-weight: bold; border: 4px solid var(--main-color); box-shadow: 4px 4px 0px var(--main-color); transition: transform 0.2s; }
+        .back-btn:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px var(--main-color); }
+
+        .grid-tienda { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        
+        .producto { background: var(--card-bg); border: 4px solid var(--dark); padding: 1.5rem; text-align: center; box-shadow: 8px 8px 0px var(--dark); transition: transform 0.3s; }
+        .producto:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--main-color); background: var(--accent-color); }
+        .producto .img-placeholder { width: 100%; height: 200px; background: #ddd; border: 4px solid var(--dark); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .producto h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .producto p { font-size: 1rem; margin-bottom: 1rem; height: 60px; }
+        .precio { font-size: 2rem; font-weight: 900; color: var(--main-color); margin-bottom: 1rem; display: block; text-shadow: 2px 2px 0px var(--dark); }
+        
+        .btn-comprar { display: inline-block; background: var(--yellow); color: var(--dark); font-size: 1.2rem; font-weight: 900; padding: 1rem 2rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 4px 4px 0px var(--dark); transition: all 0.2s; }
+        .btn-comprar:hover { background: var(--dark); color: var(--yellow); }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">← VOLVER AL REDIL</a>
+
+    <div class="header-tienda">
+        <h1>Tienda Oficial</h1>
+        <p style="margin-top: 1rem; font-size: 1.2rem; font-weight: bold;">Financia nuestra decadencia comprando trozos de plástico y papel adhesivo.</p>
+    </div>
+
+    <div class="grid-tienda">
+        <div class="producto">
+            <div class="img-placeholder">🧀</div>
+            <h3>Pegatina "K de Queso"</h3>
+            <p>Ideal para tapar la cámara del portátil y que el FBI no te vea haciendo el ridículo.</p>
+            <span class="precio">2€</span>
+            <a href="#proximamente" class="btn-comprar">COMPRAR</a>
+        </div>
+
+        <div class="producto">
+            <div class="img-placeholder">🚐</div>
+            <h3>Llavero "La Borregueta"</h3>
+            <p>Con forma de nuestra mítica furgoneta. No incluye el olor a kebab rancio.</p>
+            <span class="precio">5€</span>
+            <a href="#proximamente" class="btn-comprar">COMPRAR</a>
+        </div>
+
+        <div class="producto">
+            <div class="img-placeholder">🐑</div>
+            <h3>Pegatina "BEEEE" holográfica</h3>
+            <p>Brilla más que el futuro de los integrantes del grupo.</p>
+            <span class="precio">3€</span>
+            <a href="#proximamente" class="btn-comprar">COMPRAR</a>
+        </div>
+
+        <div class="producto">
+            <div class="img-placeholder">🤫</div>
+            <h3>Llavero "Cara de Miguel"</h3>
+            <p>Lleva al líder Supremo en el bolsillo. Mirada seductora incluida.</p>
+            <span class="precio">6€</span>
+            <a href="#proximamente" class="btn-comprar">COMPRAR</a>
+        </div>
+    </div>
+
+</body>
+</html>
