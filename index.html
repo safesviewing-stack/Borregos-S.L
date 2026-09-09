@@ -444,6 +444,7 @@
         <a href="servicios.html" onclick="toggleMenu()">Qué Hacemos</a>
         <a href="inventario.html" onclick="toggleMenu()">Inventario</a>
         <a href="blog.html" onclick="toggleMenu()">Blog</a>
+        <a href="juegos.html" onclick="toggleMenu()">Juegos</a>
         <a href="#sorteo" onclick="toggleMenu()">Sorteo 📢</a>
         <a href="#donaciones" onclick="toggleMenu()">Donaciones</a>
         <a href="#contacto" onclick="toggleMenu()">Contacto</a>
@@ -635,10 +636,18 @@
             document.getElementById('overlay').classList.toggle('active');
             document.getElementById('hamburgerBtn').classList.toggle('active');
         }
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
+        function aplicarTema() {
+            const dark = localStorage.getItem('borregos_dark_mode') === 'true';
+            document.body.classList.toggle('dark-mode', dark);
+            document.getElementById('themeBtn').innerText = dark ? '🌞' : '🌚';
         }
+        function toggleTheme() {
+            const dark = !document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode', dark);
+            localStorage.setItem('borregos_dark_mode', dark);
+            document.getElementById('themeBtn').innerText = dark ? '🌞' : '🌚';
+        }
+        aplicarTema();
 
         // 4. SONIDO Y VISUAL BEEEEEE 
         const sheepAudio = new Audio("oveja.mp3");
