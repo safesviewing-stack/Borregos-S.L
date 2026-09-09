@@ -376,6 +376,60 @@
             100% { opacity: 0; transform: translate(-50%, -120px) scale(1.4); }
         }
 
+        /* --- ANIMACIÓN OVEJITA (SOLO EN EL HEADER) --- */
+        .ovejita-container {
+            position: absolute;
+            bottom: 5%;
+            left: 0;
+            width: 160px;
+            z-index: 3;
+            animation: mover-oveja-x 22s linear infinite;
+            pointer-events: none;
+        }
+
+        .ovejita-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            animation: oveja-acciones-y 22s linear infinite;
+        }
+
+        @keyframes mover-oveja-x {
+            0%   { transform: translateX(-200px) scaleX(1); }
+            25%  { transform: translateX(30vw) scaleX(1); }
+            35%  { transform: translateX(30vw) scaleX(1); }
+            50%  { transform: translateX(110vw) scaleX(1); }
+            51%  { transform: translateX(110vw) scaleX(-1); }
+            70%  { transform: translateX(60vw) scaleX(-1); }
+            80%  { transform: translateX(60vw) scaleX(-1); }
+            100% { transform: translateX(-200px) scaleX(-1); }
+        }
+
+        @keyframes oveja-acciones-y {
+            0%, 4%, 8%, 12%, 16%, 20%, 24% { transform: translateY(0) rotate(0deg); }
+            2%, 6%, 10%, 14%, 18%, 22% { transform: translateY(-15px) rotate(5deg); }
+            
+            26% { transform: translateY(0) rotate(0deg); }
+            28% { transform: translateY(10px) rotate(-15deg); }
+            30% { transform: translateY(15px) rotate(-10deg); }
+            32% { transform: translateY(10px) rotate(-15deg); }
+            34% { transform: translateY(0) rotate(0deg); }
+
+            37%, 41%, 45%, 49% { transform: translateY(-15px) rotate(5deg); }
+            39%, 43%, 47%, 50% { transform: translateY(0) rotate(0deg); }
+
+            53%, 57%, 61%, 65%, 69% { transform: translateY(-15px) rotate(5deg); }
+            55%, 59%, 63%, 67%, 70% { transform: translateY(0) rotate(0deg); }
+
+            71% { transform: translateY(0) rotate(0deg); }
+            73% { transform: translateY(-5px) rotate(15deg); }
+            76% { transform: translateY(-5px) rotate(15deg); }
+            79% { transform: translateY(0) rotate(0deg); }
+
+            82%, 86%, 90%, 94%, 98% { transform: translateY(-15px) rotate(5deg); }
+            84%, 88%, 92%, 96%, 100% { transform: translateY(0) rotate(0deg); }
+        }
+
         /* --- MEDIA QUERIES PARA ADAPTACIÓN MÓVIL --- */
         @media (max-width: 768px) {
           section { padding: 4rem 1.2rem; }
@@ -421,6 +475,12 @@
           .email-huge { font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important; white-space: nowrap !important; display: inline-block; max-width: 100%; }
 
           .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
+
+          /* Adaptación de la Ovejita para móvil */
+          .ovejita-container {
+              width: 100px;
+              bottom: 8%;
+          }
         }
     </style>
 </head>
@@ -458,6 +518,11 @@
         <div class="spinning-badge">100% OVEJA REAL</div>
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
+
+        <!-- 🐑 AQUÍ AÑADIMOS LA OVEJITA ANIMADA 🐑 -->
+        <div class="ovejita-container">
+            <img src="ovejita.jpg" alt="Ovejita paseando" class="ovejita-img">
+        </div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
@@ -491,7 +556,7 @@
                 <img src="Jos.jpg" alt="Jos" class="jos-img">
                 <h3>Jose Gil Dimas</h3>
             </div>
-            <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #6','No sabe leer, pero es pura esencia.','Señores, estamos ante la estrella del grupo, el eje invisible que mantiene todo unido. Sin él, el sistema colapsa. Tiene una cabeza nivel Megamind, desproporcionada pero gloriosa, coronada por una mirada penetrante que, curiosamente, se intensifica de forma sobrenatural cuando hay mujeres cerca. Coincidencias que tiene la biología. Es un putero nato, no por vicio sino por vocación. Desde que pasó por los brazos de Venus —aquel evento histórico marcado por el inolvidable “ay carallo”— no ha vuelto a ser el mismo. Vive atrapado en ese recuerdo como otros en guerras pasadas. No la supera. No quiere. Trabaja en el Leroy Merlin, templo del bricolaje y las decisiones impulsivas, y como si eso no fuera suficiente, tiene su propia skin en el Gang Beasts, lo que automáticamente lo eleva a entidad mitológica. Es el líder supremo del grupo, aunque nunca fue elegido: simplemente ocurrió. Cuando habla, se escucha. Cuando calla, preocupa. Ojo si es muy tarde y empieza con esa mirada perdida en el aire, porque hace destrozos en el corazón ajeno sin tocarte. Hay rumores —no confirmados por la ciencia— de que tiene una tranca de otro mundo, lo cual explicaría muchas cosas y no aclararía ninguna. No sabe leer. Literalmente. Deletreó la contraseña del router y dijo “k de queso”. Desde ese momento, eso no es un error: es nuestro lema, nuestra filosofía, nuestro escudo. Cabeza grande, carisma peligrosa, líder natural y analfabetismo funcional. La estrella. El pegamento del grupo. El caos necesario.')">
+            <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #6','No sabe leer, pero es pura esencia.','Señores, estamos ante la estrella del grupo, el eje invisible que mantiene todo unido. Sin él, el sistema colapsa. Tiene una cabeza nivel Megamind, desproporcionada pero gloriosa, coronada por una mirada penetrante que, curiosamente, se intensifica de forma sobrenatural cuando hay mujeres cerca. Coincidencias que tiene la biología. Es un putero nato, no por vicio sino por vocación. Desde que pasó por los brazos de Venus —aquel evento histórico marcado por el inolvidable “ay carallo”— no ha vuelto a ser el mismo. Vive atrapado en ese recuerdo como otros en guerras pasadas. No la supera. No quiere. Trabaja en el Leroy Merlin, templo del bricolaje y las decisiones impulsivas, y como si eso no fuera suficiente, tiene su propia skin en el Gang Beasts, lo que automáticamente lo eleva a entidad mitológica. Es el líder supremo del grupo, aunque nunca fue elegido: simplemente ocurrió. Cuando habla, se escucha. Cuando calla, preocupa. Ojo si es muy tarde y empieza con esa mirada perdida en el aire, porque hace destrozos en el corazón ajeno sin tocarte. Hay rumores —no confirmados por la ciencia— de que tiene una tranca de otro mundo, lo cual explicaría muchas cosas y no aclararía ninguna. No sabe leer. Literalmente. Deletreó la contraseña del router y dijo “k de queso”. Desde ese momento, eso no es un error: es nuestro lema, nuestra filosofía, y nuestro escudo. Cabeza grande, carisma peligrosa, líder natural y analfabetismo funcional. La estrella. El pegamento del grupo. El caos necesario.')">
                 <img src="Miguel.jpg" alt="Miguel" class="miguel-img">
                 <h3>Miguel Madrid Gasco</h3>
             </div>
