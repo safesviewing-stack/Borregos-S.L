@@ -568,7 +568,7 @@
             </div>
             <!-- TEXTO DE PROGRESO REDISEÑADO -->
             <div class="progreso-texto" id="progresoTexto">
-                Objetivo: Dildo gigante<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">1</span>€ / 100€)</span>
+                Objetivo: Dildo gigante<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">3</span>€ / 100€)</span>
             </div>
             <div class="progreso-wrapper">
                 <div class="progreso-barra" id="barraProgreso"></div>
@@ -651,10 +651,15 @@
 
         let dineroActual = localStorage.getItem('borregos_dinero');
         if (dineroActual === null) {
-            dineroActual = 1;
+            dineroActual = 3;
             localStorage.setItem('borregos_dinero', dineroActual);
         } else {
             dineroActual = parseFloat(dineroActual);
+            // Unificar la versión anterior de 1€ con la nueva de 3€.
+            if (dineroActual === 1) {
+                dineroActual = 3;
+                localStorage.setItem('borregos_dinero', dineroActual);
+            }
         }
 
         let objetivoIndex = parseInt(localStorage.getItem('borregos_objetivo_index')) || 0;
