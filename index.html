@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borregos S.L. | K de queso</title>
+    <!-- Icono de oveja para la pestaña del navegador -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* --- VARIABLES DE TEMA (MODO CLARO) --- */
@@ -93,7 +95,7 @@
         .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
         .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* MENU LATERAL SEGURO (Evita desbordamiento con Translate y Visibility) */
+        /* MENU LATERAL SEGURO */
         .side-panel { 
             position: fixed; 
             top: 0; 
@@ -139,7 +141,7 @@
         
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; width: 100%; }
         
-        /* TARJETA REBAÑO UNIFICADA (Marcos idénticos y estáticos) */
+        /* TARJETA REBAÑO UNIFICADA */
         .card-rebano { 
             background: var(--card-bg); 
             color: var(--text-dark); 
@@ -168,7 +170,7 @@
             height: 250px;
             object-fit: cover;
             border: 4px solid var(--dark);
-            margin-bottom: 0; /* Sin margen para regular la distancia de forma absoluta */
+            margin-bottom: 0; 
             filter: grayscale(100%);
             transition: filter 0.3s ease;
         }
@@ -177,14 +179,14 @@
         }
         .card-rebano h3 {
             font-size: 1.25rem;
-            margin-top: 1rem; /* Distancia constante e idéntica de la foto en todas las pantallas */
+            margin-top: 1rem; 
             width: 100%;
             display: block;
             line-height: 1.2;
             font-weight: 900;
         }
 
-        /* AJUSTES DE ENCUADRE DE FOTOS PERSONALIZADOS (Bajan el contenido visual para centrar rostros) */
+        /* AJUSTES DE ENCUADRE DE FOTOS PERSONALIZADOS */
         .samu-img { object-position: center 10% !important; }
         .david-img { object-position: center 50% !important; }
         .ignacio-img { object-position: center 10% !important; }
@@ -195,7 +197,7 @@
         .pablo-img { object-position: center 0% !important; }
         .leandro-img { object-position: center 0% !important; }
         .adrian-img { object-position: center 10% !important; }
-        .cobarde1-img { object-position: center 10% !important; } /* Modificado para igualar a Cobarde 2 */
+        .cobarde1-img { object-position: center 10% !important; }
         .cobarde2-img { object-position: center 10% !important; }
         .ruben-img { object-position: center 15% !important; }
 
@@ -227,7 +229,7 @@
         .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; display: inline-block; }
         .btn-donar:hover { background: var(--yellow); color: var(--text-dark); transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--dark); }
         
-        /* ESTILO DEL TEXTO DEL OBJETIVO (Alineación para doble línea adaptativa) */
+        /* ESTILO DEL TEXTO DEL OBJETIVO */
         .progreso-texto { 
             font-weight: bold; 
             font-size: 1.4rem; 
@@ -235,7 +237,7 @@
             margin-top: 2rem; 
             margin-bottom: 0.5rem; 
             text-align: center;
-            line-height: 1.4; /* Interlineado aumentado para que no colisionen las dos líneas */
+            line-height: 1.4; 
         }
 
         /* ESTILO DEL CONTENEDOR DE LA BARRA */
@@ -255,12 +257,12 @@
             position: relative; 
         }
 
-        /* CONTACTO Y EMAIL (Ajustes para evitar recortes en móviles, negrita y sin subrayar) */
+        /* CONTACTO Y EMAIL */
         .email-huge { 
             font-size: clamp(1.2rem, 4.5vw, 3.5rem); 
             color: var(--main-color); 
-            text-decoration: none; /* Sin subrayar */
-            font-weight: 900; /* En negrita */
+            text-decoration: none; 
+            font-weight: 900; 
             transition: transform 0.3s, color 0.3s; 
             display: inline-block; 
             word-break: keep-all;
@@ -316,13 +318,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-align: center; /* Asegura centrado completo del texto */
+            text-align: center; 
         }
         .btn-chaos:hover { transform: scale(1.05); background: #ff0055; box-shadow: 0px 0px 50px red; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         footer { background: var(--dark); color: var(--bg-color); padding: 3rem 2rem; text-align: center; width: 100%; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
-
 
         /* EFECTO QUESO GLITCH */
         @keyframes queso-glitch {
@@ -403,16 +404,6 @@
           transform: scale(1.02);
         }
 
-        .carousel-item.video {
-          background: var(--dark);
-          color: var(--text-light);
-          font-size: 3rem;
-          font-weight: 900;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
         /* BOTONES */
         .carousel-btn {
           position: absolute;
@@ -447,201 +438,62 @@
         }
 
         @keyframes beeeAnim {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -120px) scale(1.4);
-            }
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -120px) scale(1.4); }
         }
 
         /* --- MEDIA QUERIES PARA ADAPTACIÓN MÓVIL --- */
         @media (max-width: 768px) {
+          section { padding: 4rem 1.2rem; }
+          h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); text-shadow: 4px 4px 0 var(--main-color); }
+          .subtitle { font-size: 1.1rem; letter-spacing: 2px; }
+          .section-title { font-size: 2rem; margin-bottom: 2rem; transform: none !important; text-align: center; }
 
-          /* GENERAL */
-          section {
-            padding: 4rem 1.2rem;
-          }
-
-          h1 {
-            font-size: clamp(2.2rem, 8vw, 4.5rem); /* Evita desbordamiento de letras largas en pantallas estrechas */
-            text-shadow: 4px 4px 0 var(--main-color);
-          }
-
-          .subtitle {
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-          }
-
-          .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            transform: none !important; /* Desactiva la rotación en móvil para evitar que sobresalga lateralmente */
-            text-align: center;
-          }
-
-          /* CONTROLES SUPERIORES */
-          .top-controls {
-            top: 0.8rem;
-            right: 0.8rem;
-            gap: 0.6rem;
-          }
-          .btn-control {
-            padding: 0.4rem 0.8rem;
-            font-size: 1rem;
-          }
-          .hamburger {
-            width: 38px;
-            height: 35px;
-            gap: 4px;
-          }
-          .hamburger span {
-            width: 18px;
-            height: 2px;
-          }
+          .top-controls { top: 0.8rem; right: 0.8rem; gap: 0.6rem; }
+          .btn-control { padding: 0.4rem 0.8rem; font-size: 1rem; }
+          .hamburger { width: 38px; height: 35px; gap: 4px; }
+          .hamburger span { width: 18px; height: 2px; }
           .hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
           .hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-          /* DESACTIVAR EFECTOS COMPLEJOS */
-          .magnetic-btn * {
-            transform: none !important;
-          }
+          .magnetic-btn * { transform: none !important; }
 
-          .card-rebano:hover {
-            background: var(--card-bg);
-            color: var(--text-dark);
-          }
+          .card-rebano:hover { background: var(--card-bg); color: var(--text-dark); }
+          .card-rebano { padding: 1rem !important; min-height: auto !important; }
+          .card-rebano img { height: 220px !important; margin-bottom: 0 !important; }
+          .card-rebano h3 { font-size: 1.1rem !important; margin-top: 1rem !important; }
 
-          /* REBAÑO EN MÓVIL (Alineamiento natural libre de restricciones, margen unificado) */
-          .card-rebano {
-            padding: 1rem !important;
-            min-height: auto !important;
-          }
-          .card-rebano img {
-            height: 220px !important; /* Altura controlada de imagen en móvil */
-            margin-bottom: 0 !important;
-          }
-          .card-rebano h3 {
-            font-size: 1.1rem !important;
-            margin-top: 1rem !important; /* Margen fijo e idéntico para todos los nombres en móvil */
-          }
+          .grid-3 { grid-template-columns: 1fr !important; gap: 1.5rem; }
+          .about-text { padding: 1.5rem 1rem; font-size: 0.95rem; text-align: center; }
+          .side-panel { padding-top: 8rem; }
+          .side-panel a { font-size: 1.4rem; }
 
-          .grid-3 {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem;
-          }
+          .grid-inventario { grid-template-columns: 1fr; }
+          .item-inventario img { height: 220px; }
 
-          /* TEXTO */
-          .about-text {
-            padding: 1.5rem 1rem;
-            font-size: 0.95rem;
-            text-align: center; /* Alineado al centro tal como se ha solicitado */
-          }
+          .carousel-wrapper { padding: 1rem; }
+          .carousel-item { min-width: 92%; height: 320px; }
+          .carousel-btn { display: none; }
 
-          /* MENÚ LATERAL */
-          .side-panel {
-            padding-top: 8rem;
-          }
+          .donaciones-container { padding: 2rem 1rem; }
+          .donaciones-cajas { gap: 1rem; margin: 2rem 0; }
+          .btn-donar { font-size: 1.5rem; padding: 1rem 2rem; }
 
-          .side-panel a {
-            font-size: 1.4rem;
-          }
+          header { min-height: 90vh; padding: 6rem 1rem 4rem; }
+          .spinning-badge { position: relative; margin: 2rem auto 0 auto; bottom: auto; right: auto; width: 90px; height: 90px; font-size: 0.8rem; }
 
-          /* INVENTARIO */
-          .grid-inventario {
-            grid-template-columns: 1fr;
-          }
-          .item-inventario img {
-            height: 220px;
-          }
+          .modal-perfil { padding: 2rem 1rem; }
+          .modal-content { padding: 3.5rem 1.5rem 2rem 1.5rem; margin-top: 2rem; }
+          .modal-content h2 { font-size: 2rem !important; }
+          .modal-content h4 { font-size: 1.1rem !important; }
+          .modal-content p { font-size: 1rem !important; }
+          .close-btn { top: 0.8rem; right: 0.8rem; padding: 0.4rem 0.8rem; font-size: 0.9rem; }
 
-          /* BLOG / CAROUSEL */
-          .carousel-wrapper {
-            padding: 1rem;
-          }
-          .carousel-item {
-            min-width: 92%;
-            height: 320px;
-          }
-          .carousel-btn {
-            display: none; /* Se confía en el gesto nativo de deslizamiento táctil */
-          }
+          .service-card { padding: 2rem 1.5rem; }
 
-          /* DONACIONES */
-          .donaciones-container {
-            padding: 2rem 1rem;
-          }
-          .donaciones-cajas {
-            gap: 1rem;
-            margin: 2rem 0;
-          }
-          .btn-donar {
-            font-size: 1.5rem;
-            padding: 1rem 2rem;
-          }
+          .email-huge { font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important; white-space: nowrap !important; display: inline-block; max-width: 100%; }
 
-          /* CABECERA Y INSIGNIA EN MÓVIL */
-          header {
-            min-height: 90vh;
-            padding: 6rem 1rem 4rem;
-          }
-          .spinning-badge {
-            position: relative; /* Cambia a relativo para no forzar la superposición lateral */
-            margin: 2rem auto 0 auto;
-            bottom: auto;
-            right: auto;
-            width: 90px;
-            height: 90px;
-            font-size: 0.8rem;
-          }
-
-          /* VENTANA MODAL EN MÓVIL */
-          .modal-perfil {
-            padding: 2rem 1rem;
-          }
-          .modal-content {
-            padding: 3.5rem 1.5rem 2rem 1.5rem;
-            margin-top: 2rem;
-          }
-          .modal-content h2 {
-            font-size: 2rem !important;
-          }
-          .modal-content h4 {
-            font-size: 1.1rem !important;
-          }
-          .modal-content p {
-            font-size: 1rem !important;
-          }
-          .close-btn {
-            top: 0.8rem;
-            right: 0.8rem;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.9rem;
-          }
-
-          /* SERVICIOS */
-          .service-card {
-            padding: 2rem 1.5rem;
-          }
-
-          /* CORREO EN MÓVIL (Escala estricta para forzar una única línea) */
-          .email-huge {
-              font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important;
-              white-space: nowrap !important;
-              display: inline-block;
-              max-width: 100%;
-          }
-
-          /* BOTÓN CAOS EN MÓVIL (Ajuste de tamaño y centrado de texto) */
-          .btn-chaos {
-              font-size: 1.1rem !important;
-              padding: 1.2rem 2rem !important;
-              box-shadow: 6px 6px 0px var(--yellow) !important;
-              text-align: center;
-          }
-
+          .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
         }
     </style>
 </head>
@@ -667,6 +519,7 @@
         <a href="#servicios" onclick="toggleMenu()">Qué Hacemos</a>
         <a href="#inventario" onclick="toggleMenu()">Inventario</a>
         <a href="#blog" onclick="toggleMenu()">Blog</a>
+        <a href="#sorteo" onclick="toggleMenu()">Sorteo 📢</a>
         <a href="#donaciones" onclick="toggleMenu()">Donaciones</a>
         <a href="#contacto" onclick="toggleMenu()">Contacto</a>
     </nav>
@@ -705,48 +558,39 @@
                 <img src="Frank.jpg" alt="Frank" class="frank-img">
                 <h3>Frank Moreno Bueno</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #5','Visionario incomprendido.','Este borrego es el pesao oficial, el que no calla jamás, pero con matices. Juzga y analiza absolutamente todo desde una perspectiva matemática, lógica y despiadadamente analítica. La vida no le pasa: la descompone en variables. Hay otro pesao en el grupo, sí, pero a ese le dio vergüenza salir aquí: habla mucho y no dice nada. Este, al menos, dice cosas, aunque nadie las haya pedido. Es el típico vecino al que nunca quieres encontrarte, y mucho menos en el ascensor. Porque lo que empieza como un “buenas” acaba derivando en sus experiencias en el boxeo, luego pasa por una reflexión existencial sobre la entropía social y termina explicándote por qué no quiere tener hijas por su salud mental. Cuando acaba, tú ya deberías estar cenando y él aún está calentando motores. Es el MacGyver de los borregos. No puedes pedirle algo y que no lo tenga. Su coche es el bolsillo de Doraemon: cables, bridas, herramientas, objetos que no sabías que existían pero que ahora resultan indispensables. Su casa no es una casa, es el taller de Mani Manitas en versión permanente. Odia a la gente, profundamente, pero busca no tener conflictos, lo cual lo convierte en una contradicción funcional. Es polifacético hasta el absurdo: te escala una montaña, te vuelca un pedaló sin pedir perdón, y al mes siguiente aparece trabajando tranquilamente en el sector de calidad de una multinacional tipo Stadler, como si fuera lo más normal del mundo. Tiene aura. Aura densa. Aura que llena habitaciones. Y por si fuera poco, es el dueño del medio de transporte oficial de los borregos: la mítica borregueta. No habla bajo, no pasa desapercibido y no descansa nunca… pero, por alguna razón inexplicable, siempre acaba siendo útil. Y eso le salva.')">
                 <img src="Jos.jpg" alt="Jos" class="jos-img">
                 <h3>Jose Gil Dimas</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #6','No sabe leer, pero es pura esencia.','Señores, estamos ante la estrella del grupo, el eje invisible que mantiene todo unido. Sin él, el sistema colapsa. Tiene una cabeza nivel Megamind, desproporcionada pero gloriosa, coronada por una mirada penetrante que, curiosamente, se intensifica de forma sobrenatural cuando hay mujeres cerca. Coincidencias que tiene la biología. Es un putero nato, no por vicio sino por vocación. Desde que pasó por los brazos de Venus —aquel evento histórico marcado por el inolvidable “ay carallo”— no ha vuelto a ser el mismo. Vive atrapado en ese recuerdo como otros en guerras pasadas. No la supera. No quiere. Trabaja en el Leroy Merlin, templo del bricolaje y las decisiones impulsivas, y como si eso no fuera suficiente, tiene su propia skin en el Gang Beasts, lo que automáticamente lo eleva a entidad mitológica. Es el líder supremo del grupo, aunque nunca fue elegido: simplemente ocurrió. Cuando habla, se escucha. Cuando calla, preocupa. Ojo si es muy tarde y empieza con esa mirada perdida en el aire, porque hace destrozos en el corazón ajeno sin tocarte. Hay rumores —no confirmados por la ciencia— de que tiene una tranca de otro mundo, lo cual explicaría muchas cosas y no aclararía ninguna. No sabe leer. Literalmente. Deletreó la contraseña del router y dijo “k de queso”. Desde ese momento, eso no es un error: es nuestro lema, nuestra filosofía, nuestro escudo. Cabeza grande, carisma peligrosa, líder natural y analfabetismo funcional. La estrella. El pegamento del grupo. El caos necesario.')">
                 <img src="Miguel.jpg" alt="Miguel" class="miguel-img">
                 <h3>Miguel Madrid Gasco</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #7','Sí a todo, consecuencias luego.','Este borrego es el del sí perpetuo. Puede tener 40 cosas que hacer, entre ellas un trabajo de la universidad que entrega ese mismo día a las 12 de la noche, pero si hay un plan con un 90 % de probabilidad de desastre, te va a decir que sí. Sin dudar. Con sonrisa. Con energía inexplicable. Sí, también estudia en la universidad, aunque viva en una contradicción constante: está hasta los cojones de ella, pero siempre está feliz. Feliz de verdad. Sospechosamente feliz. Es el graciosillo picante del grupo, ese al que quieres y odias a partes iguales. Hay días que te dan ganas de reventarle… pero no puedes pillarle porque corre mucho, física y verbalmente. Es el artífice del lenguaje borreguil moderno, creador de frases sin significado aparente pero con un poder devastador: “¿Eres un bombito?” “¿Tú plataneas?” “Menudo cancin.” Expresiones vacías que, repetidas lo suficiente, se convierten en dogma. Vive al límite entre la irresponsabilidad y la magia social. Siempre aparece, siempre anima, siempre se mete en líos leves pero constantes. Le queda un año de carrera y luego se va de Erasmus, lo que ya se intuye como un evento borreguil internacional. ¿Londres? Probablemente. ¿Caos? Seguro. ¿Dirá que sí a todo? Sin ninguna duda. Un borrego agotador amante de la sangría, rápido, feliz y peligroso. Pero imprescindible.')">
                 <img src="Luis.jpg" alt="Luis" class="luis-img">
                 <h3>Luis Blasco-Ibáñez Berbel</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #8','La lió sin querer.','Este borrego es tranquilo, sencillo and de perfil bajo. No quiere jaleo, no busca ruido ni protagonismo… y sin embargo, por una ironía cruel del destino, fue indirectamente el creador de esta santa mierda de grupo. Todo empezó en su falla. Nadie lo planeó, nadie lo pidió, pero ahí se abrió el portal y ya no hubo vuelta atrás. Es fallero y amante del Valencia a más no poder, con todo lo que eso implica: pólvora en el alma, paciencia selectiva y una resistencia al alcohol claramente sobreestimada. Mucho cuidado si lo pillas borracho, porque no mide, no frena und no avisa: ambulancia directa, sin cinemáticas intermedias. Es el más humilde y amable del grupo, el que no levanta la voz, el que escucha, el que no busca conflicto. Pero no nos engañemos: hay algo ahí dentro. Una chispa. Un pequeño tirón hacia la maldad discreta, como quien no quiere la cosa. No lidera el caos, pero lo permite. Y a veces lo disfruta. El colmo ha sido la aparición de la novia. Desde entonces lleva correa. Rosita. Visible. Funcional. Sigue siendo él, pero ahora con horarios, responsabilidad emocional y mensajes de “avisa cuando llegues”. Aun así, no ha perdido su esencia, aunque lo estamos perdiendo, hay que hacer algo. Un borrego calmado, noble, peligrosamente fundamental. El origen silencioso del desastre. El que no quería nada… y lo empezó todo.')">
                 <img src="Pablo.jpg" alt="Pablo" class="pablo-img">
                 <h3>Pablo Gozalbo Chorro</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #9','Confianza intacta, casa no.','Este borrego apareció de los últimos, como los DLC: compañero de gym del gordo, desbloqueable por insistencia. Tiene correa, sí, pero más suelta, de esas que permiten perderse un poco sin que nadie tire demasiado. Vive solo, lo cual explica muchas cosas y empeora otras. Con la caradura legendaria de los borregos, nos metemos en su casa sin pedir permiso y de ahí nace la borregocueva, templo del desorden funcional (la cerradura de la puerta se abre con un cuchillo). Nos usa descaradamente para limpiar su casa… para que luego vuelva a estar hecha un cristo en tiempo récord. Condones por el suelo que ni quita, como si formaran parte del mobiliario. Decoración postmoderna. Puede haber una pelea campal en su salón, gritos, caos, cristales temblando, y él seguirá jugando al GTA, impasible, como si la violencia real fuera solo ruido ambiental. Dice que tiene un plan de vida. Él lo dice. El resto del mundo piensa que está completamente perdido, flotando sin rumbo pero con mucha confianza. Lo único que, según el consenso popular, puede salvarlo es seguir los pasos de Danirep. No se sabe cómo ni cuándo, pero ahí está la fe. Su hermano tiene un bar al que no vamos a volver jamás: caro, restrictivo y traumático. Nos metieron en un habitáculo diminuto, un horno cerrado, porque ya sabían que íbamos a hacer ruido y decidieron castigarnos preventivamente. Un borrego caótico, cómodo en el desastre, con planes nebulosos y casa siempre sucia. Vive solo, vive fuerte, vive raro. Perdido… pero convencido. Y eso, dentro del grupo, ya es una forma de dirección.')">
                 <img src="Leandro.jpg" alt="Leandro" class="leandro-img">
                 <h3>Leandro Fontana</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #10','Está ahí.','Es el más pequeño del grupo, y se nota. No porque haga ruido ni intente demostrar nada —para nada, no es de esos—, sino porque carga con esa mezcla rara de estar todavía descifrando el manual de instrucciones de la vida y, al mismo tiempo, mirarte como si ya hubiera leído todos los spoilers y se estuviera riendo por dentro. Esa dualidad de “estoy aprendiendo” con mirada de “tranquilos, ya lo vi venir y va a ser divertido”. Siempre va vestido de negro y camina con ese aire de pensador atormentado, como si arrastrara el peso del universo… o quizá solo una mala decisión estética de 2017 que todavía no ha logrado desinstalar. Él cree que desprende estilo y flow natural; en su cabeza suena una banda sonora alternativa de fondo. En la realidad, proyecta un "confía en el proceso" tan intenso que no sabes si te está vendiendo café artesanal o preparándote para una crisis existencial express. Quiere imponer presencia, pero lo que despierta es ternura y ganas de arroparlo con una manta. Dan ganas de darle un bocadillo y preguntarle ha dormido bien. Tiene cara de pan. Pan artesano, del bueno: corteza crujiente, miga tierna. De ese que, aunque se empeñe, no intimida a nadie. Es alto y con ojos azules, detalle que lo ha salvado socialmente más veces de las que admitiría sin tartamudear. Porque el pelo… ese pelo es otro rollo. Lleva el corte estándar de "misterioso contemporáneo": ni acierto ni desastre, simplemente flota allí, como diciendo "déjame en paz, pero obsérvame". Como una pestaña abierta desde hace meses que nadie se atreve a cerrar por si acaso "es importante". No molesta, no genera debate. Está. Cumple horario. Punto. Es callado, tranquilo y —dato clave— siempre está atento. Aunque parezca de distraído, no se le escapa nada. Mientras los demás hablan, él archiva. Mientras los demás reaccionan, él ya hizo tres análisis y medio. Tiene un radar silencioso que capta todo: gestos, cambios de ambiente, intenciones ocultas… sin levantar la voz, sin reclamar foco, sin hacer aspavientos. Está presente como el WiFi bueno: invisible hasta que falla, y entonces maldita sea, lo notas de inmediato. Y aunque parezca discreto, tiene más conocidas de las que cualquier ingenuo pensaría. Se mueve entre conversaciones como si nada, escucha más de lo que habla y genera confianza sin esfuerzo. No necesita brillar; simplemente cae bien. Es ese tipo de persona que cuando se va, alguien pregunta: "Oye, ¿y él?"… y nadie recuerda en qué momento se volvió indispensable. No lidera, no estorba, no marca el rumbo… pero siempre está ahí. Como ese personaje secundario que no parece clave hasta que te das cuenta de que sin él, la trama simplemente se cae a pedazos.')">
                 <img src="Adrian.jpg" alt="Adrian" class="adrian-img">
                 <h3>Adrian Fernandez Núñez</h3>
             </div>
-            
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #11','Experto en todo, profesional en nada.','Experto en todo, profesional en nada. Existe entre nosotros una figura casi mitológica, tan discreta que ha decidido no aparecer en la web. No por modestia, sino por una valentía selectiva que solo se activa cuando nadie mira. Un espíritu libre del esfuerzo, un nini vocacional, orgulloso defensor del noble arte de no hacer absolutamente nada… y hacerlo con convicción. Heredero natural del todo resuelto, es el clásico niño de papi y mami, aunque él prefiere verse como un pensador independiente. Una especie de Xokas, pero sin streaming, sin comunidad y, sobre todo, sin haber farmeado nada en la vida real. Mucha opinión, mucha seguridad… y cero currículum. Especialista en todo sin haber profundizado en nada, destaca especialmente en el mundo del automóvil: cuida el coche —que curiosamente no es suyo, aunque él lo sienta así— con una devoción casi religiosa. Lo lava cada semana como si el dinero le cayera del cielo, y lo protege con el celo de quien ha confundido posesión con préstamo indefinido. No sería raro que, en una conversación relajada, afirmara con total naturalidad que es suyo. Y se quedara tan ancho. No estudia ni trabaja, aunque lo intentó. Brevemente. El tiempo justo para explicar durante años lo extremadamente duro que fue aquello que estudió (not lo era) y lo exigente que fue aquel trabajo del que no llegó a cumplir ni medio año. Pero cuidado: la épica no se mide en duración, sino en la intensidad con la que se exagera. Fantasma por definición, también es de los que se apuntan al gimnasio, se hacen la foto el primer día —no se sabe muy bien de qué presume— y desaparecen para siempre, dejando tras de sí solo una story borrosa y una autoestima intacta. En resumen: un perfil tan etéreo, tan opinador y tan poco tangible, que entendemos perfectamente su decisión de no salir en la web. Hay ausencias que también comunican.')">
                 <img src="Cobarde1.jpg" alt="Cobarde.1" class="cobarde1-img">
                 <h3>Cobarde.1</h3>
             </div>
-
             <div class="card-rebano brutal-border reveal reveal-scale"onclick="abrirPerfil('Borrego #12','Habla por hablar','El segundo integrante ausente es un personaje de presencia intensa, con un rostro severo y mirada de juicio permanente, como si estuviera siempre a punto de proclamar alguna norma incomprensible. No sale en la web, quizá porque su carisma necesita contexto… o porque intimida más en persona con la cara de terrorista que me lleva. A diferencia del anterior, este sí trabaja y estudia. O al menos lo intenta. Estudia el carné de conducir, que ya se le está atravesando como si fuera ingeniería aeroespacial. Tampoco queda muy claro para qué lo quiere, porque no hace más que hablar —insistentemente— de su patinete. El patinete es su religión, su identidad y, en ocasiones, su forma de vida. Le gusta tanto que incluso gusta cuando le ponen multas, como si fueran medallas al mérito urbano. Cuando va subido a él, adopta skin de piloto de Fórmula 1: casco imaginario, postura agresiva y actitud de clasificación oficial, aunque esté recorriendo la misma acera de siempre. Cada trayecto es una carrera. Cada semáforo, un rival. Es un pesado en potencia. Ya había uno en el grupo, pero al menos ese decía cosas. Este no. Este habla sin motivo aparente, y cuando termina no sabes muy bien para qué ha empezado, pero ahí queda, flotando en el ambiente. Lleva no se sabe cuántos años yendo al gimnasio, fiel, constante y absolutamente inmóvil en el progreso. Repite el mismo ejercicio desde tiempos inmemoriales, con resultados idénticos: brazo igual, espalda igual… y de las piernas, mejor no abrir ese melón. Digamos que no entrenan porque no quieren destacar. En definitiva, otro perfil que entendemos que prefiera no aparecer en la web. No por falta de presencia, sino porque hay personalidades que se disfrutan mejor… en pequeñas dosis.')">
                 <img src="Cobarde2.jpg" alt="Cobarde.2" class="cobarde2-img">
                 <h3>Cobarde.2</h3>
             </div>
-
-            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justificar exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y cambiando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
+            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justify exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y cambiando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
                 <img src="Ruben.jpg" alt="Rubén Herranz" class="ruben-img">
                 <h3>Rubén Herranz</h3>
             </div>
@@ -826,11 +670,38 @@
           <div class="carousel-item" style="background-image:url('14.jpg')"></div>
           <div class="carousel-item" style="background-image:url('15.jpg')"></div>
           <div class="carousel-item" style="background-image:url('16.jpg')"></div>
-          <div class="carousel-item" style="background-image:url('17.jpg')"></div>
+          <!-- Se oculta la 17 para que no de error 404 <div class="carousel-item" style="background-image:url('17.jpg')"></div> -->
         </div>
 
         <button class="carousel-btn right" onclick="scrollCarousel(1)">›</button>
       </div>
+    </section>
+
+    <!-- SORTEO -->
+    <section id="sorteo">
+        <h2 class="section-title reveal reveal-left" style="background: var(--accent-color);">Sorteo Ilegal</h2>
+        <div class="donaciones-container brutal-border reveal reveal-scale" style="background: var(--card-bg); color: var(--text-dark);">
+            <h3 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; text-transform: uppercase; color: var(--main-color); text-shadow: 2px 2px 0px var(--dark);">Gana basura de la buena</h3>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                Sorteamos un <strong>lote exclusivo de mierdas borregas</strong> (literalmente, lo que encontremos por la borregocueva que tenga algo de valor). Participar cuesta la ridícula cantidad de <strong>1€</strong>.<br><br>
+                <strong>¿Cómo funciona?</strong><br>
+                1. Pagas 1€ en el botón de abajo (Concepto: Sorteo Borrego).<br>
+                2. Estate atento a nuestro Instagram, por ahí diremos qué sorteamos exactamente y anunciaremos al ganador.<br>
+                3. Reza para no ganar, porque el premio probablemente sea un problema para tu casa.
+            </p>
+            
+            <div class="magnetic-btn" style="margin-bottom: 2rem;">
+                <!-- ⚠️ ATENCIÓN: PEGA TU NUEVO ENLACE EN EL href DE ABAJO ⚠️ -->
+                <a href="https://buy.stripe.com/7sY8wOgFbehs1kp05ldZ604" target="_blank" class="btn-donar" style="background: var(--accent-color); font-size: clamp(1.5rem, 4vw, 2.5rem);">PARTICIPAR (1€)</a>
+            </div>
+
+            <p style="font-size: 1.5rem; font-weight: 900; margin-top: 1rem; padding: 1rem; border: 4px dashed var(--dark); display: inline-block; background: var(--yellow);">
+                📢 Síguenos y entérate de todo en IG: <br>
+                <!-- Recuerda cambiar la URL por tu cuenta real de Instagram -->
+                <a href="https://instagram.com/TU_USUARIO_AQUI" target="_blank" style="color: var(--main-color); text-decoration: none; font-size: 2rem; transition: transform 0.2s; display: inline-block;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">@BorregosSL</a>
+            </p>
+        </div>
     </section>
 
     <!-- DONACIONES -->
@@ -844,7 +715,7 @@
                 <div class="magnetic-btn"><a href="https://buy.stripe.com/00weVcex3gpA6EJ5pFdZ602" target="_blank" class="btn-donar">2€</a></div>
                 <div class="magnetic-btn"><a href="https://buy.stripe.com/dRmfZg3Sp6P0gfj3hxdZ603" target="_blank" class="btn-donar">5€</a></div>
             </div>
-            <!-- TEXTO DE PROGRESO REDISEÑADO (FUERA DE LA BARRA CON SALTO DE LÍNEA) -->
+            <!-- TEXTO DE PROGRESO REDISEÑADO -->
             <div class="progreso-texto" id="progresoTexto">
                 Objetivo: Dildo gigante<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">1</span>€ / 100€)</span>
             </div>
@@ -885,7 +756,7 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // 2. MAGNETIC BUTTONS (Solo se habilitan en dispositivos con punteros precisos/ratón para mejorar rendimiento en móvil)
+        // 2. MAGNETIC BUTTONS 
         if (window.matchMedia("(pointer: fine)").matches) {
             document.querySelectorAll('.magnetic-btn').forEach(btn => {
                 btn.addEventListener('mousemove', function(e) {
@@ -907,10 +778,10 @@
             document.getElementById('themeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌞' : '🌚';
         }
 
-        // 4. SONIDO Y VISUAL BEEEEEE EN CADA CLICK
-        const sheepAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_2901ed4e68.mp3");
+        // 4. SONIDO Y VISUAL BEEEEEE (CORREGIDO ERROR 403 AL LEER DE ARCHIVO LOCAL)
+        const sheepAudio = new Audio("oveja.mp3");
 
-        // 5. DONACIONES PERSISTENTES CON ROTACIÓN DE OBJETIVOS Y REDIRECCIONAMIENTO STRIPE
+        // 5. DONACIONES PERSISTENTES CON ROTACIÓN DE OBJETIVOS
         const objetivos = [
             "Dildo gigante",
             "Alquilar un tanque",
@@ -920,7 +791,6 @@
             "Fianza judicial preventiva"
         ];
 
-        // Se inicializa en 1€ por defecto si no existen datos previos en localStorage
         let dineroActual = localStorage.getItem('borregos_dinero');
         if (dineroActual === null) {
             dineroActual = 1;
@@ -934,7 +804,6 @@
         function sumarDonacion(qty) {
             dineroActual += qty;
             
-            // Lógica de rotación de objetivos con traspaso de sobrante
             while (dineroActual >= 100) {
                 dineroActual -= 100;
                 objetivoIndex = (objetivoIndex + 1) % objetivos.length;
@@ -946,7 +815,6 @@
             actualizarUI();
             
             if (qty > 0) {
-                // Efecto visual al procesarse la donación exitosa
                 const billet = document.createElement('div');
                 billet.textContent = '💸';
                 billet.className = 'drop-fx';
@@ -962,14 +830,13 @@
             document.getElementById('progresoTexto').innerHTML = `Objetivo: ${objetivoActual}<br><span style="font-size: 1.1rem; opacity: 0.85;">(<span id="dineroRecaudado">${dineroActual}</span>€ / 100€)</span>`;
         }
 
-        // Lector inteligente de redirecciones exitosas de Stripe [1]
+        // Lector inteligente de redirecciones exitosas de Stripe
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('donado')) {
                 const cantidad = parseFloat(urlParams.get('donado'));
                 if (!isNaN(cantidad) && cantidad > 0) {
                     sumarDonacion(cantidad);
-                    // Se limpia la variable de la URL para que no sume de nuevo al recargar [1]
                     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
                     window.history.replaceState({ path: newUrl }, '', newUrl);
                 }
@@ -986,7 +853,7 @@
         }
         function cerrarPerfil() { document.getElementById('modalPerfil').style.display = 'none'; }
 
-        // EASTER EGG
+        // EASTER EGG QUESO
         document.getElementById('quesoBtn').addEventListener('click', (e) => {
             e.stopPropagation(); 
             const btn = e.currentTarget;
@@ -1063,9 +930,7 @@
           carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
         }
 
-        // Se cambia el evento a 'click' para evitar que se dispare mientras se hace scroll en dispositivos móviles
         window.addEventListener('click', function (e) {
-            // Evitamos que se dispare si se pulsó un botón o control interactivo para no entorpecer la experiencia
             if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.closest('.card-rebano') || e.target.id === 'quesoBtn') {
                 return;
             }
@@ -1081,6 +946,10 @@
             beee.style.color = colors[Math.floor(Math.random() * colors.length)];
 
             document.body.appendChild(beee);
+
+            // Intentamos reproducir el sonido de la oveja si está disponible
+            sheepAudio.currentTime = 0;
+            sheepAudio.play().catch(e => { /* Ignorar error de reproducción automática */ });
 
             setTimeout(function () {
                 beee.remove();
