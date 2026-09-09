@@ -31,15 +31,8 @@
             --text-light: #111111;
         }
 
-        html, body {
-            width: 100%; max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; position: relative;
-        }
-
-        * {
-            box-sizing: border-box; margin: 0; padding: 0;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important;
-        }
-
+        html, body { width: 100%; max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; position: relative; }
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important; }
         body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); scroll-behavior: smooth; transition: background-color 0.4s ease, color 0.4s ease; }
 
         /* --- EFECTOS FRAMER MOTION --- */
@@ -56,7 +49,6 @@
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         @keyframes rainbow { 0%{filter: hue-rotate(0deg);} 100%{filter: hue-rotate(360deg);} }
         @keyframes shake-hard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
-
         body.rave-mode { animation: rainbow 2s linear infinite; }
         body.caos-mode { animation: shake-hard 0.1s infinite !important; }
 
@@ -104,7 +96,6 @@
         .card-rebano:hover img { filter: grayscale(0%); }
         .card-rebano h3 { font-size: 1.25rem; margin-top: 1rem; width: 100%; display: block; line-height: 1.2; font-weight: 900; }
 
-        /* AJUSTES FOTOS */
         .samu-img { object-position: center 10% !important; } .david-img { object-position: center 50% !important; } .ignacio-img { object-position: center 10% !important; } .frank-img { object-position: center 10% !important; } .jos-img { object-position: center 20% !important; } .miguel-img { object-position: center 15% !important; } .luis-img { object-position: center 10% !important; } .pablo-img { object-position: center 0% !important; } .leandro-img { object-position: center 0% !important; } .adrian-img { object-position: center 10% !important; } .cobarde1-img { object-position: center 10% !important; } .cobarde2-img { object-position: center 10% !important; } .ruben-img { object-position: center 15% !important; }
 
         /* MODAL */
@@ -146,122 +137,104 @@
 
 
         /* =========================================================
-           🌿 CÉSPED REALISTA (PARALLAX + VIENTO SVG) RESTAURADO 🌿
+           🌿 CÉSPED SÓLIDO CON PINCHOS (UN SOLO COLOR) 🌿
            ========================================================= */
 
-        /* CAPA 1: Hierba trasera (Capa más oscura al fondo) */
-        .pasto-fondo {
+        .pasto-verde {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 35px; 
-            background: #2a5716; 
-            z-index: 2; border: none;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: #4ade80; /* Un solo color verde */
+            border-bottom: 4px solid var(--dark); /* Borde negro brutalista pegado abajo */
+            z-index: 4; /* IMPORTANTE: Delante de la oveja para ocultar ligeramente las patas */
         }
-        /* Puntas de la hierba trasera (Vector SVG Inyectado) */
-        .pasto-fondo::before {
+        
+        /* Los "Pinchos" de la hierba generados con SVG del mismo color */
+        .pasto-verde::before {
             content: '';
             position: absolute;
-            top: -20px; left: 0; width: 100%; height: 25px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 25" preserveAspectRatio="none"><path d="M0,25 L3,5 L7,25 L12,8 L16,25 L22,2 L26,25 L33,9 L38,25 L45,4 L50,25 L56,12 L60,25 L66,3 L72,25 L77,7 L82,25 L87,2 L92,25 L97,6 L100,25 Z" fill="%232a5716"/></svg>') repeat-x;
-            background-size: 90px 100%;
-            animation: viento-suave 4s ease-in-out infinite alternate;
-            transform-origin: bottom;
-        }
-
-        /* CAPA 2: Hierba delantera (Capa más clara y alta al frente) */
-        .pasto-frente {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 15px; 
-            background: #3f882b; 
-            z-index: 4; /* IMPORTANTE: Z-index 4 la pone POR DELANTE de las patas */
-            pointer-events: none;
-        }
-        /* Puntas de la hierba delantera */
-        .pasto-frente::before {
-            content: '';
-            position: absolute;
-            top: -25px; left: 0; width: 100%; height: 30px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,30 L4,10 L9,30 L15,15 L20,30 L28,5 L34,30 L40,12 L46,30 L52,8 L58,30 L64,18 L70,30 L76,6 L82,30 L88,10 L94,30 L98,15 L100,30 Z" fill="%233f882b"/></svg>') repeat-x;
-            background-size: 130px 100%;
-            animation: viento-suave 3s ease-in-out infinite alternate-reverse;
-            transform-origin: bottom;
-        }
-
-        @keyframes viento-suave {
-            0% { transform: skewX(-3deg); }
-            100% { transform: skewX(3deg); }
+            top: -20px; /* Sube por encima de la caja para hacer las puntas */
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,20 L4,5 L8,20 L13,8 L18,20 L23,2 L27,20 L32,10 L37,20 L42,3 L47,20 L52,9 L57,20 L62,1 L67,20 L73,5 L78,20 L83,2 L88,20 L94,7 L100,20 Z" fill="%234ade80"/></svg>') repeat-x;
+            background-size: 60px 100%;
         }
 
         /* =========================================================
-           🐑 OVEJA: PATAS, CUELLO ANATÓMICO Y PARTÍCULAS 🐑
+           🐑 OVEJA: PEGADA AL CÉSPED, CUELLO REALISTA Y PARTÍCULAS 🐑
            ========================================================= */
 
-        /* Contenedor de trayectoria (Se mete entre las dos capas de césped) */
+        /* Contenedor que la mueve horizontalmente */
         .ovejita-trayectoria {
             position: absolute;
-            bottom: 25px; /* Un poco hundida en la hierba del frente */
+            bottom: 12px; /* MÁS PEGADA Y HUNDIDA EN EL CÉSPED */
             left: 0;
             width: 140px;
-            z-index: 3; /* Entre el pasto 2 y el pasto 4 */
+            z-index: 3; /* Se esconde detrás de los pinchos del pasto-verde (Z4) */
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
 
-        /* Contenedor que voltea la imagen según hacia donde camina */
+        /* Contenedor que voltea la imagen según la dirección */
         .ovejita-direccion {
             width: 100%; height: 100%;
             animation: oveja-volteo 24s steps(1) infinite;
             transform-origin: center;
         }
 
-        /* La imagen de la oveja: Animamos el "esqueleto" invisible */
+        /* Esqueleto de la oveja: Centro de rotación ajustado al pecho para no levantar el culo */
         .animacion-cuerpo {
             width: 100%; height: auto;
             position: relative;
-            transform-origin: 30% 80%; /* Centro de rotación al nivel del pecho */
+            transform-origin: 30% 80%; /* El pecho/cuello */
             animation: oveja-esqueleto 24s linear infinite; 
         }
+        
         .ovejita-img {
             width: 100%;
             display: block;
         }
 
-        /* --- SISTEMA DE PARTÍCULAS MEJORADO Y CORREGIDO --- */
+        /* --- PARTÍCULAS DE HIERBA (Saltan de la boca) --- */
         .particulas-cesped {
             position: absolute;
-            bottom: 5px; /* Más pegado al suelo/césped */
-            left: -5%;   /* Posicionado en la parte frontal izquierda (CABEZA) */
+            bottom: 50px; /* MUY ARRIBA: Altura exacta de la boca en posición neutral */
+            left: -5%;    /* Posición de la boca (Si tu foto mira a la izquierda) */
             width: 30px; height: 30px;
-            animation: visibilidad-particulas 24s linear infinite; /* Controla cuándo aparecen */
+            animation: visibilidad-particulas 24s linear infinite; 
             pointer-events: none;
-            z-index: 5; /* Por encima de la hierba frontal para que se vean saltar */
+            z-index: 5; /* Por delante de la hierba */
         }
 
         .particula {
             position: absolute;
             bottom: 0; left: 0;
-            width: 10px; height: 10px;
-            background: #4ade80; /* Verde brillante */
-            border: 2px solid var(--dark); /* Borde brutalista */
+            width: 12px; height: 12px;
+            background: #4ade80; /* El mismo verde */
+            border: 2px solid var(--dark); /* Borde negro brutalista */
             animation: saltar-particula 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
-        /* Sincronizado EXACTAMENTE con el momento en el que come */
+        /* Sincronización perfecta: Sólo se ven cuando está agachada comiendo */
         @keyframes visibilidad-particulas {
             0%, 21% { opacity: 0; }
-            22%, 29% { opacity: 1; } /* Comer en el viaje de ida */
+            22%, 29% { opacity: 1; } /* Viaje de ida */
             30%, 61% { opacity: 0; }
-            62%, 69% { opacity: 1; } /* Comer en el viaje de vuelta */
+            62%, 69% { opacity: 1; } /* Viaje de vuelta */
             70%, 100% { opacity: 0; }
         }
 
-        /* Saltan hacia adelante (coordenadas X negativas) girando */
+        /* Vuelan haciendo una pequeña curva parabólica hacia abajo */
         @keyframes saltar-particula {
             0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-            80% { opacity: 1; }
+            50% { transform: translate(calc(var(--mov-x) * 0.5), -15px) rotate(100deg) scale(1.2); opacity: 1; }
             100% { transform: translate(var(--mov-x), var(--mov-y)) rotate(200deg) scale(0); opacity: 0; }
         }
 
-        /* Trayectoria de izquierda a derecha y vuelta */
+        /* Viaje horizontal infinito */
         @keyframes oveja-viaje {
             0%   { transform: translateX(-200px); }
             20%  { transform: translateX(35vw); }  
@@ -273,13 +246,13 @@
             100% { transform: translateX(-200px); }
         }
 
-        /* Volteo (Si salían por el culo, significa que la foto original mira a la IZQUIERDA) */
+        /* Inversión automática para que no camine de espaldas */
         @keyframes oveja-volteo {
-            0%, 45% { transform: scaleX(-1); }   /* Scale negativo la obliga a mirar a DERECHA (Ida) */
-            46%, 100% { transform: scaleX(1); }  /* Scale positivo la obliga a mirar a IZQUIERDA (Vuelta) */
+            0%, 45% { transform: scaleX(-1); }   /* Scale negativo -> Obliga a mirar a DERECHA (Ida) */
+            46%, 100% { transform: scaleX(1); }  /* Scale positivo -> Obliga a mirar a IZQUIERDA (Vuelta) */
         }
 
-        /* LA MAGIA DEL MOVIMIENTO (Waddle y Agachar Cuello) */
+        /* LA MAGIA DEL MOVIMIENTO: Patas + Agachar Cuello */
         @keyframes oveja-esqueleto {
             /* FASE 1: CAMINANDO - Pasos simulados */
             0%, 4%, 8%, 12%, 16%, 20% { transform: translateY(0) rotate(0deg) skewX(0deg); }
@@ -288,7 +261,7 @@
 
             /* FASE 2: COMIENDO PASTO */
             21% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-            /* Se estira hacia abajo desde el pecho simulando el cuello */
+            /* Se agacha desde el pecho simulando el cuello (El culo NO sube gracias al transform-origin modificado) */
             22% { transform: translateY(12px) rotate(-35deg) scale(1.1, 0.85) skewX(10deg); }
             24% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   
             26% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }
@@ -366,9 +339,9 @@
           .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
 
           /* Adaptación móvil */
-          .pasto-fondo { height: 25px; } 
-          .pasto-frente { height: 10px; }
-          .ovejita-trayectoria { width: 100px; bottom: 18px; }
+          .pasto-verde { height: 25px; } 
+          .ovejita-trayectoria { width: 100px; bottom: 8px; }
+          .particulas-cesped { bottom: 35px; } /* Ajuste de altura de boca en móvil */
         }
     </style>
 </head>
@@ -407,8 +380,8 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 CAPA 1: PASTO DE FONDO (REALISTA Y CON VIENTO) -->
-        <div class="pasto-fondo"></div>
+        <!-- 🌿 PASTO VERDE SIMPLE CON PINCHOS -->
+        <div class="pasto-verde"></div>
         
         <!-- 🐑 OVEJITA ANIMADA CON PARTÍCULAS -->
         <div class="ovejita-trayectoria">
@@ -416,20 +389,17 @@
                 <div class="animacion-cuerpo">
                     <img src="ovejita.png" alt="Ovejita paseando" class="ovejita-img">
                     
-                    <!-- Partículas de césped volando al masticar -->
+                    <!-- Partículas de césped saltando de la boca -->
                     <div class="particulas-cesped">
                         <!-- Con coordenadas X negativas, escupirá la hierba hacia adelante -->
-                        <div class="particula" style="--mov-x: -25px; --mov-y: -25px; animation-delay: 0s;"></div>
-                        <div class="particula" style="--mov-x: -45px; --mov-y: -10px; animation-delay: 0.15s;"></div>
-                        <div class="particula" style="--mov-x: -15px; --mov-y: -40px; animation-delay: 0.3s;"></div>
-                        <div class="particula" style="--mov-x: -35px; --mov-y: -20px; animation-delay: 0.45s;"></div>
+                        <div class="particula" style="--mov-x: -30px; --mov-y: 20px; animation-delay: 0s;"></div>
+                        <div class="particula" style="--mov-x: -45px; --mov-y: 10px; animation-delay: 0.15s;"></div>
+                        <div class="particula" style="--mov-x: -20px; --mov-y: 35px; animation-delay: 0.3s;"></div>
+                        <div class="particula" style="--mov-x: -40px; --mov-y: 25px; animation-delay: 0.45s;"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- 🌿 CAPA 2: PASTO DE FRENTE (CREA EL EFECTO 3D) -->
-        <div class="pasto-frente"></div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
