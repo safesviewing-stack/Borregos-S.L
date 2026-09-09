@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borregos S.L. | K de queso</title>
+    <!-- Icono de oveja para la pestaña del navegador -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -31,9 +32,28 @@
             --text-light: #111111;
         }
 
-        html, body { width: 100%; max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; position: relative; }
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important; }
-        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); scroll-behavior: smooth; transition: background-color 0.4s ease, color 0.4s ease; }
+        /* CONTROL ESTRICTO DE ANCHO PARA EVITAR DESPLAZAMIENTO LATERAL */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        * {
+            box-sizing: border-box; margin: 0; padding: 0;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🐑</text></svg>'), auto !important;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--dark);
+            scroll-behavior: smooth; 
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
 
         /* --- EFECTOS FRAMER MOTION --- */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -45,17 +65,25 @@
         .reveal-left { transform: translateX(-50px); }
         .reveal-left.active { transform: translateX(0); }
 
+        /* ANIMACIONES CONSTANTES */
         @keyframes float-hero { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         @keyframes rainbow { 0%{filter: hue-rotate(0deg);} 100%{filter: hue-rotate(360deg);} }
         @keyframes shake-hard { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(2px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(2px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+
         body.rave-mode { animation: rainbow 2s linear infinite; }
         body.caos-mode { animation: shake-hard 0.1s infinite !important; }
 
         /* --- CONTROLES SUPERIORES --- */
         .top-controls { position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 1rem; z-index: 1002; }
         .magnetic-btn { display: inline-block; transition: transform 0.2s ease-out; }
-        .btn-control { background: var(--card-bg); color: var(--dark); border: 3px solid var(--dark); padding: 0.5rem 1rem; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.2rem; box-shadow: 4px 4px 0px var(--dark); transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        
+        .btn-control {
+            background: var(--card-bg); color: var(--dark); border: 3px solid var(--dark); padding: 0.5rem 1rem;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.2rem;
+            box-shadow: 4px 4px 0px var(--dark); transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
         .btn-control:hover { box-shadow: 6px 6px 0px var(--main-color); background: var(--yellow); color: var(--text-dark); transform: translate(-2px, -2px); }
 
         .hamburger { width: 45px; height: 42px; padding: 0; flex-direction: column; gap: 5px; }
@@ -67,11 +95,33 @@
         .glass-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999; }
         .glass-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .side-panel { position: fixed; top: 0; right: 0; width: min(350px, 100vw); height: 100vh; background: var(--bg-color); border-left: 6px solid var(--dark); padding: 12rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transform: translateX(110%); visibility: hidden; transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.4s; z-index: 1000; box-shadow: -10px 0px 0px var(--main-color); }
-        .side-panel.open { transform: translateX(0); visibility: visible; }
+        /* MENU LATERAL SEGURO */
+        .side-panel { 
+            position: fixed; 
+            top: 0; 
+            right: 0; 
+            width: min(350px, 100vw); 
+            height: 100vh; 
+            background: var(--bg-color); 
+            border-left: 6px solid var(--dark); 
+            padding: 12rem 2rem 2rem; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1rem; 
+            transform: translateX(110%);
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.4s; 
+            z-index: 1000; 
+            box-shadow: -10px 0px 0px var(--main-color); 
+        }
+        .side-panel.open { 
+            transform: translateX(0); 
+            visibility: visible;
+        }
         .side-panel a { color: var(--dark); font-size: 1.8rem; text-decoration: none; font-weight: 900; text-transform: uppercase; transition: transform 0.3s ease, color 0.3s ease; display: block; text-align: center;}
         .side-panel a:hover { color: var(--accent-color); transform: translateX(10px); }
 
+        /* --- ESTILOS GENERALES Y BRUTALISMO --- */
         .brutal-border { border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
         .brutal-border:hover { transform: translate(-4px, -4px); box-shadow: 12px 12px 0px var(--dark); }
 
@@ -87,7 +137,9 @@
         .subtitle:hover { opacity: 1; color: var(--main-color); transform: scale(1.05); }
         .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 120px; height: 120px; background: var(--yellow); color: var(--text-dark); border-radius: 50%; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; text-align: center; animation: spin-slow 10s linear infinite; z-index: 1; }
 
+        /* SECCIONES TEXTO / CARTAS */
         .about-text { font-size: 1.05rem; line-height: 1.6; text-align: center; background: var(--card-bg); color: var(--text-dark); padding: 3rem; width: 100%; max-width: 100%; word-wrap: break-word; }
+        
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; width: 100%; }
         
         .card-rebano { background: var(--card-bg); color: var(--text-dark); padding: 1.5rem; text-align: center; border: 4px solid var(--dark); box-shadow: 8px 8px 0px var(--dark); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; will-change: transform; cursor: pointer; width: 100%; max-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
@@ -96,15 +148,16 @@
         .card-rebano:hover img { filter: grayscale(0%); }
         .card-rebano h3 { font-size: 1.25rem; margin-top: 1rem; width: 100%; display: block; line-height: 1.2; font-weight: 900; }
 
+        /* AJUSTES DE ENCUADRE DE FOTOS PERSONALIZADOS */
         .samu-img { object-position: center 10% !important; } .david-img { object-position: center 50% !important; } .ignacio-img { object-position: center 10% !important; } .frank-img { object-position: center 10% !important; } .jos-img { object-position: center 20% !important; } .miguel-img { object-position: center 15% !important; } .luis-img { object-position: center 10% !important; } .pablo-img { object-position: center 0% !important; } .leandro-img { object-position: center 0% !important; } .adrian-img { object-position: center 10% !important; } .cobarde1-img { object-position: center 10% !important; } .cobarde2-img { object-position: center 10% !important; } .ruben-img { object-position: center 15% !important; }
 
-        /* MODAL */
+        /* MODAL INSTANTÁNEO */
         .modal-perfil { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; display: none; overflow-y: auto; padding: 4rem 2rem; overflow-x: hidden; }
         .modal-content { width: 90%; max-width: 800px; margin: 0 auto; background: var(--card-bg); color: var(--text-dark); padding: 3rem; position: relative; text-align: center;}
         .close-btn { position: absolute; top: 1rem; right: 1rem; background: var(--main-color); color: var(--text-light); border: 4px solid var(--dark); padding: 0.5rem 1rem; font-weight: bold; transition: transform 0.2s; cursor: pointer; }
         .close-btn:hover { transform: scale(1.05); }
 
-        /* DONACIONES & CONTACTO */
+        /* DONACIONES */
         .donaciones-container { background: var(--main-color); color: var(--text-light); padding: 4rem; text-align: center; width: 100%; }
         .donaciones-cajas { display: flex; justify-content: center; gap: 2rem; margin: 3rem 0; flex-wrap: wrap; width: 100%; }
         .btn-donar { background: var(--card-bg); color: var(--text-dark); font-size: 2rem; font-weight: bold; padding: 1.5rem 3rem; border: 4px solid var(--dark); text-decoration: none; box-shadow: 6px 6px 0px var(--dark); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; display: inline-block; }
@@ -112,6 +165,8 @@
         .progreso-texto { font-weight: bold; font-size: 1.4rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 0.5rem; text-align: center; line-height: 1.4; }
         .progreso-wrapper { width: 100%; height: 40px; background: var(--dark); border: 4px solid var(--bg-color); position: relative; overflow: hidden; }
         .progreso-barra { height: 100%; width: 0%; background: var(--yellow); transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+
+        /* CONTACTO Y EMAIL */
         .email-huge { font-size: clamp(1.2rem, 4.5vw, 3.5rem); color: var(--main-color); text-decoration: none; font-weight: 900; transition: transform 0.3s, color 0.3s; display: inline-block; word-break: keep-all; white-space: nowrap; max-width: 100%; }
         .email-huge:hover { color: var(--accent-color); transform: scale(1.02) rotate(-1deg); }
 
@@ -137,136 +192,123 @@
 
 
         /* =========================================================
-           🌿 CÉSPED SÓLIDO CON PINCHOS (UN SOLO COLOR) 🌿
+           🐑 OVEJA: PATAS, CUELLO ANATÓMICO Y PARTÍCULAS CÉSPED 🐑
            ========================================================= */
 
+        /* 1. Césped brutalista original restaurado */
         .pasto-verde {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 35px;
-            background: #4ade80; /* Un solo color verde */
-            border-bottom: 4px solid var(--dark); /* Borde negro brutalista pegado abajo */
-            z-index: 4; /* IMPORTANTE: Delante de la oveja para ocultar ligeramente las patas */
-        }
-        
-        /* Los "Pinchos" de la hierba generados con SVG del mismo color */
-        .pasto-verde::before {
-            content: '';
-            position: absolute;
-            top: -20px; /* Sube por encima de la caja para hacer las puntas */
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,20 L4,5 L8,20 L13,8 L18,20 L23,2 L27,20 L32,10 L37,20 L42,3 L47,20 L52,9 L57,20 L62,1 L67,20 L73,5 L78,20 L83,2 L88,20 L94,7 L100,20 Z" fill="%234ade80"/></svg>') repeat-x;
-            background-size: 60px 100%;
+            background: #4ade80; /* Color verde césped plano */
+            border-top: 4px solid var(--dark); /* Borde brutalista */
+            z-index: 2;
         }
 
-        /* =========================================================
-           🐑 OVEJA: PEGADA AL CÉSPED, CUELLO REALISTA Y PARTÍCULAS 🐑
-           ========================================================= */
-
-        /* Contenedor que la mueve horizontalmente */
+        /* 2. Contenedor que desplaza la oveja de lado a lado */
         .ovejita-trayectoria {
             position: absolute;
-            bottom: 12px; /* MÁS PEGADA Y HUNDIDA EN EL CÉSPED */
+            bottom: 35px; /* Toca exactamente el borde del césped */
             left: 0;
             width: 140px;
-            z-index: 3; /* Se esconde detrás de los pinchos del pasto-verde (Z4) */
+            z-index: 3;
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
 
-        /* Contenedor que voltea la imagen según la dirección */
+        /* 3. Contenedor que voltea la imagen según hacia donde camina */
         .ovejita-direccion {
             width: 100%; height: 100%;
             animation: oveja-volteo 24s steps(1) infinite;
             transform-origin: center;
         }
 
-        /* Esqueleto de la oveja: Centro de rotación ajustado al pecho para no levantar el culo */
+        /* 4. La imagen de la oveja: Animamos el "esqueleto" invisible */
         .animacion-cuerpo {
             width: 100%; height: auto;
             position: relative;
-            transform-origin: 30% 80%; /* El pecho/cuello */
+            transform-origin: 30% 80%; /* Centro de gravedad en el pecho/cuello */
             animation: oveja-esqueleto 24s linear infinite; 
         }
-        
         .ovejita-img {
             width: 100%;
             display: block;
         }
 
-        /* --- PARTÍCULAS DE HIERBA (Saltan de la boca) --- */
+        /* 5. SISTEMA DE PARTÍCULAS (Ajustado a la altura de la cabeza/boca) */
         .particulas-cesped {
             position: absolute;
-            bottom: 50px; /* MUY ARRIBA: Altura exacta de la boca en posición neutral */
-            left: -5%;    /* Posición de la boca (Si tu foto mira a la izquierda) */
+            top: 35%;    /* Subido a la altura de la cara */
+            left: -5%;   /* Posicionado en la parte frontal izquierda (BOCA) */
             width: 30px; height: 30px;
-            animation: visibilidad-particulas 24s linear infinite; 
+            /* Se hacen visibles solo en el momento exacto en el que come */
+            animation: visibilidad-particulas 24s linear infinite;
             pointer-events: none;
-            z-index: 5; /* Por delante de la hierba */
+            z-index: 5;
         }
 
+        /* Cada partícula es un trocito de césped */
         .particula {
             position: absolute;
-            bottom: 0; left: 0;
-            width: 12px; height: 12px;
-            background: #4ade80; /* El mismo verde */
-            border: 2px solid var(--dark); /* Borde negro brutalista */
-            animation: saltar-particula 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
+            background: #4ade80; /* Mismo verde que el suelo */
+            border: 2px solid var(--dark); /* Efecto cómic/brutalista */
+            /* Animación constante (bucle rápido) cayendo hacia el suelo */
+            animation: saltar-particula 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
-        /* Sincronización perfecta: Sólo se ven cuando está agachada comiendo */
+        /* Controla cuándo aparecen las partículas (sincronizado con la animación principal) */
         @keyframes visibilidad-particulas {
-            0%, 21% { opacity: 0; }
-            22%, 29% { opacity: 1; } /* Viaje de ida */
-            30%, 61% { opacity: 0; }
-            62%, 69% { opacity: 1; } /* Viaje de vuelta */
+            0%, 22% { opacity: 0; }
+            23%, 29% { opacity: 1; } /* Come de ida */
+            30%, 62% { opacity: 0; }
+            63%, 69% { opacity: 1; } /* Come de vuelta */
             70%, 100% { opacity: 0; }
         }
 
-        /* Vuelan haciendo una pequeña curva parabólica hacia abajo */
+        /* Las partículas saltan y caen por gravedad (+Y) */
         @keyframes saltar-particula {
             0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-            50% { transform: translate(calc(var(--mov-x) * 0.5), -15px) rotate(100deg) scale(1.2); opacity: 1; }
-            100% { transform: translate(var(--mov-x), var(--mov-y)) rotate(200deg) scale(0); opacity: 0; }
+            80% { opacity: 1; }
+            100% { transform: translate(var(--mov-x), var(--mov-y)) rotate(200deg) scale(0.5); opacity: 0; }
         }
 
-        /* Viaje horizontal infinito */
+        /* Trayectoria de izquierda a derecha y vuelta */
         @keyframes oveja-viaje {
             0%   { transform: translateX(-200px); }
-            20%  { transform: translateX(35vw); }  
-            30%  { transform: translateX(35vw); }  
-            45%  { transform: translateX(110vw); } 
+            20%  { transform: translateX(35vw); }  /* Llega al punto de comer */
+            30%  { transform: translateX(35vw); }  /* Termina de comer */
+            45%  { transform: translateX(110vw); } /* Sale de pantalla */
             46%  { transform: translateX(110vw); } 
-            60%  { transform: translateX(60vw); }  
+            60%  { transform: translateX(60vw); }  /* Vuelve y para a comer */
             70%  { transform: translateX(60vw); }  
-            100% { transform: translateX(-200px); }
+            100% { transform: translateX(-200px); }/* Termina el ciclo */
         }
 
-        /* Inversión automática para que no camine de espaldas */
+        /* Volteo para mirar en la dirección que camina */
         @keyframes oveja-volteo {
-            0%, 45% { transform: scaleX(-1); }   /* Scale negativo -> Obliga a mirar a DERECHA (Ida) */
-            46%, 100% { transform: scaleX(1); }  /* Scale positivo -> Obliga a mirar a IZQUIERDA (Vuelta) */
+            0%, 45% { transform: scaleX(-1); }   /* Camina hacia la derecha (Asume foto mirando Izq) */
+            46%, 100% { transform: scaleX(1); }  /* Camina hacia la izquierda */
         }
 
-        /* LA MAGIA DEL MOVIMIENTO: Patas + Agachar Cuello */
+        /* LA MAGIA DEL MOVIMIENTO: Rotación, Sesgo (Waddle) y Agachar el cuello */
         @keyframes oveja-esqueleto {
-            /* FASE 1: CAMINANDO - Pasos simulados */
+            /* FASE 1: CAMINANDO - Simulando pasos */
             0%, 4%, 8%, 12%, 16%, 20% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-            1%, 5%, 9%, 13%, 17%      { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); } 
-            3%, 7%, 11%, 15%, 19%     { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); } 
+            1%, 5%, 9%, 13%, 17%      { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); } /* Levanta patas de un lado */
+            3%, 7%, 11%, 15%, 19%     { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); } /* Levanta del otro lado */
 
             /* FASE 2: COMIENDO PASTO */
             21% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-            /* Se agacha desde el pecho simulando el cuello (El culo NO sube gracias al transform-origin modificado) */
+            /* Se estira hacia abajo desde el pecho simulando el cuello */
             22% { transform: translateY(12px) rotate(-35deg) scale(1.1, 0.85) skewX(10deg); }
-            24% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   
-            26% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }
-            28% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   
-            30% { transform: translateY(0) rotate(0deg) skewX(0deg); } 
+            24% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   /* Mastica arriba */
+            26% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }/* Mastica abajo */
+            28% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   /* Mastica arriba */
+            30% { transform: translateY(0) rotate(0deg) skewX(0deg); } /* Sube cabeza */
 
             /* FASE 3: CAMINANDO */
             32%, 36%, 40%, 44% { transform: translateY(0) rotate(0deg) skewX(0deg); }
@@ -340,8 +382,10 @@
 
           /* Adaptación móvil */
           .pasto-verde { height: 25px; } 
-          .ovejita-trayectoria { width: 100px; bottom: 8px; }
-          .particulas-cesped { bottom: 35px; } /* Ajuste de altura de boca en móvil */
+          .ovejita-trayectoria {
+              width: 100px;
+              bottom: 25px; 
+          }
         }
     </style>
 </head>
@@ -380,7 +424,7 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 PASTO VERDE SIMPLE CON PINCHOS -->
+        <!-- 🌿 PASTO VERDE ORIGINAL -->
         <div class="pasto-verde"></div>
         
         <!-- 🐑 OVEJITA ANIMADA CON PARTÍCULAS -->
@@ -389,13 +433,13 @@
                 <div class="animacion-cuerpo">
                     <img src="ovejita.png" alt="Ovejita paseando" class="ovejita-img">
                     
-                    <!-- Partículas de césped saltando de la boca -->
+                    <!-- Partículas (A la altura de la boca) -->
                     <div class="particulas-cesped">
-                        <!-- Con coordenadas X negativas, escupirá la hierba hacia adelante -->
-                        <div class="particula" style="--mov-x: -30px; --mov-y: 20px; animation-delay: 0s;"></div>
-                        <div class="particula" style="--mov-x: -45px; --mov-y: 10px; animation-delay: 0.15s;"></div>
-                        <div class="particula" style="--mov-x: -20px; --mov-y: 35px; animation-delay: 0.3s;"></div>
-                        <div class="particula" style="--mov-x: -40px; --mov-y: 25px; animation-delay: 0.45s;"></div>
+                        <!-- Con movimiento en Y positivo (caen hacia abajo/adelante) -->
+                        <div class="particula" style="--mov-x: -30px; --mov-y: 15px; animation-delay: 0s;"></div>
+                        <div class="particula" style="--mov-x: -45px; --mov-y: 25px; animation-delay: 0.15s;"></div>
+                        <div class="particula" style="--mov-x: -15px; --mov-y: 35px; animation-delay: 0.3s;"></div>
+                        <div class="particula" style="--mov-x: -40px; --mov-y: 10px; animation-delay: 0.45s;"></div>
                     </div>
                 </div>
             </div>
