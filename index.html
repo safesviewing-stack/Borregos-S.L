@@ -192,82 +192,88 @@
 
 
         /* =========================================================
-           🐑 OVEJA: PATAS, CUELLO ANATÓMICO Y PARTÍCULAS CÉSPED 🐑
+           🐑 OVEJA Y CÉSPED SALVAJE ANIMADO (EFECTO VIENTO) 🐑
            ========================================================= */
 
-        /* =========================================================
-           1. CÉSPED REALISTA CON TEXTURA, PROFUNDIDAD Y BRIZNAS 3D
-           ========================================================= */
+        /* 1. Base del terreno oscuro y orgánico */
         .pasto-verde {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 35px;
-            /* Textura de tierra/pasto con profundidad (gradiente y ruido sutil) */
-            background-image: 
-                repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0, rgba(0,0,0,0.04) 2px, transparent 2px, transparent 4px),
-                linear-gradient(to top, #1b3d0c 0%, #297014 50%, #4ade80 100%);
-            background-color: #4ade80;
-            border-top: none; /* Quitamos el borde negro plano */
-            
-            /* Subimos el z-index por encima de la oveja (z-index: 3). 
-               ¡Así parece que la oveja camina POR DENTRO del césped y le tapa las pezuñas! */
+            height: 40px;
+            /* Degradado profundo simulando tierra y musgo */
+            background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.2) 0%, transparent 60%),
+                        linear-gradient(to bottom, #163d09 0%, #0a1f03 100%);
+            border-top: none; 
             z-index: 4; 
+            overflow: hidden;
         }
 
-        /* Capa frontal de briznas (verde claro, en primer plano) */
+        /* 2. Capa Trasera: Hierba oscura, densa e irregular moviéndose al viento */
         .pasto-verde::before {
             content: '';
             position: absolute;
-            top: -12px;
-            left: 0;
-            width: 100%;
-            height: 12px;
-            /* Patrón SVG generado de briznas de césped */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q2,50 5,0 Q8,50 10,100 Q12,60 15,10 Q18,60 20,100 Q22,40 25,5 Q28,40 30,100 Q32,70 35,20 Q38,70 40,100 Q42,45 45,15 Q48,45 50,100 Q52,55 55,5 Q58,55 60,100 Q62,30 65,10 Q68,30 70,100 Q72,60 75,25 Q78,60 80,100 Q82,40 85,15 Q88,40 90,100 Q92,50 95,5 Q98,50 100,100 Z' fill='%234ade80'/%3E%3C/svg%3E");
-            background-size: 35px 100%;
+            top: -20px; 
+            left: -10%; /* Sobredimensionado para que no se corten los bordes al balancearse */
+            width: 120%; 
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q5,20 -2,0 Q12,60 15,100 Q25,10 28,-5 Q35,50 38,100 Q45,15 50,-2 Q55,60 58,100 Q68,5 72,-8 Q78,50 82,100 Q88,20 92,2 Q96,60 100,100 Z' fill='%23195c11'/%3E%3C/svg%3E");
+            background-size: 50px 100%;
             background-repeat: repeat-x;
-            z-index: 2;
+            /* La animación skewX inclina las briznas creando el efecto viento */
+            animation: viento-fuerte 4s ease-in-out infinite alternate;
+            z-index: 1;
+            transform-origin: bottom center;
         }
 
-        /* Capa trasera de briznas (verde oscuro para dar volumen y profundidad) */
+        /* 3. Capa Frontal: Hierba brillante, más corta y salvaje */
         .pasto-verde::after {
             content: '';
             position: absolute;
-            top: -18px;
-            left: 0;
-            width: 100%;
-            height: 18px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q3,40 6,10 Q9,40 12,100 Q15,50 18,20 Q21,50 24,100 Q27,35 30,5 Q33,35 36,100 Q39,60 42,25 Q45,60 48,100 Q51,45 54,15 Q57,45 60,100 Q63,55 66,20 Q69,55 72,100 Q75,30 78,5 Q81,30 84,100 Q87,60 90,25 Q93,60 96,100 Q97.5,50 100,10 Z' fill='%23297014'/%3E%3C/svg%3E");
-            background-size: 55px 100%;
+            top: -12px; 
+            left: -10%; 
+            width: 120%; 
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q8,30 2,5 Q18,70 20,100 Q30,20 35,0 Q42,60 45,100 Q52,10 58,5 Q65,70 68,100 Q78,25 82,10 Q88,60 92,100 Q96,30 100,15 Z' fill='%234ade80'/%3E%3C/svg%3E");
+            background-size: 30px 100%;
             background-repeat: repeat-x;
-            z-index: 1;
+            animation: viento-suave 3s ease-in-out infinite alternate;
+            z-index: 2;
+            transform-origin: bottom center;
         }
 
-        /* 2. Contenedor que desplaza la oveja de lado a lado */
+        /* Efectos de viento balanceando el SVG */
+        @keyframes viento-fuerte {
+            0% { transform: translateX(0) skewX(-12deg); }
+            100% { transform: translateX(-15px) skewX(15deg); }
+        }
+        @keyframes viento-suave {
+            0% { transform: translateX(0) skewX(-6deg); }
+            100% { transform: translateX(-8px) skewX(8deg); }
+        }
+
+        /* Contenedor oveja */
         .ovejita-trayectoria {
             position: absolute;
-            bottom: 35px; /* Toca exactamente el borde del césped */
+            bottom: 35px; /* Toca exactamente el borde de la base oscura */
             left: 0;
             width: 140px;
-            z-index: 3; /* Detrás de la nueva capa frontal de césped */
+            z-index: 3; /* Queda envuelta ENTRE la hierba trasera y la frontal */
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
 
-        /* 3. Contenedor que voltea la imagen según hacia donde camina */
         .ovejita-direccion {
             width: 100%; height: 100%;
             animation: oveja-volteo 24s steps(1) infinite;
             transform-origin: center;
         }
 
-        /* 4. La imagen de la oveja: Animamos el "esqueleto" invisible */
         .animacion-cuerpo {
             width: 100%; height: auto;
             position: relative;
-            transform-origin: 30% 80%; /* Centro de gravedad en el pecho/cuello */
+            transform-origin: 30% 80%; 
             animation: oveja-esqueleto 24s linear infinite; 
         }
         .ovejita-img {
@@ -275,104 +281,83 @@
             display: block;
         }
 
-        /* 5. SISTEMA DE PARTÍCULAS (Ajustado a la altura de la cabeza/boca) */
+        /* 5. NUEVO SISTEMA DE PARTÍCULAS: Matas de tierra/césped arrancadas */
         .particulas-cesped {
             position: absolute;
-            top: 35%;    /* Subido a la altura de la cara */
-            left: -5%;   /* Posicionado en la parte frontal izquierda (BOCA) */
+            top: 35%;
+            left: -5%;
             width: 30px; height: 30px;
-            /* Se hacen visibles solo en el momento exacto en el que come */
             animation: visibilidad-particulas 24s linear infinite;
             pointer-events: none;
             z-index: 5;
         }
 
-        /* Cada partícula es ahora una hojita realista de hierba volando */
         .particula {
             position: absolute;
             top: 0; left: 0;
-            width: 8px; height: 14px; /* Un poco más alargado */
-            background: #4ade80; /* Mismo verde que las puntas del suelo */
-            
-            /* Truco CSS para darle forma de hoja de césped curvada */
-            border-radius: 0 100% 0 100%; 
-            box-shadow: inset -2px -2px 3px rgba(0,0,0,0.15); /* Sombreo suave interno */
-            
-            /* Animación constante cayendo hacia el suelo */
-            animation: saltar-particula 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            width: 12px; height: 12px;
+            /* Forma irregular de un terrón de tierra arrancado */
+            background: #4ade80; /* Hierba arriba */
+            border-bottom: 4px solid #3b2313; /* Tierra abajo */
+            border-radius: 40% 60% 30% 70%; 
+            box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+            /* Ahora giran caóticamente sobre sí mismas al volar */
+            animation: saltar-terron 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
-        /* Controla cuándo aparecen las partículas (sincronizado con la animación principal) */
         @keyframes visibilidad-particulas {
             0%, 22% { opacity: 0; }
-            23%, 29% { opacity: 1; } /* Come de ida */
+            23%, 29% { opacity: 1; }
             30%, 62% { opacity: 0; }
-            63%, 69% { opacity: 1; } /* Come de vuelta */
+            63%, 69% { opacity: 1; }
             70%, 100% { opacity: 0; }
         }
 
-        /* Las partículas saltan y caen por gravedad (+Y) */
-        @keyframes saltar-particula {
+        /* Salto con rotación salvaje */
+        @keyframes saltar-terron {
             0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translate(var(--mov-x), var(--mov-y)) rotate(200deg) scale(0.5); opacity: 0; }
+            70% { opacity: 1; }
+            100% { transform: translate(var(--mov-x), var(--mov-y)) rotate(420deg) scale(0.5); opacity: 0; }
         }
 
-        /* Trayectoria de izquierda a derecha y vuelta */
+        /* Trayectoria y esqueleto igual que siempre */
         @keyframes oveja-viaje {
             0%   { transform: translateX(-200px); }
-            20%  { transform: translateX(35vw); }  /* Llega al punto de comer */
-            30%  { transform: translateX(35vw); }  /* Termina de comer */
-            45%  { transform: translateX(110vw); } /* Sale de pantalla */
+            20%  { transform: translateX(35vw); }  
+            30%  { transform: translateX(35vw); }  
+            45%  { transform: translateX(110vw); } 
             46%  { transform: translateX(110vw); } 
-            60%  { transform: translateX(60vw); }  /* Vuelve y para a comer */
+            60%  { transform: translateX(60vw); }  
             70%  { transform: translateX(60vw); }  
-            100% { transform: translateX(-200px); }/* Termina el ciclo */
+            100% { transform: translateX(-200px); }
         }
-
-        /* Volteo para mirar en la dirección que camina */
         @keyframes oveja-volteo {
-            0%, 45% { transform: scaleX(-1); }   /* Camina hacia la derecha (Asume foto mirando Izq) */
-            46%, 100% { transform: scaleX(1); }  /* Camina hacia la izquierda */
+            0%, 45% { transform: scaleX(-1); }   
+            46%, 100% { transform: scaleX(1); }  
         }
-
-        /* LA MAGIA DEL MOVIMIENTO: Rotación, Sesgo (Waddle) y Agachar el cuello */
         @keyframes oveja-esqueleto {
-            /* FASE 1: CAMINANDO - Simulando pasos */
             0%, 4%, 8%, 12%, 16%, 20% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-            1%, 5%, 9%, 13%, 17%      { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); } /* Levanta patas de un lado */
-            3%, 7%, 11%, 15%, 19%     { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); } /* Levanta del otro lado */
-
-            /* FASE 2: COMIENDO PASTO */
+            1%, 5%, 9%, 13%, 17%      { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); }
+            3%, 7%, 11%, 15%, 19%     { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); }
             21% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-            /* Se estira hacia abajo desde el pecho simulando el cuello */
             22% { transform: translateY(12px) rotate(-35deg) scale(1.1, 0.85) skewX(10deg); }
-            24% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   /* Mastica arriba */
-            26% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }/* Mastica abajo */
-            28% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   /* Mastica arriba */
-            30% { transform: translateY(0) rotate(0deg) skewX(0deg); } /* Sube cabeza */
-
-            /* FASE 3: CAMINANDO */
+            24% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   
+            26% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }
+            28% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }   
+            30% { transform: translateY(0) rotate(0deg) skewX(0deg); }
             32%, 36%, 40%, 44% { transform: translateY(0) rotate(0deg) skewX(0deg); }
             31%, 35%, 39%, 43% { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); }
             33%, 37%, 41%, 45% { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); }
-
             46% { transform: translateY(0) rotate(0deg) skewX(0deg); } 
-
-            /* FASE 4: CAMINANDO DE VUELTA */
             48%, 52%, 56%, 60% { transform: translateY(0) rotate(0deg) skewX(0deg); }
             47%, 51%, 55%, 59% { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); }
             49%, 53%, 57%      { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); }
-
-            /* FASE 5: COMIENDO DE VUELTA */
             61% { transform: translateY(0) rotate(0deg) skewX(0deg); }
             62% { transform: translateY(12px) rotate(-35deg) scale(1.1, 0.85) skewX(10deg); }
             64% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }  
             66% { transform: translateY(14px) rotate(-38deg) scale(1.12, 0.82) skewX(12deg); }
             68% { transform: translateY(8px) rotate(-30deg) scale(1.05, 0.9) skewX(5deg); }  
             70% { transform: translateY(0) rotate(0deg) skewX(0deg); }
-
-            /* FASE 6: CAMINANDO HASTA DESAPARECER */
             72%, 76%, 80%, 84%, 88%, 92%, 96%, 100% { transform: translateY(0) rotate(0deg) skewX(0deg); }
             71%, 75%, 79%, 83%, 87%, 91%, 95%, 99%  { transform: translateY(-10px) rotate(8deg) skewX(5deg) scale(1.02, 0.95); }
             73%, 77%, 81%, 85%, 89%, 93%, 97%       { transform: translateY(-10px) rotate(-8deg) skewX(-5deg) scale(1.02, 0.95); }
@@ -466,7 +451,7 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 PASTO VERDE REALISTA (Z-INDEX SUPERIOR A LA OVEJA) -->
+        <!-- 🌿 PASTO VERDE SALVAJE (VIENTO) -->
         <div class="pasto-verde"></div>
         
         <!-- 🐑 OVEJITA ANIMADA CON PARTÍCULAS -->
@@ -477,11 +462,11 @@
                     
                     <!-- Partículas (A la altura de la boca) -->
                     <div class="particulas-cesped">
-                        <!-- Con movimiento en Y positivo (caen hacia abajo/adelante) -->
-                        <div class="particula" style="--mov-x: -30px; --mov-y: 15px; animation-delay: 0s;"></div>
-                        <div class="particula" style="--mov-x: -45px; --mov-y: 25px; animation-delay: 0.15s;"></div>
-                        <div class="particula" style="--mov-x: -15px; --mov-y: 35px; animation-delay: 0.3s;"></div>
-                        <div class="particula" style="--mov-x: -40px; --mov-y: 10px; animation-delay: 0.45s;"></div>
+                        <!-- Vuelan como terrones de tierra hacia adelante -->
+                        <div class="particula" style="--mov-x: -35px; --mov-y: 10px; animation-delay: 0s;"></div>
+                        <div class="particula" style="--mov-x: -50px; --mov-y: 20px; animation-delay: 0.15s;"></div>
+                        <div class="particula" style="--mov-x: -20px; --mov-y: 30px; animation-delay: 0.3s;"></div>
+                        <div class="particula" style="--mov-x: -45px; --mov-y: 15px; animation-delay: 0.45s;"></div>
                     </div>
                 </div>
             </div>
@@ -697,7 +682,6 @@
             localStorage.setItem('borregos_dinero', dineroActual);
         } else {
             dineroActual = parseFloat(dineroActual);
-            // Unificar la versión anterior de 1€ con la nueva de 3€.
             if (dineroActual === 1) {
                 dineroActual = 3;
                 localStorage.setItem('borregos_dinero', dineroActual);
@@ -787,18 +771,16 @@
             { titulo: "🚧 Lote de Mierdas Borregas", desc: "Un pack exclusivo con lo que encontremos por la borregocueva que tenga algo de valor (probablemente un cono de tráfico y unas bridas)." }
         ];
 
-        let sorteoTimer; // Variable global para la cuenta atrás
+        let sorteoTimer; 
 
         function actualizarSorteo() {
             const now = new Date();
-            // Calcula los meses totales pasados desde el año 0. 
             const totalMeses = (now.getFullYear() * 12) + now.getMonth();
             const indexPremio = totalMeses % listaSorteos.length;
 
             document.getElementById('premioTitulo').innerText = listaSorteos[indexPremio].titulo;
             document.getElementById('premioDesc').innerText = listaSorteos[indexPremio].desc;
 
-            // Calcular cuándo es el final exacto de este mes
             const finalDeMes = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).getTime();
 
             if(sorteoTimer) clearInterval(sorteoTimer);
@@ -822,7 +804,6 @@
             }, 1000);
         }
 
-        // Iniciar el sistema de sorteos al cargar la página
         actualizarSorteo();
 
         // 9. CAOS TOTAL ESPECTACULAR
