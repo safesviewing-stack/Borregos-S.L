@@ -151,7 +151,11 @@
             },
             draw: function() {
                 if(borregoImg.complete) {
-                    ctx.drawImage(borregoImg, this.x - this.width*0.1, this.y - this.height*0.1, this.width * 1.2, this.height * 1.2);
+                    ctx.save();
+                    ctx.translate(this.x + this.width, 0);
+                    ctx.scale(-1, 1);
+                    ctx.drawImage(borregoImg, -this.width - this.width*0.1, this.y - this.height*0.1, this.width * 1.2, this.height * 1.2);
+                    ctx.restore();
                 } else {
                     ctx.fillStyle = "white";
                     ctx.fillRect(this.x, this.y, this.width, this.height);
