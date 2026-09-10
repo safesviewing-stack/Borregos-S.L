@@ -132,10 +132,10 @@
 
         /* INICIO */
         header { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, var(--accent-color) 0%, var(--bg-color) 70%); position: relative; overflow: hidden; padding: 2rem; width: 100%; }
-        h1 { font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; text-shadow: 6px 6px 0px var(--main-color); animation: float-hero 5s ease-in-out infinite; z-index: 2; position: relative; width: 100%; max-width: 100%; word-wrap: break-word; }
-        .subtitle { font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 700; opacity: 0.5; margin-top: 1rem; text-transform: uppercase; letter-spacing: 5px; transition: all 0.3s ease; z-index: 2; position: relative; }
+        h1 { font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; text-shadow: 6px 6px 0px var(--main-color); animation: float-hero 5s ease-in-out infinite; z-index: 10; position: relative; width: 100%; max-width: 100%; word-wrap: break-word; }
+        .subtitle { font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 700; opacity: 0.5; margin-top: 1rem; text-transform: uppercase; letter-spacing: 5px; transition: all 0.3s ease; z-index: 10; position: relative; }
         .subtitle:hover { opacity: 1; color: var(--main-color); transform: scale(1.05); }
-        .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 120px; height: 120px; background: var(--yellow); color: var(--text-dark); border-radius: 50%; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; text-align: center; animation: spin-slow 10s linear infinite; z-index: 1; }
+        .spinning-badge { position: absolute; bottom: 10%; right: 10%; width: 120px; height: 120px; background: var(--yellow); color: var(--text-dark); border-radius: 50%; border: 4px solid var(--dark); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; text-align: center; animation: spin-slow 10s linear infinite; z-index: 10; }
 
         /* SECCIONES TEXTO / CARTAS */
         .about-text { font-size: 1.05rem; line-height: 1.6; text-align: center; background: var(--card-bg); color: var(--text-dark); padding: 3rem; width: 100%; max-width: 100%; word-wrap: break-word; }
@@ -192,74 +192,85 @@
 
 
         /* =========================================================
-           🐑 OVEJA Y CÉSPED SALVAJE ANIMADO (EFECTO VIENTO) 🐑
+           🐑 OVEJA Y CÉSPED REALISTA (EFECTO VIENTO) 🐑
            ========================================================= */
 
-        /* 1. Base del terreno oscuro y orgánico */
-        .pasto-verde {
+        /* 1. Capa Trasera: Hierba oscura, densa y realista moviéndose al viento */
+        .pasto-fondo {
+            position: absolute;
+            bottom: 45px; 
+            left: -10%; 
+            width: 120%; 
+            height: 40px;
+            /* Dos capas de SVG ultra-detalladas con curvas cuadráticas para simular briznas orgánicas */
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M-2,50 Q1,30 3,12 Q5,30 8,50 Q10,25 14,15 Q13,35 16,50 Q19,20 23,8 Q21,35 25,50 Q28,25 32,10 Q31,35 34,50 Q37,20 41,12 Q39,35 43,50 Q46,25 50,9 Q49,35 52,50 Q55,20 59,14 Q57,35 61,50 Q64,25 68,10 Q67,35 70,50 Q73,20 77,12 Q75,35 79,50 Q82,25 86,9 Q85,35 88,50 Q91,20 95,15 Q93,35 97,50 Q99,25 102,10 L100,50 L-2,50 Z' fill='%232d6b22'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q3,25 -2,2 Q4,25 6,50 Q9,20 12,5 Q11,30 13,50 Q16,15 20,0 Q18,25 21,50 Q24,20 28,8 Q26,30 29,50 Q32,15 36,1 Q35,25 38,50 Q41,20 45,6 Q43,30 46,50 Q49,15 53,2 Q51,25 55,50 Q58,20 62,7 Q60,30 63,50 Q66,15 70,0 Q68,25 72,50 Q75,20 79,5 Q77,30 81,50 Q84,15 88,3 Q86,25 90,50 Q93,20 97,6 Q95,30 100,50 L100,50 L0,50 Z' fill='%231b4513'/%3E%3C/svg%3E");
+            background-size: 60px 100%, 90px 100%;
+            background-position: left bottom, right bottom;
+            background-repeat: repeat-x, repeat-x;
+            animation: viento-fuerte 4s ease-in-out infinite alternate;
+            z-index: 2; /* Por detrás de la oveja */
+            transform-origin: bottom center;
+            pointer-events: none;
+        }
+
+        /* 2. Capa Frontal y Tierra: Base profunda con texturas granuladas */
+        .pasto-frente {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 40px;
-            /* Degradado profundo simulando tierra y musgo */
-            background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.2) 0%, transparent 60%),
-                        linear-gradient(to bottom, #163d09 0%, #0a1f03 100%);
-            border-top: none; 
-            z-index: 4; 
-            overflow: hidden;
+            height: 45px;
+            background: 
+                /* Granulado para simular piedras y tierra */
+                radial-gradient(circle at 10% 30%, rgba(0,0,0,0.4) 1px, transparent 1.5px),
+                radial-gradient(circle at 80% 60%, rgba(0,0,0,0.3) 1.5px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 1px, transparent 1.5px),
+                radial-gradient(circle at 60% 20%, rgba(255,255,255,0.03) 2px, transparent 3px),
+                /* Gradiente base marrón realista */
+                linear-gradient(to bottom, #3b2514 0%, #1a0f07 100%);
+            background-size: 20px 20px, 35px 35px, 15px 15px, 25px 25px, 100% 100%;
+            border-top: 2px solid #2d1a0e; 
+            z-index: 4; /* Por delante de la oveja */
+            pointer-events: none;
         }
 
-        /* 2. Capa Trasera: Hierba oscura, densa e irregular moviéndose al viento */
-        .pasto-verde::before {
+        /* 3. Briznas frontales superpuestas a la tierra */
+        .pasto-frente::before {
             content: '';
             position: absolute;
-            top: -20px; 
-            left: -10%; /* Sobredimensionado para que no se corten los bordes al balancearse */
-            width: 120%; 
-            height: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q5,20 -2,0 Q12,60 15,100 Q25,10 28,-5 Q35,50 38,100 Q45,15 50,-2 Q55,60 58,100 Q68,5 72,-8 Q78,50 82,100 Q88,20 92,2 Q96,60 100,100 Z' fill='%23195c11'/%3E%3C/svg%3E");
-            background-size: 50px 100%;
-            background-repeat: repeat-x;
-            /* La animación skewX inclina las briznas creando el efecto viento */
-            animation: viento-fuerte 4s ease-in-out infinite alternate;
-            z-index: 1;
-            transform-origin: bottom center;
-        }
-
-        /* 3. Capa Frontal: Hierba brillante, más corta y salvaje */
-        .pasto-verde::after {
-            content: '';
-            position: absolute;
-            top: -12px; 
+            bottom: 100%; 
             left: -10%; 
             width: 120%; 
-            height: 12px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q8,30 2,5 Q18,70 20,100 Q30,20 35,0 Q42,60 45,100 Q52,10 58,5 Q65,70 68,100 Q78,25 82,10 Q88,60 92,100 Q96,30 100,15 Z' fill='%234ade80'/%3E%3C/svg%3E");
-            background-size: 30px 100%;
+            height: 22px;
+            /* Tercera capa de SVG: Briznas brillantes en primer plano */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q2,35 5,20 Q6,35 9,50 Q12,30 15,22 Q14,40 18,50 Q21,35 24,18 Q23,40 27,50 Q30,30 33,25 Q32,40 36,50 Q39,35 42,19 Q41,40 45,50 Q48,30 51,23 Q50,40 54,50 Q57,35 60,20 Q59,40 63,50 Q66,30 69,24 Q68,40 72,50 Q75,35 78,18 Q77,40 81,50 Q84,30 87,25 Q86,40 90,50 Q93,35 96,20 Q95,40 99,50 L100,50 L0,50 Z' fill='%234ade80'/%3E%3C/svg%3E");
+            background-size: 45px 100%;
             background-repeat: repeat-x;
             animation: viento-suave 3s ease-in-out infinite alternate;
-            z-index: 2;
             transform-origin: bottom center;
+            /* Sombra ligera para separarlo de la hierba de fondo */
+            filter: drop-shadow(0px -2px 3px rgba(0,0,0,0.4));
         }
 
-        /* Efectos de viento balanceando el SVG */
+        /* Efectos de viento refinados y orgánicos */
         @keyframes viento-fuerte {
-            0% { transform: translateX(0) skewX(-12deg); }
-            100% { transform: translateX(-15px) skewX(15deg); }
+            0% { transform: translateX(0) skewX(-8deg); }
+            100% { transform: translateX(-15px) skewX(12deg); }
         }
         @keyframes viento-suave {
-            0% { transform: translateX(0) skewX(-6deg); }
-            100% { transform: translateX(-8px) skewX(8deg); }
+            0% { transform: translateX(0) skewX(-4deg); }
+            100% { transform: translateX(-8px) skewX(6deg); }
         }
 
         /* Contenedor oveja */
         .ovejita-trayectoria {
             position: absolute;
-            bottom: 35px; /* Toca exactamente el borde de la base oscura */
+            bottom: 35px; /* La oveja queda ligeramente sumergida entre el pasto trasero y frontal */
             left: 0;
             width: 140px;
-            z-index: 3; /* Queda envuelta ENTRE la hierba trasera y la frontal */
+            z-index: 3; /* Exactamente en medio del sándwich (Fondo 2 - Oveja 3 - Frente 4) */
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
@@ -289,6 +300,7 @@
             width: 30px; height: 30px;
             animation: visibilidad-particulas 24s linear infinite;
             pointer-events: none;
+            /* Saltan por detrás de la hierba de primera fila, lo cual le da aún más profundidad */
             z-index: 5;
         }
 
@@ -407,8 +419,10 @@
           .email-huge { font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important; white-space: nowrap !important; display: inline-block; max-width: 100%; }
           .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
 
-          /* Adaptación móvil */
-          .pasto-verde { height: 25px; } 
+          /* Adaptación móvil del césped hiperrealista */
+          .pasto-fondo { height: 25px; bottom: 35px; } 
+          .pasto-frente { height: 35px; }
+          .pasto-frente::before { height: 16px; }
           .ovejita-trayectoria {
               width: 100px;
               bottom: 25px; 
@@ -451,16 +465,16 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 PASTO VERDE SALVAJE (VIENTO) -->
-        <div class="pasto-verde"></div>
+        <!-- 🌿 PASTO VERDE (FONDO: Capas oscuras e intermedias de hierba) -->
+        <div class="pasto-fondo"></div>
         
-        <!-- 🐑 OVEJITA ANIMADA CON PARTÍCULAS -->
+        <!-- 🐑 OVEJITA ANIMADA (Camina ENTRE la hierba trasera y frontal) -->
         <div class="ovejita-trayectoria">
             <div class="ovejita-direccion">
                 <div class="animacion-cuerpo">
                     <img src="ovejita.png" alt="Ovejita paseando" class="ovejita-img">
                     
-                    <!-- Partículas (A la altura de la boca) -->
+                    <!-- Partículas de tierra (A la altura de las pezuñas y boca) -->
                     <div class="particulas-cesped">
                         <!-- Vuelan como terrones de tierra hacia adelante -->
                         <div class="particula" style="--mov-x: -35px; --mov-y: 10px; animation-delay: 0s;"></div>
@@ -471,6 +485,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- 🌿 PASTO VERDE (FRENTE: Tierra base realista y briznas en primer plano) -->
+        <div class="pasto-frente"></div>
     </header>
 
     <!-- SOBRE NOSOTROS -->
@@ -532,7 +549,7 @@
                 <img src="Cobarde2.jpg" alt="Cobarde.2" class="cobarde2-img">
                 <h3>Cobarde.2</h3>
             </div>
-            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justify exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existencia: comiendo, entrenando, cenando basura, solicitando coletas ajenas y cambiando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
+            <div class="card-rebano brutal-border reveal reveal-scale" onclick="abrirPerfil('Borrego #13', 'Frente premium y miedo estructural a las mujeres.', 'Este espécimen ha conseguido convertir su vida en un experimento científico basado exclusivamente en comer y entrenar, con la pequeña anomalía de que los resultados del entrenamiento parecen haberse perdido durante el transporte. Su frente, en cambio, progresa con una constancia admirable. Una superficie craneal de proporciones inmobiliarias que él mismo se encarga de potenciar pidiendo coletas por el gimnasio, no tanto por estética sino por el noble propósito de dejar más frente al descubierto. Una estrategia capilar revolucionaria: menos pelo, más territorio.\n\nEs pijo, pero no de cualquier manera. Tiene ese tipo de elegancia que aparece incluso cuando está cenando auténticas guarrerías a horas cuestionables, probablemente después de haber entrenado durante dos horas para justify exactamente esa cena. Su metabolismo vive en una contradicción permanente: come como si fuera a competir mañana y tiene un físico que parece no haberse enterado todavía. Su gran orgullo anatómico, sin embargo, reside más abajo: un culo de dimensiones administrativas, posiblemente catalogado como espacio de interés público.\n\nSe hace pirris con la solemnidad de quien está construyendo una identidad y mantiene una relación peculiar con las mujeres: las teme. Mucho. No es que no le gusten; es que las contempla como una especie animal impredecible cuya proximidad puede provocar consecuencias desconocidas. Es el Anticoños Boss, una entidad capaz de enfrentarse a una sentadilla pesada sin pestañear, pero que ante una mujer atractiva experimenta una repentina necesidad de mirar al suelo y revisar el móvil. Se llama Rubén Herranz.\n\nVirgen, reservado y socialmente peculiar, vive atrapado entre el deseo de destacar y el instinto de desaparecer cuando alguien le presta demasiada atención. Quiere presencia, pero no interacción. Quiere llamar la atención, pero no que le hablen. Quiere que se note la frente, el culo, los pirris y absolutamente todo… menos él cuando aparece una mujer.\n\nY así continúa su existence: comiendo, entrenando, cenando basura, solicitando coletas ajenas y cambiando fronteras craneales. Un pijo de gimnasio con culo de monumento, frente de aeropuerto y miedo a las mujeres suficiente como para considerarlo una disciplina olímpica.')">
                 <img src="Ruben.jpg" alt="Rubén Herranz" class="ruben-img">
                 <h3>Rubén Herranz García</h3>
             </div>
