@@ -192,85 +192,74 @@
 
 
         /* =========================================================
-           🐑 OVEJA Y CÉSPED REALISTA (EFECTO VIENTO) 🐑
+           🐑 CÉSPED PLANO/CARTOON (SÓLO TONOS DE VERDE) 🐑
            ========================================================= */
 
-        /* 1. Capa Trasera: Hierba oscura, densa y realista moviéndose al viento */
+        /* 1. Capa Trasera: Picos de hierba oscuros y medios */
         .pasto-fondo {
             position: absolute;
-            bottom: 45px; 
+            bottom: 30px; /* Se esconde un poco detrás de la capa frontal */
             left: -10%; 
             width: 120%; 
-            height: 40px;
-            /* Dos capas de SVG ultra-detalladas con curvas cuadráticas para simular briznas orgánicas */
+            height: 50px;
+            /* Dos capas vectoriales planas: verde medio (adelante) y verde oscuro (atrás) */
             background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M-2,50 Q1,30 3,12 Q5,30 8,50 Q10,25 14,15 Q13,35 16,50 Q19,20 23,8 Q21,35 25,50 Q28,25 32,10 Q31,35 34,50 Q37,20 41,12 Q39,35 43,50 Q46,25 50,9 Q49,35 52,50 Q55,20 59,14 Q57,35 61,50 Q64,25 68,10 Q67,35 70,50 Q73,20 77,12 Q75,35 79,50 Q82,25 86,9 Q85,35 88,50 Q91,20 95,15 Q93,35 97,50 Q99,25 102,10 L100,50 L-2,50 Z' fill='%232d6b22'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q3,25 -2,2 Q4,25 6,50 Q9,20 12,5 Q11,30 13,50 Q16,15 20,0 Q18,25 21,50 Q24,20 28,8 Q26,30 29,50 Q32,15 36,1 Q35,25 38,50 Q41,20 45,6 Q43,30 46,50 Q49,15 53,2 Q51,25 55,50 Q58,20 62,7 Q60,30 63,50 Q66,15 70,0 Q68,25 72,50 Q75,20 79,5 Q77,30 81,50 Q84,15 88,3 Q86,25 90,50 Q93,20 97,6 Q95,30 100,50 L100,50 L0,50 Z' fill='%231b4513'/%3E%3C/svg%3E");
-            background-size: 60px 100%, 90px 100%;
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 L8,25 L18,45 L30,15 L40,40 L52,20 L62,45 L75,10 L85,40 L95,25 L100,45 L100,50 Z' fill='%2316a34a'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 L5,10 L15,40 L25,5 L35,35 L45,15 L55,45 L65,0 L75,35 L85,10 L95,40 L100,20 L100,50 Z' fill='%2314532d'/%3E%3C/svg%3E");
+            background-size: 80px 100%, 120px 100%;
             background-position: left bottom, right bottom;
             background-repeat: repeat-x, repeat-x;
-            animation: viento-fuerte 4s ease-in-out infinite alternate;
+            animation: viento-fuerte 3s ease-in-out infinite alternate;
             z-index: 2; /* Por detrás de la oveja */
             transform-origin: bottom center;
             pointer-events: none;
         }
 
-        /* 2. Capa Frontal y Tierra: Base profunda con texturas granuladas */
+        /* 2. Capa Frontal Base: Verde sólido, sin texturas raras */
         .pasto-frente {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 45px;
-            background: 
-                /* Granulado para simular piedras y tierra */
-                radial-gradient(circle at 10% 30%, rgba(0,0,0,0.4) 1px, transparent 1.5px),
-                radial-gradient(circle at 80% 60%, rgba(0,0,0,0.3) 1.5px, transparent 2px),
-                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 1px, transparent 1.5px),
-                radial-gradient(circle at 60% 20%, rgba(255,255,255,0.03) 2px, transparent 3px),
-                /* Gradiente base marrón realista */
-                linear-gradient(to bottom, #3b2514 0%, #1a0f07 100%);
-            background-size: 20px 20px, 35px 35px, 15px 15px, 25px 25px, 100% 100%;
-            border-top: 2px solid #2d1a0e; 
-            z-index: 4; /* Por delante de la oveja */
+            height: 30px;
+            background-color: #22c55e; /* Base verde vibrante */
+            z-index: 4; /* Por delante de la oveja, oculta un pelín las pezuñas */
             pointer-events: none;
         }
 
-        /* 3. Briznas frontales superpuestas a la tierra */
+        /* 3. Briznas frontales: Picos superpuestos que salen del bloque verde sólido */
         .pasto-frente::before {
             content: '';
             position: absolute;
             bottom: 100%; 
             left: -10%; 
             width: 120%; 
-            height: 22px;
-            /* Tercera capa de SVG: Briznas brillantes en primer plano */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q2,35 5,20 Q6,35 9,50 Q12,30 15,22 Q14,40 18,50 Q21,35 24,18 Q23,40 27,50 Q30,30 33,25 Q32,40 36,50 Q39,35 42,19 Q41,40 45,50 Q48,30 51,23 Q50,40 54,50 Q57,35 60,20 Q59,40 63,50 Q66,30 69,24 Q68,40 72,50 Q75,35 78,18 Q77,40 81,50 Q84,30 87,25 Q86,40 90,50 Q93,35 96,20 Q95,40 99,50 L100,50 L0,50 Z' fill='%234ade80'/%3E%3C/svg%3E");
-            background-size: 45px 100%;
+            height: 25px;
+            /* Mismo tono que la base o muy similar, formando picos afilados */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M0,50 L10,35 L20,50 L35,25 L45,45 L60,30 L70,50 L85,20 L95,45 L100,35 L100,50 Z' fill='%2322c55e'/%3E%3C/svg%3E");
+            background-size: 60px 100%;
             background-repeat: repeat-x;
-            animation: viento-suave 3s ease-in-out infinite alternate;
+            animation: viento-suave 2.5s ease-in-out infinite alternate;
             transform-origin: bottom center;
-            /* Sombra ligera para separarlo de la hierba de fondo */
-            filter: drop-shadow(0px -2px 3px rgba(0,0,0,0.4));
         }
 
-        /* Efectos de viento refinados y orgánicos */
+        /* Viento estilo cartoon, más rígido pero con movimiento lateral */
         @keyframes viento-fuerte {
-            0% { transform: translateX(0) skewX(-8deg); }
-            100% { transform: translateX(-15px) skewX(12deg); }
+            0% { transform: translateX(0) skewX(-5deg); }
+            100% { transform: translateX(-15px) skewX(8deg); }
         }
         @keyframes viento-suave {
-            0% { transform: translateX(0) skewX(-4deg); }
-            100% { transform: translateX(-8px) skewX(6deg); }
+            0% { transform: translateX(0) skewX(-2deg); }
+            100% { transform: translateX(-8px) skewX(5deg); }
         }
 
         /* Contenedor oveja */
         .ovejita-trayectoria {
             position: absolute;
-            bottom: 35px; /* La oveja queda ligeramente sumergida entre el pasto trasero y frontal */
+            bottom: 28px; /* Toca el borde donde empieza el verde sólido frontal */
             left: 0;
             width: 140px;
-            z-index: 3; /* Exactamente en medio del sándwich (Fondo 2 - Oveja 3 - Frente 4) */
+            z-index: 3; /* Exactamente en medio del sándwich de hierba */
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
@@ -292,7 +281,7 @@
             display: block;
         }
 
-        /* 5. NUEVO SISTEMA DE PARTÍCULAS: Matas de tierra/césped arrancadas */
+        /* 5. PARTÍCULAS: Ahora son simples trozos de hierba verde (sin marrón) */
         .particulas-cesped {
             position: absolute;
             top: 35%;
@@ -300,20 +289,17 @@
             width: 30px; height: 30px;
             animation: visibilidad-particulas 24s linear infinite;
             pointer-events: none;
-            /* Saltan por detrás de la hierba de primera fila, lo cual le da aún más profundidad */
             z-index: 5;
         }
 
         .particula {
             position: absolute;
             top: 0; left: 0;
-            width: 12px; height: 12px;
-            /* Forma irregular de un terrón de tierra arrancado */
-            background: #4ade80; /* Hierba arriba */
-            border-bottom: 4px solid #3b2313; /* Tierra abajo */
-            border-radius: 40% 60% 30% 70%; 
-            box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-            /* Ahora giran caóticamente sobre sí mismas al volar */
+            width: 10px; height: 14px;
+            /* Solo verde intenso, formas poligonales básicas */
+            background: #4ade80; 
+            border-radius: 2px 8px 2px 8px; 
+            /* Giran caóticamente sobre sí mismas al volar */
             animation: saltar-terron 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
@@ -419,13 +405,13 @@
           .email-huge { font-size: clamp(0.85rem, 4.4vw, 1.3rem) !important; white-space: nowrap !important; display: inline-block; max-width: 100%; }
           .btn-chaos { font-size: 1.1rem !important; padding: 1.2rem 2rem !important; box-shadow: 6px 6px 0px var(--yellow) !important; text-align: center; }
 
-          /* Adaptación móvil del césped hiperrealista */
-          .pasto-fondo { height: 25px; bottom: 35px; } 
-          .pasto-frente { height: 35px; }
-          .pasto-frente::before { height: 16px; }
+          /* Adaptación móvil del césped */
+          .pasto-fondo { height: 35px; bottom: 25px; } 
+          .pasto-frente { height: 25px; }
+          .pasto-frente::before { height: 18px; }
           .ovejita-trayectoria {
               width: 100px;
-              bottom: 25px; 
+              bottom: 20px; 
           }
         }
     </style>
@@ -465,7 +451,7 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 PASTO VERDE (FONDO: Capas oscuras e intermedias de hierba) -->
+        <!-- 🌿 PASTO VERDE (FONDO: Picos oscuros e intermedios) -->
         <div class="pasto-fondo"></div>
         
         <!-- 🐑 OVEJITA ANIMADA (Camina ENTRE la hierba trasera y frontal) -->
@@ -474,9 +460,8 @@
                 <div class="animacion-cuerpo">
                     <img src="ovejita.png" alt="Ovejita paseando" class="ovejita-img">
                     
-                    <!-- Partículas de tierra (A la altura de las pezuñas y boca) -->
+                    <!-- Partículas de hierba verde saltando -->
                     <div class="particulas-cesped">
-                        <!-- Vuelan como terrones de tierra hacia adelante -->
                         <div class="particula" style="--mov-x: -35px; --mov-y: 10px; animation-delay: 0s;"></div>
                         <div class="particula" style="--mov-x: -50px; --mov-y: 20px; animation-delay: 0.15s;"></div>
                         <div class="particula" style="--mov-x: -20px; --mov-y: 30px; animation-delay: 0.3s;"></div>
@@ -486,7 +471,7 @@
             </div>
         </div>
 
-        <!-- 🌿 PASTO VERDE (FRENTE: Tierra base realista y briznas en primer plano) -->
+        <!-- 🌿 PASTO VERDE (FRENTE: Base sólida y picos en primer plano) -->
         <div class="pasto-frente"></div>
     </header>
 
