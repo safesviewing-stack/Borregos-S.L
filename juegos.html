@@ -6,328 +6,181 @@
     <title>Borregos S.L. | Juegos</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-color: #f4f4f0; --main-color: #ff2a5f; --dark: #111111; --yellow: #fffb00; --card-bg: #ffffff; --text-dark: #111111; --text-light: #ffffff;}
+        :root { --bg-color: #f4f4f0; --main-color: #ff2a5f; --accent-color: #00e5ff; --yellow: #fffb00; --dark: #111111; --card-bg: #ffffff; --text-dark: #111111; --text-light: #ffffff;}
         body { margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); overflow: hidden; touch-action: none; }
         
-        /* Botón volver */
-        .back-btn { position: fixed; top: 1rem; left: 1rem; background: var(--dark); color: var(--text-light); padding: 0.5rem 1rem; text-decoration: none; font-weight: bold; border: 3px solid var(--main-color); z-index: 1000; box-shadow: 4px 4px 0px var(--main-color); font-size: clamp(0.8rem, 3vw, 1rem); transition: transform 0.2s; }
-        .back-btn:hover { transform: translate(-2px, -2px); }
+        /* Botón volver (Idéntico al resto de la web) */
+        .back-btn { position: fixed; top: 1rem; left: 1rem; background: var(--dark); color: var(--text-light); padding: 0.8rem 1.5rem; text-decoration: none; font-weight: bold; font-size: 1.2rem; border: 4px solid var(--yellow); box-shadow: 4px 4px 0px var(--yellow); transition: transform 0.2s; z-index: 1000; }
+        .back-btn:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px var(--yellow); background: var(--main-color); }
         
-        /* Contador de puntos discreto en la esquina */
-        .score-display {
-            position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100;
-            background: rgba(255, 255, 255, 0.9); color: var(--dark); 
-            border: 3px solid var(--dark); border-radius: 8px;
-            padding: 0.4rem 0.8rem; font-family: 'Space Grotesk', sans-serif;
-            font-weight: 900; font-size: 1.2rem; pointer-events: none;
-            box-shadow: 3px 3px 0px var(--dark);
-        }
+        /* Botón Modo Oscuro */
+        body.dark-mode { --bg-color: #0a0a0a; --main-color: #00e5ff; --accent-color: #ff2a5f; --yellow: #7b00ff; --dark: #f4f4f0; --card-bg: #1a1a1a; --text-dark: #ffffff; --text-light: #111111; background-color: var(--bg-color); color: var(--dark); }
+        .theme-control { position: fixed; top: 1rem; right: 1rem; z-index: 2000; background: var(--card-bg); color: var(--dark); border: 3px solid var(--dark); padding: 0.5rem 1rem; font-weight: 900; font-size: 1.2rem; cursor: pointer; box-shadow: 4px 4px 0px var(--dark); transition: all 0.3s ease; }
+        .theme-control:hover { background: var(--yellow); color: var(--text-dark); transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--main-color); }
 
-        #gameCanvas { display: block; width: 100vw; height: 100vh; background: #87CEEB; }
+        /* Lienzo y UI */
+        #gameCanvas { display: block; width: 100vw; height: 100vh; background: #87CEEB; transition: background 0.3s; }
+        body.dark-mode #gameCanvas { background: #1a2332; } /* Cielo nocturno */
         
-        /* Interfaz de Menú / Leaderboard */
-        .game-ui { 
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            text-align: center; z-index: 10; width: 90%; max-width: 400px;
-            max-height: 90vh; overflow-y: auto; padding: 1rem;
-        }
+        .score-display { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100; background: rgba(255, 255, 255, 0.9); color: #111; border: 3px solid #111; border-radius: 8px; padding: 0.4rem 0.8rem; font-weight: 900; font-size: 1.2rem; pointer-events: none; box-shadow: 3px 3px 0px #111; }
         
+        .game-ui { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; width: 90%; max-width: 400px; max-height: 90vh; overflow-y: auto; padding: 1rem; }
         h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 0; text-shadow: 4px 4px 0px var(--yellow); border: 4px solid var(--dark); background: var(--card-bg); color: var(--text-dark); padding: 1rem; transform: rotate(-2deg); }
-        
         .input-group { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-        .input-group input {
-            padding: 1rem; font-size: 1.2rem; font-family: 'Space Grotesk', sans-serif;
-            border: 4px solid var(--dark); width: 100%; max-width: 250px;
-            text-align: center; font-weight: bold; outline: none;
-            box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
-        }
-        
-        .btn-jugar {
-            background: var(--yellow); color: var(--text-dark); padding: 1rem 2rem;
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 900;
-            border: 4px solid var(--dark); cursor: pointer; box-shadow: 4px 4px 0px var(--dark);
-            transition: transform 0.2s, box-shadow 0.2s; width: 100%; max-width: 250px;
-        }
+        .input-group input { padding: 1rem; font-size: 1.2rem; font-family: 'Space Grotesk', sans-serif; border: 4px solid var(--dark); width: 100%; max-width: 250px; text-align: center; font-weight: bold; outline: none; box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1); }
+        .btn-jugar { background: var(--yellow); color: var(--text-dark); padding: 1rem 2rem; font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 900; border: 4px solid var(--dark); cursor: pointer; box-shadow: 4px 4px 0px var(--dark); transition: transform 0.2s, box-shadow 0.2s; width: 100%; max-width: 250px; }
         .btn-jugar:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--dark); }
 
-        /* Leaderboard */
-        .leaderboard {
-            margin-top: 2rem; background: var(--card-bg); border: 4px solid var(--dark);
-            padding: 1.5rem; box-shadow: 6px 6px 0px var(--main-color);
-        }
+        .leaderboard { margin-top: 2rem; background: var(--card-bg); border: 4px solid var(--dark); padding: 1.5rem; box-shadow: 6px 6px 0px var(--main-color); }
         .leaderboard h3 { margin: 0 0 1rem 0; font-size: 1.5rem; color: var(--dark); text-transform: uppercase; border-bottom: 3px solid var(--dark); padding-bottom: 0.5rem;}
         .leaderboard ul { list-style: none; padding: 0; margin: 0; text-align: left; }
-        .leaderboard li { 
-            font-weight: bold; font-size: 1.1rem; border-bottom: 2px dashed #ccc; 
-            padding: 0.5rem 0; display: flex; justify-content: space-between; 
-        }
+        .leaderboard li { font-weight: bold; font-size: 1.1rem; border-bottom: 2px dashed #ccc; padding: 0.5rem 0; display: flex; justify-content: space-between; }
         .leaderboard li:last-child { border-bottom: none; }
         .leaderboard li span.score-val { color: var(--main-color); font-size: 1.2rem; }
 
         @media (max-width: 768px) {
-            .score-display { top: 1rem; right: 1rem; font-size: 1rem; padding: 0.3rem 0.6rem; }
-            .back-btn { top: 0.8rem; left: 0.8rem; padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+            .back-btn { font-size: 1rem; padding: 0.5rem 1rem; top: 0.8rem; left: 0.8rem; }
+            .theme-control { top: 0.8rem; right: 0.8rem; padding: 0.4rem 0.8rem; font-size: 1rem; }
+            .score-display { bottom: 1rem; right: 1rem; font-size: 1rem; padding: 0.3rem 0.6rem; }
         }
     </style>
 </head>
 <body>
-
-    <a href="index.html" class="back-btn">← VOLVER</a>
     
-    <!-- Contador -->
+    <a href="index.html" class="back-btn">← VOLVER AL REDIL</a>
+    <button class="theme-control" id="themeBtn" onclick="toggleTheme()">🌚</button>
+
     <div id="scoreDisplay" class="score-display">PUNTOS: 0</div>
 
-    <!-- Menú de inicio y Puntuaciones -->
     <div class="game-ui" id="startScreen">
         <h1 id="mainTitle">FLAPPY OVEJA</h1>
-        
         <div class="input-group">
             <input type="text" id="playerName" placeholder="Tu nombre..." maxlength="12" autocomplete="off">
             <button class="btn-jugar" id="startBtn">¡JUGAR!</button>
         </div>
-
         <div class="leaderboard">
             <h3>🏆 Mejores Borregos</h3>
-            <ul id="leaderboardList">
-                <!-- Se rellena por JS -->
-            </ul>
+            <ul id="leaderboardList"></ul>
         </div>
     </div>
 
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const startScreen = document.getElementById('startScreen');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const playerNameInput = document.getElementById('playerName');
-        const startBtn = document.getElementById('startBtn');
-        const leaderboardList = document.getElementById('leaderboardList');
-        
-        let W, H;
-        
-        // Ajustar canvas con DevicePixelRatio para que el icono se vea en HD y no borroso
-        function resize() {
-            W = window.innerWidth;
-            H = window.innerHeight;
-            const dpr = window.devicePixelRatio || 1;
-            
-            canvas.width = W * dpr;
-            canvas.height = H * dpr;
-            canvas.style.width = W + 'px';
-            canvas.style.height = H + 'px';
-            
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // --- MODO OSCURO ---
+        function aplicarTema() {
+            const dark = localStorage.getItem('borregos_dark_mode') === 'true';
+            document.body.classList.toggle('dark-mode', dark);
+            document.getElementById('themeBtn').innerText = dark ? '🌞' : '🌚';
         }
-        window.addEventListener('resize', resize);
-        resize();
+        function toggleTheme() {
+            const dark = !document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode', dark);
+            localStorage.setItem('borregos_dark_mode', dark);
+            document.getElementById('themeBtn').innerText = dark ? '🌞' : '🌚';
+        }
+        aplicarTema();
 
-        // Cargar imagen
-        let borregoImg = new Image();
-        borregoImg.src = 'ovejita.png';
+        // --- LÓGICA DEL JUEGO COMPACTADA ---
+        const canvas = document.getElementById('gameCanvas'), ctx = canvas.getContext('2d');
+        const ui = document.getElementById('startScreen'), scoreUI = document.getElementById('scoreDisplay');
+        const pName = document.getElementById('playerName'), btn = document.getElementById('startBtn'), list = document.getElementById('leaderboardList');
+        
+        let W, H, frames = 0, gameActive = false, score = 0, player = "", lastTime = 0;
+        let img = new Image(); img.src = 'ovejita.png';
 
-        // Variables del juego
-        let frames = 0;
-        let gameActive = false;
-        let score = 0;
-        let currentPlayer = "";
-
-        // Variables dinámicas
         const getScale = () => Math.min(W / 400, 1.5);
         const getBirdSize = () => Math.max(30, W * 0.08);
 
+        function resize() {
+            W = window.innerWidth; H = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = W * dpr; canvas.height = H * dpr;
+            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        window.addEventListener('resize', resize); resize();
+
         const bird = {
-            x: 0, y: 0, width: 0, height: 0,
-            gravity: 0, lift: 0, velocity: 0,
-            init: function() {
-                this.width = getBirdSize();
-                this.height = getBirdSize();
-                this.x = W * 0.15;
-                this.y = H / 2;
-                this.gravity = H * 0.0008; 
-                this.lift = -H * 0.011;    
-                this.velocity = 0;
+            init() { this.s = getBirdSize(); this.x = W * 0.15; this.y = H / 2; this.g = H * 0.0008; this.l = -H * 0.011; this.v = 0; },
+            draw() {
+                if(img.complete) {
+                    ctx.save(); ctx.translate(this.x + this.s, 0); ctx.scale(-1, 1);
+                    ctx.drawImage(img, -this.s - this.s*0.1, this.y - this.s*0.1, this.s * 1.2, this.s * 1.2); ctx.restore();
+                } else { ctx.fillStyle = "white"; ctx.fillRect(this.x, this.y, this.s, this.s); }
             },
-            draw: function() {
-                if(borregoImg.complete) {
-                    ctx.save();
-                    ctx.translate(this.x + this.width, 0);
-                    ctx.scale(-1, 1);
-                    ctx.drawImage(borregoImg, -this.width - this.width*0.1, this.y - this.height*0.1, this.width * 1.2, this.height * 1.2);
-                    ctx.restore();
-                } else {
-                    ctx.fillStyle = "white";
-                    ctx.fillRect(this.x, this.y, this.width, this.height);
-                }
+            update() {
+                this.v += this.g; this.y += this.v;
+                if(this.y + this.s >= H) { this.y = H - this.s; die(); }
+                if(this.y <= 0) { this.y = 0; this.v = 0; }
             },
-            update: function() {
-                this.velocity += this.gravity;
-                this.y += this.velocity;
-                
-                // Toca el suelo
-                if(this.y + this.height >= H) { 
-                    this.y = H - this.height; 
-                    die();
-                }
-                // Techo
-                if(this.y <= 0) { this.y = 0; this.velocity = 0; }
-            },
-            jump: function() { this.velocity = this.lift; }
+            jump() { this.v = this.l; }
         };
 
         const pipes = {
-            array: [], width: 0, gap: 0, dx: 0,
-            init: function() {
-                this.array = [];
-                this.width = Math.max(50, W * 0.12);
-                this.gap = getBirdSize() * 4.5; 
-                this.dx = W * 0.007; 
+            arr: [], w: 0, gap: 0, dx: 0,
+            init() { this.arr = []; this.w = Math.max(50, W * 0.12); this.gap = getBirdSize() * 4.5; this.dx = W * 0.007; },
+            draw() {
+                this.arr.forEach(p => {
+                    ctx.fillStyle = "#22c55e"; ctx.fillRect(p.x, 0, this.w, p.top); ctx.fillRect(p.x, H - p.bot, this.w, p.bot);
+                    ctx.strokeStyle = "#111"; ctx.lineWidth = 4; ctx.strokeRect(p.x, 0, this.w, p.top); ctx.strokeRect(p.x, H - p.bot, this.w, p.bot);
+                });
             },
-            draw: function() {
-                for(let i=0; i<this.array.length; i++) {
-                    let p = this.array[i];
-                    ctx.fillStyle = "#22c55e"; 
-                    ctx.fillRect(p.x, 0, this.width, p.top);
-                    ctx.fillRect(p.x, H - p.bottom, this.width, p.bottom);
-                    
-                    ctx.strokeStyle = "#111"; ctx.lineWidth = 4;
-                    ctx.strokeRect(p.x, 0, this.width, p.top);
-                    ctx.strokeRect(p.x, H - p.bottom, this.width, p.bottom);
-                }
-            },
-            update: function() {
-                // Generar nueva tubería
+            update() {
                 if(frames % Math.floor(120 / getScale()) === 0) { 
-                    let minHeight = 50;
-                    let maxTop = H - this.gap - minHeight;
-                    let top = Math.random() * (maxTop - minHeight) + minHeight;
-                    let bottom = H - (top + this.gap);
-                    this.array.push({x: W, top: top, bottom: bottom, passed: false});
+                    let top = Math.random() * (H - this.gap - 100) + 50;
+                    this.arr.push({x: W, top: top, bot: H - (top + this.gap), passed: false});
                 }
-                for(let i=0; i<this.array.length; i++) {
-                    let p = this.array[i];
-                    p.x -= this.dx;
-                    
-                    // Colisiones
-                    if(bird.x < p.x + this.width && bird.x + bird.width > p.x && 
-                      (bird.y < p.top || bird.y + bird.height > H - p.bottom)) {
-                        die(); 
-                    }
-                    
-                    // Puntuación
-                    if(!p.passed && p.x + this.width < bird.x) { 
-                        score++; 
-                        scoreDisplay.innerText = "PUNTOS: " + score;
-                        p.passed = true;
-                    } 
-                    
-                    if(p.x + this.width < 0) { this.array.shift(); i--; }
+                for(let i=0; i<this.arr.length; i++) {
+                    let p = this.arr[i]; p.x -= this.dx;
+                    if(bird.x < p.x + this.w && bird.x + bird.s > p.x && (bird.y < p.top || bird.y + bird.s > H - p.bot)) die(); 
+                    if(!p.passed && p.x + this.w < bird.x) { score++; scoreUI.innerText = "PUNTOS: " + score; p.passed = true; } 
+                    if(p.x + this.w < 0) { this.arr.shift(); i--; }
                 }
             }
         };
 
-        // ====== SISTEMA DE PUNTUACIONES ======
-        function getLeaderboard() {
-            return JSON.parse(localStorage.getItem('flappy_borrego_scores')) || [];
-        }
+        const renderLeaderboard = () => {
+            let b = JSON.parse(localStorage.getItem('flappy_borrego_scores')) || [];
+            list.innerHTML = b.length ? b.map((e, i) => `<li><span>${i+1}. ${e.name}</span><span class="score-val">${e.score}</span></li>`).join('') : "<li>Aún no hay puntuaciones.</li>";
+        }; renderLeaderboard();
 
-        function saveScore(name, finalScore) {
-            let board = getLeaderboard();
-            board.push({ name: name || "Anónimo", score: finalScore });
-            board.sort((a, b) => b.score - a.score);
-            board = board.slice(0, 10); // Guardamos solo el Top 10
-            localStorage.setItem('flappy_borrego_scores', JSON.stringify(board));
-        }
-
-        function renderLeaderboard() {
-            let board = getLeaderboard();
-            if(board.length === 0) {
-                leaderboardList.innerHTML = "<li>Aún no hay puntuaciones.</li>";
-                return;
-            }
-            leaderboardList.innerHTML = board.map((entry, i) => `
-                <li>
-                    <span>${i+1}. ${entry.name}</span>
-                    <span class="score-val">${entry.score}</span>
-                </li>
-            `).join('');
-        }
-        
-        // Cargar leaderboard inicial
-        renderLeaderboard();
-
-        // ====== LÓGICA DE JUEGO ======
         function die() {
-            if(!gameActive) return; // Evitar que muera varias veces en 1 frame
+            if(!gameActive) return; 
             gameActive = false;
-            saveScore(currentPlayer, score);
+            let board = JSON.parse(localStorage.getItem('flappy_borrego_scores')) || [];
+            board.push({ name: player || "Anónimo", score });
+            localStorage.setItem('flappy_borrego_scores', JSON.stringify(board.sort((a,b)=>b.score-a.score).slice(0,10)));
             renderLeaderboard();
             document.getElementById('mainTitle').innerText = "¡TE HAS ESTAMPADO!";
-            startScreen.style.display = 'block';
+            ui.style.display = 'block';
         }
 
-        let lastTime = 0;
-        const targetFPS = 60;
-        const frameInterval = 1000 / targetFPS;
-
-        function gameLoop(timestamp) {
-            requestAnimationFrame(gameLoop);
-            
+        function loop(timestamp) {
+            requestAnimationFrame(loop);
             if (!lastTime) lastTime = timestamp;
-            let deltaTime = timestamp - lastTime;
-            
-            if (deltaTime >= frameInterval) {
-                lastTime = timestamp - (deltaTime % frameInterval);
-
+            let dt = timestamp - lastTime;
+            if (dt >= 1000/60) {
+                lastTime = timestamp - (dt % (1000/60));
                 ctx.clearRect(0, 0, W, H);
-                
-                if(gameActive) {
-                    bird.update();
-                    pipes.update();
-                    frames++;
-                }
-                
-                bird.draw();
-                pipes.draw();
+                if(gameActive) { bird.update(); pipes.update(); frames++; }
+                bird.draw(); pipes.draw();
             }
         }
 
-        // Eventos
-        startBtn.addEventListener('click', () => {
-            const name = playerNameInput.value.trim();
-            if(name === '') {
-                alert("¡Tienes que poner un nombre para poder jugar!");
-                return;
-            }
-            currentPlayer = name;
-            
-            bird.init();
-            pipes.init();
-            gameActive = true;
-            startScreen.style.display = 'none';
-            score = 0;
-            scoreDisplay.innerText = "PUNTOS: 0";
-            frames = 0;
+        btn.addEventListener('click', () => {
+            if(!(player = pName.value.trim())) return alert("¡Pon tu nombre para jugar!");
+            bird.init(); pipes.init();
+            gameActive = true; ui.style.display = 'none';
+            score = 0; scoreUI.innerText = "PUNTOS: 0"; frames = 0;
             bird.jump();
         });
 
-        // Controles Táctiles y Click (Ignorar interfaz)
-        function action(e) {
-            // No saltar si tocamos el botón de volver, el menú o si el juego no está activo
-            if(e.target.closest('.back-btn') || e.target.closest('.game-ui') || !gameActive) return;
-            
-            e.preventDefault(); // Prevenir comportamientos raros de touch
-            bird.jump();
-        }
-
+        const action = e => { if(!e.target.closest('.back-btn, .theme-control, .game-ui') && gameActive) { e.preventDefault(); bird.jump(); }};
         window.addEventListener('touchstart', action, {passive: false});
         window.addEventListener('mousedown', action);
 
-        // Inicializar
-        bird.init();
-        pipes.init();
-        requestAnimationFrame(gameLoop);
+        bird.init(); pipes.init(); requestAnimationFrame(loop);
     </script>
 </body>
 </html>
