@@ -195,16 +195,54 @@
            🐑 OVEJA: PATAS, CUELLO ANATÓMICO Y PARTÍCULAS CÉSPED 🐑
            ========================================================= */
 
-        /* 1. Césped brutalista original restaurado */
+        /* =========================================================
+           1. CÉSPED REALISTA CON TEXTURA, PROFUNDIDAD Y BRIZNAS 3D
+           ========================================================= */
         .pasto-verde {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 35px;
-            background: #4ade80; /* Color verde césped plano */
-            border-top: 4px solid var(--dark); /* Borde brutalista */
+            /* Textura de tierra/pasto con profundidad (gradiente y ruido sutil) */
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0, rgba(0,0,0,0.04) 2px, transparent 2px, transparent 4px),
+                linear-gradient(to top, #1b3d0c 0%, #297014 50%, #4ade80 100%);
+            background-color: #4ade80;
+            border-top: none; /* Quitamos el borde negro plano */
+            
+            /* Subimos el z-index por encima de la oveja (z-index: 3). 
+               ¡Así parece que la oveja camina POR DENTRO del césped y le tapa las pezuñas! */
+            z-index: 4; 
+        }
+
+        /* Capa frontal de briznas (verde claro, en primer plano) */
+        .pasto-verde::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            /* Patrón SVG generado de briznas de césped */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q2,50 5,0 Q8,50 10,100 Q12,60 15,10 Q18,60 20,100 Q22,40 25,5 Q28,40 30,100 Q32,70 35,20 Q38,70 40,100 Q42,45 45,15 Q48,45 50,100 Q52,55 55,5 Q58,55 60,100 Q62,30 65,10 Q68,30 70,100 Q72,60 75,25 Q78,60 80,100 Q82,40 85,15 Q88,40 90,100 Q92,50 95,5 Q98,50 100,100 Z' fill='%234ade80'/%3E%3C/svg%3E");
+            background-size: 35px 100%;
+            background-repeat: repeat-x;
             z-index: 2;
+        }
+
+        /* Capa trasera de briznas (verde oscuro para dar volumen y profundidad) */
+        .pasto-verde::after {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: 0;
+            width: 100%;
+            height: 18px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q3,40 6,10 Q9,40 12,100 Q15,50 18,20 Q21,50 24,100 Q27,35 30,5 Q33,35 36,100 Q39,60 42,25 Q45,60 48,100 Q51,45 54,15 Q57,45 60,100 Q63,55 66,20 Q69,55 72,100 Q75,30 78,5 Q81,30 84,100 Q87,60 90,25 Q93,60 96,100 Q97.5,50 100,10 Z' fill='%23297014'/%3E%3C/svg%3E");
+            background-size: 55px 100%;
+            background-repeat: repeat-x;
+            z-index: 1;
         }
 
         /* 2. Contenedor que desplaza la oveja de lado a lado */
@@ -213,7 +251,7 @@
             bottom: 35px; /* Toca exactamente el borde del césped */
             left: 0;
             width: 140px;
-            z-index: 3;
+            z-index: 3; /* Detrás de la nueva capa frontal de césped */
             animation: oveja-viaje 24s linear infinite; 
             pointer-events: none;
         }
@@ -249,14 +287,18 @@
             z-index: 5;
         }
 
-        /* Cada partícula es un trocito de césped */
+        /* Cada partícula es ahora una hojita realista de hierba volando */
         .particula {
             position: absolute;
             top: 0; left: 0;
-            width: 10px; height: 10px;
-            background: #4ade80; /* Mismo verde que el suelo */
-            border: 2px solid var(--dark); /* Efecto cómic/brutalista */
-            /* Animación constante (bucle rápido) cayendo hacia el suelo */
+            width: 8px; height: 14px; /* Un poco más alargado */
+            background: #4ade80; /* Mismo verde que las puntas del suelo */
+            
+            /* Truco CSS para darle forma de hoja de césped curvada */
+            border-radius: 0 100% 0 100%; 
+            box-shadow: inset -2px -2px 3px rgba(0,0,0,0.15); /* Sombreo suave interno */
+            
+            /* Animación constante cayendo hacia el suelo */
             animation: saltar-particula 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
@@ -424,7 +466,7 @@
         <h1 class="reveal reveal-up">Borregos S.L.</h1>
         <div class="subtitle reveal reveal-up" id="quesoBtn">K de queso</div>
 
-        <!-- 🌿 PASTO VERDE ORIGINAL -->
+        <!-- 🌿 PASTO VERDE REALISTA (Z-INDEX SUPERIOR A LA OVEJA) -->
         <div class="pasto-verde"></div>
         
         <!-- 🐑 OVEJITA ANIMADA CON PARTÍCULAS -->
