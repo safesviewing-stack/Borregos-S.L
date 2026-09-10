@@ -10,39 +10,88 @@
         body { margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-color); color: var(--dark); overflow: hidden; touch-action: none; }
         
         /* Botón volver */
-        .back-btn { position: fixed; top: 1rem; left: 1rem; background: var(--dark); color: var(--text-light); padding: 0.5rem 1rem; text-decoration: none; font-weight: bold; border: 3px solid var(--main-color); z-index: 100; box-shadow: 4px 4px 0px var(--main-color); font-size: clamp(0.8rem, 3vw, 1rem); }
+        .back-btn { position: fixed; top: 1rem; left: 1rem; background: var(--dark); color: var(--text-light); padding: 0.5rem 1rem; text-decoration: none; font-weight: bold; border: 3px solid var(--main-color); z-index: 1000; box-shadow: 4px 4px 0px var(--main-color); font-size: clamp(0.8rem, 3vw, 1rem); transition: transform 0.2s; }
+        .back-btn:hover { transform: translate(-2px, -2px); }
         
         /* Contador de puntos discreto en la esquina */
         .score-display {
             position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100;
-            background: rgba(255, 255, 255, 0.85); color: var(--dark); 
-            border: 2px solid var(--dark); border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9); color: var(--dark); 
+            border: 3px solid var(--dark); border-radius: 8px;
             padding: 0.4rem 0.8rem; font-family: 'Space Grotesk', sans-serif;
             font-weight: 900; font-size: 1.2rem; pointer-events: none;
-            box-shadow: 2px 2px 0px var(--dark);
+            box-shadow: 3px 3px 0px var(--dark);
         }
 
         #gameCanvas { display: block; width: 100vw; height: 100vh; background: #87CEEB; }
         
-        .game-ui { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; z-index: 10; width: 90%; }
-        h1 { font-size: clamp(2rem, 8vw, 4rem); margin: 0; text-shadow: 4px 4px 0px var(--yellow); border: 4px solid var(--dark); background: var(--card-bg); color: var(--text-dark); padding: 1rem; transform: rotate(-2deg); }
-        p { font-size: clamp(1rem, 4vw, 1.5rem); background: var(--dark); color: var(--text-light); padding: 0.5rem; display: inline-block; margin-top: 1rem; }
+        /* Interfaz de Menú / Leaderboard */
+        .game-ui { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            text-align: center; z-index: 10; width: 90%; max-width: 400px;
+            max-height: 90vh; overflow-y: auto; padding: 1rem;
+        }
+        
+        h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 0; text-shadow: 4px 4px 0px var(--yellow); border: 4px solid var(--dark); background: var(--card-bg); color: var(--text-dark); padding: 1rem; transform: rotate(-2deg); }
+        
+        .input-group { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+        .input-group input {
+            padding: 1rem; font-size: 1.2rem; font-family: 'Space Grotesk', sans-serif;
+            border: 4px solid var(--dark); width: 100%; max-width: 250px;
+            text-align: center; font-weight: bold; outline: none;
+            box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+        }
+        
+        .btn-jugar {
+            background: var(--yellow); color: var(--text-dark); padding: 1rem 2rem;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 900;
+            border: 4px solid var(--dark); cursor: pointer; box-shadow: 4px 4px 0px var(--dark);
+            transition: transform 0.2s, box-shadow 0.2s; width: 100%; max-width: 250px;
+        }
+        .btn-jugar:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--dark); }
+
+        /* Leaderboard */
+        .leaderboard {
+            margin-top: 2rem; background: var(--card-bg); border: 4px solid var(--dark);
+            padding: 1.5rem; box-shadow: 6px 6px 0px var(--main-color);
+        }
+        .leaderboard h3 { margin: 0 0 1rem 0; font-size: 1.5rem; color: var(--dark); text-transform: uppercase; border-bottom: 3px solid var(--dark); padding-bottom: 0.5rem;}
+        .leaderboard ul { list-style: none; padding: 0; margin: 0; text-align: left; }
+        .leaderboard li { 
+            font-weight: bold; font-size: 1.1rem; border-bottom: 2px dashed #ccc; 
+            padding: 0.5rem 0; display: flex; justify-content: space-between; 
+        }
+        .leaderboard li:last-child { border-bottom: none; }
+        .leaderboard li span.score-val { color: var(--main-color); font-size: 1.2rem; }
 
         @media (max-width: 768px) {
             .score-display { top: 1rem; right: 1rem; font-size: 1rem; padding: 0.3rem 0.6rem; }
+            .back-btn { top: 0.8rem; left: 0.8rem; padding: 0.4rem 0.6rem; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-btn">← VOLVER AL CAOS</a>
+    <a href="index.html" class="back-btn">← VOLVER</a>
     
-    <!-- Contador en la esquina derecha -->
+    <!-- Contador -->
     <div id="scoreDisplay" class="score-display">PUNTOS: 0</div>
 
+    <!-- Menú de inicio y Puntuaciones -->
     <div class="game-ui" id="startScreen">
-        <h1>FLAPPY OVEJA</h1>
-        <p>Toca la pantalla para saltar</p>
+        <h1 id="mainTitle">FLAPPY OVEJA</h1>
+        
+        <div class="input-group">
+            <input type="text" id="playerName" placeholder="Tu nombre..." maxlength="12" autocomplete="off">
+            <button class="btn-jugar" id="startBtn">¡JUGAR!</button>
+        </div>
+
+        <div class="leaderboard">
+            <h3>🏆 Mejores Borregos</h3>
+            <ul id="leaderboardList">
+                <!-- Se rellena por JS -->
+            </ul>
+        </div>
     </div>
 
     <canvas id="gameCanvas"></canvas>
@@ -52,16 +101,29 @@
         const ctx = canvas.getContext('2d');
         const startScreen = document.getElementById('startScreen');
         const scoreDisplay = document.getElementById('scoreDisplay');
+        const playerNameInput = document.getElementById('playerName');
+        const startBtn = document.getElementById('startBtn');
+        const leaderboardList = document.getElementById('leaderboardList');
         
-        // Ajustar canvas a la pantalla dinámica
+        let W, H;
+        
+        // Ajustar canvas con DevicePixelRatio para que el icono se vea en HD y no borroso
         function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            W = window.innerWidth;
+            H = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            
+            canvas.width = W * dpr;
+            canvas.height = H * dpr;
+            canvas.style.width = W + 'px';
+            canvas.style.height = H + 'px';
+            
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         window.addEventListener('resize', resize);
         resize();
 
-        // Cargar imagen de la ovejita
+        // Cargar imagen
         let borregoImg = new Image();
         borregoImg.src = 'ovejita.png';
 
@@ -69,10 +131,11 @@
         let frames = 0;
         let gameActive = false;
         let score = 0;
+        let currentPlayer = "";
 
-        // Variables escaladas relativas al tamaño de pantalla (para Móvil / PC)
-        const getScale = () => Math.min(canvas.width / 400, 1.5);
-        const getBirdSize = () => Math.max(30, canvas.width * 0.08);
+        // Variables dinámicas
+        const getScale = () => Math.min(W / 400, 1.5);
+        const getBirdSize = () => Math.max(30, W * 0.08);
 
         const bird = {
             x: 0, y: 0, width: 0, height: 0,
@@ -80,15 +143,14 @@
             init: function() {
                 this.width = getBirdSize();
                 this.height = getBirdSize();
-                this.x = canvas.width * 0.15;
-                this.y = canvas.height / 2;
-                this.gravity = canvas.height * 0.0008; // Gravedad dinámica
-                this.lift = -canvas.height * 0.012;    // Salto dinámico
+                this.x = W * 0.15;
+                this.y = H / 2;
+                this.gravity = H * 0.0008; 
+                this.lift = -H * 0.011;    
                 this.velocity = 0;
             },
             draw: function() {
                 if(borregoImg.complete) {
-                    // Dibujamos la ovejita ligeramente más grande que su hitbox para que se vea mejor y sea más permisiva
                     ctx.drawImage(borregoImg, this.x - this.width*0.1, this.y - this.height*0.1, this.width * 1.2, this.height * 1.2);
                 } else {
                     ctx.fillStyle = "white";
@@ -98,63 +160,109 @@
             update: function() {
                 this.velocity += this.gravity;
                 this.y += this.velocity;
-                if(this.y + this.height >= canvas.height) { this.y = canvas.height - this.height; gameActive = false; }
+                
+                // Toca el suelo
+                if(this.y + this.height >= H) { 
+                    this.y = H - this.height; 
+                    die();
+                }
+                // Techo
                 if(this.y <= 0) { this.y = 0; this.velocity = 0; }
             },
             jump: function() { this.velocity = this.lift; }
         };
 
         const pipes = {
-            array: [], 
-            width: 0, 
-            gap: 0, 
-            dx: 0,
+            array: [], width: 0, gap: 0, dx: 0,
             init: function() {
                 this.array = [];
-                this.width = Math.max(50, canvas.width * 0.12);
-                this.gap = getBirdSize() * 4.5; // Hueco más fácil en móvil
-                this.dx = canvas.width * 0.007; // Velocidad de avance adaptativa
+                this.width = Math.max(50, W * 0.12);
+                this.gap = getBirdSize() * 4.5; 
+                this.dx = W * 0.007; 
             },
             draw: function() {
                 for(let i=0; i<this.array.length; i++) {
                     let p = this.array[i];
                     ctx.fillStyle = "#22c55e"; 
                     ctx.fillRect(p.x, 0, this.width, p.top);
-                    ctx.fillRect(p.x, canvas.height - p.bottom, this.width, p.bottom);
+                    ctx.fillRect(p.x, H - p.bottom, this.width, p.bottom);
                     
                     ctx.strokeStyle = "#111"; ctx.lineWidth = 4;
                     ctx.strokeRect(p.x, 0, this.width, p.top);
-                    ctx.strokeRect(p.x, canvas.height - p.bottom, this.width, p.bottom);
+                    ctx.strokeRect(p.x, H - p.bottom, this.width, p.bottom);
                 }
             },
             update: function() {
                 // Generar nueva tubería
                 if(frames % Math.floor(120 / getScale()) === 0) { 
                     let minHeight = 50;
-                    let maxTop = canvas.height - this.gap - minHeight;
+                    let maxTop = H - this.gap - minHeight;
                     let top = Math.random() * (maxTop - minHeight) + minHeight;
-                    let bottom = canvas.height - (top + this.gap);
-                    this.array.push({x: canvas.width, top: top, bottom: bottom});
+                    let bottom = H - (top + this.gap);
+                    this.array.push({x: W, top: top, bottom: bottom, passed: false});
                 }
                 for(let i=0; i<this.array.length; i++) {
                     let p = this.array[i];
                     p.x -= this.dx;
+                    
                     // Colisiones
                     if(bird.x < p.x + this.width && bird.x + bird.width > p.x && 
-                      (bird.y < p.top || bird.y + bird.height > canvas.height - p.bottom)) {
-                        gameActive = false; 
+                      (bird.y < p.top || bird.y + bird.height > H - p.bottom)) {
+                        die(); 
                     }
+                    
                     // Puntuación
-                    if(p.x + this.dx >= bird.x && p.x < bird.x) { 
+                    if(!p.passed && p.x + this.width < bird.x) { 
                         score++; 
                         scoreDisplay.innerText = "PUNTOS: " + score;
+                        p.passed = true;
                     } 
+                    
                     if(p.x + this.width < 0) { this.array.shift(); i--; }
                 }
             }
         };
 
-        // Limitador a 60 FPS (Arregla pantallas de 120Hz en móviles nuevos)
+        // ====== SISTEMA DE PUNTUACIONES ======
+        function getLeaderboard() {
+            return JSON.parse(localStorage.getItem('flappy_borrego_scores')) || [];
+        }
+
+        function saveScore(name, finalScore) {
+            let board = getLeaderboard();
+            board.push({ name: name || "Anónimo", score: finalScore });
+            board.sort((a, b) => b.score - a.score);
+            board = board.slice(0, 10); // Guardamos solo el Top 10
+            localStorage.setItem('flappy_borrego_scores', JSON.stringify(board));
+        }
+
+        function renderLeaderboard() {
+            let board = getLeaderboard();
+            if(board.length === 0) {
+                leaderboardList.innerHTML = "<li>Aún no hay puntuaciones.</li>";
+                return;
+            }
+            leaderboardList.innerHTML = board.map((entry, i) => `
+                <li>
+                    <span>${i+1}. ${entry.name}</span>
+                    <span class="score-val">${entry.score}</span>
+                </li>
+            `).join('');
+        }
+        
+        // Cargar leaderboard inicial
+        renderLeaderboard();
+
+        // ====== LÓGICA DE JUEGO ======
+        function die() {
+            if(!gameActive) return; // Evitar que muera varias veces en 1 frame
+            gameActive = false;
+            saveScore(currentPlayer, score);
+            renderLeaderboard();
+            document.getElementById('mainTitle').innerText = "¡TE HAS ESTAMPADO!";
+            startScreen.style.display = 'block';
+        }
+
         let lastTime = 0;
         const targetFPS = 60;
         const frameInterval = 1000 / targetFPS;
@@ -165,45 +273,54 @@
             if (!lastTime) lastTime = timestamp;
             let deltaTime = timestamp - lastTime;
             
-            // Solo dibujamos si ha pasado el tiempo para 60fps
             if (deltaTime >= frameInterval) {
                 lastTime = timestamp - (deltaTime % frameInterval);
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(0, 0, W, H);
+                
                 if(gameActive) {
                     bird.update();
                     pipes.update();
                     frames++;
                 }
+                
                 bird.draw();
                 pipes.draw();
-                
-                if(!gameActive && frames > 0) {
-                    startScreen.style.display = 'block';
-                    startScreen.querySelector('h1').innerText = "¡TE HAS ESTAMPADO!";
-                    startScreen.querySelector('p').innerText = "Toca para reiniciar";
-                }
             }
         }
 
-        function action(e) {
-            if(e) e.preventDefault(); // Evitar zoom nativo por doble toque
-            if(!gameActive) {
-                bird.init();
-                pipes.init();
-                gameActive = true;
-                startScreen.style.display = 'none';
-                score = 0;
-                scoreDisplay.innerText = "PUNTOS: 0";
-                frames = 0;
+        // Eventos
+        startBtn.addEventListener('click', () => {
+            const name = playerNameInput.value.trim();
+            if(name === '') {
+                alert("¡Tienes que poner un nombre para poder jugar!");
+                return;
             }
+            currentPlayer = name;
+            
+            bird.init();
+            pipes.init();
+            gameActive = true;
+            startScreen.style.display = 'none';
+            score = 0;
+            scoreDisplay.innerText = "PUNTOS: 0";
+            frames = 0;
+            bird.jump();
+        });
+
+        // Controles Táctiles y Click (Ignorar interfaz)
+        function action(e) {
+            // No saltar si tocamos el botón de volver, el menú o si el juego no está activo
+            if(e.target.closest('.back-btn') || e.target.closest('.game-ui') || !gameActive) return;
+            
+            e.preventDefault(); // Prevenir comportamientos raros de touch
             bird.jump();
         }
 
         window.addEventListener('touchstart', action, {passive: false});
         window.addEventListener('mousedown', action);
 
-        // Inicializar posiciones base
+        // Inicializar
         bird.init();
         pipes.init();
         requestAnimationFrame(gameLoop);
